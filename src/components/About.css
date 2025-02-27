@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+@import url('./Global.css');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif; /* Apply globally */
+}
+
+.about-us-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    width: 100vw;  /* Take full viewport width */
+    max-width: 100%;
+    height: auto; /* Changed from 50vh to auto to adapt to content */
+    margin: 0;
+    padding: 60px 5% 80px; /* Added more bottom padding */
+    flex-grow: 1;  
+    position: relative;
+    background-color: white;
+}
+
+.about-heading {
+    position: relative; /* Changed from absolute to relative */
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.title {
+    text-align: center; /* Center the subtitle */
+    font-size: 1.5rem; /* Adjust font size as needed */
+    color: #333;
+    margin-top: 40px; /* Increased space above the subtitle */
+    margin-bottom: 40px; /* Space below the subtitle */
+}
+
+@keyframes moveToCenter {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.about-text {
+    flex: 1;
+    min-width: 600px;
+}
+
+.about-text h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #333;
+}
+
+.about-text h1 span {
+    color: #FF914D;
+}
+
+.about-text p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.about-text ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-text ul li {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Updated button container */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 60px; /* Increased bottom margin */
+}
+
+/* Updated button styles */
+.btn-primary {
+    background-color: #FF8C42; /* Match your other orange buttons */
+    color: white;
+    border: none;
+    padding: 12px 25px; /* Slightly more horizontal padding */
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block; /* Ensures proper sizing */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.btn-primary:hover {
+    background-color: #FF6F22; /* Darker orange on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Image Section */
+.about-image {  
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-large {
+    width: 100%;  /* Made image larger */
+    max-width: 500px;
+    border-radius: 12px;
+    transition: transform 0.4s ease-in-out; /* Smooth animation */
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .about-us-container {
+        flex-direction: column;
+        text-align: left;
+        gap: 40px;
+        height: auto; /* Ensure auto height on mobile too */
+        padding-bottom: 100px; /* Extra padding on mobile */
+    }
+
+    .about-text, .about-image {
+        max-width: 100%;
+    }
+
+    .about-text {
+        min-width: auto; /* Override min-width on mobile */
+    }
+
+    .img-large {
+        width: 90%;
+        max-width: 400px;
+    }
+    
+    /* Ensure button has enough space on mobile */
+    .btn-container {
+        margin-bottom: 80px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .about-text h1 {
+        font-size: 2.2rem;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+    }
+}

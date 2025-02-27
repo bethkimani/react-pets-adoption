@@ -1,0 +1,978 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif; /* Apply globally */
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* App.css */
+
+
+
+.header-top {
+  background-color: #FF8C42;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+.header-links {
+  display: flex;
+  gap: 20px; /* Space between links */
+}
+
+.header-link {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s;
+}
+
+.header-link:hover {
+  text-decoration: underline;
+}
+
+/* Social Media Icons */
+.header-icons {
+  display: flex;
+  gap: 15px; /* Space between icons */
+}
+
+.social-icon {
+  color: white;
+  transition: color 0.3s;
+}
+
+.social-icon:hover {
+  color: #ddd; /* Lighten on hover */
+}
+
+/* Bottom White Bar */
+.header-bottom {
+  background-color: white;
+  padding: 10px 10px;
+  display: flex;
+  justify-content: space-between; /* Space between title and contact info */
+  align-items: center; /* Center align items vertically */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.header-title {
+  font-size: 1.5rem; 
+  font-weight: bold;
+  color: black; 
+  gap: 8px;
+}
+
+.contact-info {
+  display: flex; 
+  gap: 40px; 
+  font-size: 1rem; 
+  color: #333; 
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* Individual contact items */
+.contact-item {
+  display: flex;
+  flex-direction: column; /* Stack title and value vertically */
+  align-items: flex-start; /* Align items to the left */
+}
+
+/* Ensure contact info links are underlined */
+.contact-info a {
+  text-decoration: underline;
+  color: #007bff; 
+}
+
+.contact-item strong {
+  margin-bottom: 0; 
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .header-top {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: flex-start; /* Align items to the left */
+  }
+  
+  .header-bottom {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: flex-start; /* Align items to the left */
+  }
+
+  .contact-info {
+    flex-direction: column; /* Stack contact items vertically */
+    gap: 10px; /* Reduce gap on smaller screens */
+  }
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: rgb(36, 32, 32);
+  color: white;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.brand-name {
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 40px; /* Space after brand name */
+  color: white; /* Ensure brand name is white */
+}
+
+
+
+/* Navbar Styles */
+.navbar {
+  background-color: rgb(36, 32, 32);
+  color: white;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.brand-name {
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 40px; /* Space after brand name */
+  color: white; /* Ensure brand name is white */
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  margin-right: auto; /* Push login to the right */
+  transition: max-height 0.3s ease-out; /* Smooth transition for mobile */
+}
+
+.nav-links.active {
+  display: flex; /* Show links when active */
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  margin-right: 30px; /* Space between nav items */
+  color: white; 
+  text-decoration: none; 
+  font-size: 20px;
+}
+
+.nav-icon {
+  margin-right: 5px; /* Space between icon and text */
+  font-size: 30px; /* Adjust icon size */
+  color: white; /* Ensure icons are white */
+}
+
+.login-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: white; 
+}
+
+/* Mobile styles */
+.menu-toggle {
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.bar {
+  height: 3px;
+  width: 25px;
+  background-color: white;
+  margin: 3px 0;
+  transition: all 0.3s ease; /* Smooth transition for bars */
+}
+
+.bar.active {
+  background-color: #FF8C00; /* Change color when active */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* Hide nav links by default */
+    flex-direction: column;
+    position: absolute;
+    top: 70px; /* Position under the navbar */
+    left: 0;
+    width: 100%;
+    background-color: rgb(36, 32, 32); /* Same background as navbar */
+    z-index: 1; /* Ensure it appears above other elements */
+  }
+
+  .nav-links.active {
+    display: flex; /* Show links when active */
+  }
+
+  .menu-toggle {
+    display: flex; /* Show hamburger menu */
+  }
+
+  .nav-item {
+    margin: 10px 0; /* Space between nav items in mobile view */
+  }
+}
+
+
+
+/* Hero section styles */
+#hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero {
+  height: 79.5vh; /* Adjust height as needed */
+  width: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./assets/images/homepg.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding: 0; /* Remove padding if not needed */
+  color: white;
+  text-align: center; /* Center the text */
+  display: flex; /* Use flexbox for vertical centering */
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 40px; /* Add space below the Hero */
+}
+
+.hero-text {
+  color: white;
+  text-align: center;
+  position: relative; /* Remove absolute positioning */
+  transform: none; /* Remove transform */
+  top: auto; /* Remove top */
+  left: auto; /* Remove left */
+  font-weight: 100;
+  font-size: 1.2rem; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.hero-title {
+  color: white; /* Ensure the text is white */
+  font-size: 4rem; /* Increase font size as needed */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Optional: adds depth */
+}
+
+.hero-subtitle {
+  font-size: 2rem; /* Slightly smaller than the main headline */
+  color: white; /* Ensure it matches the overall theme */
+  margin-top: 10px; /* Add some space above the subheadline */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Optional: add shadow for depth */
+}
+
+
+.btn {
+  display: block; 
+  margin: 20px auto; /* Center the buttons */
+  padding: 15px 30px; /* Adjust padding for better sizing */
+  background-color: #FF8C42; /* Orange color */
+  color: white; 
+  border: none;
+  border-radius: 5px; 
+  cursor: pointer;
+  text-align: center; /* Center the text inside the button */
+  text-decoration: none; /* Remove underline from links */
+  transition: background-color 0.3s; 
+}
+
+.btn:hover {
+  background-color: #FF6F22; /* Darker orange on hover */
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center; /* Center the buttons */
+  gap: 20px; /* Space between buttons */
+  margin-top: 20px; /* Space above the buttons */
+}
+/* Home Page Styles */
+.homepage {
+  text-align: center;
+  padding: 20px;
+  background-color: #FFF8DC; /* Cream */
+  margin-top: 40px; /* Add space below Hero */
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: black; /* Warm Brown */
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #1a1714; /* Dark Brown */
+}  
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+/* Homepage Styles */
+.homepage {
+  padding: 20px;
+}
+
+.homepage-gallery {
+  display: flex; 
+  flex-wrap: wrap; /* Allow wrapping to the next line */
+  justify-content: center; /* Center the cards */
+  margin-top: 20px;
+}
+
+.homepage-pet-card {
+  background-color: white;
+  border-radius: 16px; /* Increased border radius for softer corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 17px; /* Space between cards */
+  padding: 15px;
+  width: calc(30% - 34px); /* Adjust width for three cards per row minus margins */
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center align the items */
+  position: relative; /* Position relative for absolute positioning of the overlay */
+  transition: transform 0.3s, box-shadow 0.3s; /* Transition for the lift effect */
+}
+
+/* Hover Effect */
+.homepage-pet-card:hover {
+  transform: scale(1.05); /* Slightly increase size */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow for depth */
+}
+
+.homepage-pet-image {
+  width: 100%;
+  height: 200px; /* Fixed height for uniformity */
+  border-radius: 16px; /* Match the card's border radius */
+  object-fit: cover; /* Ensure images cover the space without distortion */
+}
+
+/* Button Styles */
+.adopt-button {
+  background-color: #FFA500; /* Orange color */
+  color: white; /* White text color */
+  border: none;
+  padding: 10px 20px; /* Add padding for a better look */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 14px; /* Normal font size */
+  font-weight: bold; /* Bold text */
+  text-align: center; /* Center text */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.adopt-button:hover {
+  background-color: #FF8C00; /* Darker orange on hover */
+}
+
+/* Overlay Form Styles */
+.overlay-form {
+  position: absolute; /* Position absolute to overlay on the card */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust the position to truly center */
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background for contrast */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center the form */
+  padding: 20px;
+  border-radius: 8px; /* Smaller border radius for the form */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  width: 80%; /* Set a fixed width for the form */
+  max-width: 300px; /* Limit maximum width */
+  height: auto; /* Allow height to adjust based on content */
+  z-index: 10; /* Ensure it appears above other elements */
+}
+
+.close {
+  cursor: pointer;
+  align-self: flex-end; /* Align close button to the top right */
+  font-size: 18px;
+}
+
+/* Input Styles */
+input {
+  padding: 8px; /* Smaller padding for smaller form */
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%; /* Full width */
+  margin-bottom: 10px; /* Space between inputs */
+}
+
+/* Modal Button Styles */
+.modal-button {
+  background-color: #FFA500; /* Orange color */
+  color: white; /* White text color */
+  border: none;
+  padding: 8px 16px; /* Adjust padding */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 14px; /* Normal font size */
+  font-weight: bold; /* Bold text */
+  text-align: center; /* Center text */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.modal-button:hover {
+  background-color: #FF8C00; /* Darker orange on hover */
+}
+
+/* Form Toggle Link Styles */
+.toggle-link {
+  color: #007bff; /* Link color */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .homepage-pet-card {
+    width: calc(45% - 34px); /* Two cards per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage-pet-card {
+    width: calc(100% - 34px); /* One card per row */
+  }
+
+  .homepage-pet-image {
+    height: 150px; /* Adjust height for smaller screens */
+  }
+
+  .adopt-button {
+    padding: 8px 16px; /* Reduce button size */
+    font-size: 12px; /* Adjust font size */
+  }
+
+  input {
+    font-size: 12px; /* Adjust input font size */
+  }
+
+  .modal-button {
+    padding: 8px 16px; /* Adjust modal button size */
+  }
+}
+
+
+
+
+
+
+
+
+/* Search Page Styles */
+.search-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align items to the top */
+  height: 100vh;
+  text-align: center;
+  background-color: #FFF8DC; /* Cream */
+  padding: 20px;
+}
+
+.search-form {
+  margin-top: 40px; /* Space above the form */
+  width: 100%;
+  max-width: 800px; /* Increased max width */
+  background-color: white;
+  padding: 40px; /* Increased padding */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold; /* Make label text bold */
+  color: #D2B48C; /* Warm Brown */
+}
+
+select {
+  width: 100%;
+  padding: 12px; /* Increased padding for select */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Space buttons apart */
+  margin-top: 10px; /* Space above the button group */
+}
+
+.clear-button, .search-button {
+  background-color: #FFA07A; /* Earthy Orange */
+  color: white;
+  border: none;
+  padding: 12px; /* Increased padding */
+  border-radius: 4px;
+  cursor: pointer;
+  flex: 1; /* Allow buttons to take equal space */
+  margin-right: 5px; /* Space between buttons */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.clear-button:hover, .search-button:hover {
+  background-color: #FF8C42; /* Darker Earthy Orange on hover */
+}
+
+.advanced-search {
+  margin-top: 15px; /* Space above advanced search */
+}
+
+/* Search and Display Pets Styles */
+.search-and-display {
+  text-align: center;
+  padding: 20px;
+  background-color: #FFF8DC; /* Cream */
+}
+
+.search-gallery {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping to the next line */
+  justify-content: center; /* Center the cards */
+  margin-top: 20px;
+}
+
+.search-pet-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 15px;
+  text-align: center;
+  width: calc(30% - 20px); /* Three cards per row */
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center align the items */
+}
+
+.search-pet-image {
+  width: 100%;
+  height: 200px; /* Fixed height for uniformity */
+  border-radius: 4px;
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.search-pet-info {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.search-pet-info h2 {
+  color: #D2B48C; /* Warm Brown */
+}
+
+.search-pet-info p {
+  color: #654321; /* Dark Brown */
+}
+
+
+
+
+
+
+/* Live Chat Container */
+.live-chat-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+/* Chat Icon */
+.chat-icon {
+  background-color: #FFA07A; /* Earthy Orange */
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-icon:hover {
+  background-color: #FF8C42; /* Darker Earthy Orange on hover */
+}
+
+
+
+
+.live-chat-widget {
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 260px;
+  margin-top: 10px; /* Space between icon and widget */
+}
+
+.live-chat-widget h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #D2B48C; /* Warm Brown */
+}
+
+.live-chat-widget .messages {
+  height: 150px; /* Fixed height for messages */
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+}
+
+.live-chat-widget .messages div {
+  padding: 4px 0;
+}
+
+.live-chat-widget .messages .user {
+  text-align: right;
+  color: #FFA07A; /* Earthy Orange */
+}
+
+.live-chat-widget .messages .bot {
+  text-align: left;
+  color: #D2B48C; /* Warm Brown */
+}
+
+.live-chat-widget input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.live-chat-widget button {
+  width: 100%;
+  padding: 8px;
+  background-color: #FFA07A; /* Earthy Orange */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.live-chat-widget button:hover {
+  background-color: #FF8C42; /* Darker Earthy Orange on hover */
+}
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #333;
+}
+
+.login-form, .signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align form content */
+}
+
+.login-form h2, .signup-form h2 {
+  margin-bottom: 20px; /* Space below the heading */
+  color: #D2B48C; /* Warm Brown */
+}
+
+.login-form input, .signup-form input {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%; /* Full width inputs */
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align buttons and links */
+  width: 100%;
+}
+
+.login-form button, .signup-form button {
+  padding: 8px;
+  background-color: #FFA07A; /* Earthy Orange */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%; /* Full width button */
+  margin-bottom: 10px; /* Space below the button */
+  transition: background-color 0.3s;
+}
+
+.login-form button:hover, .signup-form button:hover {
+  background-color: #FF8C42; /* Darker Earthy Orange on hover */
+}
+
+.signup-link, .login-link {
+  font-size: 14px; /* Smaller font size */
+  color: #654321; /* Dark Brown */
+  text-align: center;
+  margin-top: 10px; /* Add space above the link */
+}
+
+.signup-link span, .login-link span {
+  color: #D2B48C; /* Warm Brown */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.signup-link span:hover, .login-link span:hover {
+  color: #FF8C42; /* Darker Earthy Orange on hover */
+}
+
+/* Booking Modal Specific Styles */
+.booking-modal h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #D2B48C; /* Warm Brown */
+}
+
+.booking-modal .form-group {
+  margin-bottom: 15px;
+}
+
+.booking-modal .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #D2B48C; /* Warm Brown */
+}
+
+.booking-modal .form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.booking-modal .submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #FFA07A; /* Earthy Orange */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.booking-modal .submit-button:hover {
+  background-color: #FF8C42; /* Darker Earthy Orange on hover */
+}
+
+
+
+
+/* General About Us Section */
+.about-us-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 3rem 1rem;
+}
+
+/* Layout to Keep Content & Images Together */
+.row {
+  display: flex;
+  align-items: center;
+}
+
+/* Left Side - Text Content */
+.about-text {
+  text-align: left;
+}
+
+.text-secondary {
+  color: #6c757d;
+}
+
+.text-primary {
+  color: #FF8C42;
+}
+
+.display-4 {
+  font-size: 2.5rem;
+}
+
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+.btn {
+  background-color: #FF8C42;
+  border: none;
+  color: white;
+  font-size: 0.9rem; /* Adjust font size as needed */
+  padding: 0.3rem 0.6rem; /* Reduce horizontal padding to make it shorter */
+  border-radius: 5px;
+  max-width: 120px; /* Set a maximum width for the button */
+  text-align: start; /* Center text within the button */
+  transition: background 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #e07b3d;
+}
+
+
+/* Right Side - Images */
+.about-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image Grid */
+.img-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.img-large {
+  width: 100%;
+  max-width: 800px; /* Increased size by 10 pixels */
+  height: auto;
+  border-radius: 5px;
+}
+
+.img-small {
+  width: 48%; /* Adjust as needed */
+  max-width: 400px; /* Increased size by 5 pixels */
+  height: auto;
+  border-radius: 5px;
+}
+
+.img-small {
+  width: 48%; /* about-2 and about-3 are side by side */
+  max-width: 250px; /* Set a max width to keep the size reasonable */
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .display-4 {
+      font-size: 2rem;
+  }
+
+  .about-us-container {
+      text-align: center;
+  }
+
+  .row {
+      flex-direction: column;
+  }
+
+  .about-text,
+  .about-images {
+      width: 100%;
+  }
+
+  .img-grid {
+      align-items: center;
+  }
+
+  .img-small-wrapper {
+      flex-direction: row;
+      justify-content: center;
+  }
+
+  .img-small {
+      width: 45%;
+  }
+}
+
+
+
+

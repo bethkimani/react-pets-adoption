@@ -1,0 +1,64 @@
+/* global.css */
+
+/* Responsive Footer */
+@media (max-width: 1024px) {
+    .footer-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .footer-section {
+        min-width: 250px;
+        max-width: 280px;
+        text-align: center;
+    }
+
+    .social-section .social-icons {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .faqs-support-section {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-section {
+        max-width: 100%;
+    }
+
+    .newsletter-form input {
+        width: 100%;
+    }
+
+    .faqs-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        width: 95%;
+    }
+
+    .newsletter-form input {
+        padding: 10px;
+    }
+
+    .newsletter-form button {
+        padding: 10px;
+    }
+
+    .social-icons {
+        gap: 15px;
+    }
+}
