@@ -1,0 +1,64 @@
+.user-profile {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.user-profile form {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-profile label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.user-profile input,
+.user-profile textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.user-profile textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.user-profile button {
+    padding: 10px;
+    background-color: #5cb85c; /* Bootstrap's success color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.user-profile button:hover {
+    background-color: #4cae4c; /* Darker shade on hover */
+}
+
+.profile-picture-preview {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.profile-picture-preview img {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 50%; /* Circular profile picture */
+}

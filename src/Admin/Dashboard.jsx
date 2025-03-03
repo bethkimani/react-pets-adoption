@@ -1,7 +1,15 @@
+
 import React from 'react';
 import './dashboard.css';
 
-const Dashboard = () => {
+const Dashboard = ({ onEditPet }) => {
+    const pets = [
+        { id: 1, name: 'Henry', adoptionStatus: 'Available', owner: 'None' },
+        { id: 2, name: 'Riga', adoptionStatus: 'Available', owner: 'None' },
+        { id: 3, name: 'Johnny', adoptionStatus: 'Adopted', owner: 'Owner Name' },
+        // Add more pets as needed
+    ];
+
     return (
         <div className="dashboard">
             <h1>Dashboard</h1>
@@ -82,28 +90,21 @@ const Dashboard = () => {
                             <th>Name</th>
                             <th>Adoption Status</th>
                             <th>Owner</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Henry</td>
-                            <td>Available</td>
-                            <td>None</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Riga</td>
-                            <td>Available</td>
-                            <td>None</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Johnny</td>
-                            <td>Adopted</td>
-                            <td>Owner Name</td>
-                        </tr>
-                        {/* More rows as needed */}
+                        {pets.map((pet) => (
+                            <tr key={pet.id}>
+                                <td>{pet.id}</td>
+                                <td>{pet.name}</td>
+                                <td>{pet.adoptionStatus}</td>
+                                <td>{pet.owner}</td>
+                                <td>
+                                    <button onClick={() => onEditPet(pet)}>Edit</button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
