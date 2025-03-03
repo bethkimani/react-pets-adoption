@@ -1,0 +1,54 @@
+
+
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px; /* Set the width of the sidebar */
+    background-color: #4B0082; /* Dark purple background */
+    color: white; /* Text color */
+    padding: 20px; /* Padding around the content */
+    height: 100vh; /* Full height */
+    position: fixed; /* Fixes sidebar to the left */
+    top: 0; /* Aligns to the top */
+    left: 0; /* Aligns to the left */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Adds a shadow effect */
+    z-index: 1000; /* Ensures it stays above other content */
+}
+
+.sidebar h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.sidebar ul {
+    list-style: none; /* Removes default list styles */
+    padding: 0; /* Removes padding */
+}
+
+.sidebar li {
+    margin: 15px 0; /* Space between list items */
+}
+
+.sidebar li a {
+    color: white; /* Link color */
+    text-decoration: none; /* Removes underline */
+    display: flex; /* Enables flexbox for alignment */
+    align-items: center; /* Centers items vertically */
+    padding: 10px; /* Padding around the links */
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.sidebar li a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Lighten background on hover */
+    border-radius: 5px; /* Rounded corners on hover */
+}
+
+.sidebar li a svg {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+.main-content {
+    flex: 1; /* Allows the main content to fill the remaining space */
+    padding: 20px; /* Padding around main content */
+    margin-left: 250px; /* Leaves space for the sidebar */
+}
