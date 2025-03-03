@@ -1,4 +1,3 @@
-
 import React from 'react';
 import './dashboard.css';
 
@@ -9,19 +8,47 @@ const Dashboard = () => {
             <div className="statistics">
                 <div className="stat-card">
                     <h2>Total Admins</h2>
-                    <p>36</p>
+                    <p>4</p>
                 </div>
                 <div className="stat-card">
                     <h2>Total Users</h2>
-                    <p>39</p>
+                    <p>36</p>
                 </div>
                 <div className="stat-card">
                     <h2>Adopted Pets</h2>
-                    <p>5</p>
+                    <p>7</p>
                 </div>
                 <div className="stat-card">
                     <h2>Fostered Pets</h2>
+                    <p>2</p>
+                </div>
+                <div className="stat-card">
+                    <h2>Available Pets</h2>
+                    <p>39</p>
+                </div>
+                <div className="stat-card">
+                    <h2>Total Pets</h2>
+                    <p>39</p>
+                </div>
+                <div className="stat-card">
+                    <h2>Dogs</h2>
+                    <p>5</p>
+                </div>
+                <div className="stat-card">
+                    <h2>Cats</h2>
                     <p>3</p>
+                </div>
+                <div className="stat-card">
+                    <h2>Hamsters</h2>
+                    <p>1</p>
+                </div>
+                <div className="stat-card">
+                    <h2>Fish</h2>
+                    <p>2</p>
+                </div>
+                <div className="stat-card">
+                    <h2>Turtles</h2>
+                    <p>1</p>
                 </div>
             </div>
 
@@ -69,6 +96,12 @@ const Dashboard = () => {
                             <td>Riga</td>
                             <td>Available</td>
                             <td>None</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Johnny</td>
+                            <td>Adopted</td>
+                            <td>Owner Name</td>
                         </tr>
                         {/* More rows as needed */}
                     </tbody>
