@@ -1,91 +1,68 @@
-
 import React, { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
-import EditPet from './EditPet';
-import MyPets from './MyPets';
-import UserProfile from './UserProfile'; // Import UserProfile component
+import ViewPets from './View'; // Ensure correct import
+import AddPets from './AddPets'; // Ensure correct import
+import MyPets from './MyPets'; // Ensure correct import
+import UserProfile from './UserProfile'; // Ensure correct import
+import LogoutModal from './LogoutModal'; // Import the modal
 import './Admin.css';
 
 const AdminDashboard = () => {
-    const [isEditingPet, setIsEditingPet] = useState(false);
-    const [currentPet, setCurrentPet] = useState(null);
-    const [viewingMyPets, setViewingMyPets] = useState(false);
-    const [viewingProfile, setViewingProfile] = useState(false); // State for profile view
-
-    // Sample user data
-    const user = {
-        firstName: 'Jing',
-        lastName: 'Zhao',
-        email: 'jing@pet.com',
-        phone: '189304509',
-        bio: 'Hi, welcome to the pet adoption agency.',
-    };
-
-    // Sample pet data
-    const pets = [
-        {
-            id: 1,
-            name: 'Adam',
-            breed: 'Unknown',
-            bio: 'Adam is a friendly cat.',
-            color: 'Gray',
-            weight: 24,
-            height: 23,
-            hypoallergenic: false,
-            dietary: 'Requires special cat food',
-            picture: 'https://example.com/path/to/cat-image.jpg',
-        },
-    ];
+    const navigate = useNavigate();
+    const [pets, setPets] = useState([
+        { id: 1, name: 'Adam', adoptionStatus: 'Available', owner: 'None' },
+        { id: 2, name: 'Riga', adoptionStatus: 'Available', owner: 'None' },
+        { id: 3, name: 'Johnny', adoptionStatus: 'Adopted', owner: 'Owner Name' },
+    ]);
+    
+    const [isModalOpen, setModalOpen] = useState(false); // State to manage modal visibility
 
     const handleEditPet = (pet) => {
-        setCurrentPet(pet);
-        setIsEditingPet(true);
+        console.log('Editing pet:', pet);
     };
 
-    const handleSave = (updatedPet) => {
-        console.log('Updated Pet:', updatedPet);
-        setIsEditingPet(false);
+    const handleDeletePet = (petId) => {
+        console.log('Deleting pet with ID:', petId);
+        setPets(pets.filter(pet => pet.id !== petId));
     };
 
-    const handleViewMyPets = () => {
-        setViewingMyPets(true);
-        setViewingProfile(false); // Ensure profile is hidden
+    const handleAddPet = (newPet) => {
+        setPets([...pets, newPet]);
     };
 
-    const handleViewProfile = () => {
-        setViewingProfile(true);
-        setViewingMyPets(false); // Ensure pets view is hidden
+    const handleLogout = () => {
+        localStorage.removeItem('isAuthenticated'); // Clear authentication
+        localStorage.removeItem('role'); // Clear user role
+        navigate('/'); // Redirect to the main user website (home page)
     };
 
-    const handleBackToDashboard = () => {
-        setViewingMyPets(false);
-        setViewingProfile(false); // Reset both views
-    };
-
-    const handleSaveProfileChanges = (updatedUser) => {
-        console.log('Profile Updated:', updatedUser);
-        // Logic to save user profile changes (e.g., API call)
-        setViewingProfile(false);
+    const confirmLogout = () => {
+        setModalOpen(true); // Open the confirmation modal
     };
 
     return (
         <div className="admin-dashboard">
-            <Sidebar onViewMyPets={handleViewMyPets} onViewProfile={handleViewProfile} />
+            <Sidebar 
+                onViewMyPets={() => {}} 
+                onViewProfile={() => {}} 
+                onLogout={confirmLogout} // Call the confirmLogout function
+            />
             <div className="main-content">
-                {viewingMyPets && (
-                    <MyPets pets={pets} onEditPet={handleEditPet} onBack={handleBackToDashboard} />
-                )}
-                {viewingProfile && (
-                    <UserProfile user={user} onSaveChanges={handleSaveProfileChanges} />
-                )}
-                {isEditingPet && (
-                    <EditPet pet={currentPet} onSave={handleSave} onCancel={handleBackToDashboard} />
-                )}
-                {!viewingMyPets && !viewingProfile && !isEditingPet && (
-                    <Dashboard onEditPet={handleEditPet} />
-                )}
+                <Routes>
+                    <Route path="view-pets" element={<ViewPets pets={pets} onEditPet={handleEditPet} onDeletePet={handleDeletePet} />} />
+                    <Route path="add-pet" element={<AddPets onAddPet={handleAddPet} />} />
+                    <Route path="my-pets" element={<MyPets pets={pets} onEditPet={handleEditPet} onBack={() => {}} />} />
+                    <Route path="profile" element={<UserProfile user={{}} onSaveChanges={() => {}} />} />
+                    <Route path="/" element={<Dashboard />} />
+                </Routes>
             </div>
+            <LogoutModal 
+                isOpen={isModalOpen} 
+                onClose={() => setModalOpen(false)} 
+                onConfirm={handleLogout} 
+            />
         </div>
     );
 };

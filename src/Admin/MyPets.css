@@ -1,3 +1,4 @@
+/* MyPets.css */
 
 .my-pets {
     padding: 20px;
@@ -21,7 +22,7 @@
 .pets-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 20px; /* Space between pet cards */
 }
 
 .pet-card {
@@ -53,45 +54,37 @@
 }
 
 .adopt-button {
-    background-color: #28a745;
+    background-color: #28a745; /* Green for adopt */
     color: white;
 }
 
 .adopt-button:hover {
-    background-color: #218838;
+    background-color: #218838; /* Darker green on hover */
 }
 
 .foster-button {
-    background-color: #ffc107;
+    background-color: #ffc107; /* Yellow for foster */
     color: white;
 }
 
 .foster-button:hover {
-    background-color: #e0a800;
+    background-color: #e0a800; /* Darker yellow on hover */
 }
 
 .edit-button {
-    background-color: #007bff;
+    background-color: #007bff; /* Blue for edit */
     color: white;
 }
 
 .edit-button:hover {
-    background-color: #0056b3;
-}
-
-.pet-actions button {
-    margin: 5px;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 .unsaved-button {
-    background-color: #dc3545; /* Bootstrap's danger color */
+    background-color: #dc3545; /* Red for unsaved */
     color: white;
 }
 
 .unsaved-button:hover {
-    background-color: #c82333; /* Darker shade on hover */
+    background-color: #c82333; /* Darker red on hover */
 }

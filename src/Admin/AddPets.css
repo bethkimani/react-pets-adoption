@@ -1,4 +1,3 @@
-
 /* AddPets.css */
 .add-pets {
     margin: 20px;
@@ -6,6 +5,9 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center elements */
 }
 
 .add-pets h2 {
@@ -15,6 +17,8 @@
 .add-pets form {
     display: flex;
     flex-direction: column;
+    width: 100%; /* Full width */
+    max-width: 400px; /* Limit width for better design */
 }
 
 .add-pets input,
@@ -24,6 +28,7 @@
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    width: 100%; /* Full width */
 }
 
 .upload-picture {

@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AboutUs from './components/AboutUs';
@@ -32,7 +31,7 @@ const AppLayout = () => {
     const location = useLocation();
     const isAdminRoute = location.pathname.startsWith('/admin');
     const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
-    const userRole = localStorage.getItem("role"); // Get the user role
+    const userRole = localStorage.getItem("role");
 
     return (
         <div className="App">
@@ -46,7 +45,7 @@ const AppLayout = () => {
                     <Route path="/search-and-display" element={<SearchAndDisplayPets />} />
                     <Route path="/about" element={<AboutUs />} />
                     {isAuthenticated && userRole === "admin" && (
-                        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                        <Route path="/admin-dashboard/*" element={<AdminDashboard />} />
                     )}
                     <Route path="/auth" element={<Auth />} />
                     <Route path="*" element={<div><h1>404: Not Found</h1><p>The page you are looking for does not exist.</p></div>} />
