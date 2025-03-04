@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const AuthModal = ({ onClose }) => {
+const Auth = ({ onClose }) => {
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,13 +13,15 @@ const AuthModal = ({ onClose }) => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        // Implement your login logic here
-        // For example, an API call to authenticate the user
-        const isAuthenticated = true; // Replace with actual authentication logic
-
-        if (isAuthenticated) {
+        
+        // Dummy authentication - Replace this with actual authentication logic
+        if (email === "admin@example.com" && password === "admin123") {
+            localStorage.setItem("isAuthenticated", "true"); // Store authentication state
+            localStorage.setItem("role", "admin"); // Store user role
             navigate('/admin-dashboard'); // Redirect to admin dashboard
             onClose(); // Close the modal
+        } else {
+            alert("Invalid credentials");
         }
     };
 
@@ -72,4 +74,4 @@ const AuthModal = ({ onClose }) => {
     );
 };
 
-export default AuthModal;
+export default Auth;

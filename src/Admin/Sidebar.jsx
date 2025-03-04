@@ -1,40 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaSearch, FaPaw, FaUser, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaPaw, FaUser, FaSignOutAlt, FaChevronDown, FaChevronRight } from 'react-icons/fa';
+import './Sidebar.css'; // Import CSS file
 
 const Sidebar = ({ onViewMyPets, onViewProfile }) => {
+    const [showManagePets, setShowManagePets] = useState(false);
+
     return (
         <div className="sidebar">
-            <h2>Admin Dashboard</h2>
-            <ul>
+            <h2 className="sidebar-title">Pet Dashboard</h2>
+
+            <ul className="sidebar-menu">
                 <li>
-                    <Link to="/admin-dashboard">
-                        <FaHome /> Dashboard
+                    <Link to="/admin-dashboard" className="sidebar-link">
+                        <FaHome className="icon" /> Dashboard
                     </Link>
                 </li>
+
                 <li>
-                    <Link to="/search">
-                        <FaSearch /> Search
-                    </Link>
+                    <button className="sidebar-link dropdown-btn" onClick={() => setShowManagePets(!showManagePets)}>
+                        <FaPaw className="icon" /> Manage Pets
+                        {showManagePets ? <FaChevronDown className="dropdown-icon" /> : <FaChevronRight className="dropdown-icon" />}
+                    </button>
+                    {showManagePets && (
+                        <ul className="dropdown-menu">
+                            <li>
+                                <Link to="/add-pet" className="sidebar-link">Add Pet</Link>
+                            </li>
+                            <li>
+                                <Link to="/view-pets" className="sidebar-link">View Pets</Link>
+                            </li>
+                        </ul>
+                    )}
                 </li>
+
                 <li>
-                    <Link to="/pets">
-                        <FaPaw /> Manage Pets
-                    </Link>
-                </li>
-                <li>
-                    <button onClick={onViewProfile}>
-                        <FaUser /> My Profile
+                    <button onClick={onViewMyPets} className="sidebar-link">
+                        <FaPaw className="icon" /> My Pets
                     </button>
                 </li>
+
                 <li>
-                    <button onClick={onViewMyPets}>
-                        <FaPaw /> My Pets
+                    <button onClick={onViewProfile} className="sidebar-link">
+                        <FaUser className="icon" /> My Profile
                     </button>
                 </li>
+
                 <li>
-                    <Link to="/logout">
-                        <FaSignOutAlt /> Logout
+                    <Link to="/logout" className="sidebar-link">
+                        <FaSignOutAlt className="icon" /> Logout
                     </Link>
                 </li>
             </ul>

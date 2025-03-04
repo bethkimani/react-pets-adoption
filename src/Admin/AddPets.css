@@ -1,0 +1,49 @@
+
+/* AddPets.css */
+.add-pets {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.add-pets h2 {
+    color: #FF8C42; /* Updated color */
+}
+
+.add-pets form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-pets input,
+.add-pets select,
+.add-pets textarea {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.upload-picture {
+    display: flex;
+    align-items: center;
+}
+
+.upload-picture input {
+    margin-right: 10px;
+}
+
+.add-pet-button {
+    padding: 10px;
+    background-color: #FF8C42; /* Updated color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-pet-button:hover {
+    background-color: #e07b34; /* Darker shade on hover */
+}

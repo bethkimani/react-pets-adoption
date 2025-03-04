@@ -1,54 +1,83 @@
-
-
-
-/* Sidebar Styles */
+/* Sidebar container */
 .sidebar {
-    width: 250px; /* Set the width of the sidebar */
-    background-color: #4B0082; /* Dark purple background */
-    color: white; /* Text color */
-    padding: 20px; /* Padding around the content */
-    height: 100vh; /* Full height */
-    position: fixed; /* Fixes sidebar to the left */
-    top: 0; /* Aligns to the top */
-    left: 0; /* Aligns to the left */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Adds a shadow effect */
-    z-index: 1000; /* Ensures it stays above other content */
+    width: 250px;
+    height: 100vh;
+    background-color: #222;
+    color: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.sidebar h2 {
-    text-align: center; /* Center the heading */
-    margin-bottom: 20px; /* Space below the heading */
+/* Sidebar title */
+.sidebar-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
-.sidebar ul {
-    list-style: none; /* Removes default list styles */
-    padding: 0; /* Removes padding */
+/* Sidebar menu list */
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
 }
 
-.sidebar li {
-    margin: 15px 0; /* Space between list items */
+/* Sidebar links */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background 0.3s;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
-.sidebar li a {
-    color: white; /* Link color */
-    text-decoration: none; /* Removes underline */
-    display: flex; /* Enables flexbox for alignment */
-    align-items: center; /* Centers items vertically */
-    padding: 10px; /* Padding around the links */
-    transition: background-color 0.3s; /* Smooth background color transition */
+/* Sidebar hover effect */
+.sidebar-link:hover {
+    background-color: #444;
 }
 
-.sidebar li a:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Lighten background on hover */
-    border-radius: 5px; /* Rounded corners on hover */
+/* Sidebar icons */
+.icon {
+    margin-right: 10px;
 }
 
-.sidebar li a svg {
-    margin-right: 10px; /* Space between icon and text */
+/* Dropdown button */
+.dropdown-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
-.main-content {
-    flex: 1; /* Allows the main content to fill the remaining space */
-    padding: 20px; /* Padding around main content */
-    margin-left: 250px; /* Leaves space for the sidebar */
+/* Dropdown icon */
+.dropdown-icon {
+    margin-left: auto;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.dropdown-menu .sidebar-link {
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+/* Active dropdown styling */
+.dropdown-menu .sidebar-link:hover {
+    background-color: #555;
 }
