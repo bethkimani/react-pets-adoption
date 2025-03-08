@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './View.css'; // Correctly importing the CSS file
+import './ViewPets.css'; // Correctly importing the CSS file
 import EditPetModal from './EditPetModal'; // Import the edit modal
 
 const ViewPets = ({ pets, onEditPet, onDeletePet, onUpdatePet }) => {

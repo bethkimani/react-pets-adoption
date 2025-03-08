@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import './View.css'; // Import CSS for styling
+import './ViewPets.css'; // Import CSS for styling
 
 const EditPetModal = ({ pet, onClose, onUpdate }) => {
     const [name, setName] = useState(pet.name);

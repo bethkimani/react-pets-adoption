@@ -1,0 +1,12 @@
+
+.admin-dashboard {
+    display: flex;
+    height: 100vh;  /* Full height of viewport */
+}
+
+.main-content {
+    flex: 1;  /* Takes remaining space */
+    padding: 20px;  /* Padding around the content */
+    overflow-y: auto;  /* Allows scrolling if content overflows */
+    background-color: #f4f4f4;  /* Background color for main content */
+}

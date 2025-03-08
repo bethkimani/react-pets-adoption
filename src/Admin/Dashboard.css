@@ -1,0 +1,54 @@
+.dashboard-header {
+    background: #FF8C42; /* Dark blue */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.summary-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    flex: 1;
+    background: #0D0D3C; /* Blue background for summary cards */
+    color: white;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-width: 150px; /* Optional: Set min width for cards */
+}
+
+.charts {
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart-container {
+    flex: 1;
+    margin: 10px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 400px; /* Increased height for better visibility */
+    position: relative;
+    overflow: hidden; /* Prevent overflow */
+}
+
+.chart-container h2 {
+    margin-bottom: 15px;
+}
+
+canvas {
+    height: calc(100% - 40px) !important; /* Fill the entire height of the container, accounting for header */
+    width: 100% !important; /* Fill the entire width of the container */
+    max-height: 100%; /* Prevent overflow */
+    display: block; /* Prevents extra space below the canvas */
+}

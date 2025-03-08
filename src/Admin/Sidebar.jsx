@@ -1,9 +1,11 @@
+
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaPaw, FaUser, FaSignOutAlt } from 'react-icons/fa';
 import './Sidebar.css';
 
-const Sidebar = ({ onViewMyPets, onViewProfile, onLogout }) => {
+const Sidebar = ({ onLogout }) => {
     return (
         <div className="sidebar">
             <h2 className="sidebar-title">Pet Dashboard</h2>

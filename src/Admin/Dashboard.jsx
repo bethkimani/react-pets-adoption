@@ -1,113 +1,76 @@
+import React, { useEffect, useRef } from 'react';
+import { Chart, registerables } from 'chart.js';
+import './Dashboard.css';
 
-import React from 'react';
-import './dashboard.css';
+Chart.register(...registerables);
 
-const Dashboard = ({ onEditPet }) => {
-    const pets = [
-        { id: 1, name: 'Henry', adoptionStatus: 'Available', owner: 'None' },
-        { id: 2, name: 'Riga', adoptionStatus: 'Available', owner: 'None' },
-        { id: 3, name: 'Johnny', adoptionStatus: 'Adopted', owner: 'Owner Name' },
-        // Add more pets as needed
-    ];
+const Dashboard = () => {
+    const adoptionRateChartRef = useRef(null);
+    const adoptionSummaryChartRef = useRef(null);
+
+    useEffect(() => {
+        const adoptionRateChart = new Chart(adoptionRateChartRef.current, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Adoption Rate',
+                    data: [30, 45, 50, 70, 85, 90, 70, 60, 80, 95, 100, 120], // Example data for adoption rates
+                    borderColor: 'blue',
+                    backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                    borderWidth: 2,
+                    pointRadius: 5,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            },
+        });
+
+        const adoptionSummaryChart = new Chart(adoptionSummaryChartRef.current, {
+            type: 'pie',
+            data: {
+                labels: ['Adopted', 'Available', 'Pending'],
+                datasets: [{
+                    data: [300, 150, 50], // Example data for each category
+                    backgroundColor: ['#4CAF50', '#FFC107', '#FF5722'], // Colors for each category
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            },
+        });
+
+        return () => {
+            adoptionRateChart.destroy();
+            adoptionSummaryChart.destroy();
+        };
+    }, []);
 
     return (
-        <div className="dashboard">
-            <h1>Dashboard</h1>
-            <div className="statistics">
-                <div className="stat-card">
-                    <h2>Total Admins</h2>
-                    <p>4</p>
-                </div>
-                <div className="stat-card">
-                    <h2>Total Users</h2>
-                    <p>36</p>
-                </div>
-                <div className="stat-card">
-                    <h2>Adopted Pets</h2>
-                    <p>7</p>
-                </div>
-                <div className="stat-card">
-                    <h2>Fostered Pets</h2>
-                    <p>2</p>
-                </div>
-                <div className="stat-card">
-                    <h2>Available Pets</h2>
-                    <p>39</p>
-                </div>
-                <div className="stat-card">
-                    <h2>Total Pets</h2>
-                    <p>39</p>
-                </div>
-                <div className="stat-card">
-                    <h2>Dogs</h2>
-                    <p>5</p>
-                </div>
-                <div className="stat-card">
-                    <h2>Cats</h2>
-                    <p>3</p>
-                </div>
-                <div className="stat-card">
-                    <h2>Hamsters</h2>
-                    <p>1</p>
-                </div>
-                <div className="stat-card">
-                    <h2>Fish</h2>
-                    <p>2</p>
-                </div>
-                <div className="stat-card">
-                    <h2>Turtles</h2>
-                    <p>1</p>
-                </div>
-            </div>
+        <div>
+            <header className="dashboard-header">
+                <h1>Admin Dashboard</h1>
+            </header>
 
-            <div className="tables">
-                <h2>Users List</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Admin</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Yes</td>
-                            <td>Rija</td>
-                            <td>rija@gmail.com</td>
-                            <td>123456789</td>
-                        </tr>
-                        {/* More rows as needed */}
-                    </tbody>
-                </table>
+            <section className="summary-cards">
+                <div className="summary-card">53 Users</div>
+                <div className="summary-card">57 Pets</div>
+                <div className="summary-card">3451 Adopted Pets</div>
+            </section>
 
-                <h2>Pets List</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Adoption Status</th>
-                            <th>Owner</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {pets.map((pet) => (
-                            <tr key={pet.id}>
-                                <td>{pet.id}</td>
-                                <td>{pet.name}</td>
-                                <td>{pet.adoptionStatus}</td>
-                                <td>{pet.owner}</td>
-                                <td>
-                                    <button onClick={() => onEditPet(pet)}>Edit</button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            <section className="charts">
+                <div className="chart-container">
+                    <h2>Pet Adoption Chart</h2>
+                    <canvas ref={adoptionRateChartRef}></canvas>
+                </div>
+                <div className="chart-container">
+                    <h2>Adoption Summary</h2>
+                    <canvas ref={adoptionSummaryChartRef}></canvas>
+                </div>
+            </section>
         </div>
     );
 };
