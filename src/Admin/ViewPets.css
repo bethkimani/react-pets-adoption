@@ -1,101 +1,39 @@
-/* View.css */
+.view-pets-container {
+    padding: 20px;
+}
 
-table {
+.pets-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-th, td {
+.pets-table th, .pets-table td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px;
     text-align: left;
 }
 
-th {
-    background-color: #FFA500; /* Change header background color to orange */
-    color: white; /* Change text color to white for better contrast */
+.pets-table th {
+    background-color: #f4f4f4;
 }
 
-tr:nth-child(even) {
+.pets-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-tr:hover {
+.pets-table tr:hover {
     background-color: #f1f1f1;
 }
 
-.edit-button {
-    background-color: #FFA500; /* Orange color */
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-right: 5px;
+.pets-table img {
+    border-radius: 5px; /* Optional: for rounded image corners */
 }
 
-.edit-button:hover {
-    background-color: #e59400; /* Darker orange on hover */
-}
-
-.delete-button {
-    background-color: #ff4d4d; /* Red color */
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.delete-button:hover {
-    background-color: #e60000; /* Darker red on hover */
-}
-/* View.css */
-
-/* Modal Styles */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px; /* Adjust width as needed */
-}
-
-.modal-content h2 {
-    margin: 0 0 20px;
-}
-
-.modal-content form {
-    display: flex;
-    flex-direction: column;
-}
-
-.modal-content label {
-    margin-bottom: 10px;
-}
-
-.modal-content input,
-.modal-content select {
-    padding: 8px;
-    margin-top: 5px;
-}
-
-.modal-content button {
-    margin-top: 10px;
+.search-input {
+    margin-bottom: 20px;
     padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }

@@ -6,6 +6,7 @@
     padding: 20px; /* Padding for the content */
     display: flex;
     flex-direction: column; /* Vertical layout */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
 }
 
 .sidebar-title {
@@ -28,14 +29,38 @@
     text-decoration: none; /* Remove underline */
     display: flex; /* Use flexbox for icon and text */
     align-items: center; /* Align items vertically */
+    padding: 10px; /* Add padding for clickable area */
+    border-radius: 5px; /* Rounded corners */
     transition: background 0.3s; /* Smooth background transition */
 }
 
 .sidebar-link:hover {
     background: rgba(255, 255, 255, 0.1); /* Light background on hover */
-    border-radius: 5px; /* Rounded corners on hover */
 }
 
-.icon {
+.sidebar-link svg {
     margin-right: 10px; /* Space between icon and text */
+    font-size: 20px; /* Icon size */
+    transition: transform 0.3s; /* Add transition for scaling */
+}
+
+.sidebar-link:hover svg {
+    transform: scale(1.1); /* Slightly enlarge icon on hover */
+}
+
+/* Specific styles for the Logout button */
+.sidebar-menu li button {
+    background: none; /* Remove background for button */
+    border: none; /* Remove border */
+    color: white; /* Ensure text color is white */
+    cursor: pointer; /* Pointer cursor on hover */
+    width: 100%; /* Make button take the full width */
+    text-align: left; /* Align text to the left */
+    padding: 10px; /* Same padding as links */
+    border-radius: 5px; /* Maintain rounded corners */
+    transition: background 0.3s; /* Smooth background transition */
+}
+
+.sidebar-menu li button:hover {
+    background: rgba(255, 255, 255, 0.1); /* Light background on hover */
 }

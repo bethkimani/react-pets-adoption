@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
-import './UserProfile.css'; // Import the CSS file for styling
+import React, { useState, useEffect } from 'react';
+import './UserProfile.css';
 
-const UserProfile = ({ user, onSaveChanges }) => {
-    const [firstName, setFirstName] = useState(user.firstName);
-    const [lastName, setLastName] = useState(user.lastName);
-    const [email, setEmail] = useState(user.email);
-    const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
-    const [bio, setBio] = useState(user.bio);
+const UserProfile = ({ user = {}, onSaveChanges }) => {
+    const [firstName, setFirstName] = useState(user.firstName || '');
+    const [lastName, setLastName] = useState(user.lastName || '');
+    const [email, setEmail] = useState(user.email || '');
+    const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || '');
+    const [bio, setBio] = useState(user.bio || '');
+    const [profilePicture, setProfilePicture] = useState(user.profilePicture || null);
+    const [imagePreview, setImagePreview] = useState(null);
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setProfilePicture(file);
+            setImagePreview(URL.createObjectURL(file));
+        }
+    };
 
     const handleSave = () => {
         const updatedUser = {
@@ -16,13 +26,26 @@ const UserProfile = ({ user, onSaveChanges }) => {
             email,
             phoneNumber,
             bio,
+            profilePicture,
         };
         onSaveChanges(updatedUser);
     };
 
+    // Conditional rendering for loading state
+    if (!user) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className="user-profile">
             <h2>My Profile</h2>
+            {imagePreview && <img src={imagePreview} alt="Profile Preview" className="profile-picture" />}
+            <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="file-input"
+            />
             <input
                 type="text"
                 value={firstName}

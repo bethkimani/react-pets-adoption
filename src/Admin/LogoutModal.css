@@ -1,41 +1,62 @@
-
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background */
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensures the modal is on top */
 }
 
 .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
+    background-color: #fff; /* White background for the modal */
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%; /* Make it responsive */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
     text-align: center;
 }
 
+.modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 20px; /* Increased font size */
+    color: #333; /* Darker color for better readability */
+}
+
 .modal-actions {
+    display: flex;
+    justify-content: space-between;
     margin-top: 20px;
 }
 
 .cancel-button,
 .logout-button {
-    margin: 5px;
-    padding: 10px 15px;
+    padding: 12px 24px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px; /* Increased font size */
+    transition: background-color 0.3s; /* Smooth transition */
 }
 
 .cancel-button {
-    background: #ccc;
+    background-color: #f0f0f0; /* Lighter grey for cancel */
+    color: #333; /* Dark text for contrast */
 }
 
 .logout-button {
-    background: #ff4d4d;
+    background-color: #d9534f; /* Danger color for logout */
     color: white;
+}
+
+.logout-button:hover {
+    background-color: #c9302c; /* Darker shade on hover */
+}
+
+.cancel-button:hover {
+    background-color: #e0e0e0; /* Darker shade for cancel on hover */
 }

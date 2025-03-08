@@ -1,8 +1,6 @@
-
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaPaw, FaUser, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaPaw, FaUser, FaSignOutAlt, FaUsers } from 'react-icons/fa';
 import './Sidebar.css';
 
 const Sidebar = ({ onLogout }) => {
@@ -12,32 +10,43 @@ const Sidebar = ({ onLogout }) => {
             <ul className="sidebar-menu">
                 <li>
                     <Link to="/admin-dashboard" className="sidebar-link">
-                        <FaHome className="icon" /> Dashboard
+                        <FaHome /> Dashboard
                     </Link>
                 </li>
                 <li>
-                    <Link to="/admin-dashboard/view-pets" className="sidebar-link">
-                        <FaPaw className="icon" /> View Pets
+                    <Link to="/admin-dashboard/teams" className="sidebar-link">
+                        <FaUsers /> Teams
                     </Link>
                 </li>
                 <li>
                     <Link to="/admin-dashboard/add-pet" className="sidebar-link">
-                        <FaPaw className="icon" /> Add Pet
+                        <FaPaw /> Add Pet
                     </Link>
                 </li>
                 <li>
-                    <Link to="/admin-dashboard/my-pets" className="sidebar-link">
-                        <FaPaw className="icon" /> My Pets
+                    <Link to="/admin-dashboard/view-pets" className="sidebar-link">
+                        <FaPaw /> View Pets
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/admin-dashboard/change-password" className="sidebar-link">
+                        <FaPaw /> Change Password
                     </Link>
                 </li>
                 <li>
                     <Link to="/admin-dashboard/profile" className="sidebar-link">
-                        <FaUser className="icon" /> My Profile
+                        <FaUser /> My Profile
                     </Link>
                 </li>
+
+                <li>
+    <Link to="/admin-dashboard/view-feedback" className="sidebar-link">
+        <FaUsers /> User Feedback
+    </Link>
+</li>
                 <li>
                     <button onClick={onLogout} className="sidebar-link">
-                        <FaSignOutAlt className="icon" /> Logout
+                        <FaSignOutAlt /> Logout
                     </button>
                 </li>
             </ul>

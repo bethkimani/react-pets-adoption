@@ -1,109 +1,79 @@
+
 import React, { useState } from 'react';
-import './AddPets.css'; // Import the CSS file for styling
+import Step1 from './components/Step1';
+import Step2 from './components/Step2';
+import Confirmation from './components/Confirmation';
+import { useNavigate } from 'react-router-dom';
+import './AddPets.css';
 
-const AddPets = ({ onAddPet }) => {
-    const [petName, setPetName] = useState('');
-    const [type, setType] = useState('');
-    const [adoptionStatus, setAdoptionStatus] = useState('Available');
-    const [breed, setBreed] = useState('');
-    const [height, setHeight] = useState('');
-    const [weight, setWeight] = useState('');
-    const [color, setColor] = useState('');
-    const [dietary, setDietary] = useState('');
-    const [picture, setPicture] = useState(null);
-    const [bio, setBio] = useState('');
+const steps = [
+    { title: "Add Pet Details" },
+    { title: "Add Pet Attributes" },
+    { title: "Confirmation" }
+];
 
-    const handleAdd = (e) => {
-        e.preventDefault();
-        const newPet = {
-            id: Date.now(),
-            name: petName,
-            type,
-            adoptionStatus,
-            breed,
-            height,
-            weight,
-            color,
-            dietary,
-            picture,
-            bio,
-            owner: 'None'
-        };
-        onAddPet(newPet);
-        // Reset form fields
-        setPetName('');
-        setType('');
-        setAdoptionStatus('Available');
-        setBreed('');
-        setHeight('');
-        setWeight('');
-        setColor('');
-        setDietary('');
-        setPicture(null);
-        setBio('');
+const AddPets = () => {
+    const [step, setStep] = useState(1);
+    const [values, setValues] = useState({
+        name: "",
+        species: "",
+        breed: "",
+        age: "",
+        adoptionStatus: "",
+        description: "",
+        image: null,
+    });
+
+    const navigate = useNavigate();
+
+    const nextStep = () => setStep((prevStep) => prevStep + 1);
+    const prevStep = () => setStep((prevStep) => prevStep - 1);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setValues((prevValues) => ({
+            ...prevValues,
+            [name]: value,
+        }));
+    };
+
+    const handleFileChange = (e) => {
+        setValues((prevValues) => ({
+            ...prevValues,
+            image: e.target.files[0],
+        }));
+    };
+
+    const handleFormSubmit = () => {
+        alert("Pet added successfully!");
+        navigate("/admin-dashboard/my-pets");
     };
 
     return (
-        <div className="add-pets">
-            <h2>Add a New Pet</h2>
-            <form onSubmit={handleAdd}>
-                <input
-                    type="text"
-                    value={petName}
-                    onChange={(e) => setPetName(e.target.value)}
-                    placeholder="Enter pet's name"
-                    required
-                />
-                <select value={type} onChange={(e) => setType(e.target.value)} required>
-                    <option value="">Choose Type...</option>
-                    <option value="Dog">Dog</option>
-                    <option value="Cat">Cat</option>
-                    <option value="Other">Other</option>
-                </select>
-                <select value={adoptionStatus} onChange={(e) => setAdoptionStatus(e.target.value)} required>
-                    <option value="Available">Available</option>
-                    <option value="Adopted">Adopted</option>
-                </select>
-                <input
-                    type="text"
-                    value={breed}
-                    onChange={(e) => setBreed(e.target.value)}
-                    placeholder="Enter pet's breed"
-                />
-                <input
-                    type="number"
-                    value={height}
-                    onChange={(e) => setHeight(e.target.value)}
-                    placeholder="Height (cm)"
-                />
-                <input
-                    type="number"
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}
-                    placeholder="Weight (kg)"
-                />
-                <input
-                    type="text"
-                    value={color}
-                    onChange={(e) => setColor(e.target.value)}
-                    placeholder="Color"
-                />
-                <select value={dietary} onChange={(e) => setDietary(e.target.value)}>
-                    <option value="">Choose Dietary...</option>
-                    <option value="Vegetarian">Vegetarian</option>
-                    <option value="Non-Vegetarian">Non-Vegetarian</option>
-                </select>
-                <div className="upload-picture">
-                    <input type="file" onChange={(e) => setPicture(e.target.files[0])} />
-                    <span>Choose Picture</span>
-                </div>
-                <textarea
-                    value={bio}
-                    onChange={(e) => setBio(e.target.value)}
-                    placeholder="Add a bio for the pet..."
-                />
-                <button type="submit" className="add-pet-button">Add Pet</button>
-            </form>
+        <div className="add-pets-container">
+            <div className="step-indicator">
+                {steps.map((stepInfo, index) => (
+                    <div
+                        key={index}
+                        className={`step ${step === index + 1 ? "active" : ""}`}
+                        onClick={() => setStep(index + 1)}
+                    >
+                        {stepInfo.title}
+                    </div>
+                ))}
+            </div>
+            <h2 className="form-title">{steps[step - 1].title}</h2>
+            <div className="step-content">
+                {step === 3 ? (
+                    <Confirmation prevStep={prevStep} values={values} onSubmit={handleFormSubmit} />
+                ) : (
+                    step === 1 ? (
+                        <Step1 nextStep={nextStep} handleChange={handleChange} values={values} handleFileChange={handleFileChange} />
+                    ) : (
+                        <Step2 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} values={values} />
+                    )
+                )}
+            </div>
         </div>
     );
 };
