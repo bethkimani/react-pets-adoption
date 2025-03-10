@@ -1,35 +1,169 @@
-
-/* src/components/AdoptionProcessAndFees.css */
-.adoption-process-fees {
-    text-align: center;
-    padding: 20px;
+.user-adoption-process {
+    color: white; /* Default text color */
+    padding: 0; /* Remove padding to avoid gaps */
+    position: relative; /* For overlaying content */
 }
 
-.adoption-process-fees form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.header {
+    width: 100%; /* Full width */
+    height: 600px; /* Set height */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center; /* Center text alignment */
+    position: relative; /* For positioning the overlay */
+    background-image: url('../assets/images/guineapig.jpg'); /* Use the image as background */
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center the image */
+    margin: 0; /* Remove margin */
 }
 
-.adoption-process-fees input,
-.adoption-process-fees select,
-.adoption-process-fees textarea {
-    width: 300px;
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.header::before {
+    content: ""; /* Create a pseudo-element for overlay */
+    position: absolute; /* Position it absolutely */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 1; /* Ensure overlay is on top */
 }
 
-.adoption-process-fees button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.header h2 {
+    position: relative; /* Position relative to the header */
+    z-index: 2; /* Ensure text is above the overlay */
+    font-size: 36px; /* Adjust font size as needed */
 }
 
-.adoption-process-fees button:hover {
-    background-color: #0056b3;
+.info-section {
+    background-color: #FF8C42; /* Updated background color */
+    color: black; /* Text color */
+    padding: 40px 20px; /* Padding for the section */
+    text-align: center; /* Center text alignment */
+    margin: 0; /* Remove margin to avoid gaps */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Space between items */
+    height: auto; /* Allow height to adjust based on content */
+}
+
+.button-container {
+    margin-top: auto; /* Push the button to the bottom */
+}
+
+.adoptable-animals-btn, .our-shelters-btn {
+    background-color: black; /* Button color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding for the button */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.adoptable-animals-btn:hover, .our-shelters-btn:hover {
+    background-color: #333; /* Darken on hover */
+}
+
+.cat-adoption {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* Text color */
+    padding: 40px 20px; /* Padding for the section */
+    text-align: center; /* Center text alignment */
+    margin: 20px 0; /* Margin for spacing */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.cat-adoption-title {
+    font-size: 30px; /* Increased title size for visibility */
+    font-family: 'Arial', sans-serif; /* Font family for title */
+    font-weight: bold; /* Bold for emphasis */
+    margin-bottom: 20px; /* Spacing below the title */
+}
+
+.adoption-process {
+    padding: 30px; /* Increased padding for spacing */
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.dog-adoption {
+    margin-bottom: 30px; /* Spacing between sections */
+}
+
+.dog-adoption-title {
+    font-size: 30px; /* Increased title size for visibility */
+    color: #FF4500; /* Bright orange color for the title */
+    margin-bottom: 15px; /* Space below title */
+    text-align: center; /* Center the title */
+    position: relative; /* Allow positioning of the underline */
+}
+
+.dog-adoption-title::after {
+    content: ""; /* Empty content for the underline */
+    display: block; /* Make it a block element */
+    width: 50%; /* Width of the underline */
+    height: 3px; /* Thickness of the underline */
+    background-color: #A0522D; /* Color of the underline */
+    margin: 10px auto; /* Center the underline */
+}
+
+.dog-adoption-steps {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 0; /* Remove padding */
+    margin: 10px 0; /* Margin for spacing */
+}
+
+.dog-adoption-steps li {
+    position: relative; /* For positioning the custom bullet */
+    padding-left: 30px; /* Space for the bullet */
+    margin-bottom: 10px; /* Spacing between list items */
+    font-size: 18px; /* Font size for clarity */
+    color: #333; /* Dark gray color for the text */
+}
+
+.dog-adoption-steps li::before {
+    content: "❤️"; /* Heart emoji as the bullet */
+    position: absolute; /* Positioning */
+    left: 0; /* Align to the left */
+    font-size: 24px; /* Increase size of the heart */
+    line-height: 1; /* Align the heart vertically */
+    color: #FF4500; /* Bright orange or another contrasting color */
+}
+
+.fees-title {
+    font-size: 30px; /* Increased title size for visibility */
+    color: #FF4500; /* Bright orange color for the title */
+    margin-bottom: 15px; /* Space below title */
+    text-align: center; /* Center the title */
+    position: relative; /* Allow positioning of the underline */
+}
+
+.fees-title::after {
+    content: ""; /* Empty content for the underline */
+    display: block; /* Make it a block element */
+    width: 50%; /* Width of the underline */
+    height: 3px; /* Thickness of the underline */
+    background-color: #A0522D; /* Color of the underline */
+    margin: 10px auto; /* Center the underline */
+}
+
+.adoption-fee-details {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 0; /* Remove padding */
+    margin: 10px 0; /* Margin for spacing */
+    text-align: center; /* Center the fee details */
+}
+
+.adoption-fee-details li {
+    margin: 5px 0; /* Spacing between list items */
+    font-size: 20px; /* Size of the fee text */
+    color: #333; /* Dark gray color for the text */
+}
+
+.adoption-fee-details li span {
+    font-weight: bold; /* Bold for the fee amounts */
+    color: #FF4500; /* Bright orange color for the amounts */
 }
