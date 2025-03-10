@@ -1,6 +1,5 @@
 import React from 'react';
 import './AdoptionProcess.css'; // Import the CSS for styling
-import guineapig from "../assets/images/guineapig.jpg"; // Image import path
 
 const AdoptionProcess = () => {
     return (
@@ -26,26 +25,28 @@ const AdoptionProcess = () => {
             </div>
             {/* Dog Adoption Section */}
             <div className="adoption-process">
-                <div className="dog-adoption">
-                    <h3 className="dog-adoption-title">
-                        How do <span className="highlight">dog</span> adoptions work?
-                    </h3>
-                    <ol className="dog-adoption-steps">
-                        <li>Fill out an adoption application.</li>
-                        <li>Our adoption coordinator will contact your references and call you if some additional information is needed.</li>
-                        <li>If you are the best fit for the animal in question, you will be contacted and a meet and greet will be scheduled at our shelter.</li>
-                        <li>If the pet you chose is the right match for you, the adoption will be completed by signing an adoption contract and paying the adoption fee.</li>
-                    </ol>
+                <div className="adoption-pair">
+                    <h3 className="dog-adoption-title">How do <span className="black-text">dog</span> adoptions work?</h3>
+                    <div className="dog-adoption-steps">
+                        <ul className="heart-list">
+                            <li> Fill out an adoption application.</li>
+                            <li> Our adoption coordinator will contact your references and call you if some additional information is needed.</li>
+                            <li> If you are the best fit for the animal in question, you will be contacted and a meet and greet will be scheduled at our shelter.</li>
+                            <li> If the pet you chose is the right match for you, the adoption will be completed by signing an adoption contract and paying the adoption fee.</li>
+                        </ul>
+                    </div>
                 </div>
-                <div className="adoption-fee">
-                    <h4 className="fees-title">
-                        How much is the <span className="highlight">adoption</span> fee?
-                    </h4>
-                    <ul className="adoption-fee-details">
-                        <li>Dogs: <span>$400</span></li>
-                        <li>Cats: <span>$160</span></li>
-                        <li>Small Animals: <span>$25</span></li>
-                    </ul>
+                <div className="adoption-pair">
+                    <h4 className="fees-title">How much is the <span className="black-text">adoption</span> fee?</h4>
+                    <div className="adoption-fee-details">
+                        <ul>
+                            <li>Dogs: <span>$400</span></li>
+                            <li>Cats: <span>$160</span></li>
+                            <li>Small Animals: <span>$25</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="adoption-pair">
                     <h4>What does the adoption fee include?</h4>
                     <ul className="adoption-fee-details">
                         <li>Age Appropriate Vaccinations (DA2PP and Bordetella for dogs, FVRCP for cats, and Rabies for all dogs and cats over 16 weeks of age)</li>

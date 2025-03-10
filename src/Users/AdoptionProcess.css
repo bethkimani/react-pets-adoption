@@ -2,6 +2,7 @@
     color: white; /* Default text color */
     padding: 0; /* Remove padding to avoid gaps */
     position: relative; /* For overlaying content */
+    margin: 0; /* Remove margin at the top of everything */
 }
 
 .header {
@@ -71,8 +72,8 @@
     color: white; /* Text color */
     padding: 40px 20px; /* Padding for the section */
     text-align: center; /* Center text alignment */
-    margin: 20px 0; /* Margin for spacing */
-    border-radius: 10px; /* Rounded corners */
+    margin: 0; /* Margin for spacing */
+    border-radius: 0px; /* Reduced border radius */
 }
 
 .cat-adoption-title {
@@ -83,87 +84,85 @@
 }
 
 .adoption-process {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
     padding: 30px; /* Increased padding for spacing */
     background-color: #f9f9f9; /* Light background */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin: 20px 0; /* Margin for spacing */
 }
 
-.dog-adoption {
-    margin-bottom: 30px; /* Spacing between sections */
+.adoption-pair {
+    display: flex; /* Use flexbox for each title-description pair */
+    justify-content: space-between; /* Space between title and description */
+    align-items: flex-start; /* Align items to the top */
+    margin-bottom: 20px; /* Space between pairs */
 }
 
-.dog-adoption-title {
+.dog-adoption-title, .fees-title {
+    width: 50%; /* Title takes half width */
     font-size: 30px; /* Increased title size for visibility */
     color: #FF4500; /* Bright orange color for the title */
-    margin-bottom: 15px; /* Space below title */
-    text-align: center; /* Center the title */
-    position: relative; /* Allow positioning of the underline */
+    margin-bottom: 0; /* Remove bottom margin to align with description */
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
-.dog-adoption-title::after {
-    content: ""; /* Empty content for the underline */
-    display: block; /* Make it a block element */
-    width: 50%; /* Width of the underline */
-    height: 3px; /* Thickness of the underline */
-    background-color: #A0522D; /* Color of the underline */
-    margin: 10px auto; /* Center the underline */
-}
-
-.dog-adoption-steps {
-    list-style-type: none; /* Remove default bullets */
+.dog-adoption-steps, .adoption-fee-details {
+    width: 50%; /* Description takes half width */
+    margin-left: 0px; /* Space between title and description */
     padding-left: 0; /* Remove padding */
-    margin: 10px 0; /* Margin for spacing */
 }
 
-.dog-adoption-steps li {
-    position: relative; /* For positioning the custom bullet */
-    padding-left: 30px; /* Space for the bullet */
-    margin-bottom: 10px; /* Spacing between list items */
+.dog-adoption-steps li, .adoption-fee-details li {
     font-size: 18px; /* Font size for clarity */
     color: #333; /* Dark gray color for the text */
-}
-
-.dog-adoption-steps li::before {
-    content: "❤️"; /* Heart emoji as the bullet */
-    position: absolute; /* Positioning */
-    left: 0; /* Align to the left */
-    font-size: 24px; /* Increase size of the heart */
-    line-height: 1; /* Align the heart vertically */
-    color: #FF4500; /* Bright orange or another contrasting color */
-}
-
-.fees-title {
-    font-size: 30px; /* Increased title size for visibility */
-    color: #FF4500; /* Bright orange color for the title */
-    margin-bottom: 15px; /* Space below title */
-    text-align: center; /* Center the title */
-    position: relative; /* Allow positioning of the underline */
-}
-
-.fees-title::after {
-    content: ""; /* Empty content for the underline */
-    display: block; /* Make it a block element */
-    width: 50%; /* Width of the underline */
-    height: 3px; /* Thickness of the underline */
-    background-color: #A0522D; /* Color of the underline */
-    margin: 10px auto; /* Center the underline */
+    margin-bottom: 0px; /* Spacing between list items */
 }
 
 .adoption-fee-details {
-    list-style-type: none; /* Remove default bullets */
-    padding-left: 0; /* Remove padding */
-    margin: 10px 0; /* Margin for spacing */
-    text-align: center; /* Center the fee details */
+    margin-top: 0px; /* Space above the fees */
+    margin-left: 0; /* Align to the left */
+}
+
+.adoption-fee-details ul {
+    margin-top: 10px; /* Space above the list */
+    padding-left: 0; /* Remove padding to align with the heading */
 }
 
 .adoption-fee-details li {
-    margin: 5px 0; /* Spacing between list items */
+    margin:  0; /* Spacing between list items */
     font-size: 20px; /* Size of the fee text */
     color: #333; /* Dark gray color for the text */
+    position: relative; /* For positioning the custom bullet */
 }
 
-.adoption-fee-details li span {
-    font-weight: bold; /* Bold for the fee amounts */
-    color: #FF4500; /* Bright orange color for the amounts */
+.adoption-fee-details li::before {
+    content: "🔶"; /* Custom bullet (orange diamond) */
+    position: absolute; /* Positioning */
+    left: -30px; /* Align to the left */
+    font-size: 18px; /* Size of the bullet */
+    color: #FF4500; /* Bright orange color for the bullet */
+}
+
+.black-text {
+    color: black; /* Color for the adoption word */
+}
+
+/* Heart List Styles */
+.heart-list {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 0; /* Remove padding */
+}
+
+.heart-list li {
+    position: relative; /* For positioning the heart icon */
+    padding-left: 30px; /* Space for the heart icon */
+}
+
+.heart-list li::before {
+    content: "❤️"; /* Heart icon */
+    position: absolute; /* Position it absolutely */
+    left: 0; /* Align to the left */
+    font-size: 18px; /* Size of the heart */
 }
