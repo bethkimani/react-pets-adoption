@@ -1,0 +1,131 @@
+/* Dashboard.css */
+
+.user-dashboard-content {
+    padding: 20px; /* Padding for the dashboard content */
+    background-color: #f4f4f4; /* Light background for the entire dashboard */
+}
+
+.user-dashboard-content h2 {
+    margin-top: 0; /* Remove top margin for headings */
+    color: #333; /* Dark text color */
+}
+
+.organization-info {
+    background-color: #e07b3d; /* Updated primary color for header */
+    color: white; /* White text */
+    padding: 15px; /* Padding */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 20px; /* Space below */
+}
+
+.change-org-btn {
+    background-color: transparent; /* Transparent button */
+    color: white; /* White text */
+    border: 1px solid white; /* White border */
+    padding: 10px 15px; /* Padding */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.dashboard-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+    gap: 30px; /* Increased space between cards */
+    margin-bottom: 20px; /* Space below overview section */
+}
+
+.dashboard-card {
+    background-color: #ffffff; /* Card background */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px; /* Inner padding */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center; /* Center text */
+}
+
+.dashboard-card h3 {
+    margin: 0; /* Remove default margin */
+    font-size: 1.2em; /* Font size for headings */
+}
+
+.annual-review {
+    background-color: #ffffff; /* Light background for review section */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Inner padding */
+    margin: 20px 0; /* Space above and below */
+    text-align: center; /* Center text */
+}
+
+.annual-review-content {
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+.year {
+    font-size: 3em; /* Larger font for year */
+    font-weight: bold; /* Bold weight */
+    color: #e07b3d; /* Update color for year */
+    margin-right: 20px; /* Space between year and text */
+}
+
+.annual-review-text {
+    max-width: 500px; /* Limit width of text */
+}
+
+.annual-review-btn {
+    background-color: #e07b3d; /* Updated primary color */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px 15px; /* Padding */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.dashboard-stats {
+    margin-top: 20px; /* Space above stats section */
+}
+
+.week-stats-container {
+    background-color: #ffffff; /* Light background for stats */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Inner padding */
+    margin-bottom: 20px; /* Space below */
+}
+
+.week-stats-header {
+    text-align: center; /* Center the date */
+    margin-bottom: 20px; /* Space below the header */
+}
+
+.stats-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Responsive grid for stats */
+    gap: 20px; /* Space between stats cards */
+    margin-bottom: 20px; /* Space below stats cards */
+}
+
+.stat-card {
+    background-color: #f0f0f0; /* Light grey background for stat cards */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px; /* Inner padding */
+    text-align: center; /* Center text */
+}
+
+.stat-card h4 {
+    margin: 0; /* Remove default margin */
+    font-size: 1em; /* Font size for subheadings */
+}
+
+.stat-card p {
+    font-size: 1.5em; /* Larger font for the values */
+    font-weight: bold; /* Bold values */
+}
+
+.add-pet-btn {
+    background-color: #e07b3d; /* Updated primary color */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px 15px; /* Padding */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+}

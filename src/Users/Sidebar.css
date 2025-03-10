@@ -1,0 +1,42 @@
+/* Sidebar.css */
+
+.user-sidebar {
+    width: 250px; /* Fixed width for the sidebar */
+    background-color: #000000; /* Black background for the sidebar */
+    color: white; /* White text color for better contrast */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Slightly darker shadow */
+    padding: 20px;
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
+.user-sidebar h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.user-sidebar ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+}
+
+.user-sidebar li {
+    margin: 10px 0; /* Space between items */
+}
+
+.user-sidebar li a {
+    text-decoration: none; /* Remove underline */
+    color: white; /* Change link color to white */
+    padding: 10px 15px;
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+.user-sidebar li a:hover {
+    background-color: #444444; /* Dark gray on hover */
+}
+
+.user-sidebar li a i {
+    margin-right: 10px; /* Space between icon and text */
+}

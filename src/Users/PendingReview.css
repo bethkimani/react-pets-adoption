@@ -1,0 +1,11 @@
+
+
+/* PendingReviews.css */
+
+.user-pending-reviews {
+    padding: 20px; /* Padding around the content */
+}
+
+.user-pending-reviews h2 {
+    margin-top: 0; /* Remove top margin for headings */
+}

@@ -1,0 +1,11 @@
+
+
+/* AccountManagement.css */
+
+.user-account-management {
+    padding: 20px; /* Padding around the content */
+}
+
+.user-account-management h2 {
+    margin-top: 0; /* Remove top margin for headings */
+}

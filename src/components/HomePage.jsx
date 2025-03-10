@@ -1,8 +1,7 @@
-
-
-import React, { useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 // Import images directly
@@ -77,23 +76,15 @@ const pets = [
 ];
 
 const HomePage = () => {
-  const [showAdopt, setShowAdopt] = useState(null); // Track the selected pet for adoption
-  const [isLogin, setIsLogin] = useState(true); // To toggle between login and signup
+  const navigate = useNavigate(); // Use navigate to redirect
 
   const handleAdoptClick = (pet) => {
     if (pet.available) {
-      setShowAdopt(pet); // Set the selected pet for adoption
+      // Redirect to the adoption process directly
+      navigate('/adoption-process');
     } else {
       alert(`${pet.name} has already found their forever home. 🏡`);
     }
-  };
-
-  const handleClose = () => {
-    setShowAdopt(null); // Close the form
-  };
-
-  const toggleForm = () => {
-    setIsLogin(!isLogin);
   };
 
   return (
@@ -126,24 +117,6 @@ const HomePage = () => {
                 <p>Greased: {pet.greased}</p>
                 <p>Highest Medal: {pet.highestMedal}</p>
               </div>
-
-              {/* Overlay Form */}
-              {showAdopt === pet && (
-                <div className="overlay-form">
-                  <span className="close" onClick={handleClose}>&times;</span>
-                  <h3>{isLogin ? 'Login' : 'Sign Up'}</h3>
-                  <form>
-                    {!isLogin && <input type="text" placeholder="Name" required />}
-                    <input type="text" placeholder="Email or Username" required />
-                    <input type="password" placeholder="Password" required />
-                    <button type="submit" className="modal-button">{isLogin ? 'Login' : 'Sign Up'}</button>
-                    <p>
-                      {isLogin ? 'Don\'t have an account?' : 'Already have an account?'} 
-                      <span onClick={toggleForm} className="toggle-link"> {isLogin ? 'Sign Up' : 'Login'}</span>
-                    </p>
-                  </form>
-                </div>
-              )}
             </div>
           ))}
         </div>

@@ -1,0 +1,35 @@
+
+/* src/components/AdoptionProcessAndFees.css */
+.adoption-process-fees {
+    text-align: center;
+    padding: 20px;
+}
+
+.adoption-process-fees form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.adoption-process-fees input,
+.adoption-process-fees select,
+.adoption-process-fees textarea {
+    width: 300px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.adoption-process-fees button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.adoption-process-fees button:hover {
+    background-color: #0056b3;
+}

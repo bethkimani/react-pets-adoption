@@ -1,0 +1,21 @@
+
+/* Navbar.css */
+
+.user-navbar {
+    background-color: #333; /* Dark background for the navbar */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-navbar input {
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+}
+
+.user-navbar h1 {
+    margin: 0; /* Remove margin for the title */
+}

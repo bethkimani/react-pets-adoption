@@ -1,0 +1,43 @@
+
+/* SpecialAdoptionForm.css */
+
+.user-special-adoption-form {
+    padding: 20px; /* Padding around the content */
+    background-color: #fff; /* White background for the form */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.user-special-adoption-form h2 {
+    margin-top: 0; /* Remove top margin for headings */
+}
+
+.user-special-adoption-form form {
+    display: flex;
+    flex-direction: column; /* Arrange form items vertically */
+}
+
+.user-special-adoption-form label {
+    margin-bottom: 10px; /* Space between labels and inputs */
+}
+
+.user-special-adoption-form input,
+.user-special-adoption-form textarea {
+    padding: 10px; /* Padding inside inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.user-special-adoption-form button {
+    margin-top: 10px; /* Space above the button */
+    padding: 10px; /* Padding inside the button */
+    background-color: #007bff; /* Button color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.user-special-adoption-form button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}

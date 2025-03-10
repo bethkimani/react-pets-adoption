@@ -53,10 +53,15 @@ const Navbar = () => {
               <span className="nav-label">About Us</span>
             </Link>
           </div>
+          <div className="nav-item">
+            <Link to="/adoption-process" style={{ textDecoration: 'none', color: 'white' }}>
+              <span className="nav-label">Adoption Process</span>
+            </Link>
+          </div>
         </div>
         <div className="login-item" onClick={openModal}>
           <FaUser className="nav-icon" />
-          <span className="nav-label">Login</span>
+          <span className="nav-label"> Login</span>
         </div>
       </div>
       {isModalOpen && <AuthModal onClose={closeModal} />}
