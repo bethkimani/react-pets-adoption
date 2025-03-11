@@ -1,11 +1,93 @@
 
-
-/* AccountManagement.css */
-
-.user-account-management {
-    padding: 20px; /* Padding around the content */
+body {
+    margin: 0; /* Remove default margin */
+    font-family: Arial, sans-serif; /* Set a default font */
 }
 
-.user-account-management h2 {
-    margin-top: 0; /* Remove top margin for headings */
+.account-management {
+    max-width: 600px; /* Set a maximum width */
+    margin: 20px auto; /* Center the box */
+    padding: 20px; /* Padding inside the box */
+    background-color: #FFF8DC; /* Cream background for the account management */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    overflow: hidden; /* Prevent content overflow */
+}
+
+h2 {
+    text-align: center; /* Center the titles */
+}
+
+.nav-menu {
+    display: flex; /* Flexbox for navigation */
+    justify-content: space-around; /* Space items evenly */
+    margin-bottom: 20px; /* Space below navigation */
+}
+
+.nav-button {
+    background-color: #FF8C42; /* Darker Earthy Orange */
+    color: white; /* Text color */
+    padding: 10px 15px; /* Padding for navigation items */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition */
+    text-align: left; /* Align text to the left */
+    width: 100%; /* Full width for navigation */
+}
+
+.nav-button:hover {
+    background-color: #e57b36; /* Slightly darker shade on hover */
+}
+
+.tab-content {
+    margin-top: 20px; /* Space above tab content */
+}
+
+.profile-section, .adoption-history-section, .favorites-section, .settings-section, .support-section {
+    margin-bottom: 20px; /* Space below sections */
+}
+
+.pet-item {
+    margin: 10px 0; /* Space between pet items */
+}
+
+/* Button Styles */
+.button {
+    margin-top: 10px; /* Space above buttons */
+    padding: 8px 12px; /* Padding inside buttons */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #FF8C42; /* Darker Earthy Orange */
+    color: white; /* Text color */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.button:hover {
+    background-color: #e57b36; /* Slightly darker shade on hover */
+}
+
+/* New styles for the profile section */
+.profile-section input[type="file"] {
+    margin-top: 10px; /* Space above the file input */
+    margin-bottom: 20px; /* Space below the file input */
+}
+
+.button-group {
+    display: flex; /* Flexbox for button group */
+    gap: 10px; /* Space between buttons */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 600px) {
+    .account-management {
+        width: 90%; /* Use a percentage width for smaller screens */
+        padding: 10px; /* Adjust padding */
+    }
+
+    .nav-menu {
+        flex-direction: column; /* Stack buttons on small screens */
+    }
 }

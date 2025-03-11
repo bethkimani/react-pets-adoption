@@ -1,131 +1,148 @@
-/* Dashboard.css */
-
-.user-dashboard-content {
-    padding: 20px; /* Padding for the dashboard content */
-    background-color: #f4f4f4; /* Light background for the entire dashboard */
-}
-
-.user-dashboard-content h2 {
-    margin-top: 0; /* Remove top margin for headings */
-    color: #333; /* Dark text color */
-}
-
-.organization-info {
-    background-color: #e07b3d; /* Updated primary color for header */
-    color: white; /* White text */
-    padding: 15px; /* Padding */
-    border-radius: 8px; /* Rounded corners */
-    margin-bottom: 20px; /* Space below */
-}
-
-.change-org-btn {
-    background-color: transparent; /* Transparent button */
-    color: white; /* White text */
-    border: 1px solid white; /* White border */
-    padding: 10px 15px; /* Padding */
-    border-radius: 4px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor */
-}
-
-.dashboard-overview {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
-    gap: 30px; /* Increased space between cards */
-    margin-bottom: 20px; /* Space below overview section */
-}
-
-.dashboard-card {
-    background-color: #ffffff; /* Card background */
-    border-radius: 8px; /* Rounded corners */
-    padding: 15px; /* Inner padding */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    text-align: center; /* Center text */
-}
-
-.dashboard-card h3 {
-    margin: 0; /* Remove default margin */
-    font-size: 1.2em; /* Font size for headings */
-}
-
-.annual-review {
-    background-color: #ffffff; /* Light background for review section */
-    border-radius: 8px; /* Rounded corners */
-    padding: 20px; /* Inner padding */
-    margin: 20px 0; /* Space above and below */
-    text-align: center; /* Center text */
-}
-
-.annual-review-content {
-    display: flex; /* Flexbox for alignment */
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-}
-
-.year {
-    font-size: 3em; /* Larger font for year */
-    font-weight: bold; /* Bold weight */
-    color: #e07b3d; /* Update color for year */
-    margin-right: 20px; /* Space between year and text */
-}
-
-.annual-review-text {
-    max-width: 500px; /* Limit width of text */
-}
-
-.annual-review-btn {
-    background-color: #e07b3d; /* Updated primary color */
-    color: white; /* White text */
-    border: none; /* No border */
-    padding: 10px 15px; /* Padding */
-    border-radius: 4px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor */
-}
-
-.dashboard-stats {
-    margin-top: 20px; /* Space above stats section */
-}
-
-.week-stats-container {
-    background-color: #ffffff; /* Light background for stats */
-    border-radius: 8px; /* Rounded corners */
-    padding: 20px; /* Inner padding */
-    margin-bottom: 20px; /* Space below */
-}
-
-.week-stats-header {
-    text-align: center; /* Center the date */
-    margin-bottom: 20px; /* Space below the header */
-}
-
-.stats-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Responsive grid for stats */
-    gap: 20px; /* Space between stats cards */
-    margin-bottom: 20px; /* Space below stats cards */
-}
-
-.stat-card {
-    background-color: #f0f0f0; /* Light grey background for stat cards */
-    border-radius: 8px; /* Rounded corners */
-    padding: 15px; /* Inner padding */
-    text-align: center; /* Center text */
-}
-
-.stat-card h4 {
-    margin: 0; /* Remove default margin */
-    font-size: 1em; /* Font size for subheadings */
-}
-
-.stat-card p {
-    font-size: 1.5em; /* Larger font for the values */
-    font-weight: bold; /* Bold values */
-}
-
-.add-pet-btn {
-    background-color: #e07b3d; /* Updated primary color */
-    color: white; /* White text */
-    border: none; /* No border */
-    padding: 10px 15px; /* Padding */
-    border-radius: 4px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor */
-}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background-color: #f0f4f8;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .dashboard {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the dashboard */
+  }
+  
+  .dashboard .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+  
+  .dashboard .location {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .dashboard .icon {
+    width: 16px;
+    margin-right: 5px;
+  }
+  
+  .dashboard h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .dashboard .search-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .dashboard .search-container input {
+    padding: 5px; /* Reduced padding */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 150px; /* Adjust width to your preference */
+  }
+  
+  .dashboard .notification-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  .dashboard .combined-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px; /* Space above the combined section */
+  }
+  
+  .dashboard .progress-graph {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 65%; /* Adjust width as needed */
+  }
+  
+  .dashboard .adopted-info {
+    margin-top: 10px; /* Add some space above this info */
+  }
+  
+  .dashboard .upcoming-schedule {
+    width: 30%; /* Adjust width as needed */
+    display: flex;
+    flex-direction: column; /* Stack schedule items vertically */
+  }
+  
+  .dashboard .upcoming-schedule h3 {
+    margin-bottom: 10px;
+  }
+  
+  .dashboard .schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .dashboard .book-button {
+    background: none;
+    border: none;
+    color: #007BFF;
+    cursor: pointer;
+  }
+  
+  .dashboard .pet-reviews {
+    width: 30%; /* Adjust width as needed */
+    display: flex;
+    flex-direction: column; /* Stack review items vertically */
+  }
+  
+  .dashboard .pet-reviews h3 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .dashboard .review-item {
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dashboard .star-rating {
+    margin: 10px 0;
+  }
+  
+  .dashboard .download-report {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    text-decoration: none;
+  }
+  
+  .dashboard .download-report:hover {
+    background-color: #0056b3;
+  }

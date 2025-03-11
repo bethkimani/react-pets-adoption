@@ -35,27 +35,42 @@
     z-index: 2; /* Ensure text is above the overlay */
     font-size: 36px; /* Adjust font size as needed */
 }
-
 .info-section {
-    background-color: #FF8C42; /* Updated background color */
-    color: black; /* Text color */
+    background-color: #FF8C42; /* Orange background color */
+    color: white; /* Text color */
     padding: 40px 20px; /* Padding for the section */
     text-align: center; /* Center text alignment */
     margin: 0; /* Remove margin to avoid gaps */
     display: flex; /* Use flexbox */
     flex-direction: column; /* Stack items vertically */
     justify-content: space-between; /* Space between items */
-    height: auto; /* Allow height to adjust based on content */
 }
 
 .button-container {
-    margin-top: auto; /* Push the button to the bottom */
+    margin-top: 5px; /* Some space above the button */
 }
 
-.adoptable-animals-btn, .our-shelters-btn {
+/* Adjust button size */
+.adoptable-animals-btn {
     background-color: black; /* Button color */
     color: white; /* Text color */
-    padding: 10px 20px; /* Padding for the button */
+    padding: 8px 16px; /* Padding to fit text more snugly */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.adoptable-animals-btn:hover {
+    background-color: #333; /* Darken on hover */
+}
+
+/* Adjust button size */
+ .our-shelters-btn {
+    background-color: black; /* Button color */
+    color: white; /* Text color */
+    padding: 6px 12px; /* Padding to fit text more snugly */
     border: none; /* No border */
     border-radius: 5px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
@@ -131,7 +146,7 @@
 }
 
 .adoption-fee-details li {
-    margin:  0; /* Spacing between list items */
+    margin: 0; /* Spacing between list items */
     font-size: 20px; /* Size of the fee text */
     color: #333; /* Dark gray color for the text */
     position: relative; /* For positioning the custom bullet */

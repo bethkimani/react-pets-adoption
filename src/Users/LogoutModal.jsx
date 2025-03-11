@@ -1,9 +1,8 @@
-
 import React from 'react';
-import './LogoutModal.css'; // Optional: for modal styling
+import './LogoutModal.css'; // Import the CSS for styling
 
 const LogoutModal = ({ isOpen, onClose, onLogout }) => {
-    if (!isOpen) return null;
+    if (!isOpen) return null; // Don't render if not open
 
     return (
         <div className="modal-overlay">

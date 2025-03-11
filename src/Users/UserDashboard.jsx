@@ -4,10 +4,7 @@ import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import AccountManagement from './AccountManagement';
 import AdoptionProcess from './AdoptionProcess';
-
 import AdoptionForm from './AdoptionForm';
-
-
 import Inbox from './Inbox';
 import PaymentSettings from './PaymentSettings';
 import PendingReviews from './PendingReviews';
@@ -21,6 +18,7 @@ const UserDashboard = () => {
     const handleLogout = () => {
         console.log("User logged out");
         setIsModalOpen(false);
+        // Perform additional logout actions here, like redirecting or clearing user data
     };
 
     return (
@@ -38,7 +36,6 @@ const UserDashboard = () => {
                         <Route path="/account-management" element={<AccountManagement />} />
                         <Route path="/adoption-process" element={<AdoptionProcess />} />
                         <Route path="/adoption-form" element={<AdoptionForm />} />
-                        
                         <Route path="/inbox" element={<Inbox />} />
                         <Route path="/payment-settings" element={<PaymentSettings />} />
                         <Route path="/pending-reviews" element={<PendingReviews />} />

@@ -29,10 +29,10 @@ const AdoptionProcess = () => {
                     <h3 className="dog-adoption-title">How do <span className="black-text">dog</span> adoptions work?</h3>
                     <div className="dog-adoption-steps">
                         <ul className="heart-list">
-                            <li> Fill out an adoption application.</li>
-                            <li> Our adoption coordinator will contact your references and call you if some additional information is needed.</li>
-                            <li> If you are the best fit for the animal in question, you will be contacted and a meet and greet will be scheduled at our shelter.</li>
-                            <li> If the pet you chose is the right match for you, the adoption will be completed by signing an adoption contract and paying the adoption fee.</li>
+                            <li>Fill out an adoption application.</li>
+                            <li>Our adoption coordinator will contact your references and call you if some additional information is needed.</li>
+                            <li>If you are the best fit for the animal in question, you will be contacted and a meet and greet will be scheduled at our shelter.</li>
+                            <li>If the pet you chose is the right match for you, the adoption will be completed by signing an adoption contract and paying the adoption fee.</li>
                         </ul>
                     </div>
                 </div>

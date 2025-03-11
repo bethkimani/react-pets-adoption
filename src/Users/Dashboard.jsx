@@ -1,80 +1,89 @@
 import React from 'react';
-import './Dashboard.css'; // User dashboard styles
+import { Line } from 'react-chartjs-2';
+import { Link } from 'react-router-dom'; // Ensure Link is imported
+import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement } from "chart.js";
+import pinIcon from '../assets/images/pin.ico';
+import './Dashboard.css';
+
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
 const Dashboard = () => {
-    return (
-        <div className="user-dashboard-content">
-            <h2>Dashboard</h2>
-            <div className="organization-info">
-                <h3>test12345</h3>
-                <p>Organization ID: N12345</p>
-                <button className="change-org-btn">Change Org</button>
-            </div>
-            <div className="dashboard-overview">
-                <div className="dashboard-card">
-                    <h3>Adoptable Pets</h3>
-                    <p>42</p>
-                </div>
-                <div className="dashboard-card">
-                    <h3>Applications Pending</h3>
-                    <p>20</p>
-                </div>
-                <div className="dashboard-card">
-                    <h3>Pets On Hold</h3>
-                    <p>166</p>
-                </div>
-                <div className="dashboard-card">
-                    <h3>Pets Adopted</h3>
-                    <p>133</p>
-                </div>
-                <div className="dashboard-card">
-                    <h3>Drafts</h3>
-                    <p>958</p>
-                </div>
-            </div>
-            <div className="annual-review">
-                <div className="annual-review-content">
-                    <span className="year">2025</span>
-                    <div className="annual-review-text">
-                        <h3>Your Annual Review is here!</h3>
-                        <p>Recap the past year with a curated view of your life-saving impact. View your top pet profiles, average time pets spent on-site, funds you’ve raised, and more.</p>
-                        <button className="annual-review-btn">See the Annual Review</button>
-                    </div>
-                </div>
-            </div>
-            <div className="dashboard-stats">
-                <h3>This Week's Stats</h3>
-                <div className="week-stats-container">
-                    <div className="week-stats-header">
-                        <p>7/20/23 - 7/26/23</p>
-                    </div>
-                    <div className="stats-cards">
-                        <div className="stat-card">
-                            <h4>Locations</h4>
-                            <p>8</p>
-                        </div>
-                        <div className="stat-card">
-                            <h4>Homepage Views</h4>
-                            <p>31</p>
-                        </div>
-                        <div className="stat-card">
-                            <h4>Pet Listings</h4>
-                            <p>684</p>
-                        </div>
-                        <div className="stat-card">
-                            <h4>Pet Inquiries</h4>
-                            <p>3</p>
-                        </div>
-                        <div className="stat-card">
-                            <h4>Pets Adopted</h4>
-                            <p>0</p>
-                        </div>
-                    </div>
-                    <button className="add-pet-btn">Add a Pet</button>
-                </div>
-            </div>
+  const data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [
+      {
+        label: 'Pets Adopted',
+        data: [10, 20, 30, 40, 50, 50, 60, 65, 70, 75, 80, 90],
+        fill: true,
+        backgroundColor: 'rgba(135, 206, 250, 0.5)',
+        borderColor: 'rgba(0, 123, 255, 1)',
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  return (
+    <div className="dashboard">
+      {/* Navbar with Search Bar */}
+      <header className="navbar">
+        <div className="location">
+          <img src={pinIcon} alt="Location Pin" className="icon" />
+          <span>Subuluri, Indonesia</span>
         </div>
-    );
+        <h1>Looking for adoption</h1>
+        <div className="search-container">
+          <input type="text" placeholder="Search ..." />
+          <button className="notification-icon">🔔</button>
+        </div>
+      </header>
+
+      {/* Main Content Section */}
+      <div className="combined-section">
+        {/* Graph Section */}
+        <section className="progress-graph">
+          <h3>Pets Growth Health</h3>
+          <Line data={data} />
+          <div className="adopted-info">
+            <span>12 Jan 2022</span>
+            <span>50 adopted</span>
+          </div>
+        </section>
+
+        {/* Upcoming Schedule Section */}
+        <div className="upcoming-schedule">
+          <h3>Upcoming Schedule</h3>
+          <div className="schedule-item">
+            <span>09:00 AM</span>
+            <p>Health checkup</p>
+            <button className="book-button">Book now</button>
+          </div>
+          <div className="schedule-item">
+            <span>10:00 AM</span>
+            <p>Health adoption 2</p>
+            <button className="book-button">Book now</button>
+          </div>
+        </div>
+
+        {/* Pets Growth Health Section */}
+        <div className="pet-reviews">
+          <h3>Pets Growth Health</h3>
+          <div className="review-item">
+            <span>3 years</span>
+            <p>Animal age</p>
+          </div>
+          <div className="review-item">
+            <span>87.5 centimeters</span>
+            <p>Animal height</p>
+          </div>
+          <div className="star-rating">
+            <span>Rating: </span>
+            <span>⭐⭐⭐⭐⭐</span>
+          </div>
+          <Link to="/download-report" className="download-report">Download report</Link>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;

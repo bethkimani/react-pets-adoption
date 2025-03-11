@@ -1,5 +1,4 @@
 body {
-    background-color: #FFF8DC; /* Cream background for the entire page */
     margin: 0; /* Remove default margin */
     font-family: Arial, sans-serif; /* Set a default font */
 }
@@ -9,7 +8,7 @@ body {
     margin: 20px auto; /* Center the box */
     padding: 20px; /* Padding inside the box */
     border-radius: 12px; /* Rounded corners */
-    background-color: #FFFFFF; /* White background for the container */
+    background-color: #FFF8DC; /* Cream background for the inbox container */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
@@ -52,14 +51,14 @@ button {
     padding: 10px; /* Padding inside the button */
     border: none; /* No border */
     border-radius: 4px; /* Rounded corners */
-    background-color:  #FF6F22; /* Blue background */
+    background-color: #FF6F22; /* Orange background */
     color: white; /* White text */
     cursor: pointer; /* Pointer cursor on hover */
     transition: background 0.3s; /* Smooth background transition */
 }
 
 button:hover {
-    background-color:  #FF6F22; /* Darker blue on hover */
+    background-color: #e65c1e; /* Darker shade on hover */
 }
 
 /* Specific styles for the "Inbox" text in the button */
