@@ -1,28 +1,36 @@
-/* src/components/AdoptionForm.css */
+html, body {
+    height: 100%; /* Ensure body takes full height */
+    margin: 0; /* Remove default margin */
+}
+
 .adoption-form {
-    background-color: #6A1B9A;  /* Purple background */
-    color: white; /* Text color */
-    padding: 30px;
+    background-color: #f0f0f0; /* Set a light background color for better visibility */
+    color: #333; /* Dark text color for contrast */
+    padding: 20px;
     border-radius: 10px;
-    max-width: 800px; /* Constrain width for better readability */
-    margin: 20px auto; /* Center the form */
+    width: 100%; /* Use full width */
+    max-width: none; /* Remove max width to fill the screen */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+    position: relative; /* Allow full-screen coverage */
+    padding-bottom: 30px; /* Padding at the bottom */
 }
 
 .adoption-form h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .adoption-form .form-row {
     display: flex; /* Use flexbox for row layout */
+    flex-wrap: wrap; /* Allow wrapping */
     justify-content: space-between; /* Space out form groups */
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .adoption-form .form-group {
     flex: 1; /* Allow form groups to grow equally */
     margin-right: 10px; /* Space between groups */
+    min-width: 200px; /* Minimum width for responsiveness */
 }
 
 .adoption-form .form-group:last-child {
@@ -34,38 +42,42 @@
     margin-bottom: 5px;
 }
 
-.adoption-form input,
-.adoption-form select,
-.adoption-form textarea {
+.adoption-form input[type="text"],
+.adoption-form input[type="email"],
+.adoption-form select {
     width: 100%; /* Full width for inputs */
-    padding: 10px;
+    padding: 8px;
     margin-top: 5px;
-    border: 1px solid #D2B48C; /* Border color */
-    background-color: #D2B48C; /* Background color */
-    color: #443e3e; /* Dark text color for contrast */
+    border: 1px solid #aaa; /* Border color */
+    background-color: #fff; /* White background for inputs */
+    color: #333; /* Dark text color for contrast */
     border-radius: 5px;
-    font-size: 16px; /* Increase font size for better readability */
+    font-size: 14px; /* Adjust font size for readability */
 }
 
-.adoption-form textarea {
-    height: 60px; /* Fixed height for text areas */
+.adoption-form input[type="checkbox"] {
+    margin-right: 8px; /* Spacing for checkbox */
 }
 
 .adoption-form button {
-    background-color: #007bff;
+    background-color: #ff9800; /* Orange color for the button */
     color: white;
-    padding: 10px 20px;
+    padding: 10px 15px; /* Normal button size */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 18px; /* Larger button text */
+    font-size: 16px; /* Larger button text */
     margin-top: 10px;
 }
 
 .adoption-form button:hover {
-    background-color: #0056b3; /* Darken button on hover */
+    background-color: #e68a00; /* Darken button on hover */
 }
 
-.adoption-form p {
-    margin: 10px 0; /* Add margin between paragraphs */
+.info-section {
+    margin: 20px 0; /* Spacing for the information section */
+    padding: 15px; /* Padding for the info section */
+    border-radius: 5px; /* Rounded corners */
+    color: black; /* Black text color for statements */
+    background-color: white; /* Set a white background for readability */
 }

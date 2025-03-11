@@ -1,0 +1,89 @@
+.payment-settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    padding: 20px;
+    background-image: url('../assets/images/paypal.png'); /* Set your background image */
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center the background image */
+    position: relative; /* Ensure positioning for absolute children */
+}
+
+.card {
+    position: absolute; /* Position the card absolutely */
+    top: 0; /* Align to top */
+    left: 0; /* Align to left */
+    right: 0; /* Align to right */
+    bottom: 0; /* Align to bottom */
+    padding: 40px; /* Increased padding for better spacing */
+    border-radius: 12px; /* More rounded corners */
+    background-color: rgba(255, 140, 0, 0.9); /* Darker orange background for the card */
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4); /* Deeper shadow for depth */
+    display: flex; /* Use flex for centering children */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center; /* Center children horizontally */
+}
+
+h2 {
+    font-weight: bold; /* Bold title */
+    margin-bottom: 20px; /* Spacing below title */
+    color: #ffffff; /* White text for better contrast */
+}
+
+.payment-methods {
+    margin-bottom: 20px; /* Space below payment methods */
+}
+
+.payment-method {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white for payment method items */
+}
+
+.no-methods {
+    color: #ffffff; /* White color for no methods message */
+}
+
+.add-payment-method {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Align items vertically */
+    gap: 10px; /* Space between elements */
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #ccc; /* Lighter border */
+    border-radius: 4px;
+    width: 150px; /* Fixed width for select */
+    max-width: 100%; /* Prevent overflow */
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc; /* Lighter border */
+    border-radius: 4px;
+    flex-grow: 1; /* Allow input to grow */
+    min-width: 0; /* Prevent overflow */
+    max-width: 200px; /* Set a maximum width */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff; /* Bright blue button */
+    color: white; /* White text for the button */
+    cursor: pointer;
+    transition: background 0.3s; /* Smooth background transition */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

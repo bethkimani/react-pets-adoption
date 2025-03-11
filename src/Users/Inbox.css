@@ -1,0 +1,68 @@
+body {
+    background-color: #FFF8DC; /* Cream background for the entire page */
+    margin: 0; /* Remove default margin */
+    font-family: Arial, sans-serif; /* Set a default font */
+}
+
+.inbox-container {
+    max-width: 600px; /* Set a maximum width */
+    margin: 20px auto; /* Center the box */
+    padding: 20px; /* Padding inside the box */
+    border-radius: 12px; /* Rounded corners */
+    background-color: #FFFFFF; /* White background for the container */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+h2, h3 {
+    text-align: center; /* Center the titles */
+    color: #333; /* Dark text color */
+}
+
+.messages-list {
+    margin-bottom: 20px; /* Space below message list */
+}
+
+.message {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0; /* Space between messages */
+    background-color: rgba(240, 240, 240, 0.9); /* Slightly different background for messages */
+}
+
+label {
+    display: block; /* Block display for labels */
+    margin-bottom: 5px; /* Space below labels */
+    color: #555; /* Slightly lighter text */
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%; /* Full width inputs */
+    padding: 10px; /* Padding inside inputs */
+    margin-bottom: 15px; /* Space below inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+button {
+    width: 100%; /* Full width button */
+    padding: 10px; /* Padding inside the button */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    background-color:  #FF6F22; /* Blue background */
+    color: white; /* White text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background 0.3s; /* Smooth background transition */
+}
+
+button:hover {
+    background-color:  #FF6F22; /* Darker blue on hover */
+}
+
+/* Specific styles for the "Inbox" text in the button */
+button span {
+    color: #FF6F22; /* Orange color for the "Inbox" text */
+}
