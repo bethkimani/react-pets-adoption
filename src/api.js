@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'http://127.0.0.1:5000/api',
+    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api',
     headers: {
         'Content-Type': 'application/json',
     },
