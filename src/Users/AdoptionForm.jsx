@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Make sure to install axios
+import axios from 'axios'; // Ensure axios is installed
 import './AdoptionForm.css';
 
 const AdoptionForm = () => {
@@ -51,12 +51,12 @@ const AdoptionForm = () => {
         e.preventDefault();
         console.log('Submitting form data:', formData); // Log the form data
         try {
-            const response = await axios.post('YOUR_API_ENDPOINT_HERE', formData);
+            const response = await axios.post('https://pets-adoption-flask-sqlite.onrender.com/api', formData);
             console.log('Response:', response.data); // Handle successful response
-            alert('Your application has been submitted successfully!');
+            alert('Your application has been submitted successfully!'); // Alert on success
         } catch (error) {
-            console.error('Error submitting form:', error.response.data);
-            alert('There was an error submitting your application. Please try again.');
+            console.error('Error submitting form:', error.response ? error.response.data : error.message);
+            alert('There was an error submitting your application. Please try again.'); // Alert on error
         }
     };
 
