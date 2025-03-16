@@ -21,19 +21,23 @@
 }
 
 .close-button {
-    background: transparent;
+    background: rgba(255, 165, 0, 0.8); /* Background for visibility */
     border: none;
     cursor: pointer;
-    font-size: 16px;       /* Reduced font size */
+    font-size: 16px;       /* Font size */
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 25px;           /* Reduced width */
-    height: 25px;          /* Reduced height */
+    width: 25px;           /* Width */
+    height: 25px;          /* Height */
     padding: 0;            /* Remove padding */
+    border-radius: 50%;    /* Circular shape */
     z-index: 1;            /* Ensure it's above other elements */
-    color: #007BFF;        /* Change color to match the theme */
+    color: white;          /* Text color */
     font-weight: bold;     /* Make it bold for visibility */
+    display: flex;         /* Center the text */
+    justify-content: center; /* Center text */
+    align-items: center;   /* Center text */
 }
 
 .user-type-selection {
