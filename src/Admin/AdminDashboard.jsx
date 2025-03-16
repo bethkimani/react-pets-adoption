@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar'; // Update this to AdminSidebar if different
 import Dashboard from './Dashboard';
 import ViewPets from './ViewPets';
 import AddPets from './AddPets';
 import ChangePassword from './ChangePassword';
 import UserProfile from './UserProfile';
 import Teams from './Teams';
-import ViewFeedback from './ViewFeedback'; // Import the new component
-
+import ViewFeedback from './ViewFeedback';
 import LogoutModal from './LogoutModal';
 import './AdminDashboard.css';
 
@@ -23,7 +22,7 @@ const AdminDashboard = () => {
     };
 
     const confirmLogout = () => {
-        setModalOpen(true); // Open the logout confirmation modal
+        setModalOpen(true);
     };
 
     return (
@@ -31,13 +30,13 @@ const AdminDashboard = () => {
             <Sidebar onLogout={confirmLogout} />
             <div className="main-content">
                 <Routes>
+                    <Route path="/" element={<Dashboard />} />
                     <Route path="view-pets" element={<ViewPets />} />
                     <Route path="add-pet" element={<AddPets />} />
                     <Route path="change-password" element={<ChangePassword />} />
                     <Route path="profile" element={<UserProfile />} />
                     <Route path="teams" element={<Teams />} />
-                    <Route path="view-feedback" element={<ViewFeedback />} /> {/* New Route */}
-                    <Route path="/" element={<Dashboard />} />
+                    <Route path="view-feedback" element={<ViewFeedback />} />
                 </Routes>
             </div>
             <LogoutModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} onConfirm={handleLogout} />

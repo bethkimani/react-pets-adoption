@@ -1,61 +1,73 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Auth.css'; // Import the CSS for styling
+import { login, signup } from '../api';
+import './Auth.css';
 
 const Auth = ({ onClose }) => {
     const [isLogin, setIsLogin] = useState(true);
-    const [userType, setUserType] = useState('user'); // State to track user type
+    const [userType, setUserType] = useState('user');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState(''); // State for name
+    const [name, setName] = useState('');
     const navigate = useNavigate();
 
     const toggleForm = () => {
         setIsLogin(!isLogin);
     };
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        
-        // Dummy authentication - Replace this with actual authentication logic
-        if (userType === "admin" && email === "admin@example.com" && password === "admin123") {
-            localStorage.setItem("isAuthenticated", "true");
-            localStorage.setItem("role", "admin");
-            navigate('/admin-dashboard');
+        try {
+            const response = await login({ email, password, user_type: userType });
+            console.log('Login response:', response.data); // Debug log
+            const { token, role, user_id } = response.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('role', role);
+            localStorage.setItem('user_id', user_id);
+            localStorage.setItem('isAuthenticated', 'true');
+            if (role.toLowerCase() === 'admin') {
+                navigate('/admin-dashboard');
+            } else {
+                navigate('/user-dashboard');
+            }
             onClose();
-        } else if (userType === "user" && email === "user@example.com" && password === "user123") {
-            localStorage.setItem("isAuthenticated", "true");
-            localStorage.setItem("role", "user");
-            navigate('/user-dashboard');
-            onClose();
-        } else {
-            alert("Invalid credentials");
+        } catch (error) {
+            alert(error.response?.data?.error || 'Login failed');
         }
     };
 
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
-        // Handle sign-up logic here (e.g., send data to server)
-        alert("Sign up successful!");
-        onClose(); // Close modal after sign-up
+        try {
+            await signup({ name, email, password, role: 'user' });
+            alert('Sign up successful! Please log in.');
+            setIsLogin(true);
+        } catch (error) {
+            alert(error.response?.data?.error || 'Sign up failed');
+        }
     };
 
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <button className="close-button" onClick={onClose}>X</button>
-                
-                <h2>{isLogin ? "Login" : "Sign Up"}</h2>
-
-                {/* User Type Selection */}
+                <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
                 {isLogin && (
                     <div className="user-type-selection">
-                        <button className={`login-button ${userType === 'user' ? 'active' : ''}`} onClick={() => setUserType('user')}>User Login</button>
-                        <button className={`login-button ${userType === 'admin' ? 'active' : ''}`} onClick={() => setUserType('admin')}>Admin Login</button>
+                        <button
+                            className={`login-button ${userType === 'user' ? 'active' : ''}`}
+                            onClick={() => setUserType('user')}
+                        >
+                            User Login
+                        </button>
+                        <button
+                            className={`login-button ${userType === 'admin' ? 'active' : ''}`}
+                            onClick={() => setUserType('admin')}
+                        >
+                            Admin Login
+                        </button>
                     </div>
                 )}
-
                 <form onSubmit={isLogin ? handleLogin : handleSignUp}>
                     {isLogin ? (
                         <>
@@ -100,12 +112,12 @@ const Auth = ({ onClose }) => {
                         </>
                     )}
                     <div className="form-actions">
-                        <button type="submit" className="submit-button">{isLogin ? "Login" : "Sign Up"}</button>
+                        <button type="submit" className="submit-button">
+                            {isLogin ? 'Login' : 'Sign Up'}
+                        </button>
                         <p className="toggle-link">
-                            {isLogin 
-                                ? "Don't have an account? " 
-                                : "Already have an account? "}
-                            <span onClick={toggleForm}>{isLogin ? "Sign up" : "Login"}</span>
+                            {isLogin ? "Don't have an account? " : 'Already have an account? '}
+                            <span onClick={toggleForm}>{isLogin ? 'Sign up' : 'Login'}</span>
                         </p>
                     </div>
                 </form>

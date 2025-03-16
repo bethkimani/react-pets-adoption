@@ -18,7 +18,7 @@ const UserDashboard = () => {
     const handleLogout = () => {
         console.log("User logged out");
         setIsModalOpen(false);
-        // Perform additional logout actions here, like redirecting or clearing user data
+        // Add logout logic here if needed
     };
 
     return (
@@ -32,14 +32,15 @@ const UserDashboard = () => {
                 <Sidebar onLogout={() => setIsModalOpen(true)} />
                 <div className="main-content">
                     <Routes>
+                        {/* Make the root route match "/user-dashboard" */}
                         <Route path="/" element={<Dashboard />} />
-                        <Route path="/account-management" element={<AccountManagement />} />
-                        <Route path="/adoption-process" element={<AdoptionProcess />} />
-                        <Route path="/adoption-form" element={<AdoptionForm />} />
-                        <Route path="/inbox" element={<Inbox />} />
-                        <Route path="/payment-settings" element={<PaymentSettings />} />
-                        <Route path="/pending-reviews" element={<PendingReviews />} />
-                        <Route path="/special-adoption-form" element={<SpecialAdoptionForm />} />
+                        <Route path="account-management" element={<AccountManagement />} />
+                        <Route path="adoption-process" element={<AdoptionProcess />} />
+                        <Route path="adoption-form" element={<AdoptionForm />} />
+                        <Route path="inbox" element={<Inbox />} />
+                        <Route path="payment-settings" element={<PaymentSettings />} />
+                        <Route path="pending-reviews" element={<PendingReviews />} />
+                        <Route path="special-adoption-form" element={<SpecialAdoptionForm />} />
                     </Routes>
                 </div>
             </div>
