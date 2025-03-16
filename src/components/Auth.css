@@ -14,24 +14,26 @@
     background: white;
     border-radius: 8px;
     padding: 20px;
-    width: 100%;         /* Changed to 100% for better responsiveness */
-    max-width: 400px;    /* Set a max width for the modal */
+    width: 100%;            
+    max-width: 400px;       
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative;   /* Make sure close button is positioned relative to this */
+    position: relative;      
 }
 
 .close-button {
     background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;       /* Reduced font size */
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 30px;        /* Set a specific width */
-    height: 30px;       /* Set a specific height */
-    padding: 0;         /* Remove padding to prevent overflow */
-    z-index: 1;         /* Ensure it's above other elements */
+    width: 25px;           /* Reduced width */
+    height: 25px;          /* Reduced height */
+    padding: 0;            /* Remove padding */
+    z-index: 1;            /* Ensure it's above other elements */
+    color: #007BFF;        /* Change color to match the theme */
+    font-weight: bold;     /* Make it bold for visibility */
 }
 
 .user-type-selection {
