@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Make sure to install axios
 import './AdoptionForm.css';
 
 const AdoptionForm = () => {
@@ -33,7 +34,8 @@ const AdoptionForm = () => {
         willingToWorkOn: '',
         reference: '',
         additionalInfo: '',
-        consent: false
+        infoConsent: false,
+        emailConsent: false,
     });
 
     const handleChange = (e) => {
@@ -45,9 +47,17 @@ const AdoptionForm = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+        console.log('Submitting form data:', formData); // Log the form data
+        try {
+            const response = await axios.post('YOUR_API_ENDPOINT_HERE', formData);
+            console.log('Response:', response.data); // Handle successful response
+            alert('Your application has been submitted successfully!');
+        } catch (error) {
+            console.error('Error submitting form:', error.response.data);
+            alert('There was an error submitting your application. Please try again.');
+        }
     };
 
     return (
