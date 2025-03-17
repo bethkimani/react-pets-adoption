@@ -3,7 +3,7 @@ import './AdoptionProcess.css'; // Import the CSS for styling
 
 const AdoptionProcess = () => {
     return (
-        <div className="user-adoption-process">
+        <div className="adoption-process-container"> {/* Changed class name */}
             {/* Header with background image */}
             <div className="header">
                 <h2>Adoption Process & Fees</h2>
