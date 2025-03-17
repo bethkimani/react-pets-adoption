@@ -21,10 +21,11 @@
 .add-button {
     background-color: #003366; /* Dark blue */
     color: white;
-    padding: 10px 20px;
+    padding: 5px 10px; /* Smaller padding for a smaller button */
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 14px; /* Smaller font size */
 }
 
 /* Search input styles */
@@ -53,11 +54,17 @@
 }
 
 /* Action button styles */
+.action-buttons {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Align items vertically */
+}
+
 .action-button {
     background: none;
     border: none;
     cursor: pointer;
     color: #3498db; /* Soft blue */
+    margin-right: 10px; /* Space between buttons */
 }
 
 .delete-button {

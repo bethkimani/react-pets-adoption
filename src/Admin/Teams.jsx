@@ -120,12 +120,14 @@ const Team = () => {
                                 <td>{member.phone_number}</td>
                                 <td>{member.role ? member.role.name : "No Role Assigned"}</td>
                                 <td>
-                                    <button className="action-button edit-button" onClick={() => openEditModal(member)}>
-                                        <FaEdit /> Edit
-                                    </button>
-                                    <button className="action-button delete-button" onClick={() => openDeleteModal(member)}>
-                                        <FaTrash /> Delete
-                                    </button>
+                                    <div className="action-buttons">
+                                        <button className="action-button edit-button" onClick={() => openEditModal(member)}>
+                                            <FaEdit /> Edit
+                                        </button>
+                                        <button className="action-button delete-button" onClick={() => openDeleteModal(member)}>
+                                            <FaTrash /> Delete
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
