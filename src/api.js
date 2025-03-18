@@ -1,13 +1,12 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api', // Ensure this matches your deployment
+    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api', // Match your deployment
     headers: {
         'Content-Type': 'application/json',
     },
 });
 
-// Request interceptor to add authorization token
 API.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -16,7 +15,6 @@ API.interceptors.request.use((config) => {
     return config;
 });
 
-// Response interceptor to handle errors
 API.interceptors.response.use(
     (response) => response,
     (error) => {
@@ -31,15 +29,11 @@ API.interceptors.response.use(
     }
 );
 
-// Auth API calls
 export const login = (data) => API.post('/auth/login', data);
+export const getUsers = () => API.get('/users');
+export const getRoles = () => API.get('/roles');
+export const signup = (data) => API.post('/auth/signup', data); // Corrected endpoint
+export const updateUser = (id, data) => API.put(`/users/${id}`, data);
+export const deleteUser = (id) => API.delete(`/users/${id}`);
 
-// User management API calls
-export const getUsers = () => API.get('/users'); // Assuming this is the correct endpoint
-export const getRoles = () => API.get('/roles'); // Assuming this is the correct endpoint
-export const signup = (data) => API.post('/users', data); // Assuming this is the correct endpoint for signing up
-export const updateUser = (id, data) => API.put(`/users/${id}`, data); // Assuming this is the correct endpoint for updating
-export const deleteUser = (id) => API.delete(`/users/${id}`); // Assuming this is the correct endpoint for deleting
-
-// Export API instance
 export default API;

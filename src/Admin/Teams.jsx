@@ -40,7 +40,6 @@ const Team = () => {
             try {
                 const usersResponse = await getUsers();
                 setTeamMembers(usersResponse.data);
-
                 const rolesResponse = await getRoles();
                 setRoles(rolesResponse.data);
             } catch (err) {
@@ -75,7 +74,6 @@ const Team = () => {
                 phone_number: formData.phone_number,
                 role_id: parseInt(formData.role_id)
             });
-
             const updatedUsers = await getUsers();
             setTeamMembers(updatedUsers.data);
             setShowAddModal(false);
@@ -104,7 +102,6 @@ const Team = () => {
                 phone_number: formData.phone_number,
                 role_id: parseInt(formData.role_id)
             });
-
             const updatedUsers = await getUsers();
             setTeamMembers(updatedUsers.data);
             setShowEditModal(false);
@@ -229,7 +226,6 @@ const Team = () => {
                 </tbody>
             </table>
 
-            {/* Add User Modal */}
             {showAddModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
@@ -261,6 +257,7 @@ const Team = () => {
                                 placeholder="Phone"
                                 value={formData.phone_number}
                                 onChange={handleInputChange}
+                                required
                             />
                             <input
                                 type="password"
@@ -296,7 +293,6 @@ const Team = () => {
                 </div>
             )}
 
-            {/* Edit User Modal */}
             {showEditModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
@@ -328,6 +324,7 @@ const Team = () => {
                                 placeholder="Phone"
                                 value={formData.phone_number}
                                 onChange={handleInputChange}
+                                required
                             />
                             <select
                                 name="role_id"
@@ -354,7 +351,6 @@ const Team = () => {
                 </div>
             )}
 
-            {/* Delete User Modal */}
             {showDeleteModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">

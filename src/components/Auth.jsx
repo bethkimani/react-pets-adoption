@@ -5,20 +5,19 @@ import { login, signup } from '../api';
 import './Auth.css';
 
 const Auth = ({ onClose }) => {
-    const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
+    const [isLogin, setIsLogin] = useState(true);
     const [userType, setUserType] = useState('user');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState(''); // For signup
-    const [phone_number, setPhoneNumber] = useState(''); // For signup
-    const [role_id, setRoleId] = useState(''); // For signup (default to User role)
+    const [name, setName] = useState('');
+    const [phone_number, setPhoneNumber] = useState('');
+    const [role_id, setRoleId] = useState('1'); // Default to User (role_id=1)
     const navigate = useNavigate();
 
     const handleAuth = async (e) => {
         e.preventDefault();
         try {
             if (isLogin) {
-                // Login functionality
                 const response = await login({ email, password, user_type: userType });
                 const { token, role, user_id } = response.data;
                 localStorage.setItem('token', token);
@@ -32,22 +31,20 @@ const Auth = ({ onClose }) => {
                 }
                 onClose();
             } else {
-                // Signup functionality
                 const response = await signup({
                     name,
                     email,
                     password,
                     phone_number,
-                    role_id: role_id || 1 // Default to User role (role_id=1)
+                    role_id
                 });
                 alert('Signup successful! Please log in.');
-                setIsLogin(true); // Switch to login after signup
-                // Clear input fields
+                setIsLogin(true);
                 setName('');
                 setPhoneNumber('');
-                setRoleId('');
                 setEmail('');
                 setPassword('');
+                setRoleId('1');
             }
         } catch (error) {
             alert(error.response?.data?.error || (isLogin ? 'Login failed' : 'Signup failed'));
@@ -92,6 +89,14 @@ const Auth = ({ onClose }) => {
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 required
                             />
+                            <select
+                                value={role_id}
+                                onChange={(e) => setRoleId(e.target.value)}
+                                required
+                            >
+                                <option value="1">User</option>
+                                <option value="2">Admin</option>
+                            </select>
                         </>
                     )}
                     <input
@@ -108,17 +113,6 @@ const Auth = ({ onClose }) => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    {!isLogin && (
-                        <select
-                            value={role_id}
-                            onChange={(e) => setRoleId(e.target.value)}
-                            required
-                        >
-                            <option value="">Select Role</option>
-                            <option value="1">User</option>
-                            <option value="2">Admin</option>
-                        </select>
-                    )}
                     <div className="form-actions">
                         <button type="submit" className="submit-button">
                             {isLogin ? 'Login' : 'Signup'}
