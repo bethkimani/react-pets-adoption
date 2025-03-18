@@ -18,6 +18,7 @@
     color: #f97316; /* Orange color */
 }
 
+/* Add button styles */
 .add-button {
     background-color: #003366; /* Dark blue */
     color: white;
@@ -34,6 +35,10 @@
     width: auto; /* Fit to content */
 }
 
+.add-button:hover {
+    background-color: #002244; /* Slightly lighter dark blue on hover */
+}
+
 /* Search input styles */
 .search-input {
     width: 100%;
@@ -47,6 +52,7 @@
 .team-table {
     width: 100%;
     border-collapse: collapse;
+    overflow-x: auto; /* Enable horizontal scrolling on small screens */
 }
 
 .team-table th, .team-table td {
@@ -57,6 +63,16 @@
 
 .team-table th {
     background-color: #f9f9f9; /* Light gray */
+}
+
+/* Responsive table for smaller screens */
+@media (max-width: 768px) {
+    .team-table {
+        display: block;
+    }
+    .team-table th, .team-table td {
+        min-width: 120px;
+    }
 }
 
 /* Action button styles */
@@ -73,8 +89,16 @@
     margin-right: 10px; /* Space between buttons */
 }
 
+.action-button:hover {
+    color: #1d6fa5; /* Lighter blue for edit on hover */
+}
+
 .delete-button {
     color: #8B0000; /* Dark red */
+}
+
+.delete-button:hover {
+    color: #a40000; /* Lighter red for delete on hover */
 }
 
 /* Modal styles */
@@ -113,7 +137,7 @@
     margin-bottom: 20px;
 }
 
-/* Modal input styles */
+/* Modal input and select styles */
 .modal-input,
 .modal-select {
     width: 100%;
@@ -134,12 +158,52 @@
     border: none;
     border-radius: 4px;
     color: white;
+    cursor: pointer;
 }
 
 .continue-button {
     background-color: #003366; /* Dark blue */
 }
 
+.continue-button:hover {
+    background-color: #002244; /* Slightly lighter dark blue on hover */
+}
+
 .cancel-button {
     background-color: #e74c3c; /* Red */
+}
+
+.cancel-button:hover {
+    background-color: #c0392b; /* Lighter red on hover */
+}
+
+/* Loading message with spinner */
+.loading-message {
+    color: blue;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.loading-message::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid blue;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error message styles */
+.error-message {
+    color: red;
+    text-align: center;
+    margin: 10px 0;
 }

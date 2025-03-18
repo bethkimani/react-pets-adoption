@@ -1,18 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './Teams.css';
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { getUsers, getRoles, signup, updateUser, deleteUser } from '../api';
 
 const Team = () => {
-    const [teamMembers, setTeamMembers] = useState([
-        { id: 1, name: "Stephanie Mwoya", email: "stephanie.mwoya@gmail.com", phone_number: "+254712598987", role: { id: 1, name: "superAdmin" } },
-        { id: 2, name: "Alice Johnson", email: "alice.j@gmail.com", phone_number: "+254712345678", role: { id: 2, name: "User" } },
-        { id: 3, name: "Bob Brown", email: "bob.brown@gmail.com", phone_number: "+254712345679", role: { id: 3, name: "User" } },
-    ]);
-    const [roles] = useState([
-        { id: 1, name: "superAdmin" },
-        { id: 2, name: "User" },
-    ]);
-    
+    // State for users and roles fetched from backend
+    const [teamMembers, setTeamMembers] = useState([]);
+    const [roles, setRoles] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -25,36 +19,129 @@ const Team = () => {
         role_id: ""
     });
     const [searchTerm, setSearchTerm] = useState("");
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [userRole, setUserRole] = useState(null); // To store the logged-in user's role
+
+    // Fetch users and roles from backend on component mount
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            setError(null);
+
+            // Get the logged-in user's role from localStorage
+            const storedRole = localStorage.getItem("role");
+            setUserRole(storedRole);
+
+            // Only proceed if the user is a SuperAdmin
+            if (storedRole !== "SuperAdmin") {
+                setError("Unauthorized: Only SuperAdmins can manage users.");
+                setLoading(false);
+                return;
+            }
+
+            try {
+                const usersResponse = await getUsers();
+                setTeamMembers(usersResponse.data);
+
+                const rolesResponse = await getRoles();
+                setRoles(rolesResponse.data);
+            } catch (err) {
+                setError(err.response?.data?.error || "Failed to fetch data");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleAddUser = (e) => {
+    // Add a new user via the signup endpoint
+    const handleAddUser = async (e) => {
         e.preventDefault();
-        const newMember = {
-            id: teamMembers.length + 1,
-            ...formData,
-            role: roles.find(role => role.id === parseInt(formData.role_id)) || { name: "No Role Assigned" }
-        };
-        setTeamMembers([...teamMembers, newMember]);
-        setShowAddModal(false);
-        resetForm();
+        if (userRole !== "SuperAdmin") {
+            setError("Unauthorized: Only SuperAdmins can add users.");
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+
+        try {
+            await signup({
+                name: formData.name,
+                email: formData.email,
+                password: formData.password,
+                phone_number: formData.phone_number,
+                role_id: parseInt(formData.role_id) // Ensure role_id is an integer
+            });
+
+            const updatedUsers = await getUsers();
+            setTeamMembers(updatedUsers.data);
+            setShowAddModal(false);
+            resetForm();
+        } catch (err) {
+            setError(err.response?.data?.error || "Failed to add user");
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const handleEditUser = (e) => {
+    // Edit a user via the update endpoint
+    const handleEditUser = async (e) => {
         e.preventDefault();
-        const updatedMembers = teamMembers.map(member => 
-            member.id === currentUser.id ? { ...currentUser, ...formData } : member
-        );
-        setTeamMembers(updatedMembers);
-        setShowEditModal(false);
-        resetForm();
+        if (userRole !== "SuperAdmin") {
+            setError("Unauthorized: Only SuperAdmins can edit users.");
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+
+        try {
+            await updateUser(currentUser.id, {
+                name: formData.name,
+                email: formData.email,
+                phone_number: formData.phone_number,
+                role_id: parseInt(formData.role_id) // Ensure role_id is an integer
+            });
+
+            const updatedUsers = await getUsers();
+            setTeamMembers(updatedUsers.data);
+            setShowEditModal(false);
+            resetForm();
+        } catch (err) {
+            setError(err.response?.data?.error || "Failed to update user");
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const handleDeleteUser = () => {
-        setTeamMembers(teamMembers.filter(member => member.id !== currentUser.id));
-        setShowDeleteModal(false);
+    // Delete a user via the DELETE endpoint
+    const handleDeleteUser = async () => {
+        if (userRole !== "SuperAdmin") {
+            setError("Unauthorized: Only SuperAdmins can delete users.");
+            setShowDeleteModal(false);
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+
+        try {
+            await deleteUser(currentUser.id);
+            const updatedUsers = await getUsers();
+            setTeamMembers(updatedUsers.data);
+            setShowDeleteModal(false);
+        } catch (err) {
+            setError(err.response?.data?.error || "Failed to delete user");
+        } finally {
+            setLoading(false);
+        }
     };
 
     const resetForm = () => {
@@ -68,28 +155,40 @@ const Team = () => {
     };
 
     const openEditModal = (member) => {
+        if (userRole !== "SuperAdmin") {
+            setError("Unauthorized: Only SuperAdmins can edit users.");
+            return;
+        }
         setCurrentUser(member);
         setFormData({
             name: member.name,
             email: member.email,
-            phone_number: member.phone_number,
-            role_id: member.role.id
+            phone_number: member.phone_number || "",
+            role_id: member.role ? member.role.id : ""
         });
         setShowEditModal(true);
     };
 
     const openDeleteModal = (member) => {
+        if (userRole !== "SuperAdmin") {
+            setError("Unauthorized: Only SuperAdmins can delete users.");
+            return;
+        }
         setCurrentUser(member);
         setShowDeleteModal(true);
     };
 
     return (
         <div className="container">
+            {loading && <div className="loading-message">Loading...</div>}
+            {error && <div className="error-message">{error}</div>}
             <div className="header">
                 <h2 className="title">Team</h2>
-                <button className="add-button" onClick={() => setShowAddModal(true)}>
-                    Add +
-                </button>
+                {userRole === "SuperAdmin" && (
+                    <button className="add-button" onClick={() => setShowAddModal(true)}>
+                        Add +
+                    </button>
+                )}
             </div>
 
             <input
@@ -117,17 +216,19 @@ const Team = () => {
                             <tr key={member.id}>
                                 <td>{member.name}</td>
                                 <td>{member.email}</td>
-                                <td>{member.phone_number}</td>
+                                <td>{member.phone_number || "N/A"}</td>
                                 <td>{member.role ? member.role.name : "No Role Assigned"}</td>
                                 <td>
-                                    <div className="action-buttons">
-                                        <button className="action-button edit-button" onClick={() => openEditModal(member)}>
-                                            <FaEdit /> Edit
-                                        </button>
-                                        <button className="action-button delete-button" onClick={() => openDeleteModal(member)}>
-                                            <FaTrash /> Delete
-                                        </button>
-                                    </div>
+                                    {userRole === "SuperAdmin" && (
+                                        <div className="action-buttons">
+                                            <button className="action-button edit-button" onClick={() => openEditModal(member)}>
+                                                <FaEdit /> Edit
+                                            </button>
+                                            <button className="action-button delete-button" onClick={() => openDeleteModal(member)}>
+                                                <FaTrash /> Delete
+                                            </button>
+                                        </div>
+                                    )}
                                 </td>
                             </tr>
                         ))}
@@ -166,7 +267,6 @@ const Team = () => {
                                 placeholder="Phone"
                                 value={formData.phone_number}
                                 onChange={handleInputChange}
-                                required
                             />
                             <input
                                 type="password"
@@ -190,8 +290,12 @@ const Team = () => {
                                 ))}
                             </select>
                             <div className="modal-buttons">
-                                <button type="submit" className="modal-button continue-button">Continue</button>
-                                <button type="button" className="modal-button cancel-button" onClick={() => setShowAddModal(false)}>Cancel</button>
+                                <button type="submit" className="modal-button continue-button" disabled={loading}>
+                                    {loading ? "Adding..." : "Continue"}
+                                </button>
+                                <button type="button" className="modal-button cancel-button" onClick={() => setShowAddModal(false)} disabled={loading}>
+                                    Cancel
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -230,7 +334,6 @@ const Team = () => {
                                 placeholder="Phone"
                                 value={formData.phone_number}
                                 onChange={handleInputChange}
-                                required
                             />
                             <select
                                 name="role_id"
@@ -245,8 +348,12 @@ const Team = () => {
                                 ))}
                             </select>
                             <div className="modal-buttons">
-                                <button type="submit" className="modal-button continue-button">Save Changes</button>
-                                <button type="button" className="modal-button cancel-button" onClick={() => setShowEditModal(false)}>Cancel</button>
+                                <button type="submit" className="modal-button continue-button" disabled={loading}>
+                                    {loading ? "Saving..." : "Save Changes"}
+                                </button>
+                                <button type="button" className="modal-button cancel-button" onClick={() => setShowEditModal(false)} disabled={loading}>
+                                    Cancel
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -261,8 +368,12 @@ const Team = () => {
                         <h2 className="modal-title">Delete User</h2>
                         <p>Are you sure you want to delete {currentUser?.name}?</p>
                         <div className="modal-buttons">
-                            <button className="modal-button continue-button" onClick={handleDeleteUser}>Yes, Delete</button>
-                            <button className="modal-button cancel-button" onClick={() => setShowDeleteModal(false)}>Cancel</button>
+                            <button className="modal-button continue-button" onClick={handleDeleteUser} disabled={loading}>
+                                {loading ? "Deleting..." : "Yes, Delete"}
+                            </button>
+                            <button className="modal-button cancel-button" onClick={() => setShowDeleteModal(false)} disabled={loading}>
+                                Cancel
+                            </button>
                         </div>
                     </div>
                 </div>
