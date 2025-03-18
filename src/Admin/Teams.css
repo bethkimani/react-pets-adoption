@@ -21,16 +21,18 @@
 .add-button {
     background-color: #003366; /* Dark blue */
     color: white;
-    padding: 5px 10px; /* Smaller padding for a compact button */
+    padding: 5px 8px; /* Adjust padding to minimize width */
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px; /* Smaller font size */
     line-height: 1; /* Adjust line height for consistency */
-    height: 40px; /* Set a specific height */
-    display: flex; /* Center text vertically */
+    min-height: 20px; /* Set a specific minimum height */
+    display: inline-flex; /* Change to inline-flex for smaller button */
     align-items: center; /* Center text vertically */
     justify-content: center; /* Center text horizontally */
+    white-space: nowrap; /* Prevent text from wrapping */
+    float: right; /* Align the button to the right */
 }
 
 /* Search input styles */
