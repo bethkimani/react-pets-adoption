@@ -8,8 +8,8 @@
 /* Header styles */
 .header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; /* Space between title and button */
+    align-items: center; /* Center items vertically */
     margin-bottom: 20px;
 }
 
@@ -21,18 +21,17 @@
 .add-button {
     background-color: #003366; /* Dark blue */
     color: white;
-    padding: 5px 8px; /* Adjust padding to minimize width */
+    padding: 3px 6px; /* Reduced padding for a smaller button */
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 14px; /* Smaller font size */
-    line-height: 1; /* Adjust line height for consistency */
-    min-height: 20px; /* Set a specific minimum height */
-    display: inline-flex; /* Change to inline-flex for smaller button */
+    font-size: 12px; /* Smaller font size */
+    line-height: 1; /* Consistent line height */
+    display: inline-flex; /* Keeps it compact */
     align-items: center; /* Center text vertically */
     justify-content: center; /* Center text horizontally */
-    white-space: nowrap; /* Prevent text from wrapping */
-    float: right; /* Align the button to the right */
+    white-space: nowrap; /* Prevent text wrapping */
+    width: auto; /* Fit to content */
 }
 
 /* Search input styles */

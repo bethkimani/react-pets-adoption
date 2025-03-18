@@ -138,7 +138,7 @@ const Team = () => {
             {showAddModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
-                        <span className="close-button" onClick={() => setShowAddModal(false)}>&times;</span>
+                        <span className="close-button" onClick={() => setShowAddModal(false)}>×</span>
                         <h2 className="modal-title">Add New User</h2>
                         <form onSubmit={handleAddUser}>
                             <input
@@ -202,7 +202,7 @@ const Team = () => {
             {showEditModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
-                        <span className="close-button" onClick={() => setShowEditModal(false)}>&times;</span>
+                        <span className="close-button" onClick={() => setShowEditModal(false)}>×</span>
                         <h2 className="modal-title">Edit User</h2>
                         <form onSubmit={handleEditUser}>
                             <input
@@ -257,7 +257,7 @@ const Team = () => {
             {showDeleteModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
-                        <span className="close-button" onClick={() => setShowDeleteModal(false)}>&times;</span>
+                        <span className="close-button" onClick={() => setShowDeleteModal(false)}>×</span>
                         <h2 className="modal-title">Delete User</h2>
                         <p>Are you sure you want to delete {currentUser?.name}?</p>
                         <div className="modal-buttons">
