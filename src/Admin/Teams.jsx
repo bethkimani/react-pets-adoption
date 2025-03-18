@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from "react";
 import './Teams.css'; // Ensure your CSS is correctly set up
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -21,7 +22,7 @@ const Team = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [userRole, setUserRole] = useState(localStorage.getItem("role"));
+    const [userRole, setUserRole] = useState(localStorage.getItem("role") || "");
 
     useEffect(() => {
         if (!userRole || userRole !== "Admin") {
@@ -36,8 +37,8 @@ const Team = () => {
         setError(null);
         try {
             const [usersResponse, rolesResponse] = await Promise.all([getUsers(), getRoles()]);
-            console.log("Users Response:", usersResponse.data); // Log users response
-            console.log("Roles Response:", rolesResponse.data); // Log roles response
+            console.log("Users Response:", usersResponse.data);
+            console.log("Roles Response:", rolesResponse.data);
             setTeamMembers(usersResponse.data || []);
             setRoles(rolesResponse.data || []);
         } catch (err) {
@@ -189,6 +190,7 @@ const Team = () => {
                 </tbody>
             </table>
 
+            {/* Add User Modal */}
             {showAddModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
@@ -218,6 +220,7 @@ const Team = () => {
                 </div>
             )}
 
+            {/* Edit User Modal */}
             {showEditModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
@@ -246,6 +249,7 @@ const Team = () => {
                 </div>
             )}
 
+            {/* Delete User Modal */}
             {showDeleteModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
