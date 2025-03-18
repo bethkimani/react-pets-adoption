@@ -1,3 +1,4 @@
+/* src/components/Auth.css */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -14,30 +15,30 @@
     background: white;
     border-radius: 8px;
     padding: 20px;
-    width: 100%;            
-    max-width: 400px;       
+    width: 100%;
+    max-width: 400px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative;      
+    position: relative;
 }
 
 .close-button {
-    background: rgba(255, 165, 0, 0.8); /* Background for visibility */
+    background: rgba(255, 165, 0, 0.8);
     border: none;
     cursor: pointer;
-    font-size: 16px;       /* Font size */
+    font-size: 16px;
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 25px;           /* Width */
-    height: 25px;          /* Height */
-    padding: 0;            /* Remove padding */
-    border-radius: 50%;    /* Circular shape */
-    z-index: 1;            /* Ensure it's above other elements */
-    color: white;          /* Text color */
-    font-weight: bold;     /* Make it bold for visibility */
-    display: flex;         /* Center the text */
-    justify-content: center; /* Center text */
-    align-items: center;   /* Center text */
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .user-type-selection {
@@ -76,7 +77,39 @@
     margin-top: 10px;
 }
 
-.toggle-link {
+.toggle-button {
     margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.toggle-button:hover {
+    background-color: #e0e0e0;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Additional styling for form inputs to match the design */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+h2 {
     text-align: center;
+    margin-bottom: 20px;
 }

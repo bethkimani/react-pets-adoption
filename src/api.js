@@ -1,8 +1,8 @@
-
+// api.js
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api',
+    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api', // Ensure this matches your deployment
     headers: {
         'Content-Type': 'application/json',
     },
@@ -23,7 +23,7 @@ API.interceptors.response.use(
             localStorage.removeItem('token');
             localStorage.removeItem('role');
             localStorage.removeItem('user_id');
-            localStorage.removeItem('isAuthenticated');
+            localStorageItem('isAuthenticated');
             window.location.href = '/login';
         }
         return Promise.reject(error);
