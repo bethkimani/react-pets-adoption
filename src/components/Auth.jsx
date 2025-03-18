@@ -1,10 +1,11 @@
+// src/components/Auth.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api';
 import './Auth.css';
 
 const Auth = ({ onClose }) => {
-    const [isLogin] = useState(true); // Set to true as signup is handled in Team.jsx
+    const [isLogin] = useState(true);
     const [userType, setUserType] = useState('user');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,7 +20,7 @@ const Auth = ({ onClose }) => {
             localStorage.setItem('role', role);
             localStorage.setItem('user_id', user_id);
             localStorage.setItem('isAuthenticated', 'true');
-            if (role.toLowerCase() === 'admin' || role.toLowerCase() === 'superadmin') {
+            if (role.toLowerCase() === 'admin') {  // Removed superadmin
                 navigate('/admin-dashboard');
             } else {
                 navigate('/user-dashboard');

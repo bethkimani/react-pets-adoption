@@ -1,10 +1,10 @@
+// src/components/Team.jsx
 import React, { useState, useEffect } from "react";
 import './Teams.css';
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { getUsers, getRoles, signup, updateUser, deleteUser } from '../api';
 
 const Team = () => {
-    // State for users and roles fetched from backend
     const [teamMembers, setTeamMembers] = useState([]);
     const [roles, setRoles] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
@@ -21,21 +21,18 @@ const Team = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [userRole, setUserRole] = useState(null); // To store the logged-in user's role
+    const [userRole, setUserRole] = useState(null);
 
-    // Fetch users and roles from backend on component mount
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             setError(null);
 
-            // Get the logged-in user's role from localStorage
             const storedRole = localStorage.getItem("role");
             setUserRole(storedRole);
 
-            // Only proceed if the user is a SuperAdmin
-            if (storedRole !== "SuperAdmin") {
-                setError("Unauthorized: Only SuperAdmins can manage users.");
+            if (storedRole !== "Admin") {
+                setError("Unauthorized: Only Admins can manage users.");
                 setLoading(false);
                 return;
             }
@@ -60,11 +57,10 @@ const Team = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // Add a new user via the signup endpoint
     const handleAddUser = async (e) => {
         e.preventDefault();
-        if (userRole !== "SuperAdmin") {
-            setError("Unauthorized: Only SuperAdmins can add users.");
+        if (userRole !== "Admin") {
+            setError("Unauthorized: Only Admins can add users.");
             return;
         }
 
@@ -77,7 +73,7 @@ const Team = () => {
                 email: formData.email,
                 password: formData.password,
                 phone_number: formData.phone_number,
-                role_id: parseInt(formData.role_id) // Ensure role_id is an integer
+                role_id: parseInt(formData.role_id)
             });
 
             const updatedUsers = await getUsers();
@@ -91,11 +87,10 @@ const Team = () => {
         }
     };
 
-    // Edit a user via the update endpoint
     const handleEditUser = async (e) => {
         e.preventDefault();
-        if (userRole !== "SuperAdmin") {
-            setError("Unauthorized: Only SuperAdmins can edit users.");
+        if (userRole !== "Admin") {
+            setError("Unauthorized: Only Admins can edit users.");
             return;
         }
 
@@ -107,7 +102,7 @@ const Team = () => {
                 name: formData.name,
                 email: formData.email,
                 phone_number: formData.phone_number,
-                role_id: parseInt(formData.role_id) // Ensure role_id is an integer
+                role_id: parseInt(formData.role_id)
             });
 
             const updatedUsers = await getUsers();
@@ -121,10 +116,9 @@ const Team = () => {
         }
     };
 
-    // Delete a user via the DELETE endpoint
     const handleDeleteUser = async () => {
-        if (userRole !== "SuperAdmin") {
-            setError("Unauthorized: Only SuperAdmins can delete users.");
+        if (userRole !== "Admin") {
+            setError("Unauthorized: Only Admins can delete users.");
             setShowDeleteModal(false);
             return;
         }
@@ -155,8 +149,8 @@ const Team = () => {
     };
 
     const openEditModal = (member) => {
-        if (userRole !== "SuperAdmin") {
-            setError("Unauthorized: Only SuperAdmins can edit users.");
+        if (userRole !== "Admin") {
+            setError("Unauthorized: Only Admins can edit users.");
             return;
         }
         setCurrentUser(member);
@@ -170,8 +164,8 @@ const Team = () => {
     };
 
     const openDeleteModal = (member) => {
-        if (userRole !== "SuperAdmin") {
-            setError("Unauthorized: Only SuperAdmins can delete users.");
+        if (userRole !== "Admin") {
+            setError("Unauthorized: Only Admins can delete users.");
             return;
         }
         setCurrentUser(member);
@@ -184,7 +178,7 @@ const Team = () => {
             {error && <div className="error-message">{error}</div>}
             <div className="header">
                 <h2 className="title">Team</h2>
-                {userRole === "SuperAdmin" && (
+                {userRole === "Admin" && (
                     <button className="add-button" onClick={() => setShowAddModal(true)}>
                         Add +
                     </button>
@@ -219,7 +213,7 @@ const Team = () => {
                                 <td>{member.phone_number || "N/A"}</td>
                                 <td>{member.role ? member.role.name : "No Role Assigned"}</td>
                                 <td>
-                                    {userRole === "SuperAdmin" && (
+                                    {userRole === "Admin" && (
                                         <div className="action-buttons">
                                             <button className="action-button edit-button" onClick={() => openEditModal(member)}>
                                                 <FaEdit /> Edit
