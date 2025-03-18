@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api', // Match your deployment
+    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api', // Matches your backend
     headers: {
         'Content-Type': 'application/json',
     },
@@ -32,7 +32,7 @@ API.interceptors.response.use(
 export const login = (data) => API.post('/auth/login', data);
 export const getUsers = () => API.get('/users');
 export const getRoles = () => API.get('/roles');
-export const signup = (data) => API.post('/auth/signup', data); // Corrected endpoint
+export const signup = (data) => API.post('/auth/signup', data); // Correct endpoint
 export const updateUser = (id, data) => API.put(`/users/${id}`, data);
 export const deleteUser = (id) => API.delete(`/users/${id}`);
 
