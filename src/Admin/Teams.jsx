@@ -1,6 +1,6 @@
-// src/components/Team.jsx
+
 import React, { useState, useEffect } from "react";
-import './Teams.css';
+import './Teams.css'; // Ensure your CSS is correctly set up
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { getUsers, getRoles, signup, updateUser, deleteUser } from '../api';
 
@@ -36,11 +36,13 @@ const Team = () => {
         setError(null);
         try {
             const [usersResponse, rolesResponse] = await Promise.all([getUsers(), getRoles()]);
+            console.log("Users Response:", usersResponse.data); // Log users response
+            console.log("Roles Response:", rolesResponse.data); // Log roles response
             setTeamMembers(usersResponse.data || []);
             setRoles(rolesResponse.data || []);
         } catch (err) {
-            console.error("Fetch error:", err.response ? err.response.data : err.message);
-            setError(err.response?.data?.error || "Failed to fetch data from the server.");
+            console.error("Fetch error:", err);
+            setError(err.response ? err.response.data.error : "Failed to fetch data from the server.");
         } finally {
             setLoading(false);
         }
