@@ -33,9 +33,9 @@ const Auth = ({ onClose }) => {
             } else {
                 const response = await signup({
                     name,
+                    phone_number,
                     email,
                     password,
-                    phone_number,
                     role_id
                 });
                 console.log('Signup response:', response.data); // Debug log
@@ -98,35 +98,37 @@ const Auth = ({ onClose }) => {
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 required
                             />
-                            <input
-                                type="email"
-                                id="auth-email"
-                                name="email"
-                                placeholder="Email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                            <input
-                                type="password"
-                                id="auth-password"
-                                name="password"
-                                placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
-                            <select
-                                id="signup-role"
-                                name="role_id"
-                                value={role_id}
-                                onChange={(e) => setRoleId(e.target.value)}
-                                required
-                            >
-                                <option value="1">User</option>
-                                <option value="2">Admin</option>
-                            </select>
                         </>
+                    )}
+                    <input
+                        type="email"
+                        id="auth-email"
+                        name="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="password"
+                        id="auth-password"
+                        name="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    {!isLogin && (
+                        <select
+                            id="signup-role"
+                            name="role_id"
+                            value={role_id}
+                            onChange={(e) => setRoleId(e.target.value)}
+                            required
+                        >
+                            <option value="1">User</option>
+                            <option value="2">Admin</option>
+                        </select>
                     )}
                     <div className="form-actions">
                         <button type="submit" className="submit-button">
