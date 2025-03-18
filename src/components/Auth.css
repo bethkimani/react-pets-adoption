@@ -67,7 +67,7 @@
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #28a745;
+    background-color: #ff8c00; /* Changed to orange to match screenshot */
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -97,6 +97,12 @@ select {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    color: #666; /* Placeholder text color */
+}
+
+/* Ensure placeholder text color for select */
+select:invalid {
+    color: #666; /* Matches the placeholder color in the screenshot */
 }
 
 /* Additional styling for form inputs to match the design */
@@ -107,6 +113,11 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+}
+
+/* Style for placeholder text in inputs */
+input::placeholder {
+    color: #666; /* Matches the placeholder color in the screenshot */
 }
 
 h2 {
