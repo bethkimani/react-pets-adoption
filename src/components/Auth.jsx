@@ -1,35 +1,56 @@
+// src/components/Auth.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../api';
+import { login, signup } from '../api';
 import './Auth.css';
 
 const Auth = ({ onClose }) => {
+    const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
+    const [userType, setUserType] = useState('user');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState(''); // For signup
+    const [phone_number, setPhoneNumber] = useState(''); // For signup
+    const [role_id, setRoleId] = useState(''); // For signup (default to User role)
     const navigate = useNavigate();
 
     const handleAuth = async (e) => {
         e.preventDefault();
         try {
-            // Attempt to log in with email and password
-            const response = await login({ email, password });
-            const { token, role, user_id } = response.data;
-
-            // Store token and user details in localStorage
-            localStorage.setItem('token', token);
-            localStorage.setItem('role', role);
-            localStorage.setItem('user_id', user_id);
-            localStorage.setItem('isAuthenticated', 'true');
-
-            // Navigate based on role
-            if (role.toLowerCase() === 'admin') {
-                navigate('/admin-dashboard');
+            if (isLogin) {
+                // Login functionality
+                const response = await login({ email, password, user_type: userType });
+                const { token, role, user_id } = response.data;
+                localStorage.setItem('token', token);
+                localStorage.setItem('role', role);
+                localStorage.setItem('user_id', user_id);
+                localStorage.setItem('isAuthenticated', 'true');
+                if (role.toLowerCase() === 'admin') {
+                    navigate('/admin-dashboard');
+                } else {
+                    navigate('/user-dashboard');
+                }
+                onClose();
             } else {
-                navigate('/user-dashboard');
+                // Signup functionality
+                const response = await signup({
+                    name,
+                    email,
+                    password,
+                    phone_number,
+                    role_id: role_id || 1 // Default to User role (role_id=1)
+                });
+                alert('Signup successful! Please log in.');
+                setIsLogin(true); // Switch to login after signup
+                // Clear input fields
+                setName('');
+                setPhoneNumber('');
+                setRoleId('');
+                setEmail('');
+                setPassword('');
             }
-            onClose();
         } catch (error) {
-            alert(error.response?.data?.error || 'Login failed');
+            alert(error.response?.data?.error || (isLogin ? 'Login failed' : 'Signup failed'));
         }
     };
 
@@ -37,8 +58,42 @@ const Auth = ({ onClose }) => {
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <button className="close-button" onClick={onClose}>X</button>
-                <h2>Login</h2>
+                <h2>{isLogin ? 'Login' : 'Signup'}</h2>
+                {isLogin && (
+                    <div className="user-type-selection">
+                        <button
+                            className={`login-button ${userType === 'user' ? 'active' : ''}`}
+                            onClick={() => setUserType('user')}
+                        >
+                            User Login
+                        </button>
+                        <button
+                            className={`login-button ${userType === 'admin' ? 'active' : ''}`}
+                            onClick={() => setUserType('admin')}
+                        >
+                            Admin Login
+                        </button>
+                    </div>
+                )}
                 <form onSubmit={handleAuth}>
+                    {!isLogin && (
+                        <>
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+                            <input
+                                type="tel"
+                                placeholder="Phone Number"
+                                value={phone_number}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                required
+                            />
+                        </>
+                    )}
                     <input
                         type="email"
                         placeholder="Email"
@@ -53,16 +108,27 @@ const Auth = ({ onClose }) => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+                    {!isLogin && (
+                        <select
+                            value={role_id}
+                            onChange={(e) => setRoleId(e.target.value)}
+                            required
+                        >
+                            <option value="">Select Role</option>
+                            <option value="1">User</option>
+                            <option value="2">Admin</option>
+                        </select>
+                    )}
                     <div className="form-actions">
                         <button type="submit" className="submit-button">
-                            Login
+                            {isLogin ? 'Login' : 'Signup'}
                         </button>
                         <button
                             type="button"
                             className="toggle-button"
-                            onClick={() => alert('Signup functionality is not implemented.')}
+                            onClick={() => setIsLogin(!isLogin)}
                         >
-                            Need an account? Signup
+                            {isLogin ? 'Need an account? Signup' : 'Already have an account? Login'}
                         </button>
                     </div>
                 </form>
