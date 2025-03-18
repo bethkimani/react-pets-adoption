@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api', // Matches your backend
+    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api', // Matches your deployed backend
     headers: {
         'Content-Type': 'application/json',
     },
@@ -25,6 +25,7 @@ API.interceptors.response.use(
             localStorage.removeItem('isAuthenticated');
             window.location.href = '/login';
         }
+        console.error('API Error:', error.response?.data || error.message); // Log error for debugging
         return Promise.reject(error);
     }
 );

@@ -38,6 +38,7 @@ const Auth = ({ onClose }) => {
                     phone_number,
                     role_id
                 });
+                console.log('Signup response:', response.data); // Debug log
                 alert('Signup successful! Please log in.');
                 setIsLogin(true);
                 setName('');
@@ -47,7 +48,11 @@ const Auth = ({ onClose }) => {
                 setRoleId('1');
             }
         } catch (error) {
-            alert(error.response?.data?.error || (isLogin ? 'Login failed' : 'Signup failed'));
+            const errorMessage = error.response?.data?.error || 
+                                (isLogin ? 'Login failed' : 'Signup failed') || 
+                                'An unexpected error occurred';
+            console.error('Auth error:', errorMessage); // Debug log
+            alert(errorMessage);
         }
     };
 
@@ -77,6 +82,8 @@ const Auth = ({ onClose }) => {
                         <>
                             <input
                                 type="text"
+                                id="signup-name"
+                                name="name"
                                 placeholder="Name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -84,12 +91,34 @@ const Auth = ({ onClose }) => {
                             />
                             <input
                                 type="tel"
+                                id="signup-phone"
+                                name="phone_number"
                                 placeholder="Phone Number"
                                 value={phone_number}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 required
                             />
+                            <input
+                                type="email"
+                                id="auth-email"
+                                name="email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                            <input
+                                type="password"
+                                id="auth-password"
+                                name="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
                             <select
+                                id="signup-role"
+                                name="role_id"
                                 value={role_id}
                                 onChange={(e) => setRoleId(e.target.value)}
                                 required
@@ -99,20 +128,6 @@ const Auth = ({ onClose }) => {
                             </select>
                         </>
                     )}
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
                     <div className="form-actions">
                         <button type="submit" className="submit-button">
                             {isLogin ? 'Login' : 'Signup'}
