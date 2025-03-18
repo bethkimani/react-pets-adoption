@@ -23,7 +23,7 @@ API.interceptors.response.use(
             localStorage.removeItem('token');
             localStorage.removeItem('role');
             localStorage.removeItem('user_id');
-            localStorageItem('isAuthenticated');
+            localStorage.removeItem('isAuthenticated');
             window.location.href = '/login';
         }
         return Promise.reject(error);
@@ -31,18 +31,7 @@ API.interceptors.response.use(
 );
 
 // Auth API calls
-export const signup = (data) => API.post('/auth/signup', data);
 export const login = (data) => API.post('/auth/login', data);
 
-// User API calls
-export const getUsers = () => API.get('/users');
-export const updateUser = (id, data) => API.put(`/users/${id}`, data);
-export const deleteUser = (id) => API.delete(`/users/${id}`);
-
-// Role API calls
-export const getRoles = () => API.get('/roles');
-
-// Pet API calls
-export const getPets = () => API.get('/pets');
-
+// Export API instance
 export default API;
