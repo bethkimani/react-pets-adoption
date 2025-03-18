@@ -25,7 +25,7 @@ API.interceptors.response.use(
             localStorage.removeItem('isAuthenticated');
             window.location.href = '/login';
         }
-        console.error('API Error:', error.response?.data || error.message); // Log error for debugging
+        console.error('API Error:', error.response?.data || error.message);
         return Promise.reject(error);
     }
 );
@@ -33,7 +33,7 @@ API.interceptors.response.use(
 export const login = (data) => API.post('/auth/login', data);
 export const getUsers = () => API.get('/users');
 export const getRoles = () => API.get('/roles');
-export const signup = (data) => API.post('/auth/signup', data); // Correct endpoint
+export const signup = (data) => API.post('/auth/signup', data);
 export const updateUser = (id, data) => API.put(`/users/${id}`, data);
 export const deleteUser = (id) => API.delete(`/users/${id}`);
 

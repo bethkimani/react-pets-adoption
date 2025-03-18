@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import './Teams.css'; // Ensure your CSS is correctly set up
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -21,6 +19,7 @@ const Team = () => {
     });
     const [searchTerm, setSearchTerm] = useState("");
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
     const [loading, setLoading] = useState(false);
     const [userRole, setUserRole] = useState(localStorage.getItem("role") || "");
 
@@ -37,12 +36,11 @@ const Team = () => {
         setError(null);
         try {
             const [usersResponse, rolesResponse] = await Promise.all([getUsers(), getRoles()]);
-            console.log("Users Response:", usersResponse.data);
-            console.log("Roles Response:", rolesResponse.data);
+            console.log("Users Response Data:", usersResponse.data);
             setTeamMembers(usersResponse.data || []);
             setRoles(rolesResponse.data || []);
         } catch (err) {
-            console.error("Fetch error:", err);
+            console.error("Fetch error:", err.response ? err.response.data : err.message);
             setError(err.response ? err.response.data.error : "Failed to fetch data from the server.");
         } finally {
             setLoading(false);
@@ -63,6 +61,8 @@ const Team = () => {
             await fetchData();
             setShowAddModal(false);
             resetForm();
+            setSuccess("User added successfully.");
+            setTimeout(() => setSuccess(null), 3000);
         } catch (err) {
             setError(err.response?.data?.error || "Failed to add user.");
         } finally {
@@ -80,6 +80,8 @@ const Team = () => {
             await fetchData();
             setShowEditModal(false);
             resetForm();
+            setSuccess("User updated successfully.");
+            setTimeout(() => setSuccess(null), 3000);
         } catch (err) {
             setError(err.response?.data?.error || "Failed to update user.");
         } finally {
@@ -89,12 +91,15 @@ const Team = () => {
 
     const handleDeleteUser = async () => {
         if (!userRole || userRole !== "Admin") return setError("Unauthorized: Only Admins can delete users.");
+        if (!currentUser?.id) return setError("Invalid user selected.");
         setLoading(true);
         setError(null);
         try {
             await deleteUser(currentUser.id);
             await fetchData();
             setShowDeleteModal(false);
+            setSuccess("User deleted successfully.");
+            setTimeout(() => setSuccess(null), 3000);
         } catch (err) {
             setError(err.response?.data?.error || "Failed to delete user.");
         } finally {
@@ -133,6 +138,7 @@ const Team = () => {
         <div className="container">
             {loading && <div className="loading-message">Loading...</div>}
             {error && <div className="error-message">{error}</div>}
+            {success && <div className="success-message">{success}</div>}
             <div className="header">
                 <h2 className="title">Team</h2>
                 {userRole === "Admin" && (
@@ -161,7 +167,11 @@ const Team = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredMembers.length > 0 ? (
+                    {loading ? (
+                        <tr>
+                            <td colSpan="5">Loading...</td>
+                        </tr>
+                    ) : filteredMembers.length > 0 ? (
                         filteredMembers.map((member) => (
                             <tr key={member.id}>
                                 <td>{member.name}</td>
