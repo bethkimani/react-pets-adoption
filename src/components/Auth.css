@@ -21,31 +21,45 @@
     position: relative;
 }
 
-/* New class for success modal */
+/* Overlay for success modal */
+.success-modal-overlay {
+    position: absolute; /* Relative to the parent modal */
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to the top */
+    background: none; /* No dark overlay, as in the screenshot */
+    z-index: 1000; /* Ensure it’s above the login modal */
+}
+
+/* Style for success modal */
 .success-modal-content {
-    background: #ff8c00; /* Bright orange to match website theme */
-    border-radius: 8px;
-    padding: 15px; /* Slightly less padding for a smaller look */
+    background: #FFC107; /* Yellow background as in the second screenshot */
+    border-radius: 5px;
+    padding: 10px 20px; /* Less padding for a smaller look */
     width: 100%;
-    max-width: 300px; /* Smaller width than the main modal */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 300px; /* Slightly smaller than the login modal */
     position: relative;
+    box-shadow: none; /* No shadow, as in the screenshot */
+    transform: translateY(20px); /* Slightly overlap the top of the login modal */
 }
 
 .close-button {
-    background: rgba(255, 255, 255, 0.8); /* White background for contrast on orange */
+    background: rgba(255, 165, 0, 0.8); /* Orange background as in the login modal */
     border: none;
     cursor: pointer;
-    font-size: 14px; /* Slightly smaller for the smaller modal */
+    font-size: 16px;
     position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 20px; /* Smaller close button */
-    height: 20px;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
     padding: 0;
     border-radius: 50%;
     z-index: 1;
-    color: #ff8c00; /* Orange text to match the theme */
+    color: white;
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -137,13 +151,13 @@ h2 {
 .modal-content p,
 .success-modal-content p {
     text-align: center;
-    margin: 15px 0; /* Slightly less margin for smaller modal */
-    font-size: 14px; /* Smaller font size for smaller modal */
-    color: #333; /* Default for main modal */
+    margin: 10px 0; /* Reduced margin for the success modal */
+    font-size: 14px; /* Smaller font size */
+    color: #333; /* Black text for success modal */
 }
 
-/* Override text color for success modal to ensure readability on orange background */
+/* Remove previous success modal text color override */
 .success-modal-content h2,
 .success-modal-content p {
-    color: white; /* White text for contrast on orange background */
+    color: #333; /* Ensure black text */
 }
