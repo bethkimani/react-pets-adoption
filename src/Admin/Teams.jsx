@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './Teams.css'; // Ensure your CSS is correctly set up
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { getUsers, getRoles, signup, updateUser, deleteUser } from '../api';
+import { useNavigate } from 'react-router-dom';
 
 const Team = () => {
     const [teamMembers, setTeamMembers] = useState([]);
@@ -22,29 +23,77 @@ const Team = () => {
     const [success, setSuccess] = useState(null);
     const [loading, setLoading] = useState(false);
     const [userRole, setUserRole] = useState(localStorage.getItem("role") || "");
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (!userRole || userRole !== "Admin") {
+        // Check if user is authenticated and has the correct role
+        const token = localStorage.getItem("token");
+        console.log("Token in localStorage:", token);
+        console.log("User Role:", userRole);
+        if (!token || !userRole || userRole !== "Admin") {
+            console.log("Unauthorized: Redirecting to login page");
             setError("Unauthorized: Only Admins can manage users.");
+            localStorage.removeItem('token');
+            localStorage.removeItem('role');
+            localStorage.removeItem('user_id');
+            localStorage.removeItem('isAuthenticated');
+            navigate('/auth');
             return;
         }
         fetchData();
-    }, [userRole]);
+    }, [userRole, navigate]);
 
     const fetchData = async () => {
         setLoading(true);
         setError(null);
+
+        // Fetch users
         try {
-            const [usersResponse, rolesResponse] = await Promise.all([getUsers(), getRoles()]);
+            console.log("Fetching users...");
+            const usersResponse = await getUsers();
             console.log("Users Response Data:", usersResponse.data);
             setTeamMembers(usersResponse.data || []);
+        } catch (err) {
+            console.error("Users fetch error:", err.response ? err.response.data : err.message);
+            if (err.response?.status === 401) {
+                console.log("401 Unauthorized: Redirecting to login page");
+                setError("Session expired or unauthorized. Please log in again.");
+                localStorage.removeItem('token');
+                localStorage.removeItem('role');
+                localStorage.removeItem('user_id');
+                localStorage.removeItem('isAuthenticated');
+                navigate('/auth');
+                return;
+            } else {
+                const errorMessage = err.response?.data?.error || err.message || "Failed to fetch users from the server. Please check your network or server status.";
+                setError(`Error fetching users: ${errorMessage}`);
+            }
+        }
+
+        // Fetch roles
+        try {
+            console.log("Fetching roles...");
+            const rolesResponse = await getRoles();
+            console.log("Roles Response Data:", rolesResponse.data);
             setRoles(rolesResponse.data || []);
         } catch (err) {
-            console.error("Fetch error:", err.response ? err.response.data : err.message);
-            setError(err.response ? err.response.data.error : "Failed to fetch data from the server.");
-        } finally {
-            setLoading(false);
+            console.error("Roles fetch error:", err.response ? err.response.data : err.message);
+            if (err.response?.status === 401) {
+                console.log("401 Unauthorized: Redirecting to login page");
+                setError("Session expired or unauthorized. Please log in again.");
+                localStorage.removeItem('token');
+                localStorage.removeItem('role');
+                localStorage.removeItem('user_id');
+                localStorage.removeItem('isAuthenticated');
+                navigate('/auth');
+                return;
+            } else {
+                const errorMessage = err.response?.data?.error || err.message || "Failed to fetch roles from the server. Please check your network or server status.";
+                setError(`Error fetching roles: ${errorMessage}`);
+            }
         }
+
+        setLoading(false);
     };
 
     const handleInputChange = (e) => {
@@ -53,10 +102,14 @@ const Team = () => {
 
     const handleAddUser = async (e) => {
         e.preventDefault();
-        if (!userRole || userRole !== "Admin") return setError("Unauthorized: Only Admins can add users.");
+        if (!userRole || userRole !== "Admin") {
+            setError("Unauthorized: Only Admins can add users.");
+            return;
+        }
         setLoading(true);
         setError(null);
         try {
+            console.log("Adding new user with data:", formData);
             await signup({ ...formData, role_id: parseInt(formData.role_id) });
             await fetchData();
             setShowAddModal(false);
@@ -64,7 +117,9 @@ const Team = () => {
             setSuccess("User added successfully.");
             setTimeout(() => setSuccess(null), 3000);
         } catch (err) {
-            setError(err.response?.data?.error || "Failed to add user.");
+            console.error("Add user error:", err.response ? err.response.data : err.message);
+            const errorMessage = err.response?.data?.error || "Failed to add user.";
+            setError(`Error adding user: ${errorMessage}`);
         } finally {
             setLoading(false);
         }
@@ -72,10 +127,14 @@ const Team = () => {
 
     const handleEditUser = async (e) => {
         e.preventDefault();
-        if (!userRole || userRole !== "Admin") return setError("Unauthorized: Only Admins can edit users.");
+        if (!userRole || userRole !== "Admin") {
+            setError("Unauthorized: Only Admins can edit users.");
+            return;
+        }
         setLoading(true);
         setError(null);
         try {
+            console.log("Editing user with data:", formData);
             await updateUser(currentUser.id, { ...formData, role_id: parseInt(formData.role_id) });
             await fetchData();
             setShowEditModal(false);
@@ -83,25 +142,36 @@ const Team = () => {
             setSuccess("User updated successfully.");
             setTimeout(() => setSuccess(null), 3000);
         } catch (err) {
-            setError(err.response?.data?.error || "Failed to update user.");
+            console.error("Edit user error:", err.response ? err.response.data : err.message);
+            const errorMessage = err.response?.data?.error || "Failed to update user.";
+            setError(`Error updating user: ${errorMessage}`);
         } finally {
             setLoading(false);
         }
     };
 
     const handleDeleteUser = async () => {
-        if (!userRole || userRole !== "Admin") return setError("Unauthorized: Only Admins can delete users.");
-        if (!currentUser?.id) return setError("Invalid user selected.");
+        if (!userRole || userRole !== "Admin") {
+            setError("Unauthorized: Only Admins can delete users.");
+            return;
+        }
+        if (!currentUser?.id) {
+            setError("Invalid user selected.");
+            return;
+        }
         setLoading(true);
         setError(null);
         try {
+            console.log("Deleting user with ID:", currentUser.id);
             await deleteUser(currentUser.id);
             await fetchData();
             setShowDeleteModal(false);
             setSuccess("User deleted successfully.");
             setTimeout(() => setSuccess(null), 3000);
         } catch (err) {
-            setError(err.response?.data?.error || "Failed to delete user.");
+            console.error("Delete user error:", err.response ? err.response.data : err.message);
+            const errorMessage = err.response?.data?.error || "Failed to delete user.";
+            setError(`Error deleting user: ${errorMessage}`);
         } finally {
             setLoading(false);
         }
@@ -113,7 +183,10 @@ const Team = () => {
     };
 
     const openEditModal = (member) => {
-        if (!userRole || userRole !== "Admin") return setError("Unauthorized: Only Admins can edit users.");
+        if (!userRole || userRole !== "Admin") {
+            setError("Unauthorized: Only Admins can edit users.");
+            return;
+        }
         setCurrentUser(member);
         setFormData({
             name: member.name,
@@ -125,7 +198,10 @@ const Team = () => {
     };
 
     const openDeleteModal = (member) => {
-        if (!userRole || userRole !== "Admin") return setError("Unauthorized: Only Admins can delete users.");
+        if (!userRole || userRole !== "Admin") {
+            setError("Unauthorized: Only Admins can delete users.");
+            return;
+        }
         setCurrentUser(member);
         setShowDeleteModal(true);
     };

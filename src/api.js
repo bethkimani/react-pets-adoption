@@ -5,6 +5,7 @@ const API = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
+    withCredentials: true, // Ensure cookies/credentials are sent with requests
 });
 
 API.interceptors.request.use((config) => {
@@ -19,11 +20,14 @@ API.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response?.status === 401) {
+            console.warn('Unauthorized: Token may be invalid or expired');
+            // Clear localStorage and redirect to login page
             localStorage.removeItem('token');
             localStorage.removeItem('role');
             localStorage.removeItem('user_id');
             localStorage.removeItem('isAuthenticated');
-            window.location.href = '/login';
+            window.location.href = '/auth';
+            return Promise.reject(error);
         }
         console.error('API Error:', error.response?.data || error.message);
         return Promise.reject(error);
