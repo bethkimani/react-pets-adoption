@@ -28,7 +28,7 @@ const Dashboard = () => {
       <header className="navbar">
         <div className="location">
           <img src={pinIcon} alt="Location Pin" className="icon" />
-          <span>Subuluri, Indonesia</span>
+          <span>Riyadh, Saudi Arabia</span>
         </div>
         <h1>Looking for adoption</h1>
         <div className="search-container">
