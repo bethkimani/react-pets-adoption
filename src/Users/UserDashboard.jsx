@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom'; // Add useNavigate
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import AccountManagement from './AccountManagement';
@@ -14,11 +14,14 @@ import './UserDashboard.css';
 
 const UserDashboard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate(); // Add useNavigate hook
 
     const handleLogout = () => {
-        console.log("User logged out");
+        // Clear authentication state
+        localStorage.removeItem('isAuthenticated');
+        localStorage.removeItem('role');
         setIsModalOpen(false);
-        // Add logout logic here if needed
+        navigate('/auth'); // Navigate to the login page
     };
 
     return (
@@ -32,7 +35,6 @@ const UserDashboard = () => {
                 <Sidebar onLogout={() => setIsModalOpen(true)} />
                 <div className="main-content">
                     <Routes>
-                        {/* Make the root route match "/user-dashboard" */}
                         <Route path="/" element={<Dashboard />} />
                         <Route path="account-management" element={<AccountManagement />} />
                         <Route path="adoption-process" element={<AdoptionProcess />} />
