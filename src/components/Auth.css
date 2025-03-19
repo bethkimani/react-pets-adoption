@@ -21,20 +21,31 @@
     position: relative;
 }
 
+/* New class for success modal */
+.success-modal-content {
+    background: #ff8c00; /* Bright orange to match website theme */
+    border-radius: 8px;
+    padding: 15px; /* Slightly less padding for a smaller look */
+    width: 100%;
+    max-width: 300px; /* Smaller width than the main modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
 .close-button {
-    background: rgba(255, 165, 0, 0.8);
+    background: rgba(255, 255, 255, 0.8); /* White background for contrast on orange */
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px; /* Slightly smaller for the smaller modal */
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 25px;
-    height: 25px;
+    top: 8px;
+    right: 8px;
+    width: 20px; /* Smaller close button */
+    height: 20px;
     padding: 0;
     border-radius: 50%;
     z-index: 1;
-    color: white;
+    color: #ff8c00; /* Orange text to match the theme */
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -67,7 +78,7 @@
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #ff8c00; /* Changed to orange to match screenshot */
+    background-color: #ff8c00;
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -97,15 +108,13 @@ select {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    color: #666; /* Placeholder text color */
+    color: #666;
 }
 
-/* Ensure placeholder text color for select */
 select:invalid {
-    color: #666; /* Matches the placeholder color in the screenshot */
+    color: #666;
 }
 
-/* Additional styling for form inputs to match the design */
 input {
     width: 100%;
     padding: 10px;
@@ -115,12 +124,26 @@ input {
     box-sizing: border-box;
 }
 
-/* Style for placeholder text in inputs */
 input::placeholder {
-    color: #666; /* Matches the placeholder color in the screenshot */
+    color: #666;
 }
 
 h2 {
     text-align: center;
     margin-bottom: 20px;
+}
+
+/* Style for success message in modal */
+.modal-content p,
+.success-modal-content p {
+    text-align: center;
+    margin: 15px 0; /* Slightly less margin for smaller modal */
+    font-size: 14px; /* Smaller font size for smaller modal */
+    color: #333; /* Default for main modal */
+}
+
+/* Override text color for success modal to ensure readability on orange background */
+.success-modal-content h2,
+.success-modal-content p {
+    color: white; /* White text for contrast on orange background */
 }

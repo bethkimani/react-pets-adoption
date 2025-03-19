@@ -159,10 +159,10 @@ const Auth = ({ onClose }) => {
                 </div>
             </div>
 
-            {/* Success Modal */}
+            {/* Success Modal with new class */}
             {showSuccessModal && (
                 <div className="modal-overlay">
-                    <div className="modal-content">
+                    <div className="success-modal-content">
                         <button
                             className="close-button"
                             onClick={() => setShowSuccessModal(false)}
