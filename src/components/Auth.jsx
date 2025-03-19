@@ -26,7 +26,7 @@ const Auth = ({ onClose }) => {
                 localStorage.setItem('user_id', user_id);
                 localStorage.setItem('isAuthenticated', 'true');
                 // Show success modal for login
-                setSuccessMessage('Successfully logged in!');
+                setSuccessMessage('Successfully logged in');
                 setShowSuccessModal(true);
                 setTimeout(() => {
                     setShowSuccessModal(false);
@@ -47,7 +47,7 @@ const Auth = ({ onClose }) => {
                 });
                 console.log('Signup response:', response.data); // Debug log (unchanged)
                 // Show success modal instead of alert
-                setSuccessMessage('Successfully signed up, now login!');
+                setSuccessMessage('Successfully signed up, now login');
                 setShowSuccessModal(true);
                 setTimeout(() => {
                     setShowSuccessModal(false);
@@ -159,9 +159,9 @@ const Auth = ({ onClose }) => {
                 </div>
             </div>
 
-            {/* Success Modal */}
+            {/* Success Modal with new class */}
             {showSuccessModal && (
-                <div className="success-modal-overlay">
+                <div className="modal-overlay">
                     <div className="success-modal-content">
                         <button
                             className="close-button"
@@ -169,6 +169,7 @@ const Auth = ({ onClose }) => {
                         >
                             X
                         </button>
+                        <h2>Success</h2>
                         <p>{successMessage}</p>
                     </div>
                 </div>

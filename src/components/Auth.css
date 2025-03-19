@@ -21,33 +21,8 @@
     position: relative;
 }
 
-/* Overlay for success modal */
-.success-modal-overlay {
-    position: absolute; /* Relative to the parent modal */
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Align to the top */
-    background: none; /* No dark overlay, as in the screenshot */
-    z-index: 1000; /* Ensure it’s above the login modal */
-}
-
-/* Style for success modal */
-.success-modal-content {
-    background: #FFC107; /* Yellow background as in the second screenshot */
-    border-radius: 5px;
-    padding: 10px 20px; /* Less padding for a smaller look */
-    width: 100%;
-    max-width: 300px; /* Slightly smaller than the login modal */
-    position: relative;
-    box-shadow: none; /* No shadow, as in the screenshot */
-    transform: translateY(20px); /* Slightly overlap the top of the login modal */
-}
-
 .close-button {
-    background: rgba(255, 165, 0, 0.8); /* Orange background as in the login modal */
+    background: rgba(255, 165, 0, 0.8);
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -92,7 +67,7 @@
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #ff8c00;
+    background-color: #ff8c00; /* Changed to orange to match screenshot */
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -122,13 +97,15 @@ select {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    color: #666;
+    color: #666; /* Placeholder text color */
 }
 
+/* Ensure placeholder text color for select */
 select:invalid {
-    color: #666;
+    color: #666; /* Matches the placeholder color in the screenshot */
 }
 
+/* Additional styling for form inputs to match the design */
 input {
     width: 100%;
     padding: 10px;
@@ -138,26 +115,12 @@ input {
     box-sizing: border-box;
 }
 
+/* Style for placeholder text in inputs */
 input::placeholder {
-    color: #666;
+    color: #666; /* Matches the placeholder color in the screenshot */
 }
 
 h2 {
     text-align: center;
     margin-bottom: 20px;
-}
-
-/* Style for success message in modal */
-.modal-content p,
-.success-modal-content p {
-    text-align: center;
-    margin: 10px 0; /* Reduced margin for the success modal */
-    font-size: 14px; /* Smaller font size */
-    color: #333; /* Black text for success modal */
-}
-
-/* Remove previous success modal text color override */
-.success-modal-content h2,
-.success-modal-content p {
-    color: #333; /* Ensure black text */
 }
