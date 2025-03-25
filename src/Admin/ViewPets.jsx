@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getPets } from '../api'; // Import the getPets function
 import './ViewPets.css';
 
 const ViewPets = () => {
@@ -7,39 +8,15 @@ const ViewPets = () => {
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
 
-    // Mock data for testing
-    const mockPets = [
-        {
-            id: 1,
-            name: "Bella",
-            species: "Dog",
-            breed: "Labrador",
-            age: "2 years",
-            adoptionStatus: "Available",
-            description: "Friendly and playful.",
-            image: "https://via.placeholder.com/50"
-        },
-        {
-            id: 2,
-            name: "Mittens",
-            species: "Cat",
-            breed: "Siamese",
-            age: "3 years",
-            adoptionStatus: "Adopted",
-            description: "Loves to cuddle.",
-            image: "https://via.placeholder.com/50"
-        }
-    ];
-
     useEffect(() => {
-        const fetchPets = () => {
+        const fetchPets = async () => {
             try {
-                setTimeout(() => {
-                    setPets(mockPets);
-                    setLoading(false);
-                }, 1000);
+                const response = await getPets();
+                setPets(response.data); // Set the pets from the API response
+                setLoading(false);
             } catch (error) {
-                setError("Failed to load pets. Please try again later.");
+                const errorMessage = error.response?.data?.error || error.message || "Unknown error";
+                setError(`Failed to load pets: ${errorMessage}`);
                 setLoading(false);
             }
         };
@@ -50,7 +27,7 @@ const ViewPets = () => {
     const filteredPets = pets.filter(pet => 
         pet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         pet.species.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pet.breed.toLowerCase().includes(searchTerm.toLowerCase())
+        pet.breed?.toLowerCase().includes(searchTerm.toLowerCase()) || false // Handle null breed
     );
 
     if (loading) return <p>Loading pets...</p>;
@@ -86,12 +63,27 @@ const ViewPets = () => {
                             <tr key={pet.id}>
                                 <td>{pet.name}</td>
                                 <td>{pet.species}</td>
-                                <td>{pet.breed}</td>
-                                <td>{pet.age}</td>
-                                <td>{pet.adoptionStatus}</td>
-                                <td>{pet.description}</td>
+                                <td>{pet.breed || 'N/A'}</td>
+                                <td>{pet.age || 'N/A'}</td>
+                                <td>{pet.adoption_status}</td>
+                                <td>{pet.description || 'N/A'}</td>
                                 <td>
-                                    <img src={pet.image} alt={pet.name} style={{ width: "50px", height: "50px" }} />
+                                    {pet.image ? (
+                                        <img
+                                            src={`https://pets-adoption-flask-sqlite.onrender.com${pet.image}`}
+                                            alt={pet.name}
+                                            style={{ width: "50px", height: "50px" }}
+                                            onError={(e) => {
+                                                e.target.src = "https://via.placeholder.com/50"; // Fallback image if the pet image fails to load
+                                            }}
+                                        />
+                                    ) : (
+                                        <img
+                                            src="https://via.placeholder.com/50"
+                                            alt="No image"
+                                            style={{ width: "50px", height: "50px" }}
+                                        />
+                                    )}
                                 </td>
                             </tr>
                         ))}

@@ -42,5 +42,6 @@ export const addPet = (formData) =>
             'Content-Type': 'multipart/form-data',
         },
     });
+export const getPets = () => API.get('/pets/'); // Add this function to fetch pets
 
 export default API;
