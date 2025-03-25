@@ -4,7 +4,6 @@ import Step2 from './components/Step2';
 import Confirmation from './components/Confirmation';
 import { useNavigate } from 'react-router-dom';
 import { addPet } from '../api';
-import axios from 'axios';  // Import axios directly for the ping
 import './AddPets.css';
 
 const steps = [
@@ -28,24 +27,12 @@ const AddPets = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Check if the user is an admin
         const token = localStorage.getItem('token');
         const role = localStorage.getItem('role');
         if (!token || role !== 'Admin') {
             alert('You must be logged in as an Admin to add a pet.');
             navigate('/auth');
         }
-
-        // Ping the backend to wake it up
-        const pingBackend = async () => {
-            try {
-                await axios.get('https://pets-adoption-flask-sqlite.onrender.com/api/health');
-                console.log('Backend is awake');
-            } catch (error) {
-                console.error('Failed to ping backend:', error.message);
-            }
-        };
-        pingBackend();
     }, [navigate]);
 
     const nextStep = () => setStep((prevStep) => prevStep + 1);
