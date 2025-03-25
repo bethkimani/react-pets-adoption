@@ -1,14 +1,21 @@
-
 import React from "react";
 
 const Confirmation = ({ prevStep, values, onSubmit }) => {
+    // Function to format values for display
+    const formatValue = (key, value) => {
+        if (key === "image" && value) {
+            return value.name || "Image selected"; // Display the file name
+        }
+        return value || "N/A";
+    };
+
     return (
         <div className="confirmation-container">
             <h3>Confirm Pet Details</h3>
             <ul className="confirmation-list">
                 {Object.entries(values).map(([key, value]) => (
                     <li key={key}>
-                        <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {value || "N/A"}
+                        <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {formatValue(key, value)}
                     </li>
                 ))}
             </ul>

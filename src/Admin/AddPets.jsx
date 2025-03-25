@@ -75,11 +75,17 @@ const AddPets = () => {
 
         try {
             const response = await addPet(formData);
+            console.log("Pet added successfully:", response.data);
             alert("Pet added successfully!");
             navigate("/admin-dashboard/my-pets");
         } catch (error) {
             const errorMessage = error.response?.data?.error || error.message || "Unknown error";
-            console.error("Error adding pet:", error);
+            console.error("Detailed error adding pet:", {
+                message: error.message,
+                response: error.response?.data,
+                status: error.response?.status,
+                headers: error.response?.headers,
+            });
             alert(`Failed to add pet: ${errorMessage}`);
         }
     };
