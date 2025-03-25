@@ -65,20 +65,34 @@
 }
 
 /* Button styles */
-.adoption-process-container .adoptable-animals-btn,
-.adoption-process-container .our-shelters-btn {
-    background-color: #1E90FF; /* Blue button color from screenshot */
+.adoption-process-container .adoptable-animals-btn {
+    background-color: #FF8C00; /* Orange background color as requested */
     color: white; /* Text color */
-    padding: 8px 16px; /* Smaller padding for a more standard button size */
+    padding: 6px 12px; /* Further reduced padding for a smaller button */
     border: none; /* No border */
-    border-radius: 0; /* Remove border radius for a rectangular button */
+    border-radius: 0; /* No border radius for a rectangular button */
     cursor: pointer; /* Pointer cursor on hover */
-    font-size: 14px; /* Smaller font size for a standard button */
+    font-size: 12px; /* Smaller font size for a smaller button */
     text-transform: uppercase; /* Uppercase text */
     transition: background-color 0.3s; /* Smooth transition */
 }
 
-.adoption-process-container .adoptable-animals-btn:hover,
+.adoption-process-container .adoptable-animals-btn:hover {
+    background-color: #E07B00; /* Slightly darker orange on hover */
+}
+
+.adoption-process-container .our-shelters-btn {
+    background-color: #1E90FF; /* Blue button color from screenshot */
+    color: white; /* Text color */
+    padding: 6px 12px; /* Further reduced padding for a smaller button */
+    border: none; /* No border */
+    border-radius: 0; /* No border radius for a rectangular button */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 12px; /* Smaller font size for a smaller button */
+    text-transform: uppercase; /* Uppercase text */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
 .adoption-process-container .our-shelters-btn:hover {
     background-color: #1C86EE; /* Slightly darker blue on hover */
 }
