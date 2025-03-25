@@ -68,13 +68,14 @@
 .adoption-process-container .adoptable-animals-btn {
     background-color: #FF8C00; /* Orange background color as requested */
     color: white; /* Text color */
-    padding: 6px 12px; /* Further reduced padding for a smaller button */
+    padding: 5px 10px; /* Adjusted padding to match the size of the Logout button */
     border: none; /* No border */
     border-radius: 0; /* No border radius for a rectangular button */
     cursor: pointer; /* Pointer cursor on hover */
-    font-size: 12px; /* Smaller font size for a smaller button */
+    font-size: 14px; /* Font size to match the Logout button */
     text-transform: uppercase; /* Uppercase text */
     transition: background-color 0.3s; /* Smooth transition */
+    display: inline-block; /* Ensure button width matches content */
 }
 
 .adoption-process-container .adoptable-animals-btn:hover {
@@ -84,13 +85,14 @@
 .adoption-process-container .our-shelters-btn {
     background-color: #1E90FF; /* Blue button color from screenshot */
     color: white; /* Text color */
-    padding: 6px 12px; /* Further reduced padding for a smaller button */
+    padding: 5px 10px; /* Adjusted padding to match the size of the Logout button */
     border: none; /* No border */
     border-radius: 0; /* No border radius for a rectangular button */
     cursor: pointer; /* Pointer cursor on hover */
-    font-size: 12px; /* Smaller font size for a smaller button */
+    font-size: 14px; /* Font size to match the Logout button */
     text-transform: uppercase; /* Uppercase text */
     transition: background-color 0.3s; /* Smooth transition */
+    display: inline-block; /* Ensure button width matches content */
 }
 
 .adoption-process-container .our-shelters-btn:hover {
