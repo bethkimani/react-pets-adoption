@@ -1,11 +1,8 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api', // Matches your deployed backend
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    withCredentials: true, // Ensure cookies/credentials are sent with requests
+    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api',
+    withCredentials: true,
 });
 
 API.interceptors.request.use((config) => {
@@ -21,7 +18,6 @@ API.interceptors.response.use(
     (error) => {
         if (error.response?.status === 401) {
             console.warn('Unauthorized: Token may be invalid or expired');
-            // Clear localStorage and redirect to login page
             localStorage.removeItem('token');
             localStorage.removeItem('role');
             localStorage.removeItem('user_id');
@@ -40,5 +36,11 @@ export const getRoles = () => API.get('/roles');
 export const signup = (data) => API.post('/auth/signup', data);
 export const updateUser = (id, data) => API.put(`/users/${id}`, data);
 export const deleteUser = (id) => API.delete(`/users/${id}`);
+export const addPet = (formData) => 
+    API.post('/pets/', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
 
 export default API;
