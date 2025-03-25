@@ -38,9 +38,9 @@
     color: white; /* White text */
 }
 
-/* Info Section (Purple Background) */
+/* Info Section (Orange Background) */
 .adoption-process-container .info-section {
-    background-color: #4B2E83; /* Purple background color from screenshot */
+    background-color: #FF8C42; /* Orange background color as requested */
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('path-to-textured-background.jpg'); /* Add textured background if available */
     background-size: cover; /* Cover the entire area */
     background-position: center; /* Center the image */
@@ -69,11 +69,11 @@
 .adoption-process-container .our-shelters-btn {
     background-color: #1E90FF; /* Blue button color from screenshot */
     color: white; /* Text color */
-    padding: 10px 20px; /* Padding */
+    padding: 8px 16px; /* Smaller padding for a more standard button size */
     border: none; /* No border */
-    border-radius: 25px; /* Rounded corners to match screenshot */
+    border-radius: 0; /* Remove border radius for a rectangular button */
     cursor: pointer; /* Pointer cursor on hover */
-    font-size: 16px; /* Font size */
+    font-size: 14px; /* Smaller font size for a standard button */
     text-transform: uppercase; /* Uppercase text */
     transition: background-color 0.3s; /* Smooth transition */
 }
