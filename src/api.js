@@ -3,6 +3,7 @@ import axios from 'axios';
 const API = axios.create({
     baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api',
     withCredentials: true,
+    timeout: 60000,  // Increase timeout to 60 seconds
 });
 
 API.interceptors.request.use((config) => {
