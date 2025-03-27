@@ -14,7 +14,8 @@ import Header from './components/Header';
 import WhyAdopt from './components/WhyAdopt';
 import AdminDashboard from './Admin/AdminDashboard';
 import UserDashboard from './Users/UserDashboard';
-import Auth from './components/Auth';
+import LoginModal from './components/LoginModal'; // New Login Modal
+import SignupModal from './components/SignupModal'; // New Signup Modal
 
 // Home component for the landing page
 const Home = () => {
@@ -35,7 +36,7 @@ const ProtectedRoute = ({ element, allowedRole }) => {
     const userRole = localStorage.getItem('role')?.toLowerCase();
 
     if (!isAuthenticated) {
-        return <Navigate to="/auth" replace />;
+        return <Navigate to="/login" replace />; // Redirect to /login instead of /auth
     }
 
     if (allowedRole && userRole !== allowedRole.toLowerCase()) {
@@ -64,7 +65,8 @@ const AppLayout = () => {
                     <Route path="/search" element={<SearchPage />} />
                     <Route path="/search-and-display" element={<SearchAndDisplayPets />} />
                     <Route path="/about" element={<AboutUs />} />
-                    <Route path="/auth" element={<Auth onClose={() => {}} />} />
+                    <Route path="/login" element={<LoginModal onClose={() => {}} />} />
+                    <Route path="/signup" element={<SignupModal onClose={() => {}} />} />
 
                     {/* Protected Routes */}
                     <Route
