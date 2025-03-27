@@ -65,38 +65,31 @@
 }
 
 /* Button styles */
-.adoption-process-container .adoptable-animals-btn {
-    background-color: #FF8C00; /* Orange background color as requested */
+.adoption-process-container .adoptable-animals-btn,
+.adoption-process-container .our-shelters-btn {
+    background-color: #FF8C00; /* Default orange background color */
     color: white; /* Text color */
-    padding: 5px 10px; /* Adjusted padding to match the size of the Logout button */
+    padding: 8px 16px; /* Adjusted padding for a more prominent button */
     border: none; /* No border */
-    border-radius: 0; /* No border radius for a rectangular button */
+    border-radius: 5px; /* Slightly rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
-    font-size: 14px; /* Font size to match the Logout button */
+    font-size: 16px; /* Font size for better readability */
     text-transform: uppercase; /* Uppercase text */
     transition: background-color 0.3s; /* Smooth transition */
     display: inline-block; /* Ensure button width matches content */
+    margin: 10px 0; /* Space around buttons */
 }
 
 .adoption-process-container .adoptable-animals-btn:hover {
-    background-color: #E07B00; /* Slightly darker orange on hover */
+    background-color: #E07B00; /* Darker orange on hover */
 }
 
 .adoption-process-container .our-shelters-btn {
-    background-color: #1E90FF; /* Blue button color from screenshot */
-    color: white; /* Text color */
-    padding: 5px 10px; /* Adjusted padding to match the size of the Logout button */
-    border: none; /* No border */
-    border-radius: 0; /* No border radius for a rectangular button */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 14px; /* Font size to match the Logout button */
-    text-transform: uppercase; /* Uppercase text */
-    transition: background-color 0.3s; /* Smooth transition */
-    display: inline-block; /* Ensure button width matches content */
+    background-color: #1E90FF; /* Blue button color for shelters */
 }
 
 .adoption-process-container .our-shelters-btn:hover {
-    background-color: #1C86EE; /* Slightly darker blue on hover */
+    background-color: #1C86EE; /* Darker blue on hover for shelters */
 }
 
 /* Cat Adoption Section (Green Background) */
