@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 import BookingModal from './BookingPet';
-import homepg from '../assets/images/homepg.jpg'; // Import images from src/assets/images/
-import guinea from '../assets/images/guinea.jpg';
-import about3 from '../assets/images/about-3.jpg';
+import homepg from './assets/images/homepg.jpg'; // Import images from src/assets/images/
+import guinea from './assets/images/guinea.jpg';
+import about3 from './assets/images/about-3.jpg';
 
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
