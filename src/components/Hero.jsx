@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 import BookingModal from './BookingPet';
-import homepg from '../assets/images/homepg.jpg'; // Corrected path
-import guinea from '../assets/images/guinea.jpg'; // Corrected path
-import about3 from '../assets/images/about-3.jpg'; // Corrected path
 
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,20 +9,24 @@ const Hero = () => {
   const [fade, setFade] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Array of imported background images
-  const backgroundImages = [homepg, guinea, about3];
-
-  // Log image paths for debugging
-  useEffect(() => {
-    console.log('Image paths:', { homepg, guinea, about3 });
-  }, []);
+  // Array of background image URLs
+  const backgroundImages = [
+    "url('/assets/images/homepg.jpg')",
+    "url('/assets/images/guinea.jpg')",
+    "url('/assets/images/about-3.jpg')",
+  ];
 
   // Preload images to avoid delays
   useEffect(() => {
-    backgroundImages.forEach((image) => {
+    const imagePaths = [
+      '/assets/images/homepg.jpg',
+      '/assets/images/guinea.jpg',
+      '/assets/images/about-3.jpg',
+    ];
+    imagePaths.forEach((path) => {
       const img = new Image();
-      img.src = image;
-      img.onerror = () => console.error(`Failed to load image: ${image}`);
+      img.src = path;
+      img.onerror = () => console.error(`Failed to load image: ${path}`);
     });
   }, []);
 
@@ -93,14 +94,14 @@ const Hero = () => {
       <div
         className="hero-background"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${backgroundImages[currentImageIndex]})`,
+          background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), ${backgroundImages[currentImageIndex]}`,
           opacity: fade ? 1 : 0,
         }}
       />
       <div
         className="hero-background"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${backgroundImages[nextImageIndex]})`,
+          background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), ${backgroundImages[nextImageIndex]}`,
           opacity: fade ? 0 : 1,
         }}
       />
