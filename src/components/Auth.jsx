@@ -1,10 +1,9 @@
-// src/components/Auth.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, signup } from '../api';
 import './Auth.css';
 
-const Auth = ({ onClose }) => {
+const Auth = ({ onClose, initialMode }) => {
     const [isLogin, setIsLogin] = useState(true);
     const [userType, setUserType] = useState('user');
     const [email, setEmail] = useState('');
@@ -13,6 +12,11 @@ const Auth = ({ onClose }) => {
     const [phone_number, setPhoneNumber] = useState('');
     const [role_id, setRoleId] = useState('1'); // Default to User (role_id=1)
     const navigate = useNavigate();
+
+    // Set initial mode based on prop
+    useEffect(() => {
+        setIsLogin(initialMode === 'login');
+    }, [initialMode]);
 
     const handleAuth = async (e) => {
         e.preventDefault();
@@ -38,7 +42,7 @@ const Auth = ({ onClose }) => {
                     password,
                     role_id
                 });
-                console.log('Signup response:', response.data); // Debug log
+                console.log('Signup response:', response.data);
                 alert('Signup successful! Please log in.');
                 setIsLogin(true);
                 setName('');
@@ -51,7 +55,7 @@ const Auth = ({ onClose }) => {
             const errorMessage = error.response?.data?.error || 
                                 (isLogin ? 'Login failed' : 'Signup failed') || 
                                 'An unexpected error occurred';
-            console.error('Auth error:', errorMessage); // Debug log
+            console.error('Auth error:', errorMessage);
             alert(errorMessage);
         }
     };

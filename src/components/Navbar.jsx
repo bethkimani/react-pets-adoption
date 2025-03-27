@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; 
-import { FaHome, FaSearch, FaUser, FaPaw, FaInfoCircle } from 'react-icons/fa'; 
+import { FaHome, FaSearch, FaUser, FaPaw, FaInfoCircle, FaSignInAlt } from 'react-icons/fa'; 
 import AuthModal from './Auth';
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [modalType, setModalType] = useState('login'); // To track which form to show
 
-  const openModal = () => {
+  const openModal = (type) => {
+    setModalType(type); // Set whether it's login or signup
     setIsModalOpen(true);
   };
 
@@ -53,14 +55,19 @@ const Navbar = () => {
               <span className="nav-label">About Us</span>
             </Link>
           </div>
-          
         </div>
-        <div className="login-item" onClick={openModal}>
-          <FaUser className="nav-icon" />
-          <span className="nav-label"> Login</span>
+        <div className="auth-buttons">
+          <div className="login-item" onClick={() => openModal('login')}>
+            <FaUser className="nav-icon" />
+            <span className="nav-label">Login</span>
+          </div>
+          <div className="signup-item" onClick={() => openModal('signup')}>
+            <FaSignInAlt className="nav-icon" />
+            <span className="nav-label">Sign Up</span>
+          </div>
         </div>
       </div>
-      {isModalOpen && <AuthModal onClose={closeModal} />}
+      {isModalOpen && <AuthModal onClose={closeModal} initialMode={modalType} />}
     </nav>
   );
 };
