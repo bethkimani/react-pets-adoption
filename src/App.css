@@ -338,7 +338,7 @@ html {
 .cta-buttons {
   display: flex;
   justify-content: center; /* Center the buttons */
-  gap: 30px; /* Increase space between buttons to match the first screenshot */
+  gap: 20px; /* Increase space between buttons to match the first screenshot */
   margin-top: 30px; /* More space above the buttons */
 }
 
