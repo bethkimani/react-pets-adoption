@@ -249,20 +249,9 @@ html {
 }
 
 
-
-/* Hero section styles */
-#hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
 .hero {
   height: 79.5vh; /* Adjust height as needed */
   width: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./assets/images/homepg.jpg');
   background-size: cover;
   background-position: center;
   position: relative;
@@ -273,58 +262,35 @@ html {
   align-items: center;
   justify-content: center;
   padding-bottom: 40px; /* Add space below the Hero */
+  /* Carousel animation */
+  animation: carouselFade 15s infinite;
 }
 
-.hero-text {
-  color: white;
-  text-align: center;
-  position: relative; /* Remove absolute positioning */
-  transform: none; /* Remove transform */
-  top: auto; /* Remove top */
-  left: auto; /* Remove left */
-  font-weight: 100;
-  font-size: 1.2rem; 
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+/* Define the carousel animation with keyframes */
+@keyframes carouselFade {
+  0% {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./assets/images/homepg.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  33% {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./assets/images/guineapig.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  66% {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./assets/images/about-3.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  100% {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./assets/images/homepg.jpg');
+    background-size: cover;
+    background-position: center;
+  }
 }
 
-.hero-title {
-  color: white; /* Ensure the text is white */
-  font-size: 4rem; /* Increase font size as needed */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Optional: adds depth */
-}
 
-.hero-subtitle {
-  font-size: 2rem; /* Slightly smaller than the main headline */
-  color: white; /* Ensure it matches the overall theme */
-  margin-top: 10px; /* Add some space above the subheadline */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Optional: add shadow for depth */
-}
-
-
-.btn {
-  display: block; 
-  margin: 20px auto; /* Center the buttons */
-  padding: 15px 30px; /* Adjust padding for better sizing */
-  background-color: #FF8C42; /* Orange color */
-  color: white; 
-  border: none;
-  border-radius: 5px; 
-  cursor: pointer;
-  text-align: center; /* Center the text inside the button */
-  text-decoration: none; /* Remove underline from links */
-  transition: background-color 0.3s; 
-}
-
-.btn:hover {
-  background-color: #FF6F22; /* Darker orange on hover */
-}
-
-.cta-buttons {
-  display: flex;
-  justify-content: center; /* Center the buttons */
-  gap: 20px; /* Space between buttons */
-  margin-top: 20px; /* Space above the buttons */
-}
 /* Home Page Styles */
 .homepage {
   text-align: center;
