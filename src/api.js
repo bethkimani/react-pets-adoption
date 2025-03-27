@@ -30,6 +30,7 @@ API.interceptors.response.use(
     }
 );
 
+// Existing API functions
 export const login = (data) => API.post('/auth/login', data);
 export const getUsers = () => API.get('/users');
 export const getRoles = () => API.get('/roles');
@@ -42,6 +43,10 @@ export const addPet = (formData) =>
             'Content-Type': 'multipart/form-data',
         },
     });
-export const getPets = () => API.get('/pets/'); // Add this function to fetch pets
+export const getPets = () => API.get('/pets/');
+
+// New functions for adoption form
+export const submitAdoptionForm = (formData) => API.post('/adoptions/', formData);
+export const getAdoptions = () => API.get('/adoptions/');
 
 export default API;

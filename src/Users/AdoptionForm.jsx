@@ -1,41 +1,59 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+// AdoptionForm.jsx
+import React, { useState, useEffect } from 'react';
+import { submitAdoptionForm, getPets } from '../api';
 import './AdoptionForm.css';
 
 const AdoptionForm = () => {
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        phoneNumber: '',
+        user_id: localStorage.getItem('user_id') || '',
+        pet_id: '',
+        first_name: '',
+        last_name: '',
+        phone_number: '',
         email: '',
-        ageCategory: '',
+        age_category: '',
         address: '',
-        addressLine2: '',
+        address_line2: '',
         city: '',
         province: '',
-        postalCode: '',
-        interestedPet: '',
-        livingEnvironment: '',
-        durationAtAddress: '',
+        postal_code: '',
+        interested_pet: '',
+        living_environment: '',
+        duration_at_address: '',
         residents: '',
-        homeDescription: '',
+        home_description: '',
         allergies: '',
-        partnerAgreement: '',
-        aloneTime: '',
-        otherPets: '',
-        spayedNeutered: '',
-        currentPetsVaccinated: '',
-        dogStay: '',
+        partner_agreement: '',
+        alone_time: '',
+        other_pets: '',
+        spayed_neutered: '',
+        current_pets_vaccinated: '',
+        dog_stay: '',
         enrichment: '',
-        hadDogsBefore: '',
-        trainingMethods: '',
-        hasVeterinarian: '',
-        vetFrequency: '',
-        willingToWorkOn: '',
+        had_dogs_before: '',
+        training_methods: '',
+        has_veterinarian: '',
+        vet_frequency: '',
+        willing_to_work_on: '',
         reference: '',
-        additionalInfo: '',
-        consent: false, // Combine infoConsent and emailConsent into one for simplicity
+        additional_info: '',
+        consent: false,
     });
+    const [pets, setPets] = useState([]);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchPets = async () => {
+            try {
+                const response = await getPets();
+                setPets(response.data);
+            } catch (err) {
+                console.error('Error fetching pets:', err);
+                setError('Failed to load pets. Please try again later.');
+            }
+        };
+        fetchPets();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -47,71 +65,92 @@ const AdoptionForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Submitting form data:', formData);
+        if (!formData.user_id) {
+            alert('Please log in to submit the form.');
+            window.location.href = '/auth';
+            return;
+        }
+
         try {
-            const response = await axios.post('https://pets-adoption-flask-sqlite.onrender.com/api/adoptions/', formData);
+            const response = await submitAdoptionForm(formData);
             console.log('Response:', response.data);
             alert('Your application has been submitted successfully!');
-            // Reset form after successful submission
             setFormData({
-                firstName: '',
-                lastName: '',
-                phoneNumber: '',
+                user_id: localStorage.getItem('user_id') || '',
+                pet_id: '',
+                first_name: '',
+                last_name: '',
+                phone_number: '',
                 email: '',
-                ageCategory: '',
+                age_category: '',
                 address: '',
-                addressLine2: '',
+                address_line2: '',
                 city: '',
                 province: '',
-                postalCode: '',
-                interestedPet: '',
-                livingEnvironment: '',
-                durationAtAddress: '',
+                postal_code: '',
+                interested_pet: '',
+                living_environment: '',
+                duration_at_address: '',
                 residents: '',
-                homeDescription: '',
+                home_description: '',
                 allergies: '',
-                partnerAgreement: '',
-                aloneTime: '',
-                otherPets: '',
-                spayedNeutered: '',
-                currentPetsVaccinated: '',
-                dogStay: '',
+                partner_agreement: '',
+                alone_time: '',
+                other_pets: '',
+                spayed_neutered: '',
+                current_pets_vaccinated: '',
+                dog_stay: '',
                 enrichment: '',
-                hadDogsBefore: '',
-                trainingMethods: '',
-                hasVeterinarian: '',
-                vetFrequency: '',
-                willingToWorkOn: '',
+                had_dogs_before: '',
+                training_methods: '',
+                has_veterinarian: '',
+                vet_frequency: '',
+                willing_to_work_on: '',
                 reference: '',
-                additionalInfo: '',
+                additional_info: '',
                 consent: false,
             });
-        } catch (error) {
-            console.error('Error submitting form:', error.response ? error.response.data : error.message);
-            alert('There was an error submitting your application. Please try again.');
+            setError(null);
+        } catch (err) {
+            console.error('Error submitting form:', err.response?.data || err.message);
+            setError('There was an error submitting your application. Please try again.');
         }
     };
 
     return (
         <div className="adoption-form">
             <h1>Adoption Form</h1>
+            {error && <div className="error-message">{error}</div>}
             <form onSubmit={handleSubmit}>
-                {/* Personal Information */}
+                <div className="form-row">
+                    <div className="form-group">
+                        <label>Select a pet to adopt:</label>
+                        <select name="pet_id" value={formData.pet_id} onChange={handleChange} required>
+                            <option value="">Select a pet</option>
+                            {pets.map((pet) => (
+                                <option key={pet.id} value={pet.id}>
+                                    {pet.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+
                 <div className="form-row">
                     <div className="form-group">
                         <label>First Name:</label>
-                        <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required />
+                        <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} required />
                     </div>
                     <div className="form-group">
                         <label>Last Name:</label>
-                        <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required />
+                        <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} required />
                     </div>
                 </div>
 
                 <div className="form-row">
                     <div className="form-group">
                         <label>Phone Number:</label>
-                        <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
+                        <input type="text" name="phone_number" value={formData.phone_number} onChange={handleChange} required />
                     </div>
                     <div className="form-group">
                         <label>Email Address:</label>
@@ -121,14 +160,13 @@ const AdoptionForm = () => {
 
                 <div className="form-group">
                     <label>Please select the appropriate age category:</label>
-                    <select name="ageCategory" value={formData.ageCategory} onChange={handleChange} required>
+                    <select name="age_category" value={formData.age_category} onChange={handleChange} required>
                         <option value="">Select</option>
                         <option value="under18">Under 18</option>
                         <option value="18plus">18+</option>
                     </select>
                 </div>
 
-                {/* Address Information */}
                 <div className="form-row">
                     <div className="form-group">
                         <label>Street Address:</label>
@@ -136,7 +174,7 @@ const AdoptionForm = () => {
                     </div>
                     <div className="form-group">
                         <label>Address Line 2:</label>
-                        <input type="text" name="addressLine2" value={formData.addressLine2} onChange={handleChange} />
+                        <input type="text" name="address_line2" value={formData.address_line2} onChange={handleChange} />
                     </div>
                 </div>
 
@@ -154,29 +192,28 @@ const AdoptionForm = () => {
                 <div className="form-row">
                     <div className="form-group">
                         <label>Postal Code:</label>
-                        <input type="text" name="postalCode" value={formData.postalCode} onChange={handleChange} required />
+                        <input type="text" name="postal_code" value={formData.postal_code} onChange={handleChange} required />
                     </div>
                 </div>
 
-                {/* Pet Information */}
                 <div className="form-row">
                     <div className="form-group">
-                        <label>Which pet are you interested in?</label>
-                        <input type="text" name="interestedPet" value={formData.interestedPet} onChange={handleChange} required />
+                        <label>Which pet are you interested in? (e.g., name or type)</label>
+                        <input type="text" name="interested_pet" value={formData.interested_pet} onChange={handleChange} required />
                     </div>
                 </div>
 
                 <div className="form-row">
                     <div className="form-group">
                         <label>What best describes your living environment?</label>
-                        <input type="text" name="livingEnvironment" value={formData.livingEnvironment} onChange={handleChange} required />
+                        <input type="text" name="living_environment" value={formData.living_environment} onChange={handleChange} required />
                     </div>
                 </div>
 
                 <div className="form-row">
                     <div className="form-group">
                         <label>How long have you lived there?</label>
-                        <input type="text" name="durationAtAddress" value={formData.durationAtAddress} onChange={handleChange} required />
+                        <input type="text" name="duration_at_address" value={formData.duration_at_address} onChange={handleChange} required />
                     </div>
                 </div>
 
@@ -190,11 +227,10 @@ const AdoptionForm = () => {
                 <div className="form-row">
                     <div className="form-group">
                         <label>Describe your home and lifestyle:</label>
-                        <textarea name="homeDescription" value={formData.homeDescription} onChange={handleChange} required />
+                        <textarea name="home_description" value={formData.home_description} onChange={handleChange} required />
                     </div>
                 </div>
 
-                {/* Allergies and Pets */}
                 <div className="form-row">
                     <div className="form-group">
                         <label>Is anyone in your home allergic to dogs?</label>
@@ -206,7 +242,7 @@ const AdoptionForm = () => {
                     </div>
                     <div className="form-group">
                         <label>Does your partner agree with adopting this animal?</label>
-                        <select name="partnerAgreement" value={formData.partnerAgreement} onChange={handleChange}>
+                        <select name="partner_agreement" value={formData.partner_agreement} onChange={handleChange}>
                             <option value="">Select</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
@@ -219,21 +255,21 @@ const AdoptionForm = () => {
                 <div className="form-row">
                     <div className="form-group">
                         <label>How many hours will the pet be alone (dogs only)?</label>
-                        <input type="text" name="aloneTime" value={formData.aloneTime} onChange={handleChange} required />
+                        <input type="text" name="alone_time" value={formData.alone_time} onChange={handleChange} required />
                     </div>
                 </div>
 
                 <div className="form-row">
                     <div className="form-group">
                         <label>Do you have other pets? If yes, describe:</label>
-                        <textarea name="otherPets" value={formData.otherPets} onChange={handleChange} />
+                        <textarea name="other_pets" value={formData.other_pets} onChange={handleChange} />
                     </div>
                 </div>
 
                 <div className="form-row">
                     <div className="form-group">
                         <label>Are your current pets spayed/neutered?</label>
-                        <select name="spayedNeutered" value={formData.spayedNeutered} onChange={handleChange} required>
+                        <select name="spayed_neutered" value={formData.spayed_neutered} onChange={handleChange} required>
                             <option value="">Select</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
@@ -241,7 +277,7 @@ const AdoptionForm = () => {
                     </div>
                     <div className="form-group">
                         <label>Are your current pets vaccinated?</label>
-                        <select name="currentPetsVaccinated" value={formData.currentPetsVaccinated} onChange={handleChange} required>
+                        <select name="current_pets_vaccinated" value={formData.current_pets_vaccinated} onChange={handleChange} required>
                             <option value="">Select</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
@@ -252,7 +288,7 @@ const AdoptionForm = () => {
                 <div className="form-row">
                     <div className="form-group">
                         <label>Where will your dog stay when you’re not home?</label>
-                        <input type="text" name="dogStay" value={formData.dogStay} onChange={handleChange} required />
+                        <input type="text" name="dog_stay" value={formData.dog_stay} onChange={handleChange} required />
                     </div>
                 </div>
 
@@ -263,11 +299,10 @@ const AdoptionForm = () => {
                     </div>
                 </div>
 
-                {/* Training and Vet */}
                 <div className="form-row">
                     <div className="form-group">
                         <label>Have you had dogs before?</label>
-                        <select name="hadDogsBefore" value={formData.hadDogsBefore} onChange={handleChange} required>
+                        <select name="had_dogs_before" value={formData.had_dogs_before} onChange={handleChange} required>
                             <option value="">Select</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
@@ -278,14 +313,14 @@ const AdoptionForm = () => {
                 <div className="form-row">
                     <div className="form-group">
                         <label>What training methods will you use?</label>
-                        <textarea name="trainingMethods" value={formData.trainingMethods} onChange={handleChange} required />
+                        <textarea name="training_methods" value={formData.training_methods} onChange={handleChange} required />
                     </div>
                 </div>
 
                 <div className="form-row">
                     <div className="form-group">
                         <label>Do you have a veterinarian?</label>
-                        <select name="hasVeterinarian" value={formData.hasVeterinarian} onChange={handleChange} required>
+                        <select name="has_veterinarian" value={formData.has_veterinarian} onChange={handleChange} required>
                             <option value="">Select</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
@@ -296,7 +331,7 @@ const AdoptionForm = () => {
                 <div className="form-row">
                     <div className="form-group">
                         <label>How often should your dog see a vet?</label>
-                        <select name="vetFrequency" value={formData.vetFrequency} onChange={handleChange} required>
+                        <select name="vet_frequency" value={formData.vet_frequency} onChange={handleChange} required>
                             <option value="">Select</option>
                             <option value="whenSick">When sick</option>
                             <option value="every3Years">Every 3 years</option>
@@ -310,7 +345,7 @@ const AdoptionForm = () => {
                 <div className="form-row">
                     <div className="form-group">
                         <label>What are you willing to work on with your dog?</label>
-                        <textarea name="willingToWorkOn" value={formData.willingToWorkOn} onChange={handleChange} required />
+                        <textarea name="willing_to_work_on" value={formData.willing_to_work_on} onChange={handleChange} required />
                     </div>
                 </div>
 
@@ -324,11 +359,10 @@ const AdoptionForm = () => {
                 <div className="form-row">
                     <div className="form-group">
                         <label>Anything else we should know?</label>
-                        <textarea name="additionalInfo" value={formData.additionalInfo} onChange={handleChange} />
+                        <textarea name="additional_info" value={formData.additional_info} onChange={handleChange} />
                     </div>
                 </div>
 
-                {/* Consent */}
                 <div className="info-section">
                     <label>
                         <input type="checkbox" name="consent" checked={formData.consent} onChange={handleChange} required />
