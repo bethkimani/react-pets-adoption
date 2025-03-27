@@ -19,9 +19,6 @@ const Hero = () => {
         <h1 className="hero-title">
           Find Your Perfect Furry Friend Today!
         </h1>
-        <h2 className="hero-subtitle">
-          Browse adorable cats, dogs, and more. Adopt, don’t shop!
-        </h2>
         <div className="cta-buttons">
           <a href="/catalogue" className="btn">Meet Your Match</a>
           <a href="/catalogue#adoption-form-section" className="btn">Start the Adoption Process</a>

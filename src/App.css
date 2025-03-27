@@ -249,6 +249,15 @@ html {
 }
 
 
+/* Hero section styles */
+#hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
 .hero {
   height: 79.5vh; /* Adjust height as needed */
   width: 100%;
@@ -279,7 +288,7 @@ html {
     background-position: center;
   }
   66% {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./assets/images/about-3.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./assets/images/hamster.jpg');
     background-size: cover;
     background-position: center;
   }
@@ -289,6 +298,54 @@ html {
     background-position: center;
   }
 }
+
+.hero-text {
+  color: white;
+  text-align: center;
+  position: relative; /* Remove absolute positioning */
+  transform: none; /* Remove transform */
+  top: auto; /* Remove top */
+  left: auto; /* Remove left */
+  font-weight: 100;
+  font-size: 1.2rem; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.hero-title {
+  color: white; /* Ensure the text is white */
+  font-size: 4rem; /* Increase font size as needed */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Optional: adds depth */
+}
+
+.btn {
+  display: inline-block; /* Change to inline-block for flex layout */
+  padding: 12px 40px; /* Larger padding for bigger buttons like the first screenshot */
+  background-color: #FF8C42; /* Orange color */
+  color: white; 
+  border: none;
+  border-radius: 5px; 
+  cursor: pointer;
+  text-align: center; /* Center the text inside the button */
+  text-decoration: none; /* Remove underline from links */
+  transition: background-color 0.3s; 
+  font-size: 1.1rem; /* Slightly larger font for better readability */
+}
+
+.btn:hover {
+  background-color: #FF6F22; /* Darker orange on hover */
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center; /* Center the buttons */
+  gap: 30px; /* Increase space between buttons to match the first screenshot */
+  margin-top: 30px; /* More space above the buttons */
+}
+
+
+
+
+
 
 
 /* Home Page Styles */
