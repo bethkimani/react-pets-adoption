@@ -40,8 +40,8 @@
 
 /* Info Section (Orange Background) */
 .adoption-process-container .info-section {
-    background-color: #FF8C42; /* Orange background color as requested */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('path-to-textured-background.jpg'); /* Add textured background if available */
+    background-color: #FF8C42; /* Orange background color */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('path-to-textured-background.jpg'); /* Optional textured background */
     background-size: cover; /* Cover the entire area */
     background-position: center; /* Center the image */
     color: white; /* Text color */
@@ -69,15 +69,15 @@
 .adoption-process-container .our-shelters-btn {
     background-color: #FF8C00; /* Default orange background color */
     color: white; /* Text color */
-    padding: 8px 16px; /* Adjusted padding for a more prominent button */
+    padding: 4px 8px; /* Smaller padding for a compact button */
     border: none; /* No border */
-    border-radius: 5px; /* Slightly rounded corners */
+    border-radius: 3px; /* Slightly rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
-    font-size: 16px; /* Font size for better readability */
+    font-size: 14px; /* Smaller font size for a compact look */
     text-transform: uppercase; /* Uppercase text */
     transition: background-color 0.3s; /* Smooth transition */
     display: inline-block; /* Ensure button width matches content */
-    margin: 10px 0; /* Space around buttons */
+    margin: 5px 0; /* Space around buttons */
 }
 
 .adoption-process-container .adoptable-animals-btn:hover {
@@ -94,7 +94,7 @@
 
 /* Cat Adoption Section (Green Background) */
 .adoption-process-container .cat-adoption {
-    background-color: #32CD32; /* Green background color from screenshot */
+    background-color: #32CD32; /* Green background color */
     color: white; /* Text color */
     padding: 40px 20px; /* Padding for the section */
     text-align: center; /* Center text alignment */
@@ -130,7 +130,7 @@
 /* Dog Adoption Section (White Background with Texture) */
 .adoption-process-container .adoption-process {
     background-color: #F5F5F5; /* Light gray/white background */
-    background-image: url('path-to-white-textured-background.jpg'); /* Add textured background if available */
+    background-image: url('path-to-white-textured-background.jpg'); /* Optional textured background */
     background-size: cover; /* Cover the entire area */
     background-position: center; /* Center the image */
     padding: 40px 20px; /* Padding for the section */
