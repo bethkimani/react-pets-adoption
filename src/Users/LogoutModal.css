@@ -1,36 +1,60 @@
 /* LogoutModal.css */
-
-.modal-overlay {
+body {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    color: #333333;
+  }
+  
+  .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.modal-content {
-    background: white; /* White background for the content */
-    padding: 20px; /* Padding around the content */
-    border-radius: 0; /* No rounded corners */
-    text-align: center; /* Center text alignment */
-    box-shadow: none; /* No shadow for a flat appearance */
-}
-
-.modal-content button {
-    margin: 10px; /* Space between buttons */
-    padding: 10px 15px; /* Button padding */
-    border: none; /* No border */
-    background-color: #FF8C42; /* Button background color */
-    color: white; /* Button text color */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 5px; /* Slightly rounded corners for buttons */
-    transition: background-color 0.3s; /* Smooth transition */
-}
-
-.modal-content button:hover {
-    background-color: #FF6F24; /* Darker shade on hover */
-}
+  }
+  
+  .modal-content {
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-content h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .modal-content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .modal-content button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+  }
+  
+  .modal-content button:hover {
+    background-color: #3A80D2;
+  }
+  
+  .modal-content button.secondary {
+    background-color: #F5A623;
+  }
+  
+  .modal-content button.secondary:hover {
+    background-color: #E59413;
+  }

@@ -1,83 +1,109 @@
+/* AdoptionForm.css */
 html, body {
-    height: 100%; /* Ensure body takes full height */
-    margin: 0; /* Remove default margin */
-}
-
-.adoption-form {
-    background-color: #f0f0f0; /* Set a light background color for better visibility */
-    color: #333; /* Dark text color for contrast */
+    height: 100%;
+    margin: 0;
+  }
+  
+  body {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    color: #333333;
+  }
+  
+  .adoption-form {
+    background-color: #FFFFFF;
+    color: #333333;
     padding: 20px;
     border-radius: 10px;
-    width: 100%; /* Use full width */
-    max-width: none; /* Remove max width to fill the screen */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
-    position: relative; /* Allow full-screen coverage */
-    padding-bottom: 30px; /* Padding at the bottom */
-}
-
-.adoption-form h1 {
+    width: 100%;
+    max-width: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding-bottom: 30px;
+  }
+  
+  .adoption-form h1 {
     text-align: center;
+    font-size: 24px;
+    font-weight: bold;
     margin-bottom: 15px;
-}
-
-.adoption-form .form-row {
-    display: flex; /* Use flexbox for row layout */
-    flex-wrap: wrap; /* Allow wrapping */
-    justify-content: space-between; /* Space out form groups */
+  }
+  
+  .adoption-form .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin-bottom: 10px;
-}
-
-.adoption-form .form-group {
-    flex: 1; /* Allow form groups to grow equally */
-    margin-right: 10px; /* Space between groups */
-    min-width: 200px; /* Minimum width for responsiveness */
-}
-
-.adoption-form .form-group:last-child {
-    margin-right: 0; /* Remove margin on the last group */
-}
-
-.adoption-form label {
-    font-weight: bold; /* Make labels stand out */
+  }
+  
+  .adoption-form .form-group {
+    flex: 1;
+    margin-right: 10px;
+    min-width: 200px;
+  }
+  
+  .adoption-form .form-group:last-child {
+    margin-right: 0;
+  }
+  
+  .adoption-form label {
+    font-weight: bold;
     margin-bottom: 5px;
-}
-
-.adoption-form input[type="text"],
-.adoption-form input[type="email"],
-.adoption-form select {
-    width: 100%; /* Full width for inputs */
+    display: block;
+    font-size: 16px;
+  }
+  
+  .adoption-form input[type="text"],
+  .adoption-form input[type="email"],
+  .adoption-form select {
+    width: 100%;
     padding: 8px;
     margin-top: 5px;
-    border: 1px solid #aaa; /* Border color */
-    background-color: #fff; /* White background for inputs */
-    color: #333; /* Dark text color for contrast */
+    border: 1px solid #E0E0E0;
+    background-color: #FFFFFF;
+    color: #333333;
     border-radius: 5px;
-    font-size: 14px; /* Adjust font size for readability */
-}
-
-.adoption-form input[type="checkbox"] {
-    margin-right: 8px; /* Spacing for checkbox */
-}
-
-.adoption-form button {
-    background-color: #ff9800; /* Orange color for the button */
-    color: white;
-    padding: 10px 15px; /* Normal button size */
+    font-size: 14px;
+  }
+  
+  .adoption-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: vertical;
+  }
+  
+  .adoption-form input[type="checkbox"] {
+    margin-right: 8px;
+  }
+  
+  .adoption-form button {
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px; /* Larger button text */
+    font-size: 16px;
     margin-top: 10px;
-}
-
-.adoption-form button:hover {
-    background-color: #e68a00; /* Darken button on hover */
-}
-
-.info-section {
-    margin: 20px 0; /* Spacing for the information section */
-    padding: 15px; /* Padding for the info section */
-    border-radius: 5px; /* Rounded corners */
-    color: black; /* Black text color for statements */
-    background-color: white; /* Set a white background for readability */
-}
+  }
+  
+  .adoption-form button:hover {
+    background-color: #3A80D2;
+  }
+  
+  .info-section {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 5px;
+    color: #333333;
+    background-color: #FFFFFF;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+  }

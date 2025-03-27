@@ -1,216 +1,201 @@
-/* Adoption Process Container */
-.adoption-process-container {
-    color: white; /* Default text color */
-    padding: 0; /* Remove padding to avoid gaps */
-    margin: 0; /* Remove margin at the top of everything */
-}
-
-/* Header Section */
-.adoption-process-container .header {
-    width: 100%; /* Full width */
-    height: 300px; /* Adjusted height to fit content better */
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    text-align: center; /* Center text alignment */
-    position: relative; /* For positioning the overlay */
-    background-image: url('../assets/images/guineapig.jpg'); /* Use the image as background */
-    background-size: cover; /* Cover the entire area */
-    background-position: center; /* Center the image */
-    margin: 0; /* Remove margin */
-}
-
-.adoption-process-container .header::before {
-    content: ""; /* Create a pseudo-element for overlay */
-    position: absolute; /* Position it absolutely */
-    top: 0;
+/* AdoptionProcess.css */
+body {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    color: #333333;
+  }
+  
+  .adoption-process-container {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .adoption-process-container .header {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0;
+  }
+  
+  .adoption-process-container .header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .adoption-process-container .info-section {
+    background-color: #FFFFFF;
+    color: #333333;
+    padding: 40px 20px;
+    text-align: center;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .adoption-process-container .info-section p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .adoption-process-container .info-section p:last-of-type {
+    font-size: 14px;
+    color: #666666;
+  }
+  
+  .adoption-process-container .adoptable-animals-btn {
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: inline-block;
+  }
+  
+  .adoption-process-container .adoptable-animals-btn:hover {
+    background-color: #3A80D2;
+  }
+  
+  .adoption-process-container .our-shelters-btn {
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: inline-block;
+  }
+  
+  .adoption-process-container .our-shelters-btn:hover {
+    background-color: #3A80D2;
+  }
+  
+  .adoption-process-container .cat-adoption {
+    background-color: #FFFFFF;
+    color: #333333;
+    padding: 40px 20px;
+    text-align: center;
+    margin: 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .adoption-process-container .cat-adoption .cat-adoption-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .adoption-process-container .cat-adoption .cat-adoption-title::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #4A90E2;
+    margin: 10px auto;
+  }
+  
+  .adoption-process-container .cat-adoption p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .adoption-process-container .cat-adoption p:last-of-type {
+    font-size: 14px;
+    color: #666666;
+    text-transform: uppercase;
+  }
+  
+  .adoption-process-container .adoption-process {
+    background-color: #FFFFFF;
+    padding: 40px 20px;
+    color: #333333;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .adoption-process-container .adoption-process .adoption-pair {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .adoption-process-container .adoption-process .dog-adoption-title,
+  .adoption-process-container .adoption-process h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px;
+  }
+  
+  .adoption-process-container .adoption-process .dog-adoption-title .black-text,
+  .adoption-process-container .adoption-process h4 .black-text {
+    color: #333333;
+  }
+  
+  .adoption-process-container .adoption-process .dog-adoption-title::after,
+  .adoption-process-container .adoption-process h4::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #4A90E2;
+    margin: 10px 0;
+  }
+  
+  .adoption-process-container .adoption-process ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .adoption-process-container .adoption-process .heart-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .adoption-process-container .adoption-process .heart-list li::before {
+    content: "♥";
+    position: absolute;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-    z-index: 1; /* Ensure overlay is on top */
-}
-
-.adoption-process-container .header h2 {
-    position: relative; /* Position relative to the header */
-    z-index: 2; /* Ensure text is above the overlay */
-    font-size: 36px; /* Adjust font size as needed */
-    color: white; /* White text */
-}
-
-/* Info Section (Orange Background) */
-.adoption-process-container .info-section {
-    background-color: #FF8C42; /* Orange background color as requested */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('path-to-textured-background.jpg'); /* Add textured background if available */
-    background-size: cover; /* Cover the entire area */
-    background-position: center; /* Center the image */
-    color: white; /* Text color */
-    padding: 40px 20px; /* Padding for the section */
-    text-align: center; /* Center text alignment */
-    margin: 0; /* Remove margin to avoid gaps */
-    display: flex; /* Use flexbox */
-    flex-direction: column; /* Stack items vertically */
-    justify-content: space-between; /* Space between items */
-    gap: 20px; /* Space between elements */
-}
-
-.adoption-process-container .info-section p {
-    font-size: 18px; /* Adjust font size */
-    margin: 10px 0; /* Margin for spacing */
-}
-
-.adoption-process-container .info-section p:last-of-type {
-    font-size: 14px; /* Smaller font for the note */
-    color: #D3D3D3; /* Light gray color for the note */
-}
-
-/* Button styles */
-.adoption-process-container .adoptable-animals-btn {
-    background-color: #FF8C00; /* Orange background color as requested */
-    color: white; /* Text color */
-    padding: 5px 10px; /* Adjusted padding to match the size of the Logout button */
-    border: none; /* No border */
-    border-radius: 0; /* No border radius for a rectangular button */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 14px; /* Font size to match the Logout button */
-    text-transform: uppercase; /* Uppercase text */
-    transition: background-color 0.3s; /* Smooth transition */
-    display: inline-block; /* Ensure button width matches content */
-}
-
-.adoption-process-container .adoptable-animals-btn:hover {
-    background-color: #E07B00; /* Slightly darker orange on hover */
-}
-
-.adoption-process-container .our-shelters-btn {
-    background-color: #1E90FF; /* Blue button color from screenshot */
-    color: white; /* Text color */
-    padding: 5px 10px; /* Adjusted padding to match the size of the Logout button */
-    border: none; /* No border */
-    border-radius: 0; /* No border radius for a rectangular button */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 14px; /* Font size to match the Logout button */
-    text-transform: uppercase; /* Uppercase text */
-    transition: background-color 0.3s; /* Smooth transition */
-    display: inline-block; /* Ensure button width matches content */
-}
-
-.adoption-process-container .our-shelters-btn:hover {
-    background-color: #1C86EE; /* Slightly darker blue on hover */
-}
-
-/* Cat Adoption Section (Green Background) */
-.adoption-process-container .cat-adoption {
-    background-color: #32CD32; /* Green background color from screenshot */
-    color: white; /* Text color */
-    padding: 40px 20px; /* Padding for the section */
-    text-align: center; /* Center text alignment */
-    margin: 0; /* Remove margin to avoid gaps */
-}
-
-.adoption-process-container .cat-adoption .cat-adoption-title {
-    font-size: 28px; /* Larger font for the title */
-    margin-bottom: 20px; /* Space below the title */
-    color: white; /* White text */
-}
-
-.adoption-process-container .cat-adoption .cat-adoption-title::after {
-    content: ""; /* Underline effect */
-    display: block;
-    width: 50px; /* Width of the underline */
-    height: 3px; /* Height of the underline */
-    background-color: #1E90FF; /* Blue underline color */
-    margin: 10px auto; /* Center the underline */
-}
-
-.adoption-process-container .cat-adoption p {
-    font-size: 18px; /* Adjust font size */
-    margin: 10px 0; /* Margin for spacing */
-}
-
-.adoption-process-container .cat-adoption p:last-of-type {
-    font-size: 14px; /* Smaller font for the note */
-    color: #D3D3D3; /* Light gray color for the note */
-    text-transform: uppercase; /* Uppercase for the note */
-}
-
-/* Dog Adoption Section (White Background with Texture) */
-.adoption-process-container .adoption-process {
-    background-color: #F5F5F5; /* Light gray/white background */
-    background-image: url('path-to-white-textured-background.jpg'); /* Add textured background if available */
-    background-size: cover; /* Cover the entire area */
-    background-position: center; /* Center the image */
-    padding: 40px 20px; /* Padding for the section */
-    color: #333; /* Dark text color */
-    display: flex; /* Use flexbox */
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
-    justify-content: space-around; /* Space between sections */
-    gap: 20px; /* Space between elements */
-}
-
-.adoption-process-container .adoption-process .adoption-pair {
-    flex: 1; /* Allow each pair to grow */
-    min-width: 300px; /* Minimum width for each section */
-}
-
-.adoption-process-container .adoption-process .dog-adoption-title,
-.adoption-process-container .adoption-process h4 {
-    font-size: 24px; /* Font size for titles */
-    color: #FF8C00; /* Orange color for titles */
-    margin-bottom: 20px; /* Space below the title */
-}
-
-.adoption-process-container .adoption-process .dog-adoption-title .black-text,
-.adoption-process-container .adoption-process h4 .black-text {
-    color: #000; /* Black color for specific words */
-}
-
-.adoption-process-container .adoption-process .dog-adoption-title::after,
-.adoption-process-container .adoption-process h4::after {
-    content: ""; /* Underline effect */
-    display: block;
-    width: 50px; /* Width of the underline */
-    height: 3px; /* Height of the underline */
-    background-color: #1E90FF; /* Blue underline color */
-    margin: 10px 0; /* Space for the underline */
-}
-
-.adoption-process-container .adoption-process ul {
-    list-style: none; /* Remove default list style */
-    padding: 0; /* Remove padding */
-}
-
-.adoption-process-container .adoption-process .heart-list li {
-    position: relative; /* For positioning the heart */
-    padding-left: 30px; /* Space for the heart */
-    margin-bottom: 10px; /* Space between items */
-    font-size: 16px; /* Font size */
-}
-
-.adoption-process-container .adoption-process .heart-list li::before {
-    content: "♥"; /* Heart symbol */
-    position: absolute; /* Position the heart */
-    left: 0; /* Align to the left */
-    color: #FF8C00; /* Orange color for the heart */
-    font-size: 18px; /* Size of the heart */
-}
-
-.adoption-process-container .adoption-process .adoption-fee-details li {
-    position: relative; /* For positioning the bullet */
-    padding-left: 30px; /* Space for the bullet */
-    margin-bottom: 10px; /* Space between items */
-    font-size: 16px; /* Font size */
-}
-
-.adoption-process-container .adoption-process .adoption-fee-details li::before {
-    content: "•"; /* Bullet symbol */
-    position: absolute; /* Position the bullet */
-    left: 0; /* Align to the left */
-    color: #FF8C00; /* Orange color for the bullet */
-    font-size: 18px; /* Size of the bullet */
-}
-
-.adoption-process-container .adoption-process .adoption-fee-details li span {
-    color: #000; /* Black color for the fee amounts */
-    font-weight: bold; /* Bold for emphasis */
-}
+    color: #F5A623;
+    font-size: 18px;
+  }
+  
+  .adoption-process-container .adoption-process .adoption-fee-details li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .adoption-process-container .adoption-process .adoption-fee-details li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #F5A623;
+    font-size: 18px;
+  }
+  
+  .adoption-process-container .adoption-process .adoption-fee-details li span {
+    color: #333333;
+    font-weight: bold;
+  }
