@@ -250,18 +250,6 @@ html {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* Hero section styles */
 #hero {
   height: 100vh;
@@ -274,7 +262,11 @@ html {
 .hero {
   height: 79.5vh; /* Adjust height as needed */
   width: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./assets/images/homepg.jpg');
+  background-size: cover;
+  background-position: center;
   position: relative;
+  padding: 0; /* Remove padding if not needed */
   color: white;
   text-align: center; /* Center the text */
   display: flex; /* Use flexbox for vertical centering */
@@ -283,35 +275,31 @@ html {
   padding-bottom: 40px; /* Add space below the Hero */
 }
 
-.slick-slide {
-  height: 79.5vh; /* Match height of hero section */
-}
-
-.slick-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures the image covers the area */
-}
-
 .hero-text {
-  position: absolute; /* Position text over the carousel */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Centering */
   color: white;
+  text-align: center;
+  position: relative; /* Remove absolute positioning */
+  transform: none; /* Remove transform */
+  top: auto; /* Remove top */
+  left: auto; /* Remove left */
   font-weight: 100;
+  font-size: 1.2rem; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .hero-title {
+  color: white; /* Ensure the text is white */
   font-size: 4rem; /* Increase font size as needed */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Optional: adds depth */
 }
 
 .hero-subtitle {
   font-size: 2rem; /* Slightly smaller than the main headline */
+  color: white; /* Ensure it matches the overall theme */
   margin-top: 10px; /* Add some space above the subheadline */
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Optional: add shadow for depth */
 }
+
 
 .btn {
   display: block; 
@@ -337,32 +325,6 @@ html {
   gap: 20px; /* Space between buttons */
   margin-top: 20px; /* Space above the buttons */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Home Page Styles */
 .homepage {
   text-align: center;
