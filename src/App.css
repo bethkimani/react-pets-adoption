@@ -249,6 +249,7 @@ html {
 }
 
 
+
 /* Hero section styles */
 #hero {
   height: 100vh;
@@ -334,7 +335,7 @@ html {
 
 .carousel-arrow {
   position: absolute;
-  top: 50%;
+  top: 75%; /* Move arrows lower (75% from the top) */
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
@@ -378,6 +379,26 @@ html {
 
 .dot.active {
   background-color: white;
+}
+
+/* Home Page Styles */
+.homepage {
+  text-align: center;
+  padding: 20px;
+  background-color: #FFF8DC; /* Cream */
+  margin-top: 40px; /* Add space below Hero */
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: black; /* Warm Brown */
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #1a1714; /* Dark Brown */
 }
 
 /* Home Page Styles */

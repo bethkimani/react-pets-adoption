@@ -11,17 +11,17 @@ const Hero = () => {
 
   // Array of background image URLs
   const backgroundImages = [
-    "url('/assets/images/homepg.jpg')",
-    "url('/assets/images/guinea.jpg')",
-    "url('/assets/images/about-3.jpg')",
+    "url('./assets/images/homepg.jpg')",
+    "url('./assets/images/guinea.jpg')",
+    "url('./assets/images/about-3.jpg')",
   ];
 
   // Preload images to avoid delays
   useEffect(() => {
     const imagePaths = [
-      '/assets/images/homepg.jpg',
-      '/assets/images/guinea.jpg',
-      '/assets/images/about-3.jpg',
+      './assets/images/homepg.jpg',
+      './assets/images/guinea.jpg',
+      './assets/images/about-3.jpg',
     ];
     imagePaths.forEach((path) => {
       const img = new Image();
