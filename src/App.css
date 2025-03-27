@@ -250,6 +250,18 @@ html {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Hero section styles */
 #hero {
   height: 100vh;
@@ -263,63 +275,56 @@ html {
   height: 79.5vh; /* Adjust height as needed */
   width: 100%;
   position: relative;
-  padding: 0; /* Remove padding if not needed */
   color: white;
   text-align: center; /* Center the text */
   display: flex; /* Use flexbox for vertical centering */
   align-items: center;
   justify-content: center;
   padding-bottom: 40px; /* Add space below the Hero */
-  overflow: hidden; /* Ensure no overflow from background layers */
-  background-color: #333; /* Fallback background color */
 }
 
-.hero-background {
-  position: absolute;
-  top: 0;
-  left: 0;
+.slick-slide {
+  height: 79.5vh; /* Match height of hero section */
+}
+
+.slick-slide img {
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  transition: opacity 1s ease-in-out; /* Smooth opacity transition for cross-fade */
+  object-fit: cover; /* Ensures the image covers the area */
 }
 
 .hero-text {
+  position: absolute; /* Position text over the carousel */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centering */
   color: white;
-  text-align: center;
-  position: relative; /* Ensure text is above background layers */
-  z-index: 1; /* Bring text above background */
   font-weight: 100;
-  font-size: 1.2rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .hero-title {
-  color: white; /* Ensure the text is white */
   font-size: 4rem; /* Increase font size as needed */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Optional: adds depth */
 }
 
 .hero-subtitle {
   font-size: 2rem; /* Slightly smaller than the main headline */
-  color: white; /* Ensure it matches the overall theme */
   margin-top: 10px; /* Add some space above the subheadline */
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Optional: add shadow for depth */
 }
 
 .btn {
-  display: block;
+  display: block; 
   margin: 20px auto; /* Center the buttons */
   padding: 15px 30px; /* Adjust padding for better sizing */
   background-color: #FF8C42; /* Orange color */
-  color: white;
+  color: white; 
   border: none;
-  border-radius: 5px;
+  border-radius: 5px; 
   cursor: pointer;
   text-align: center; /* Center the text inside the button */
   text-decoration: none; /* Remove underline from links */
-  transition: background-color 0.3s;
+  transition: background-color 0.3s; 
 }
 
 .btn:hover {
@@ -333,93 +338,19 @@ html {
   margin-top: 20px; /* Space above the buttons */
 }
 
-.carousel-arrow {
-  position: absolute;
-  top: 75%; /* Move arrows lower (75% from the top) */
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 24px;
-  z-index: 1;
-}
 
-.carousel-arrow.left {
-  left: 20px;
-}
 
-.carousel-arrow.right {
-  right: 20px;
-}
 
-.carousel-arrow:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
 
-.carousel-dots {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 1;
-}
 
-.dot {
-  width: 10px;
-  height: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
 
-.dot.active {
-  background-color: white;
-}
 
-/* Home Page Styles */
-.homepage {
-  text-align: center;
-  padding: 20px;
-  background-color: #FFF8DC; /* Cream */
-  margin-top: 40px; /* Add space below Hero */
-}
 
-h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
-  color: black; /* Warm Brown */
-}
 
-p {
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  color: #1a1714; /* Dark Brown */
-}
 
-/* Home Page Styles */
-.homepage {
-  text-align: center;
-  padding: 20px;
-  background-color: #FFF8DC; /* Cream */
-  margin-top: 40px; /* Add space below Hero */
-}
 
-h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
-  color: black; /* Warm Brown */
-}
 
-p {
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  color: #1a1714; /* Dark Brown */
-}
+
 
 
 
