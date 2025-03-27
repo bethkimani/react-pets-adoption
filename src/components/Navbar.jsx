@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; 
 import { FaHome, FaSearch, FaUser, FaPaw, FaInfoCircle, FaSignInAlt } from 'react-icons/fa'; 
-import AuthModal from './Auth';
+import LoginModal from './LoginModal'; // New Login Modal
+import SignupModal from './SignupModal'; // New Signup Modal
 
 const Navbar = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [modalType, setModalType] = useState('login'); // To track which form to show
 
-  const openModal = (type) => {
-    setModalType(type); // Set whether it's login or signup
-    setIsModalOpen(true);
-  };
+  const openLoginModal = () => setIsLoginModalOpen(true);
+  const closeLoginModal = () => setIsLoginModalOpen(false);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const openSignupModal = () => setIsSignupModalOpen(true);
+  const closeSignupModal = () => setIsSignupModalOpen(false);
 
-  const toggleMenu = () => {
-    setIsMobile(!isMobile);
-  };
+  const toggleMenu = () => setIsMobile(!isMobile);
 
   return (
     <nav className="navbar">
@@ -57,17 +53,18 @@ const Navbar = () => {
           </div>
         </div>
         <div className="auth-buttons">
-          <div className="login-item" onClick={() => openModal('login')}>
+          <div className="login-item" onClick={openLoginModal}>
             <FaUser className="nav-icon" />
             <span className="nav-label">Login</span>
           </div>
-          <div className="signup-item" onClick={() => openModal('signup')}>
+          <div className="signup-item" onClick={openSignupModal}>
             <FaSignInAlt className="nav-icon" />
             <span className="nav-label">Sign Up</span>
           </div>
         </div>
       </div>
-      {isModalOpen && <AuthModal onClose={closeModal} initialMode={modalType} />}
+      {isLoginModalOpen && <LoginModal onClose={closeLoginModal} />}
+      {isSignupModalOpen && <SignupModal onClose={closeSignupModal} />}
     </nav>
   );
 };

@@ -119,28 +119,6 @@ html {
   }
 }
 
-/* Navbar Styles */
-.navbar {
-  background-color: rgb(36, 32, 32);
-  color: white;
-  padding: 20px 20px;
-  display: flex;
-  justify-content: space-between;  
-  align-items: center;
-}
-
-.navbar-content {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.brand-name {
-  font-size: 28px;
-  font-weight: bold;
-  margin-right: 40px; /* Space after brand name */
-  color: white; /* Ensure brand name is white */
-}
 
 
 
@@ -165,47 +143,83 @@ html {
   font-weight: bold;
   margin-right: 40px; /* Space after brand name */
   color: white; /* Ensure brand name is white */
+}
+
+
+
+
+/* Navbar Styles */
+.navbar {
+  background-color: rgb(36, 32, 32);
+  color: white;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.brand-name {
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 40px;
+  color: white;
 }
 
 /* Navigation Links */
 .nav-links {
   display: flex;
   align-items: center;
-  margin-right: auto; /* Push login to the right */
-  transition: max-height 0.3s ease-out; /* Smooth transition for mobile */
+  margin-right: auto;
+  transition: max-height 0.3s ease-out;
 }
 
 .nav-links.active {
-  display: flex; /* Show links when active */
+  display: flex;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  margin-right: 30px; /* Space between nav items */
-  color: white; 
-  text-decoration: none; 
+  margin-right: 30px;
+  color: white;
+  text-decoration: none;
   font-size: 20px;
 }
 
 .nav-icon {
-  margin-right: 5px; /* Space between icon and text */
-  font-size: 30px; /* Adjust icon size */
-  color: white; /* Ensure icons are white */
+  margin-right: 5px;
+  font-size: 30px;
+  color: white;
 }
 
+/* Auth Buttons */
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between Login and Sign Up */
+}
 
-
-.login-item {
+.login-item, .signup-item {
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: white; 
+  color: white;
+  font-size: 20px;
+}
+
+.login-item:hover, .signup-item:hover {
+  color: #FF8C00; /* Orange hover effect */
 }
 
 /* Mobile styles */
 .menu-toggle {
-  display: none; /* Hidden by default */
+  display: none;
   flex-direction: column;
   cursor: pointer;
 }
@@ -215,38 +229,59 @@ html {
   width: 25px;
   background-color: white;
   margin: 3px 0;
-  transition: all 0.3s ease; /* Smooth transition for bars */
+  transition: all 0.3s ease;
 }
 
 .bar.active {
-  background-color: #FF8C00; /* Change color when active */
+  background-color: #FF8C00;
 }
 
 /* Media Queries */
 @media (max-width: 768px) {
   .nav-links {
-    display: none; /* Hide nav links by default */
+    display: none;
     flex-direction: column;
     position: absolute;
-    top: 70px; /* Position under the navbar */
+    top: 70px;
     left: 0;
     width: 100%;
-    background-color: rgb(36, 32, 32); /* Same background as navbar */
-    z-index: 1; /* Ensure it appears above other elements */
+    background-color: rgb(36, 32, 32);
+    z-index: 1;
   }
 
   .nav-links.active {
-    display: flex; /* Show links when active */
+    display: flex;
   }
 
   .menu-toggle {
-    display: flex; /* Show hamburger menu */
+    display: flex;
   }
 
   .nav-item {
-    margin: 10px 0; /* Space between nav items in mobile view */
+    margin: 10px 0;
+  }
+
+  .auth-buttons {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .login-item, .signup-item {
+    margin: 10px 0;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* Hero section styles */
