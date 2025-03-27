@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 import BookingModal from './BookingPet';
-import homepg from './assets/images/homepg.jpg'; // Import images from src/assets/images/
-import guinea from './assets/images/guinea.jpg';
-import about3 from './assets/images/about-3.jpg';
+import homepg from '../assets/images/homepg.jpg'; // Corrected path
+import guinea from '../assets/images/guinea.jpg'; // Corrected path
+import about3 from '../assets/images/about-3.jpg'; // Corrected path
 
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,11 +15,17 @@ const Hero = () => {
   // Array of imported background images
   const backgroundImages = [homepg, guinea, about3];
 
+  // Log image paths for debugging
+  useEffect(() => {
+    console.log('Image paths:', { homepg, guinea, about3 });
+  }, []);
+
   // Preload images to avoid delays
   useEffect(() => {
     backgroundImages.forEach((image) => {
       const img = new Image();
       img.src = image;
+      img.onerror = () => console.error(`Failed to load image: ${image}`);
     });
   }, []);
 
