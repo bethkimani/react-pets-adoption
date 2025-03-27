@@ -3,11 +3,14 @@ import Slider from 'react-slick';
 import '../App.css';
 import BookingModal from './BookingPet';
 
+// Importing carousel images
+import homepg from '../assets/images/homepg.jpg'; // Adjust the path according to your structure
+
 // Carousel images
 const carouselImages = [
-  './assets/images/homepg.jpg', // Using the same image for all slides
-  './assets/images/homepg.jpg',
-  './assets/images/homepg.jpg',
+  homepg,
+  homepg,
+  homepg,
 ];
 
 const Hero = () => {
