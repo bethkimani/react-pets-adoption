@@ -1,6 +1,5 @@
-// AdoptionForm.jsx
 import React, { useState, useEffect } from 'react';
-import { submitAdoptionForm, getPets } from '../api';
+import { submitAdoptionForm, getPets } from '../api'; // Import API functions
 import './AdoptionForm.css';
 
 const AdoptionForm = () => {
