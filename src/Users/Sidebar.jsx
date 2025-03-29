@@ -12,9 +12,8 @@ const Sidebar = ({ onLogout }) => {
                         <i className="fas fa-tachometer-alt"></i> Dashboard
                     </Link>
                 </li>
-
                 <li>
-                    <Link to="/user-dashboard/adoption-process">
+                    <Link to="/user-dashboard/all-pets">
                         <i className="fas fa-paw"></i> All Pets
                     </Link>
                 </li>
