@@ -9,7 +9,6 @@ const AllPets = () => {
   const [pets, setPets] = useState([]);
   const navigate = useNavigate();
 
-  // Fetch pets from the backend on component mount
   useEffect(() => {
     const fetchPets = async () => {
       try {

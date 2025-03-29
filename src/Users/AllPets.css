@@ -24,9 +24,10 @@
     margin-bottom: 20px;
   }
   
+  /* New class for the pets gallery */
   .pets-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
     gap: 20px;
   }
   
