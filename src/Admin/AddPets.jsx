@@ -80,12 +80,7 @@ const AddPets = () => {
             navigate("/admin-dashboard/my-pets");
         } catch (error) {
             const errorMessage = error.response?.data?.error || error.message || "Unknown error";
-            console.error("Detailed error adding pet:", {
-                message: error.message,
-                response: error.response?.data,
-                status: error.response?.status,
-                headers: error.response?.headers,
-            });
+            console.error("Detailed error adding pet:", error);
             alert(`Failed to add pet: ${errorMessage}`);
         }
     };
