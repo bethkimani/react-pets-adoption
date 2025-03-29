@@ -67,7 +67,7 @@ const AddPets = () => {
         formData.append("species", values.species);
         formData.append("breed", values.breed || "");
         formData.append("age", values.age ? parseInt(values.age) : "");
-        formData.append("adoption_status", values.adoptionStatus);
+        formData.append("adoption_status", values.adoptionStatus); // Ensure this corresponds to your API
         formData.append("description", values.description || "");
         if (values.image) {
             formData.append("image", values.image);

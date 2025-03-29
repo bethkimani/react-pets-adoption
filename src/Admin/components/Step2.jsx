@@ -13,7 +13,7 @@ const Step2 = ({ nextStep, prevStep, handleChange, values }) => {
                     required
                 >
                     <option value="">Select...</option>
-                    <option value="available">Available</option>
+                    <option value="available">Adopt me</option>
                     <option value="adopted">Adopted</option>
                 </select>
             </div>
