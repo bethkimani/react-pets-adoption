@@ -1,85 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { getPets } from '../api'; // Import the API function
 import './AllPets.css';
 
-// Import images directly (replace with your actual image paths)
-import catImage from '../assets/images/cat.jpeg';
-import dogImage from '../assets/images/dog.webp';
-import germanShepherdImage from '../assets/images/germanshepherd.jpg';
-import rabbitImage from '../assets/images/rabbit.jpg';
-import turtleImage from '../assets/images/turtle.jpg';
-import parrotImage from '../assets/images/parrot.jpg';
-
-const pets = [
-  { 
-    name: 'Amuki', 
-    type: 'Dog', 
-    image: dogImage, 
-    available: false, 
-    specialty: 'Babysitting',
-    weight: '30 lbs',
-    greased: 'Yes',
-    highestMedal: 'Gold Medal'
-  },
-  { 
-    name: 'Muimui', 
-    type: 'Dog', 
-    image: catImage, 
-    available: true, 
-    specialty: 'Truffle Hunter',
-    weight: '25 lbs',
-    greased: 'No',
-    highestMedal: 'Silver Medal'
-  },
-  { 
-    name: 'Snow', 
-    type: 'Golden Retriever', 
-    image: germanShepherdImage, 
-    available: true, 
-    specialty: 'Helper Dog',
-    weight: '65 lbs',
-    greased: 'No',
-    highestMedal: 'Bronze Medal'
-  },
-  { 
-    name: 'Bunny', 
-    type: 'Rabbit', 
-    image: rabbitImage, 
-    available: true, 
-    specialty: 'Bunny Hop',
-    weight: '5 lbs',
-    greased: 'No',
-    highestMedal: 'None'
-  },
-  { 
-    name: 'Shelly', 
-    type: 'Turtle', 
-    image: turtleImage, 
-    available: true, 
-    specialty: 'Slow and Steady',
-    weight: '10 lbs',
-    greased: 'No',
-    highestMedal: 'Participation Medal'
-  },
-  { 
-    name: 'Polly', 
-    type: 'Parrot', 
-    image: parrotImage, 
-    available: true, 
-    specialty: 'Talkative',
-    weight: '2 lbs',
-    greased: 'No',
-    highestMedal: 'Champion Talker'
-  },
-];
-
 const AllPets = () => {
+  const [pets, setPets] = useState([]);
   const navigate = useNavigate();
 
+  // Fetch pets from the backend on component mount
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const response = await getPets();
+        setPets(response.data);
+      } catch (error) {
+        console.error('Error fetching pets:', error);
+      }
+    };
+    fetchPets();
+  }, []);
+
   const handleAdoptClick = (pet) => {
-    if (pet.available) {
+    if (pet.adoption_status === 'Available') {
       navigate('/user-dashboard/adoption-process');
     } else {
       alert(`${pet.name} has already found their forever home. 🏡`);
@@ -94,27 +38,33 @@ const AllPets = () => {
         </h1>
         <h2>Catalogue</h2>
         <div className="pets-gallery">
-          {pets.map((pet, index) => (
-            <div key={index} className="pet-card">
-              <img src={pet.image} alt={pet.name} className="pet-image" />
-              <h2>{pet.name}</h2>
-              <div className="button-container">
-                {pet.available ? (
-                  <button className="adopt-button" onClick={() => handleAdoptClick(pet)}>
-                    Adopt Me
-                  </button>
-                ) : (
-                  <button className="adopt-button" disabled>
-                    Adopted
-                  </button>
-                )}
-              </div>
-              <div className="pet-details">
-                <p>Type: {pet.type}</p>
-                <p>Specialty: {pet.specialty}</p>
-                <p>Weight: {pet.weight}</p>
-                <p>Greased: {pet.greased}</p>
-                <p>Highest Medal: {pet.highestMedal}</p>
+          {pets.map((pet) => (
+            <div key={pet.id} className="pet-card">
+              <img 
+                src={pet.image ? `https://pets-adoption-flask-sqlite.onrender.com${pet.image}` : 'default-image.jpg'} 
+                alt={pet.name} 
+                className="pet-image" 
+              />
+              <div className="pet-info">
+                <h2>{pet.name}</h2>
+                <div className="pet-details-front">
+                  <p><strong>Type:</strong> {pet.species}</p>
+                  <p><strong>Breed:</strong> {pet.breed || 'N/A'}</p>
+                  <p><strong>Age:</strong> {pet.age || 'N/A'}</p>
+                  <p><strong>Description:</strong> {pet.description || 'N/A'}</p>
+                  <p><strong>Status:</strong> {pet.adoption_status}</p>
+                </div>
+                <div className="button-container">
+                  {pet.adoption_status === 'Available' ? (
+                    <button className="adopt-button" onClick={() => handleAdoptClick(pet)}>
+                      Adopt Me
+                    </button>
+                  ) : (
+                    <button className="adopt-button" disabled>
+                      Adopted
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           ))}
