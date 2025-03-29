@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { addPayment, getPayments } from "../api"; // Import API functions
+import React, { useState } from "react";
 import "./PaymentSettings.css";
 
 const PaymentSettings = () => {
@@ -8,21 +7,6 @@ const PaymentSettings = () => {
   const [paymentType, setPaymentType] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const userId = localStorage.getItem("user_id");
-
-  // Fetch payment methods on mount
-  useEffect(() => {
-    if (userId) {
-      getPayments(userId)
-        .then((response) => {
-          setPaymentMethods(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching payment methods:", error);
-          setError("Failed to load payment methods.");
-        });
-    }
-  }, [userId]);
 
   const validatePaymentMethod = () => {
     if (!paymentType) {
@@ -45,33 +29,27 @@ const PaymentSettings = () => {
     return true;
   };
 
-  const addPaymentMethod = async () => {
+  const addPaymentMethod = () => {
     setError("");
     setSuccess("");
 
     if (!validatePaymentMethod()) return;
 
-    try {
-      const response = await addPayment({
-        user_id: userId,
-        payment_type: paymentType,
-        method: newMethod,
-      });
-      setPaymentMethods([...paymentMethods, response.data]);
-      setNewMethod("");
-      setPaymentType("");
-      setSuccess("Payment method added successfully!");
-    } catch (error) {
-      console.error("Error adding payment method:", error);
-      setError("Failed to add payment method. Please try again.");
-    }
+    const newPayment = {
+      id: Date.now(), // Temporary ID for frontend-only; will be replaced by backend ID
+      type: paymentType,
+      method: newMethod,
+    };
+    setPaymentMethods([...paymentMethods, newPayment]);
+    setNewMethod("");
+    setPaymentType("");
+    setSuccess("Payment method added successfully!");
   };
 
   const deletePaymentMethod = (id) => {
-    // In a real app, you'd call a DELETE endpoint here
-    // For now, we'll filter it out locally
     setPaymentMethods(paymentMethods.filter((method) => method.id !== id));
     setSuccess("Payment method deleted successfully!");
+    setError("");
   };
 
   return (
@@ -86,8 +64,12 @@ const PaymentSettings = () => {
             paymentMethods.map((method) => (
               <div key={method.id} className="payment-method">
                 <div className="method-details">
-                  <span className="method-type">{method.payment_type}</span>
-                  <span className="method-info">{method.method}</span>
+                  <span className="method-type">{method.type}</span>
+                  <span className="method-info">
+                    {method.type === "MasterCard"
+                      ? `**** **** **** ${method.method.slice(-4)}`
+                      : method.method}
+                  </span>
                 </div>
                 <button
                   className="delete-button"
