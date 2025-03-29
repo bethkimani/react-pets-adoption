@@ -1,65 +1,93 @@
 import React from 'react';
-import './AdoptionProcess.css'; // Import the CSS for styling
+import './AdoptionProcess.css';
+
+// Placeholder images (replace with actual image URLs or local paths)
+const petImage = 'https://via.placeholder.com/300x400?text=Pet+Image';
+const adopterImage = 'https://via.placeholder.com/300x400?text=Adopter+Image';
 
 const AdoptionProcess = () => {
-    return (
-        <div className="adoption-process-container"> {/* Changed class name */}
-            {/* Header with background image */}
-            <div className="header">
-                <h2>Adoption Process & Fees</h2>
-            </div>
-            {/* Info Section */}
-            <div className="info-section">
-                <p>If you wish to adopt one of our animals, we encourage you to browse through our list.</p>
-                <p>Feel free to contact us if you have any questions or comments.</p>
-                <div className="button-container">
-                    <button className="adoptable-animals-btn">Adoptable Animals</button>
-                </div>
-                <p>Please consider that most dogs and cats live to be 10 years or more. Adopting is a serious, life-changing decision.</p>
-            </div>
-            {/* Cat Adoption Section */}
-            <div className="cat-adoption">
-                <h3 className="cat-adoption-title">For Cat Adopters</h3>
-                <p>No need to fill out an application. Come to our shelter to meet your match or visit our online shop!</p>
-                <button className="our-shelters-btn">Our Shelters</button>
-            </div>
-            {/* Dog Adoption Section */}
-            <div className="adoption-process">
-                <div className="adoption-pair">
-                    <h3 className="dog-adoption-title">How do <span className="black-text">dog</span> adoptions work?</h3>
-                    <div className="dog-adoption-steps">
-                        <ul className="heart-list">
-                            <li>Fill out an adoption application.</li>
-                            <li>Our adoption coordinator will contact your references and call you if some additional information is needed.</li>
-                            <li>If you are the best fit for the animal in question, you will be contacted and a meet and greet will be scheduled at our shelter.</li>
-                            <li>If the pet you chose is the right match for you, the adoption will be completed by signing an adoption contract and paying the adoption fee.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="adoption-pair">
-                    <h4 className="fees-title">How much is the <span className="black-text">adoption</span> fee?</h4>
-                    <div className="adoption-fee-details">
-                        <ul>
-                            <li>Dogs: <span>$400</span></li>
-                            <li>Cats: <span>$160</span></li>
-                            <li>Small Animals: <span>$25</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="adoption-pair">
-                    <h4>What does the adoption fee include?</h4>
-                    <ul className="adoption-fee-details">
-                        <li>Age Appropriate Vaccinations (DA2PP and Bordetella for dogs, FVRCP for cats, and Rabies for all dogs and cats over 16 weeks of age)</li>
-                        <li>Microchip identification</li>
-                        <li>Spay/Neuter</li>
-                        <li>Flea treatment</li>
-                        <li>Deworming</li>
-                        <li>Please note some animals may receive more tests or treatments (this information will be outlined in the medical record you receive for your adopted pet)</li>
-                    </ul>
-                </div>
-            </div>
+  return (
+    <div className="adoption-process-container">
+      {/* Header Section */}
+      <div className="header">
+        <div className="shelter-info">
+          <div className="shelter-logo">W</div>
+          <h2>Shelter World</h2>
         </div>
-    );
+        <h1>Application details</h1>
+        <button className="payment-btn">PAYMENT</button>
+      </div>
+
+      {/* Progress Timeline */}
+      <div className="progress-timeline">
+        <div className="progress-step completed">
+          <div className="step-circle">✔</div>
+          <p>Application</p>
+          <span>18 OCT</span>
+        </div>
+        <div className="progress-line completed"></div>
+        <div className="progress-step completed">
+          <div className="step-circle">✔</div>
+          <p>Start review</p>
+          <span>18 OCT</span>
+        </div>
+        <div className="progress-line completed"></div>
+        <div className="progress-step completed">
+          <div className="step-circle">✔</div>
+          <p>Approve</p>
+          <span>18 OCT</span>
+        </div>
+        <div className="progress-line"></div>
+        <div className="progress-step active">
+          <div className="step-circle">⬤</div>
+          <p>Payment</p>
+        </div>
+        <div className="progress-line"></div>
+        <div className="progress-step">
+          <div className="step-circle">⬤</div>
+          <p>Schedule pick-up</p>
+        </div>
+      </div>
+
+      {/* Main Content: Pet and Adopter Info */}
+      <div className="main-content">
+        {/* Images Section */}
+        <div className="images-section">
+          <div className="image-container">
+            <img src={petImage} alt="Pet" />
+            <p className="name">Pelico</p>
+          </div>
+          <div className="heart-icon">❤️</div>
+          <div className="image-container">
+            <img src={adopterImage} alt="Adopter" />
+            <p className="name">Laura</p>
+          </div>
+        </div>
+
+        {/* Pet Info Section */}
+        <div className="pet-info-section">
+          <h3>Pet info</h3>
+          <ul>
+            <li><span className="icon">🚻</span> Gender: Male</li>
+            <li><span className="icon">🐾</span> Breed: Golden Retriever</li>
+            <li><span className="icon">🎂</span> Age: Adult</li>
+            <li><span className="icon">📏</span> Size: Small</li>
+            <li><span className="icon">🐶</span> Type: Dog</li>
+            <li><span className="icon">⏳</span> Time in shelter: 2 months</li>
+            <li><span className="icon">💰</span> Adoption Fee: $500.00</li>
+            <li><span className="icon">📋</span> Fee model: Adopter pays</li>
+          </ul>
+          <h3>Adopter info</h3>
+          <p>Fee model: Adopter pays</p>
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="action-buttons">
+        <button className="cancel-btn">Cancel adoption</button>
+      </div>
+    </div>
+  );
 };
 
 export default AdoptionProcess;
