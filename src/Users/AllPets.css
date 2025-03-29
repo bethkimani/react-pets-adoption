@@ -28,7 +28,7 @@
   .pets-gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 items per row */
-    gap: 20px; /* Gap between items */
+    gap: 20px;
   }
   
   /* Pet card styling */
@@ -36,9 +36,8 @@
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     transition: transform 0.3s ease;
-    width: 100%; /* Full width to fill its grid column */
-    height: 320px; /* Increased height for better content fitting */
   }
   
   .pet-card:hover {
@@ -47,14 +46,14 @@
   
   .pet-image {
     width: 100%;
-    height: 200px; /* Maintain consistent image height */
-    object-fit: cover; /* Cover the image aspect well */
+    height: 200px;
+    object-fit: cover;
   }
   
   .pet-info h2 {
     margin: 0 0 10px;
     color: #333;
-    font-size: 1.5rem; /* Size of pet name */
+    font-size: 1.5rem;
   }
   
   .pet-details {
@@ -63,29 +62,29 @@
   
   .pet-details p {
     margin: 5px 0;
-    color: #555; /* Darker color for detail text */
-    font-size: 0.9rem; /* Font size for details */
+    color: #555;
+    font-size: 0.9rem;
   }
   
   .button-container {
-    text-align: center; /* Center the button */
+    text-align: center;
   }
   
   .adopt-button {
-    background-color: #ff6b6b; /* Adopt button color */
+    background-color: #ff6b6b;
     color: white;
     border: none;
-    padding: 10px 20px; /* Padding for a better button size */
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Transition effect */
+    transition: background-color 0.3s ease;
   }
   
   .adopt-button:hover:not(:disabled) {
-    background-color: #ff8787; /* Color change on hover */
+    background-color: #ff8787;
   }
   
   .adopt-button:disabled {
-    background-color: #cccccc; /* Color when disabled */
-    cursor: not-allowed; /* Not allowed cursor */
+    background-color: #cccccc;
+    cursor: not-allowed;
   }
