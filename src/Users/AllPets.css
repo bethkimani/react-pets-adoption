@@ -24,13 +24,14 @@
     margin-bottom: 20px;
   }
   
-  /* New class for the pets gallery */
+  /* CSS for the pets gallery */
   .pets-gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 items per row */
     gap: 20px;
   }
   
+  /* Pet card styling */
   .pet-card {
     background: #fff;
     border-radius: 10px;
