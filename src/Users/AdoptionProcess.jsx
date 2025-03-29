@@ -69,10 +69,6 @@ const AdoptionProcess = () => {
     setSelectedPet(null);
   };
 
-  const handlePetDetails = (pet) => {
-    alert(`Details for ${pet.name}:\nType: ${pet.type}\nStatus: ${pet.status}`);
-  };
-
   return (
     <div className="adoption-process-container">
       {/* Header Section */}
@@ -150,19 +146,13 @@ const AdoptionProcess = () => {
                 </td>
                 <td>
                   <button
-                    className="action-btn details-btn"
-                    onClick={() => handlePetDetails(pet)}
-                  >
-                    Details
-                  </button>
-                  <button
                     className="action-btn edit-btn"
                     onClick={() => {
                       setSelectedPet(pet);
                       setShowEditModal(true);
                     }}
                   >
-                    Edit
+                    <i className="fas fa-edit"></i>
                   </button>
                   <button
                     className="action-btn delete-btn"
@@ -171,7 +161,7 @@ const AdoptionProcess = () => {
                       setShowDeleteModal(true);
                     }}
                   >
-                    Delete
+                    <i className="fas fa-trash"></i>
                   </button>
                 </td>
               </tr>

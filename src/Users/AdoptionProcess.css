@@ -107,88 +107,6 @@
     background-color: #28a745;
 }
 
-/* Main Content */
-.main-content {
-    display: flex;
-    gap: 20px;
-}
-
-/* Images Section */
-.images-section {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex: 2;
-}
-
-.image-container {
-    text-align: center;
-}
-
-.image-container img {
-    width: 250px;
-    height: 350px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.image-container .name {
-    margin-top: 10px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.heart-icon {
-    font-size: 24px;
-    color: #ff4d4d;
-}
-
-/* Info Section */
-.info-section {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-}
-
-/* Pet Info Section */
-.pet-info-section, .adopter-info-section {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 10px;
-    flex: 1;
-}
-
-.pet-info-section h3, .adopter-info-section h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #ff4d4d;
-}
-
-.pet-info-section ul, .adopter-info-section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.pet-info-section li, .adopter-info-section li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-    font-size: 14px;
-}
-
-.pet-info-section .icon, .adopter-info-section .icon {
-    margin-right: 8px;
-    font-size: 16px;
-}
-
-.pet-info-section input, .adopter-info-section input {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 14px;
-}
-
 /* Pets Table Section */
 .pets-table-section {
     margin-top: 40px;
@@ -259,39 +177,31 @@
     color: white;
 }
 
+/* Action Buttons */
 .action-btn {
-    padding: 5px 10px;
+    padding: 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-right: 5px;
 }
 
-.details-btn {
-    background-color: #007bff;
-    color: white;
-}
-
-.details-btn:hover {
-    background-color: #0056b3;
-}
-
 .edit-btn {
-    background-color: #28a745;
-    color: white;
-}
-
-.edit-btn:hover {
-    background-color: #218838;
+    background-color: #28a745; /* Green for Edit */
 }
 
 .delete-btn {
-    background-color: #ff4d4d;
-    color: white;
+    background-color: #ff4d4d; /* Red for Delete */
 }
 
-.delete-btn:hover {
-    background-color: #e04343;
+/* Icons */
+.action-btn i {
+    font-size: 16px; /* Adjust size as necessary */
+}
+
+/* Hover Effects */
+.action-btn:hover {
+    opacity: 0.8; /* Slightly transparent on hover */
 }
 
 /* Modal Styles */
