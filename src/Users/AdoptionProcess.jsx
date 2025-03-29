@@ -35,22 +35,6 @@ const AdoptionProcess = () => {
   const [selectedPet, setSelectedPet] = useState(null);
   const [newPet, setNewPet] = useState({ name: '', type: '', status: 'Available' });
 
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
-
-  const handleSave = () => {
-    setIsEditing(false);
-  };
-
-  const handleInputChange = (e, field, isAdopter = false) => {
-    if (isAdopter) {
-      setAdopterInfo({ ...adopterInfo, [field]: e.target.value });
-    } else {
-      setPetInfo({ ...petInfo, [field]: e.target.value });
-    }
-  };
-
   const handleAddPet = () => {
     setPets([...pets, { id: pets.length + 1, ...newPet }]);
     setNewPet({ name: '', type: '', status: 'Available' });
@@ -145,24 +129,26 @@ const AdoptionProcess = () => {
                   </span>
                 </td>
                 <td>
-                  <button
-                    className="action-btn edit-btn"
-                    onClick={() => {
-                      setSelectedPet(pet);
-                      setShowEditModal(true);
-                    }}
-                  >
-                    <i className="fas fa-edit"></i>
-                  </button>
-                  <button
-                    className="action-btn delete-btn"
-                    onClick={() => {
-                      setSelectedPet(pet);
-                      setShowDeleteModal(true);
-                    }}
-                  >
-                    <i className="fas fa-trash"></i>
-                  </button>
+                  <div className="action-buttons">
+                    <button
+                      className="action-btn edit-btn"
+                      onClick={() => {
+                        setSelectedPet(pet);
+                        setShowEditModal(true);
+                      }}
+                    >
+                      <i className="fas fa-edit"></i>
+                    </button>
+                    <button
+                      className="action-btn delete-btn"
+                      onClick={() => {
+                        setSelectedPet(pet);
+                        setShowDeleteModal(true);
+                      }}
+                    >
+                      <i className="fas fa-trash"></i>
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -269,12 +255,6 @@ const AdoptionProcess = () => {
           </div>
         </div>
       )}
-
-      {/* Cancel Adoption Button */}
-      <div className="action-buttons">
-        {isEditing && <button onClick={handleSave} className="save-btn">Save</button>}
-        <button className="cancel-btn">Cancel adoption</button>
-      </div>
     </div>
   );
 };
