@@ -48,28 +48,20 @@
     object-fit: cover;
   }
   
-  .pet-info {
-    padding: 15px;
-  }
-  
   .pet-info h2 {
     margin: 0 0 10px;
     color: #333;
     font-size: 1.5rem;
   }
   
-  .pet-details-front {
+  .pet-details {
     margin-bottom: 15px;
   }
   
-  .pet-details-front p {
+  .pet-details p {
     margin: 5px 0;
     color: #555;
     font-size: 0.9rem;
-  }
-  
-  .pet-details-front p strong {
-    color: #333;
   }
   
   .button-container {
