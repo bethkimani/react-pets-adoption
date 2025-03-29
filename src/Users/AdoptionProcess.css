@@ -126,8 +126,8 @@
   }
   
   .image-container img {
-    width: 300px;
-    height: 400px;
+    width: 250px;
+    height: 350px;
     object-fit: cover;
     border-radius: 10px;
   }
@@ -143,54 +143,116 @@
     color: #ff4d4d;
   }
   
-  /* Pet Info Section */
-  .pet-info-section {
+  /* Info Section */
+  .info-section {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Pet Info Section */
+  .pet-info-section, .adopter-info-section {
     background-color: #f9f9f9;
-    padding: 20px;
+    padding: 15px;
     border-radius: 10px;
   }
   
-  .pet-info-section h3 {
+  .pet-info-section h3, .adopter-info-section h3 {
     font-size: 18px;
     margin-bottom: 10px;
     color: #ff4d4d;
   }
   
-  .pet-info-section ul {
+  .pet-info-section ul, .adopter-info-section ul {
     list-style: none;
     padding: 0;
   }
   
-  .pet-info-section li {
+  .pet-info-section li, .adopter-info-section li {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-size: 14px;
   }
   
-  .pet-info-section .icon {
-    margin-right: 10px;
+  .pet-info-section .icon, .adopter-info-section .icon {
+    margin-right: 8px;
     font-size: 16px;
   }
   
-  .pet-info-section p {
+  .pet-info-section input, .adopter-info-section input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
     font-size: 14px;
   }
   
   /* Action Buttons */
   .action-buttons {
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
     margin-top: 20px;
+    position: relative;
+  }
+  
+  .actions-dropdown {
+    position: relative;
+  }
+  
+  .actions-dropdown button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  .dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .save-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .save-btn:hover {
+    background-color: #218838;
   }
   
   .cancel-btn {
     background-color: #ff4d4d;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border-radius: 20px;
-    font-weight: bold;
     cursor: pointer;
   }
   
