@@ -147,7 +147,7 @@
   .info-section {
     flex: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Changed to row to place sections side by side */
     gap: 20px;
   }
   
@@ -156,6 +156,7 @@
     background-color: #f9f9f9;
     padding: 15px;
     border-radius: 10px;
+    flex: 1; /* Each section takes equal space */
   }
   
   .pet-info-section h3, .adopter-info-section h3 {
@@ -202,7 +203,8 @@
   }
   
   .actions-dropdown button {
-    background-color: #f0f0f0;
+    background-color: #e0e0e0; /* Light gray for better visibility */
+    color: #333; /* Darker text for contrast */
     border: 1px solid #ccc;
     padding: 8px 16px;
     border-radius: 20px;
@@ -213,8 +215,8 @@
     position: absolute;
     top: 40px;
     right: 0;
-    background-color: white;
-    border: 1px solid #ccc;
+    background-color: #d0d0d0; /* Slightly darker gray for dropdown */
+    border: 1px solid #bbb;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 10;
@@ -226,12 +228,13 @@
     padding: 10px;
     border: none;
     background: none;
+    color: #333; /* Darker text for contrast */
     text-align: left;
     cursor: pointer;
   }
   
   .dropdown-menu button:hover {
-    background-color: #f0f0f0;
+    background-color: #c0c0c0; /* Even darker gray on hover */
   }
   
   .save-btn {
