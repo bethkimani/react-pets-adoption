@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom'; // Add useNavigate
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import AccountManagement from './AccountManagement';
@@ -9,19 +9,19 @@ import Inbox from './Inbox';
 import PaymentSettings from './PaymentSettings';
 import PendingReviews from './PendingReviews';
 import SpecialAdoptionForm from './SpecialAdoptionForm';
-import AllPets from './AllPets'; // Import the new AllPets component
 import LogoutModal from './LogoutModal';
 import './UserDashboard.css';
 
 const UserDashboard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Add useNavigate hook
 
     const handleLogout = () => {
+        // Clear authentication state
         localStorage.removeItem('isAuthenticated');
         localStorage.removeItem('role');
         setIsModalOpen(false);
-        navigate('/auth');
+        navigate('/auth'); // Navigate to the login page
     };
 
     return (
@@ -43,7 +43,6 @@ const UserDashboard = () => {
                         <Route path="payment-settings" element={<PaymentSettings />} />
                         <Route path="pending-reviews" element={<PendingReviews />} />
                         <Route path="special-adoption-form" element={<SpecialAdoptionForm />} />
-                        <Route path="all-pets" element={<AllPets />} /> {/* Add route for AllPets */}
                     </Routes>
                 </div>
             </div>

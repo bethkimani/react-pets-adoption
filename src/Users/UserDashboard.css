@@ -1,63 +1,25 @@
+
+/* UserDashboard.css */
+
 .user-dashboard {
     display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
-  .dashboard-content {
+    height: 100vh; /* Full height for the dashboard */
+    background-color: #f4f4f4; /* Light background color */
+}
+
+.dashboard-content {
     display: flex;
-    flex: 1;
-  }
-  
-  .user-sidebar {
-    width: 250px;
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-right: 1px solid #ddd;
-  }
-  
-  .user-sidebar h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-  }
-  
-  .user-sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .user-sidebar li {
-    margin-bottom: 10px;
-  }
-  
-  .user-sidebar a, .user-sidebar button {
-    text-decoration: none;
-    color: #333;
-    font-size: 1.1em;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .user-sidebar a:hover, .user-sidebar button:hover {
-    background-color: #ddd;
-  }
-  
-  .user-sidebar i {
-    margin-right: 10px;
-  }
-  
-  .logout-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-  }
-  
-  .main-content {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-  }
+    flex-grow: 1; /* Allow the content to take the remaining space */
+}
+
+.user-main-content {
+    flex-grow: 1; /* Allow this area to take up remaining space */
+    padding: 20px; /* Padding around the content */
+    background-color: #ffffff; /* White background for main content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
+.user-main-content h2 {
+    margin-top: 0; /* Remove top margin for headings */
+}
