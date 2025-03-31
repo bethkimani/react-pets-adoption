@@ -2,7 +2,8 @@ import axios from 'axios';
 
 // Create an Axios instance with the base URL and credentials
 const API = axios.create({
-    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api',
+    // Use Vite's environment variable syntax; fallback to local URL
+    baseURL: import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000/api',
     withCredentials: true,
 });
 
@@ -51,14 +52,17 @@ export const addPet = (formData) =>
 
 export const getPets = () => API.get('/pets/');
 
-// New functions for adoption management
+// API functions for adoption management
 export const submitAdoptionForm = (formData) => API.post('/adoptions/', formData);
 export const getAdoptions = () => API.get('/adoptions/');
 
-// New function for adding payment method
+// API function for adding payment method
 export const addPaymentMethod = (data) => API.post('/payments/', data);
 
-// Add this function to your existing api.js
+// API function for scheduling pickup
 export const schedulePickup = (data) => API.post('/schedule-pickup/', data);
+
+// New API function for fetching chat history
+export const getChatMessages = () => API.get('/messages/');
 
 export default API;
