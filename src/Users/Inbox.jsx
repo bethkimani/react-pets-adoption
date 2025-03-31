@@ -1,43 +1,33 @@
 // Inbox.jsx
 import React, { useState } from 'react';
 import './Inbox.css';
+import { sendMessage } from '../api'; // Import the API function
 
 const Inbox = () => {
-  const [messages, setMessages] = useState([]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [status, setStatus] = useState(''); // For success/error messages
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newMessage = {
-      id: messages.length + 1,
-      name,
-      email,
-      message,
-    };
-    setMessages([...messages, newMessage]);
-    setName('');
-    setEmail('');
-    setMessage('');
+    try {
+      const messageData = { name, email, message };
+      await sendMessage(messageData);
+      setStatus('Message sent successfully!');
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch (error) {
+      setStatus(`Error: ${error.error || 'Failed to send message'}`);
+    }
   };
 
   return (
     <div className="inbox-container">
       <h1>Inbox</h1>
-      <div className="messages-list">
-        {messages.length === 0 ? (
-          <p>No messages yet.</p>
-        ) : (
-          messages.map((msg) => (
-            <div key={msg.id} className="message">
-              <h4>{msg.name} ({msg.email})</h4>
-              <p>{msg.message}</p>
-            </div>
-          ))
-        )}
-      </div>
       <h2>Send a Message</h2>
+      {status && <p className={status.includes('Error') ? 'error' : 'success'}>{status}</p>}
       <form onSubmit={handleSubmit}>
         <label htmlFor="user-name">Your Name:</label>
         <input

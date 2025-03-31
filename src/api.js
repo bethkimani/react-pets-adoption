@@ -1,3 +1,4 @@
+// api.js
 import axios from 'axios';
 
 // Create an Axios instance with the base URL and credentials
@@ -47,6 +48,12 @@ export const updatePet = (id, formData) =>
     });
 
 export const deletePet = (id) => API.delete(`/pets/${id}`);
+
+// API functions for messages (new additions)
+export const sendMessage = (messageData) =>
+    API.post('/messages/send', messageData);
+
+export const getMessages = () => API.get('/messages/');
 
 // Other API functions (unchanged)
 export const login = (data) => API.post('/auth/login', data);
