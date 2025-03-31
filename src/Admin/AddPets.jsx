@@ -23,16 +23,16 @@ const AddPets = () => {
         description: "",
         image: null,
     });
-    const [successMessage, setSuccessMessage] = useState(null); // New state for success feedback
-    const [errorMessage, setErrorMessage] = useState(null); // New state for error feedback
+    const [successMessage, setSuccessMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         const role = localStorage.getItem('role');
-        if (!token || (role !== 'Admin' && role !== 'SuperAdmin')) {
-            alert('You must be logged in as an Admin or SuperAdmin to add a pet.');
+        if (!token || role !== 'Admin') {
+            alert('You must be logged in as an Admin to add a pet.');
             navigate('/auth');
         }
     }, [navigate]);
@@ -69,7 +69,7 @@ const AddPets = () => {
         formData.append("species", values.species);
         formData.append("breed", values.breed || "");
         formData.append("age", values.age ? parseInt(values.age) : "");
-        formData.append("adoption_status", values.adoptionStatus); // Matches backend
+        formData.append("adoption_status", values.adoptionStatus);
         formData.append("description", values.description || "");
         if (values.image) {
             formData.append("image", values.image);
@@ -90,12 +90,13 @@ const AddPets = () => {
                 description: "",
                 image: null,
             });
-            setStep(1); // Return to Step 1 without navigating away
+            setStep(1);
         } catch (error) {
             const errorMessage = error.response?.data?.error || error.message || "Unknown error";
             console.error("Detailed error adding pet:", error);
             setErrorMessage(`Failed to add pet: ${errorMessage}`);
             setSuccessMessage(null);
+            // Stay on the current step (Confirmation) to allow corrections
         }
     };
 
