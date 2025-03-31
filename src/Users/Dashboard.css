@@ -1,16 +1,6 @@
 /* Dashboard.css */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
-body {
-  background-color: #1a2a44; /* Dark blue background */
-  font-family: 'Roboto', 'Arial', sans-serif;
-  color: #ffffff;
-}
-
+/* Scope all styles to .dashboard-container to avoid affecting other components */
 .dashboard-container {
   display: flex;
   flex-direction: column;
@@ -19,24 +9,25 @@ body {
   background-color: #1a2a44; /* Dark blue background */
   color: #ffffff;
   min-height: 100vh;
+  font-family: 'Roboto', 'Arial', sans-serif;
 }
 
-.dashboard-header {
+.dashboard-container .dashboard-header {
   text-align: center;
   margin-bottom: 40px;
 }
 
-.dashboard-header h1 {
+.dashboard-container .dashboard-header h1 {
   font-size: 2.5rem;
   margin-bottom: 10px;
 }
 
-.dashboard-header p {
+.dashboard-container .dashboard-header p {
   font-size: 1.2rem;
   color: #a0a0a0;
 }
 
-.dashboard-content {
+.dashboard-container .dashboard-content {
   position: relative;
   width: 600px;
   height: 600px;
@@ -46,7 +37,7 @@ body {
 }
 
 /* Central Pet Icon */
-.pet-icon {
+.dashboard-container .pet-icon {
   position: absolute;
   font-size: 3rem;
   background-color: #ffffff;
@@ -60,7 +51,7 @@ body {
 }
 
 /* Circles */
-.circle {
+.dashboard-container .circle {
   position: absolute;
   width: 400px;
   height: 400px;
@@ -73,15 +64,15 @@ body {
   z-index: 1;
 }
 
-.adopter-circle {
+.dashboard-container .adopter-circle {
   left: 0;
 }
 
-.shelter-circle {
+.dashboard-container .shelter-circle {
   right: 0;
 }
 
-.circle-label {
+.dashboard-container .circle-label {
   position: absolute;
   top: 20px;
   font-size: 1.5rem;
@@ -91,14 +82,14 @@ body {
 }
 
 /* Features */
-.feature {
+.dashboard-container .feature {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.feature span {
+.dashboard-container .feature span {
   font-size: 1rem;
   color: #ffffff;
   text-align: center;
@@ -112,7 +103,7 @@ body {
   margin-right: 10px;
 }
 
-.feature::before {
+.dashboard-container .feature::before {
   content: '';
   position: absolute;
   width: 100px;
@@ -122,112 +113,112 @@ body {
 }
 
 /* Adopter Features */
-.intelligent-pet-search {
+.dashboard-container .intelligent-pet-search {
   top: -50px;
   left: 50px;
 }
 
-.intelligent-pet-search::before {
+.dashboard-container .intelligent-pet-search::before {
   transform: rotate(45deg);
   transform-origin: 0 0;
 }
 
-.online-application {
+.dashboard-container .online-application {
   top: 50%;
   left: -50px;
   transform: translateY(-50%);
 }
 
-.online-application::before {
+.dashboard-container .online-application::before {
   transform: rotate(90deg);
   transform-origin: 0 0;
 }
 
-.automatic-status-updates {
+.dashboard-container .automatic-status-updates {
   bottom: -50px;
   left: 50px;
 }
 
-.automatic-status-updates::before {
+.dashboard-container .automatic-status-updates::before {
   transform: rotate(135deg);
   transform-origin: 0 0;
 }
 
 /* Shelter Features */
-.donation-campaigns {
+.dashboard-container .donation-campaigns {
   top: -50px;
   right: 50px;
 }
 
-.donation-campaigns::before {
+.dashboard-container .donation-campaigns::before {
   transform: rotate(-45deg);
   transform-origin: 100% 0;
 }
 
-.automated-emails {
+.dashboard-container .automated-emails {
   top: 20%;
   right: -50px;
   transform: translateY(-50%);
 }
 
-.automated-emails::before {
+.dashboard-container .automated-emails::before {
   transform: rotate(-90deg);
   transform-origin: 100% 0;
 }
 
-.approval-workflow {
+.dashboard-container .approval-workflow {
   top: 50%;
   right: -50px;
   transform: translateY(-50%);
 }
 
-.approval-workflow::before {
+.dashboard-container .approval-workflow::before {
   transform: rotate(-90deg);
   transform-origin: 100% 0;
 }
 
-.visualization-dashboard {
+.dashboard-container .visualization-dashboard {
   bottom: -50px;
   right: 50px;
 }
 
-.visualization-dashboard::before {
+.dashboard-container .visualization-dashboard::before {
   transform: rotate(-135deg);
   transform-origin: 100% 0;
 }
 
 /* In-person & Online Adoptions Label */
-.adoptions-label {
+.dashboard-container .adoptions-label {
   position: absolute;
   bottom: -20px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.2rem;
-  color: #ffffff;
+  color: #ffffff; /* Changed to white for better visibility */
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .dashboard-content {
+  .dashboard-container .dashboard-content {
     width: 100%;
     height: auto;
     padding: 20px;
   }
 
-  .circle {
+  .dashboard-container .circle {
     width: 300px;
     height: 300px;
   }
 
-  .feature span {
+  .dashboard-container .feature span {
     font-size: 0.9rem;
   }
 
-  .dashboard-header h1 {
+  .dashboard-container .dashboard-header h1 {
     font-size: 2rem;
   }
 
-  .dashboard-header p {
+  .dashboard-container .dashboard-header p {
     font-size: 1rem;
   }
 }
