@@ -2,7 +2,6 @@ import axios from 'axios';
 
 // Create an Axios instance with the base URL and credentials
 const API = axios.create({
-    // Use Vite's environment variable syntax; fallback to local URL
     baseURL: import.meta.env.VITE_API_URL || 'https://pets-adoption-flask-sqlite.onrender.com/api',
     withCredentials: true,
 });
@@ -26,7 +25,7 @@ API.interceptors.response.use(
             localStorage.removeItem('role');
             localStorage.removeItem('user_id');
             localStorage.removeItem('isAuthenticated');
-            window.location.href = '/auth'; // Redirect to the login page
+            window.location.href = '/auth';
             return Promise.reject(error);
         }
         console.error('API Error:', error.response?.data || error.message);
@@ -45,12 +44,15 @@ export const deleteUser = (id) => API.delete(`/users/${id}`);
 // API functions for pet management
 export const addPet = (formData) =>
     API.post('/pets/', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data', // Set content type for form data
-        },
+        headers: { 'Content-Type': 'multipart/form-data' },
     });
 
 export const getPets = () => API.get('/pets/');
+export const updatePet = (id, formData) =>
+    API.put(`/pets/${id}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+    });
+export const deletePet = (id) => API.delete(`/pets/${id}`);
 
 // API functions for adoption management
 export const submitAdoptionForm = (formData) => API.post('/adoptions/', formData);
