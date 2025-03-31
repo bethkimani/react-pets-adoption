@@ -1,4 +1,3 @@
-// AdoptionProcess.jsx
 import React, { useState } from 'react';
 import Procedure from './Procedure';
 import AdoptionForm from './AdoptionForm';
@@ -70,8 +69,8 @@ const AdoptionProcess = () => {
           <div className="shelter-logo">W</div>
           <h2>Shelter World</h2>
         </div>
-        
-        <button className="payment-btn">Application Details</button>
+        {/* Removed <h1>Application Details</h1> */}
+        <button className="payment-btn">Application Details</button> {/* Changed button label to "Application Details" */}
       </div>
 
       <div className="progress-timeline">
