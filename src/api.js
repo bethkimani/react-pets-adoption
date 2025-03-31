@@ -49,13 +49,13 @@ export const updatePet = (id, formData) =>
 
 export const deletePet = (id) => API.delete(`/pets/${id}`);
 
-// API functions for messages (new additions)
+// API functions for messages
 export const sendMessage = (messageData) =>
     API.post('/messages/send', messageData);
 
 export const getMessages = () => API.get('/messages/');
 
-// Other API functions (unchanged)
+// Other API functions
 export const login = (data) => API.post('/auth/login', data);
 export const getUsers = () => API.get('/users');
 export const getRoles = () => API.get('/roles');

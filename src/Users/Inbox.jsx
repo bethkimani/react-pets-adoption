@@ -1,13 +1,13 @@
 // Inbox.jsx
 import React, { useState } from 'react';
 import './Inbox.css';
-import { sendMessage } from '../api'; // Import the API function
+import { sendMessage } from '../api';
 
 const Inbox = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [status, setStatus] = useState(''); // For success/error messages
+  const [status, setStatus] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ const Inbox = () => {
       setEmail('');
       setMessage('');
     } catch (error) {
-      setStatus(`Error: ${error.error || 'Failed to send message'}`);
+      setStatus(`Error: ${error.response?.data?.error || 'Failed to send message'}`);
     }
   };
 

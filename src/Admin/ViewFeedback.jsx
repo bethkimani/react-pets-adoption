@@ -1,7 +1,7 @@
 // ViewFeedback.jsx
 import React, { useEffect, useState } from 'react';
 import './ViewFeedback.css';
-import { getMessages } from '../api'; // Import the API function
+import { getMessages } from '../api';
 
 const ViewFeedback = () => {
   const [messages, setMessages] = useState([]);
@@ -10,10 +10,10 @@ const ViewFeedback = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const data = await getMessages();
-        setMessages(data);
+        const response = await getMessages();
+        setMessages(response.data || response);
       } catch (err) {
-        setError(err.error || 'Failed to load messages');
+        setError(err.response?.data?.error || 'Failed to load messages');
       }
     };
     fetchMessages();
