@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { addPaymentMethod } from '../api'; // Import the API function
 import "./PaymentSettings.css";
 
-const PaymentSettings = () => {
+const PaymentSettings = ({ onSubmit }) => {
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [newMethod, setNewMethod] = useState("");
   const [paymentType, setPaymentType] = useState("");
@@ -17,7 +18,6 @@ const PaymentSettings = () => {
       setError("Please enter payment details.");
       return false;
     }
-    // Basic validation for payment details
     if (paymentType === "PayPal" && !newMethod.includes("@")) {
       setError("Please enter a valid PayPal email.");
       return false;
@@ -29,21 +29,33 @@ const PaymentSettings = () => {
     return true;
   };
 
-  const addPaymentMethod = () => {
+  const addNewPaymentMethod = async () => {
     setError("");
     setSuccess("");
 
     if (!validatePaymentMethod()) return;
 
     const newPayment = {
-      id: Date.now(), // Temporary ID for frontend-only; will be replaced by backend ID
-      type: paymentType,
+      user_id: localStorage.getItem('user_id'), // Ensure you have the user ID
+      payment_type: paymentType,
       method: newMethod,
     };
-    setPaymentMethods([...paymentMethods, newPayment]);
-    setNewMethod("");
-    setPaymentType("");
-    setSuccess("Payment method added successfully!");
+
+    try {
+      await addPaymentMethod(newPayment); // Call the API to add the payment
+      setPaymentMethods([...paymentMethods, newPayment]);
+      setNewMethod("");
+      setPaymentType("");
+      setSuccess("Payment method added successfully!");
+    } catch (error) {
+      setError("Failed to add payment method.");
+      console.error(error);
+    }
+
+    // Call onSubmit to move to the next step
+    if (onSubmit) {
+      onSubmit();
+    }
   };
 
   const deletePaymentMethod = (id) => {
@@ -64,9 +76,9 @@ const PaymentSettings = () => {
             paymentMethods.map((method) => (
               <div key={method.id} className="payment-method">
                 <div className="method-details">
-                  <span className="method-type">{method.type}</span>
+                  <span className="method-type">{method.payment_type}</span>
                   <span className="method-info">
-                    {method.type === "MasterCard"
+                    {method.payment_type === "MasterCard"
                       ? `**** **** **** ${method.method.slice(-4)}`
                       : method.method}
                   </span>
@@ -111,7 +123,7 @@ const PaymentSettings = () => {
               }
             />
           </div>
-          <button className="add-button" onClick={addPaymentMethod}>
+          <button className="add-button" onClick={addNewPaymentMethod}>
             Add Payment Method
           </button>
         </div>

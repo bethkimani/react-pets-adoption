@@ -1,0 +1,114 @@
+/* Procedure.css */
+.procedure-container {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/images/guineapig.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .procedure-content {
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .procedure-content h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: white;
+  }
+  
+  .procedure-section {
+    margin-bottom: 30px;
+    text-align: left;
+  }
+  
+  .section-title {
+    font-size: 24px;
+    color: #f5a623; /* Orange color for section titles */
+    margin-bottom: 10px;
+    text-decoration: underline;
+  }
+  
+  .procedure-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .procedure-section li {
+    font-size: 16px;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
+  }
+  
+  .procedure-section li:before {
+    content: '♥'; /* Heart icon for "How do dog adoptions work?" */
+    position: absolute;
+    left: 0;
+    color: #f5a623;
+  }
+  
+  .procedure-section li:nth-child(n+5):before {
+    content: '•'; /* Bullet icon for other sections */
+  }
+  
+  .cat-adopters {
+    background: #28a745; /* Green background for "For Cat Adopters" section */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .cat-adopters p {
+    margin: 10px 0;
+  }
+  
+  .procedure-footer {
+    background: #6f42c1; /* Purple background for footer section */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+  }
+  
+  .procedure-footer p {
+    margin: 10px 0;
+  }
+  
+  .procedure-btn {
+    display: inline-block;
+    background: #17a2b8; /* Cyan button color */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .procedure-btn:hover {
+    background: #138496;
+  }
+  
+  .continue-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .continue-btn:hover {
+    background: #0056b3;
+  }

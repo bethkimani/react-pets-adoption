@@ -42,7 +42,7 @@ export const updateUser = (id, data) => API.put(`/users/${id}`, data);
 export const deleteUser = (id) => API.delete(`/users/${id}`);
 
 // API functions for pet management
-export const addPet = (formData) => 
+export const addPet = (formData) =>
     API.post('/pets/', formData, {
         headers: {
             'Content-Type': 'multipart/form-data', // Set content type for form data
@@ -54,5 +54,11 @@ export const getPets = () => API.get('/pets/');
 // New functions for adoption management
 export const submitAdoptionForm = (formData) => API.post('/adoptions/', formData);
 export const getAdoptions = () => API.get('/adoptions/');
+
+// New function for adding payment method
+export const addPaymentMethod = (data) => API.post('/payments/', data);
+
+// Add this function to your existing api.js
+export const schedulePickup = (data) => API.post('/schedule-pickup/', data);
 
 export default API;

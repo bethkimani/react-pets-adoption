@@ -1,3 +1,4 @@
+// UserDashboard.jsx
 import React, { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
@@ -10,6 +11,7 @@ import PaymentSettings from './PaymentSettings';
 import PendingReviews from './PendingReviews';
 import SpecialAdoptionForm from './SpecialAdoptionForm';
 import AllPets from './AllPets';
+import SchedulePickup from './SchedulePickup'; // Import the SchedulePickup component
 import LogoutModal from './LogoutModal';
 import './UserDashboard.css';
 
@@ -44,6 +46,7 @@ const UserDashboard = () => {
                         <Route path="pending-reviews" element={<PendingReviews />} />
                         <Route path="special-adoption-form" element={<SpecialAdoptionForm />} />
                         <Route path="all-pets" element={<AllPets />} />
+                        <Route path="schedule-pickup" element={<SchedulePickup />} /> {/* New route for SchedulePickup */}
                     </Routes>
                 </div>
             </div>

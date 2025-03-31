@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { submitAdoptionForm, getPets } from '../api';
 import './AdoptionForm.css';
 
-const AdoptionForm = () => {
+const AdoptionForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     user_id: localStorage.getItem('user_id') || '',
     pet_id: '',
@@ -111,6 +111,9 @@ const AdoptionForm = () => {
         consent: false,
       });
       setError(null);
+      if (onSubmit) {
+        onSubmit(); // Call the onSubmit prop to move to the next step
+      }
     } catch (err) {
       console.error('Error submitting form:', err.response?.data || err.message);
       setError('There was an error submitting your application. Please try again.');

@@ -1,43 +1,36 @@
+// Sidebar.jsx (updated to remove Adoption Form, Payment Settings, and Schedule Pick-Up)
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 
 const Sidebar = ({ onLogout }) => {
+    const location = useLocation();
+
     return (
         <div className="user-sidebar">
             <h2>Pet Adoption Navigation</h2>
             <ul>
-                <li>
+                <li className={location.pathname === '/user-dashboard' ? 'active' : ''}>
                     <Link to="/user-dashboard">
                         <i className="fas fa-tachometer-alt"></i> Dashboard
                     </Link>
                 </li>
-                <li>
+                <li className={location.pathname === '/user-dashboard/all-pets' ? 'active' : ''}>
                     <Link to="/user-dashboard/all-pets">
                         <i className="fas fa-paw"></i> All Pets
                     </Link>
                 </li>
-                <li>
+                <li className={location.pathname === '/user-dashboard/adoption-process' ? 'active' : ''}>
                     <Link to="/user-dashboard/adoption-process">
                         <i className="fas fa-paw"></i> Adoption Process
                     </Link>
                 </li>
-                <li>
-                    <Link to="/user-dashboard/adoption-form">
-                        <i className="fas fa-file-alt"></i> Adoption Form
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/user-dashboard/payment-settings">
-                        <i className="fas fa-credit-card"></i> Payment Settings
-                    </Link>
-                </li>
-                <li>
+                <li className={location.pathname === '/user-dashboard/inbox' ? 'active' : ''}>
                     <Link to="/user-dashboard/inbox">
                         <i className="fas fa-envelope"></i> Inbox
                     </Link>
                 </li>
-                <li>
+                <li className={location.pathname === '/user-dashboard/account-management' ? 'active' : ''}>
                     <Link to="/user-dashboard/account-management">
                         <i className="fas fa-user-cog"></i> Account Management
                     </Link>
