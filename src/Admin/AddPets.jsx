@@ -23,14 +23,16 @@ const AddPets = () => {
         description: "",
         image: null,
     });
+    const [successMessage, setSuccessMessage] = useState(null); // New state for success feedback
+    const [errorMessage, setErrorMessage] = useState(null); // New state for error feedback
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         const role = localStorage.getItem('role');
-        if (!token || role !== 'Admin') {
-            alert('You must be logged in as an Admin to add a pet.');
+        if (!token || (role !== 'Admin' && role !== 'SuperAdmin')) {
+            alert('You must be logged in as an Admin or SuperAdmin to add a pet.');
             navigate('/auth');
         }
     }, [navigate]);
@@ -57,7 +59,7 @@ const AddPets = () => {
         const requiredFields = ['name', 'species', 'adoptionStatus'];
         for (const field of requiredFields) {
             if (!values[field]) {
-                alert(`Please fill in the ${field} field.`);
+                setErrorMessage(`Please fill in the ${field} field.`);
                 return;
             }
         }
@@ -67,7 +69,7 @@ const AddPets = () => {
         formData.append("species", values.species);
         formData.append("breed", values.breed || "");
         formData.append("age", values.age ? parseInt(values.age) : "");
-        formData.append("adoption_status", values.adoptionStatus); // Ensure this corresponds to your API
+        formData.append("adoption_status", values.adoptionStatus); // Matches backend
         formData.append("description", values.description || "");
         if (values.image) {
             formData.append("image", values.image);
@@ -76,13 +78,40 @@ const AddPets = () => {
         try {
             const response = await addPet(formData);
             console.log("Pet added successfully:", response.data);
-            alert("Pet added successfully!");
-            navigate("/admin-dashboard/my-pets");
+            setSuccessMessage("Pet added successfully! Add another pet below.");
+            setErrorMessage(null);
+            // Reset form values but stay on Step 1
+            setValues({
+                name: "",
+                species: "",
+                breed: "",
+                age: "",
+                adoptionStatus: "",
+                description: "",
+                image: null,
+            });
+            setStep(1); // Return to Step 1 without navigating away
         } catch (error) {
             const errorMessage = error.response?.data?.error || error.message || "Unknown error";
             console.error("Detailed error adding pet:", error);
-            alert(`Failed to add pet: ${errorMessage}`);
+            setErrorMessage(`Failed to add pet: ${errorMessage}`);
+            setSuccessMessage(null);
         }
+    };
+
+    const handleStartOver = () => {
+        setValues({
+            name: "",
+            species: "",
+            breed: "",
+            age: "",
+            adoptionStatus: "",
+            description: "",
+            image: null,
+        });
+        setStep(1);
+        setSuccessMessage(null);
+        setErrorMessage(null);
     };
 
     return (
@@ -99,6 +128,15 @@ const AddPets = () => {
                 ))}
             </div>
             <h2 className="form-title">{steps[step - 1].title}</h2>
+            {successMessage && (
+                <div className="success-message">
+                    {successMessage}
+                    <button onClick={handleStartOver} className="start-over-button">
+                        Start Over
+                    </button>
+                </div>
+            )}
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
             <div className="step-content">
                 {step === 3 ? (
                     <Confirmation prevStep={prevStep} values={values} onSubmit={handleFormSubmit} />
