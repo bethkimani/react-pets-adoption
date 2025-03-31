@@ -2,35 +2,36 @@
     padding: 20px;
 }
 
-.pets-table {
+.view-pets-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.pets-table th, .pets-table td {
+.view-pets-table th,
+.view-pets-table td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
 }
 
-.pets-table th {
+.view-pets-table th {
     background-color: #f4f4f4;
 }
 
-.pets-table tr:nth-child(even) {
+.view-pets-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.pets-table tr:hover {
+.view-pets-table tr:hover {
     background-color: #f1f1f1;
 }
 
-.pets-table img {
+.view-pets-table img {
     border-radius: 5px;
 }
 
-.search-input {
+.view-pets-search-input {
     margin-bottom: 20px;
     padding: 10px;
     width: 100%;
@@ -38,7 +39,38 @@
     border-radius: 4px;
 }
 
-.modal {
+.view-pets-actions {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    align-items: center;
+}
+
+.view-pets-edit-btn,
+.view-pets-delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+}
+
+.view-pets-edit-btn {
+    color: #4CAF50; /* Green for edit */
+}
+
+.view-pets-delete-btn {
+    color: #f44336; /* Red for delete */
+}
+
+.view-pets-edit-btn:hover {
+    color: #45a049;
+}
+
+.view-pets-delete-btn:hover {
+    color: #da190b;
+}
+
+.view-pets-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -50,7 +82,7 @@
     align-items: center;
 }
 
-.modal-content {
+.view-pets-modal-content {
     background: white;
     padding: 20px;
     border-radius: 5px;
@@ -58,8 +90,8 @@
     max-width: 90%;
 }
 
-.modal-content input,
-.modal-content textarea {
+.view-pets-modal-content input,
+.view-pets-modal-content textarea {
     width: 100%;
     margin: 10px 0;
     padding: 8px;
@@ -67,7 +99,7 @@
     border-radius: 4px;
 }
 
-.modal-content button {
+.view-pets-modal-content button {
     margin: 5px;
     padding: 8px 16px;
     border: none;
@@ -75,12 +107,12 @@
     cursor: pointer;
 }
 
-.modal-content button:first-child {
+.view-pets-modal-content button:first-child {
     background-color: #4CAF50;
     color: white;
 }
 
-.modal-content button:last-child {
+.view-pets-modal-content button:last-child {
     background-color: #f44336;
     color: white;
 }

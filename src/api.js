@@ -33,38 +33,32 @@ API.interceptors.response.use(
     }
 );
 
-// Existing API functions for user management
+// API functions for pet management
+export const getPets = () => API.get('/pets/');
+
+export const addPet = (formData) =>
+    API.post('/pets/', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+    });
+
+export const updatePet = (id, formData) =>
+    API.put(`/pets/${id}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+    });
+
+export const deletePet = (id) => API.delete(`/pets/${id}`);
+
+// Other API functions (unchanged)
 export const login = (data) => API.post('/auth/login', data);
 export const getUsers = () => API.get('/users');
 export const getRoles = () => API.get('/roles');
 export const signup = (data) => API.post('/auth/signup', data);
 export const updateUser = (id, data) => API.put(`/users/${id}`, data);
 export const deleteUser = (id) => API.delete(`/users/${id}`);
-
-// API functions for pet management
-export const addPet = (formData) =>
-    API.post('/pets/', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-    });
-
-export const getPets = () => API.get('/pets/');
-export const updatePet = (id, formData) =>
-    API.put(`/pets/${id}`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-    });
-export const deletePet = (id) => API.delete(`/pets/${id}`);
-
-// API functions for adoption management
 export const submitAdoptionForm = (formData) => API.post('/adoptions/', formData);
 export const getAdoptions = () => API.get('/adoptions/');
-
-// API function for adding payment method
 export const addPaymentMethod = (data) => API.post('/payments/', data);
-
-// API function for scheduling pickup
 export const schedulePickup = (data) => API.post('/schedule-pickup/', data);
-
-// New API function for fetching chat history
 export const getChatMessages = () => API.get('/messages/');
 
 export default API;

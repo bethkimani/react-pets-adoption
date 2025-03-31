@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getPets, updatePet, deletePet } from '../api'; // Import API functions
+import { FaEdit, FaTrash } from 'react-icons/fa'; // Import icons from react-icons
+import { getPets, updatePet, deletePet } from '../api';
 import './ViewPets.css';
 
 const ViewPets = () => {
@@ -41,17 +42,24 @@ const ViewPets = () => {
     const submitEdit = async () => {
         try {
             const updatedPet = new FormData();
-            for (const key in formData) {
-                updatedPet.append(key, formData[key]);
-            }
+            // Append all form fields
+            updatedPet.append('name', formData.name || '');
+            updatedPet.append('species', formData.species || '');
+            updatedPet.append('breed', formData.breed || '');
+            updatedPet.append('age', formData.age || '');
+            updatedPet.append('adoption_status', formData.adoption_status || '');
+            updatedPet.append('description', formData.description || '');
             if (formData.imageFile) {
                 updatedPet.append('image', formData.imageFile);
             }
-            await updatePet(selectedPet.id, updatedPet);
-            setPets(pets.map(p => (p.id === selectedPet.id ? { ...p, ...formData } : p)));
+
+            const response = await updatePet(selectedPet.id, updatedPet);
+            setPets(pets.map(p => (p.id === selectedPet.id ? response.data : p))); // Update with server response
             setEditModalOpen(false);
+            setError(null); // Clear any previous errors
         } catch (error) {
-            setError(`Failed to update pet: ${error.message}`);
+            const errorMessage = error.response?.data?.error || error.message || 'Unknown error';
+            setError(`Failed to update pet: ${errorMessage}`);
         }
     };
 
@@ -60,8 +68,10 @@ const ViewPets = () => {
             await deletePet(selectedPet.id);
             setPets(pets.filter(p => p.id !== selectedPet.id));
             setDeleteModalOpen(false);
+            setError(null); // Clear any previous errors
         } catch (error) {
-            setError(`Failed to delete pet: ${error.message}`);
+            const errorMessage = error.response?.data?.error || error.message || 'Unknown error';
+            setError(`Failed to delete pet: ${errorMessage}`);
         }
     };
 
@@ -82,12 +92,12 @@ const ViewPets = () => {
                 placeholder="Search by name, species, or breed"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input"
+                className="view-pets-search-input"
             />
             {filteredPets.length === 0 ? (
                 <p>No pets found.</p>
             ) : (
-                <table className="pets-table">
+                <table className="view-pets-table">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -125,9 +135,13 @@ const ViewPets = () => {
                                         />
                                     )}
                                 </td>
-                                <td>
-                                    <button onClick={() => handleEdit(pet)}>Edit</button>
-                                    <button onClick={() => handleDelete(pet)}>Delete</button>
+                                <td className="view-pets-actions">
+                                    <button onClick={() => handleEdit(pet)} className="view-pets-edit-btn">
+                                        <FaEdit />
+                                    </button>
+                                    <button onClick={() => handleDelete(pet)} className="view-pets-delete-btn">
+                                        <FaTrash />
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -137,8 +151,8 @@ const ViewPets = () => {
 
             {/* Edit Modal */}
             {editModalOpen && (
-                <div className="modal">
-                    <div className="modal-content">
+                <div className="view-pets-modal">
+                    <div className="view-pets-modal-content">
                         <h3>Edit Pet</h3>
                         <input
                             type="text"
@@ -187,8 +201,8 @@ const ViewPets = () => {
 
             {/* Delete Modal */}
             {deleteModalOpen && (
-                <div className="modal">
-                    <div className="modal-content">
+                <div className="view-pets-modal">
+                    <div className="view-pets-modal-content">
                         <h3>Confirm Delete</h3>
                         <p>Are you sure you want to delete {selectedPet.name}?</p>
                         <button onClick={confirmDelete}>Yes</button>
