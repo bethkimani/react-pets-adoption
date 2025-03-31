@@ -1,5 +1,6 @@
 // Dashboard.jsx
 import React from 'react';
+import petIcon from '../assets/images/about-2.jpg'; // Import the image
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -12,7 +13,9 @@ const Dashboard = () => {
 
       <div className="dashboard-content">
         {/* Central Pet Icon */}
-        <div className="pet-icon">🐾</div>
+        <div className="pet-icon">
+          <img src={petIcon} alt="Pet Icon" />
+        </div>
 
         {/* Adopter Circle */}
         <div className="circle adopter-circle">
