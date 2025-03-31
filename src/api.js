@@ -3,7 +3,7 @@ import axios from 'axios';
 // Create an Axios instance with the base URL and credentials
 const API = axios.create({
     // Use Vite's environment variable syntax; fallback to local URL
-    baseURL: import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000/api',
+    baseURL: import.meta.env.VITE_API_URL || 'https://pets-adoption-flask-sqlite.onrender.com/api',
     withCredentials: true,
 });
 
