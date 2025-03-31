@@ -70,8 +70,8 @@ const AdoptionProcess = () => {
           <div className="shelter-logo">W</div>
           <h2>Shelter World</h2>
         </div>
-        <h1>Application Details</h1>
-        <button className="payment-btn">PAYMENT</button>
+        
+        <button className="payment-btn">Application Details</button>
       </div>
 
       <div className="progress-timeline">
