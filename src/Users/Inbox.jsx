@@ -1,10 +1,8 @@
-// Inbox.jsx
 import React, { useState } from 'react';
 import './Inbox.css';
 import { sendMessage } from '../api';
 
 const Inbox = () => {
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
@@ -12,10 +10,9 @@ const Inbox = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const messageData = { name, email, message };
+      const messageData = { email, message };
       await sendMessage(messageData);
       setStatus('Message sent successfully!');
-      setName('');
       setEmail('');
       setMessage('');
     } catch (error) {
@@ -29,15 +26,6 @@ const Inbox = () => {
       <h2>Send a Message</h2>
       {status && <p className={status.includes('Error') ? 'error' : 'success'}>{status}</p>}
       <form onSubmit={handleSubmit}>
-        <label htmlFor="user-name">Your Name:</label>
-        <input
-          type="text"
-          id="user-name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-
         <label htmlFor="user-email">Your Email:</label>
         <input
           type="email"

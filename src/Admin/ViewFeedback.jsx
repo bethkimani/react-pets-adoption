@@ -1,4 +1,3 @@
-// ViewFeedback.jsx
 import React, { useEffect, useState } from 'react';
 import './ViewFeedback.css';
 import { getMessages } from '../api';
@@ -29,7 +28,7 @@ const ViewFeedback = () => {
         <ul className="feedback-list">
           {messages.map((msg) => (
             <li key={msg.id} className="feedback-item">
-              <strong>{msg.name} ({msg.email}):</strong> {msg.text}
+              <strong>{msg.email}:</strong> {msg.text}
               <br />
               <small>{new Date(msg.timestamp).toLocaleString()}</small>
             </li>
