@@ -24,7 +24,7 @@
 
 .dashboard-container .dashboard-header p {
   font-size: 1.2rem;
-  color: #a0a0a0;
+  color: #ffffff; /* Changed to white for better visibility */
 }
 
 .dashboard-container .dashboard-content {
@@ -87,13 +87,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #ffffff; /* Ensure feature text is white */
 }
 
 .dashboard-container .feature span {
   font-size: 1rem;
   color: #ffffff;
   text-align: center;
-  background-color: #ff6f61; /* Coral background for labels */
+  background-color: #ff6f61; /* Coral background for dots */
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -194,7 +195,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.2rem;
-  color: #ffffff; /* Changed to white for better visibility */
+  color: #ffffff; /* Already white for better visibility */
 }
 
 /* Responsive Design */
