@@ -94,7 +94,7 @@ html {
 /* Ensure contact info links are underlined */
 .contact-info a {
   text-decoration: underline;
-  color: #007bff; 
+  color:  #FF8C00; 
 }
 
 .contact-item strong {
@@ -529,7 +529,7 @@ input {
 
 /* Form Toggle Link Styles */
 .toggle-link {
-  color: #007bff; /* Link color */
+  color: #FF8C00; /* Link color */
   cursor: pointer;
   text-decoration: underline;
 }
