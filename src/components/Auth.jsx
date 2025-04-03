@@ -11,15 +11,17 @@ const Auth = ({ onClose, initialMode }) => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [phone_number, setPhoneNumber] = useState('');
+    const [isLoading, setIsLoading] = useState(false); // Add loading state for better UX
     const navigate = useNavigate();
 
     const handleAuth = async (e) => {
         e.preventDefault();
+        setIsLoading(true); // Show loading state
         try {
             if (showReset) {
-                // Handle password reset
+                // Handle password reset request
                 await resetPassword({ email });
-                alert('Password reset link has been sent to your email.');
+                alert('A password reset link has been sent to your email. Please check your inbox (and spam/junk folder).');
                 setShowReset(false);
                 setEmail('');
             } else if (isLogin) {
@@ -54,10 +56,12 @@ const Auth = ({ onClose, initialMode }) => {
             }
         } catch (error) {
             const errorMessage = error.response?.data?.error ||
-                                (showReset ? 'Reset failed' : isLogin ? 'Login failed' : 'Signup failed') ||
+                                (showReset ? 'Failed to send reset email. Please try again.' : isLogin ? 'Login failed' : 'Signup failed') ||
                                 'An unexpected error occurred';
             console.error('Auth error:', errorMessage);
             alert(errorMessage);
+        } finally {
+            setIsLoading(false); // Reset loading state
         }
     };
 
@@ -89,28 +93,16 @@ const Auth = ({ onClose, initialMode }) => {
                             />
                         </>
                     )}
-                    {(isLogin || !showReset) && (
-                        <input
-                            type="email"
-                            id="auth-email"
-                            name="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    )}
-                    {showReset ? (
-                        <input
-                            type="email"
-                            id="reset-email"
-                            name="email"
-                            placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    ) : (
+                    <input
+                        type="email"
+                        id="auth-email"
+                        name="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    {!showReset && (
                         <input
                             type="password"
                             id="auth-password"
@@ -122,8 +114,8 @@ const Auth = ({ onClose, initialMode }) => {
                         />
                     )}
                     <div className="form-actions">
-                        <button type="submit" className="submit-button">
-                            {showReset ? 'Reset Password' : isLogin ? 'Login' : 'Sign Up'}
+                        <button type="submit" className="submit-button" disabled={isLoading}>
+                            {isLoading ? 'Processing...' : showReset ? 'Send Reset Link' : isLogin ? 'Login' : 'Sign Up'}
                         </button>
                         {isLogin && !showReset && (
                             <button
