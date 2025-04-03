@@ -1,3 +1,4 @@
+// src/App.jsx
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
@@ -14,8 +15,7 @@ import Header from './components/Header';
 import WhyAdopt from './components/WhyAdopt';
 import AdminDashboard from './Admin/AdminDashboard';
 import UserDashboard from './Users/UserDashboard';
-import LoginModal from './components/LoginModal'; // New Login Modal
-import SignupModal from './components/SignupModal'; // New Signup Modal
+import Auth from './components/Auth'; // Updated to use Auth component
 
 // Home component for the landing page
 const Home = () => {
@@ -36,7 +36,7 @@ const ProtectedRoute = ({ element, allowedRole }) => {
     const userRole = localStorage.getItem('role')?.toLowerCase();
 
     if (!isAuthenticated) {
-        return <Navigate to="/login" replace />; // Redirect to /login instead of /auth
+        return <Navigate to="/login" replace />;
     }
 
     if (allowedRole && userRole !== allowedRole.toLowerCase()) {
@@ -55,7 +55,6 @@ const AppLayout = () => {
     return (
         <div className="App">
             <ErrorBoundary>
-                {/* Render Header and Navbar unless on dashboard routes */}
                 {!isUserDashboard && !isAdminRoute && <Header />}
                 {!isUserDashboard && !isAdminRoute && <Navbar />}
                 <Routes>
@@ -65,8 +64,8 @@ const AppLayout = () => {
                     <Route path="/search" element={<SearchPage />} />
                     <Route path="/search-and-display" element={<SearchAndDisplayPets />} />
                     <Route path="/about" element={<AboutUs />} />
-                    <Route path="/login" element={<LoginModal onClose={() => {}} />} />
-                    <Route path="/signup" element={<SignupModal onClose={() => {}} />} />
+                    <Route path="/login" element={<Auth onClose={() => {}} initialMode="login" />} />
+                    <Route path="/signup" element={<Auth onClose={() => {}} initialMode="signup" />} />
 
                     {/* Protected Routes */}
                     <Route

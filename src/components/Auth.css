@@ -41,33 +41,12 @@
     align-items: center;
 }
 
-.user-type-selection {
-    display: flex;
-    justify-content: space-between;
-}
-
-.login-button {
-    flex: 1;
-    padding: 10px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #007BFF;
-    color: white;
-    font-weight: bold;
-}
-
-.login-button.active {
-    background-color: #0056b3;
-}
-
 .submit-button {
     width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #ff8c00; /* Changed to orange to match screenshot */
+    background-color: #FFA500; /* Orange color as specified */
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -90,22 +69,6 @@
     background-color: #e0e0e0;
 }
 
-select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    color: #666; /* Placeholder text color */
-}
-
-/* Ensure placeholder text color for select */
-select:invalid {
-    color: #666; /* Matches the placeholder color in the screenshot */
-}
-
-/* Additional styling for form inputs to match the design */
 input {
     width: 100%;
     padding: 10px;
@@ -115,9 +78,8 @@ input {
     box-sizing: border-box;
 }
 
-/* Style for placeholder text in inputs */
 input::placeholder {
-    color: #666; /* Matches the placeholder color in the screenshot */
+    color: #666;
 }
 
 h2 {

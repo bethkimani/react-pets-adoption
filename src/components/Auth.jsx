@@ -1,28 +1,30 @@
-import React, { useState, useEffect } from 'react';
+// src/components/Auth.jsx
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login, signup } from '../api';
+import { login, signup, resetPassword } from '../api';
 import './Auth.css';
 
 const Auth = ({ onClose, initialMode }) => {
-    const [isLogin, setIsLogin] = useState(true);
-    const [userType, setUserType] = useState('user');
+    const [isLogin, setIsLogin] = useState(initialMode === 'login');
+    const [showReset, setShowReset] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [phone_number, setPhoneNumber] = useState('');
-    const [role_id, setRoleId] = useState('1'); // Default to User (role_id=1)
     const navigate = useNavigate();
-
-    // Set initial mode based on prop
-    useEffect(() => {
-        setIsLogin(initialMode === 'login');
-    }, [initialMode]);
 
     const handleAuth = async (e) => {
         e.preventDefault();
         try {
-            if (isLogin) {
-                const response = await login({ email, password, user_type: userType });
+            if (showReset) {
+                // Handle password reset
+                await resetPassword({ email });
+                alert('Password reset link has been sent to your email.');
+                setShowReset(false);
+                setEmail('');
+            } else if (isLogin) {
+                // Handle login
+                const response = await login({ email, password });
                 const { token, role, user_id } = response.data;
                 localStorage.setItem('token', token);
                 localStorage.setItem('role', role);
@@ -35,12 +37,12 @@ const Auth = ({ onClose, initialMode }) => {
                 }
                 onClose();
             } else {
+                // Handle signup
                 const response = await signup({
                     name,
                     phone_number,
                     email,
                     password,
-                    role_id
                 });
                 console.log('Signup response:', response.data);
                 alert('Signup successful! Please log in.');
@@ -49,11 +51,10 @@ const Auth = ({ onClose, initialMode }) => {
                 setPhoneNumber('');
                 setEmail('');
                 setPassword('');
-                setRoleId('1');
             }
         } catch (error) {
-            const errorMessage = error.response?.data?.error || 
-                                (isLogin ? 'Login failed' : 'Signup failed') || 
+            const errorMessage = error.response?.data?.error ||
+                                (showReset ? 'Reset failed' : isLogin ? 'Login failed' : 'Signup failed') ||
                                 'An unexpected error occurred';
             console.error('Auth error:', errorMessage);
             alert(errorMessage);
@@ -64,25 +65,9 @@ const Auth = ({ onClose, initialMode }) => {
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <button className="close-button" onClick={onClose}>X</button>
-                <h2>{isLogin ? 'Login' : 'Signup'}</h2>
-                {isLogin && (
-                    <div className="user-type-selection">
-                        <button
-                            className={`login-button ${userType === 'user' ? 'active' : ''}`}
-                            onClick={() => setUserType('user')}
-                        >
-                            User Login
-                        </button>
-                        <button
-                            className={`login-button ${userType === 'admin' ? 'active' : ''}`}
-                            onClick={() => setUserType('admin')}
-                        >
-                            Admin Login
-                        </button>
-                    </div>
-                )}
+                <h2>{showReset ? 'Reset Password' : isLogin ? 'Login' : 'Sign Up'}</h2>
                 <form onSubmit={handleAuth}>
-                    {!isLogin && (
+                    {!isLogin && !showReset && (
                         <>
                             <input
                                 type="text"
@@ -104,47 +89,68 @@ const Auth = ({ onClose, initialMode }) => {
                             />
                         </>
                     )}
-                    <input
-                        type="email"
-                        id="auth-email"
-                        name="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="password"
-                        id="auth-password"
-                        name="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                    {!isLogin && (
-                        <select
-                            id="signup-role"
-                            name="role_id"
-                            value={role_id}
-                            onChange={(e) => setRoleId(e.target.value)}
+                    {(isLogin || !showReset) && (
+                        <input
+                            type="email"
+                            id="auth-email"
+                            name="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             required
-                        >
-                            <option value="1">User</option>
-                            <option value="2">Admin</option>
-                        </select>
+                        />
+                    )}
+                    {showReset ? (
+                        <input
+                            type="email"
+                            id="reset-email"
+                            name="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    ) : (
+                        <input
+                            type="password"
+                            id="auth-password"
+                            name="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
                     )}
                     <div className="form-actions">
                         <button type="submit" className="submit-button">
-                            {isLogin ? 'Login' : 'Signup'}
+                            {showReset ? 'Reset Password' : isLogin ? 'Login' : 'Sign Up'}
                         </button>
-                        <button
-                            type="button"
-                            className="toggle-button"
-                            onClick={() => setIsLogin(!isLogin)}
-                        >
-                            {isLogin ? 'Need an account? Signup' : 'Already have an account? Login'}
-                        </button>
+                        {isLogin && !showReset && (
+                            <button
+                                type="button"
+                                className="toggle-button"
+                                onClick={() => setShowReset(true)}
+                            >
+                                Forgot Password?
+                            </button>
+                        )}
+                        {showReset ? (
+                            <button
+                                type="button"
+                                className="toggle-button"
+                                onClick={() => setShowReset(false)}
+                            >
+                                Back to Login
+                            </button>
+                        ) : (
+                            <button
+                                type="button"
+                                className="toggle-button"
+                                onClick={() => setIsLogin(!isLogin)}
+                            >
+                                {isLogin ? 'Need an account? Sign Up' : 'Already have an account? Login'}
+                            </button>
+                        )}
                     </div>
                 </form>
             </div>
