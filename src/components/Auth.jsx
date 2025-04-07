@@ -7,21 +7,27 @@ import './Auth.css';
 const Auth = ({ onClose, initialMode }) => {
     const [isLogin, setIsLogin] = useState(initialMode === 'login');
     const [showReset, setShowReset] = useState(false);
+    const [resetMethod, setResetMethod] = useState('email'); // 'email' or 'otp'
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [phone_number, setPhoneNumber] = useState('');
-    const [isLoading, setIsLoading] = useState(false); // Add loading state for better UX
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleAuth = async (e) => {
         e.preventDefault();
-        setIsLoading(true); // Show loading state
+        setIsLoading(true);
         try {
             if (showReset) {
                 // Handle password reset request
-                await resetPassword({ email });
-                alert('A password reset link has been sent to your email. Please check your inbox (and spam/junk folder).');
+                await resetPassword({ email, method: resetMethod });
+                if (resetMethod === 'email') {
+                    alert('A password reset link has been sent to your email. Please check your inbox (and spam/junk folder).');
+                } else {
+                    alert('An OTP has been sent to your phone. Please check your messages.');
+                    navigate(`/verify-otp?email=${email}`);
+                }
                 setShowReset(false);
                 setEmail('');
             } else if (isLogin) {
@@ -56,12 +62,12 @@ const Auth = ({ onClose, initialMode }) => {
             }
         } catch (error) {
             const errorMessage = error.response?.data?.error ||
-                                (showReset ? 'Failed to send reset email. Please try again.' : isLogin ? 'Login failed' : 'Signup failed') ||
+                                (showReset ? 'Failed to send reset email or OTP. Please try again.' : isLogin ? 'Login failed' : 'Signup failed') ||
                                 'An unexpected error occurred';
             console.error('Auth error:', errorMessage);
             alert(errorMessage);
         } finally {
-            setIsLoading(false); // Reset loading state
+            setIsLoading(false);
         }
     };
 
@@ -113,9 +119,21 @@ const Auth = ({ onClose, initialMode }) => {
                             required
                         />
                     )}
+                    {showReset && (
+                        <div>
+                            <label>Reset Method:</label>
+                            <select
+                                value={resetMethod}
+                                onChange={(e) => setResetMethod(e.target.value)}
+                            >
+                                <option value="email">Email (Receive a reset link)</option>
+                                <option value="otp">Phone (Receive an OTP)</option>
+                            </select>
+                        </div>
+                    )}
                     <div className="form-actions">
                         <button type="submit" className="submit-button" disabled={isLoading}>
-                            {isLoading ? 'Processing...' : showReset ? 'Send Reset Link' : isLogin ? 'Login' : 'Sign Up'}
+                            {isLoading ? 'Processing...' : showReset ? 'Send Reset Link/OTP' : isLogin ? 'Login' : 'Sign Up'}
                         </button>
                         {isLogin && !showReset && (
                             <button
