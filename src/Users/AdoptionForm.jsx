@@ -1,12 +1,11 @@
-// AdoptionForm.jsx
 import React, { useState, useEffect } from 'react';
 import { submitAdoptionForm, getPets } from '../api';
 import './AdoptionForm.css';
 
-const AdoptionForm = ({ onSubmit }) => {
+const AdoptionForm = ({ petId, onSubmit }) => {
   const [formData, setFormData] = useState({
     user_id: localStorage.getItem('user_id') || '',
-    pet_id: '',
+    pet_id: petId || '', // Preselect the petId if provided
     first_name: '',
     last_name: '',
     phone_number: '',
@@ -46,14 +45,30 @@ const AdoptionForm = ({ onSubmit }) => {
     const fetchPets = async () => {
       try {
         const response = await getPets();
-        setPets(response.data);
+        // Filter out pets that are already adopted
+        const availablePets = response.data.filter(
+          (pet) => pet.adoption_status.toLowerCase() === 'available'
+        );
+        setPets(availablePets);
+
+        // If petId is provided, set the interested_pet field
+        if (petId) {
+          const selectedPet = response.data.find((pet) => pet.id === parseInt(petId));
+          if (selectedPet) {
+            setFormData((prev) => ({
+              ...prev,
+              pet_id: petId,
+              interested_pet: selectedPet.name,
+            }));
+          }
+        }
       } catch (err) {
         console.error('Error fetching pets:', err);
         setError('Failed to load pets. Please try again later.');
       }
     };
     fetchPets();
-  }, []);
+  }, [petId]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -128,7 +143,7 @@ const AdoptionForm = ({ onSubmit }) => {
         <div className="form-row">
           <div className="form-group">
             <label>Select a pet to adopt:</label>
-            <select name="pet_id" value={formData.pet_id} onChange={handleChange} required>
+            <select name="pet_id" value={formData.pet_id} onChange={handleChange} required disabled={!!petId}>
               <option value="">Select a pet</option>
               {pets.map((pet) => (
                 <option key={pet.id} value={pet.id}>

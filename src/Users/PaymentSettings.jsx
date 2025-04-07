@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addPaymentMethod } from '../api'; // Import the API function
+import { addPaymentMethod } from '../api';
 import "./PaymentSettings.css";
 
 const PaymentSettings = ({ onSubmit }) => {
@@ -36,13 +36,13 @@ const PaymentSettings = ({ onSubmit }) => {
     if (!validatePaymentMethod()) return;
 
     const newPayment = {
-      user_id: localStorage.getItem('user_id'), // Ensure you have the user ID
+      user_id: localStorage.getItem('user_id'),
       payment_type: paymentType,
       method: newMethod,
     };
 
     try {
-      await addPaymentMethod(newPayment); // Call the API to add the payment
+      await addPaymentMethod(newPayment);
       setPaymentMethods([...paymentMethods, newPayment]);
       setNewMethod("");
       setPaymentType("");
@@ -52,7 +52,6 @@ const PaymentSettings = ({ onSubmit }) => {
       console.error(error);
     }
 
-    // Call onSubmit to move to the next step
     if (onSubmit) {
       onSubmit();
     }

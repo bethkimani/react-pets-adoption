@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom'; // Add this import
 import Procedure from './Procedure';
 import AdoptionForm from './AdoptionForm';
 import PaymentSettings from './PaymentSettings';
@@ -6,6 +7,9 @@ import SchedulePickup from './SchedulePickup';
 import './AdoptionProcess.css';
 
 const AdoptionProcess = () => {
+  const location = useLocation(); // Get the navigation state
+  const petId = location.state?.petId; // Extract petId from state
+
   const [currentStep, setCurrentStep] = useState('Procedure');
   const [completedSteps, setCompletedSteps] = useState({
     Procedure: false,
@@ -69,8 +73,7 @@ const AdoptionProcess = () => {
           <div className="shelter-logo">W</div>
           <h2>Shelter World</h2>
         </div>
-        {/* Removed <h1>Application Details</h1> */}
-        <button className="payment-btn">Application Details</button> {/* Changed button label to "Application Details" */}
+        <button className="payment-btn">Application Details</button>
       </div>
 
       <div className="progress-timeline">
@@ -141,7 +144,7 @@ const AdoptionProcess = () => {
 
       <div className="step-content">
         {currentStep === 'Procedure' && <Procedure onProcedureComplete={handleProcedureComplete} />}
-        {currentStep === 'Application' && <AdoptionForm onSubmit={handleApplicationSubmit} />}
+        {currentStep === 'Application' && <AdoptionForm petId={petId} onSubmit={handleApplicationSubmit} />}
         {currentStep === 'Payment' && <PaymentSettings onSubmit={handlePaymentSubmit} />}
         {currentStep === 'Schedule pick-up' && (
           <SchedulePickup onScheduleSubmit={handleScheduleSubmit} />

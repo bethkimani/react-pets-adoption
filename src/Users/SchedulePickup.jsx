@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './SchedulePickup.css';
-import { schedulePickup } from '../api'; // Ensure you add this import
+import { schedulePickup } from '../api';
 
 const SchedulePickup = ({ onScheduleSubmit }) => {
   const [pickupData, setPickupData] = useState({
@@ -35,7 +35,7 @@ const SchedulePickup = ({ onScheduleSubmit }) => {
     }
 
     try {
-      await schedulePickup(pickupData); // Call the API to schedule pickup
+      await schedulePickup(pickupData);
       setSuccess('Pickup scheduled successfully!');
       setPickupData({
         date: '',

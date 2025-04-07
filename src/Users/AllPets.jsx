@@ -1,4 +1,3 @@
-// AllPets.jsx
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +7,8 @@ import './AllPets.css';
 
 const AllPets = () => {
     const [pets, setPets] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -17,33 +18,47 @@ const AllPets = () => {
                 setPets(response.data);
             } catch (error) {
                 console.error('Error fetching pets:', error);
+                setError('Failed to load pets. Please try again later.');
             }
         };
         fetchPets();
     }, []);
 
     const handleAdoptClick = async (pet) => {
-        if (pet.adoption_status === 'available') {
-            try {
-                // Update pet status on server
-                const formData = new FormData();
-                formData.append('adoption_status', 'adopted');
-                await updatePet(pet.id, formData);
-
-                // Update local state
-                setPets(pets.map(p => 
-                    p.id === pet.id ? { ...p, adoption_status: 'adopted' } : p
-                ));
-                
-                navigate('/user-dashboard/adoption-process');
-            } catch (error) {
-                console.error('Error updating adoption status:', error);
-                alert('Failed to process adoption. Please try again.');
-            }
-        } else {
+        if (pet.adoption_status.toLowerCase() !== 'available') {
             alert(`${pet.name} has already found their forever home. 🏡`);
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+
+        try {
+            // Update pet status on server
+            const formData = new FormData();
+            formData.append('adoption_status', 'adopted');
+            const response = await updatePet(pet.id, formData);
+
+            // Update local state with the response from the server
+            setPets(pets.map(p => 
+                p.id === pet.id ? { ...p, adoption_status: response.data.adoption_status } : p
+            ));
+
+            // Navigate to adoption process with the pet ID
+            navigate('/user-dashboard/adoption-process', { state: { petId: pet.id } });
+        } catch (error) {
+            console.error('Error updating adoption status:', error);
+            const errorMessage = error.response?.data?.error || 'Failed to process adoption. Please try again.';
+            setError(errorMessage);
+            alert(errorMessage);
+        } finally {
+            setLoading(false);
         }
     };
+
+    if (error && pets.length === 0) {
+        return <div className="all-pets"><p>{error}</p></div>;
+    }
 
     return (
         <div className="all-pets">
@@ -52,6 +67,7 @@ const AllPets = () => {
                     <FontAwesomeIcon icon={faHeart} className="heart-icon" /> All Pets <FontAwesomeIcon icon={faHeart} className="heart-icon" />
                 </h1>
                 <h2>Catalogue</h2>
+                {error && <p className="error-message">{error}</p>}
                 <div className="pets-gallery">
                     {pets.map((pet) => (
                         <div key={pet.id} className="pet-card">
@@ -63,11 +79,11 @@ const AllPets = () => {
                             <h2>{pet.name}</h2>
                             <div className="button-container">
                                 <button 
-                                    className={`adopt-button ${pet.adoption_status !== 'available' ? 'adopted' : ''}`}
+                                    className={`adopt-button ${pet.adoption_status.toLowerCase() !== 'available' ? 'adopted' : ''}`}
                                     onClick={() => handleAdoptClick(pet)}
-                                    disabled={pet.adoption_status !== 'available'}
+                                    disabled={pet.adoption_status.toLowerCase() !== 'available' || loading}
                                 >
-                                    {pet.adoption_status === 'available' ? 'Adopt Me' : 'Adopted'}
+                                    {loading ? 'Processing...' : (pet.adoption_status.toLowerCase() === 'available' ? 'Adopt Me' : 'Adopted')}
                                 </button>
                             </div>
                             <div className="pet-details">
