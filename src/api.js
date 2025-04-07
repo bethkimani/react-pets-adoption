@@ -45,6 +45,8 @@ export const sendMessage = (messageData) => API.post('/messages/send', messageDa
 export const getMessages = () => API.get('/messages/');
 export const replyToMessage = (messageId, replyData) => API.post(`/messages/reply/${messageId}`, replyData);
 export const likeMessage = (messageId) => API.post(`/messages/like/${messageId}`);
+export const userLikeMessage = (messageId) => API.post(`/messages/user/like/${messageId}`);
+export const userReplyToMessage = (messageId, replyData) => API.post(`/messages/user/reply/${messageId}`, replyData);
 export const getUserMessages = (email) => API.get(`/messages/user/${email}`);
 export const login = (data) => API.post('/auth/login', data);
 export const getUsers = () => API.get('/users');

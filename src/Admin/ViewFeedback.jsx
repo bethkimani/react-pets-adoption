@@ -7,6 +7,7 @@ const ViewFeedback = () => {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
   const [replyText, setReplyText] = useState({});
+  const [likedMessages, setLikedMessages] = useState(new Set());
 
   useEffect(() => {
     fetchMessages();
@@ -27,7 +28,7 @@ const ViewFeedback = () => {
       if (!text) return;
       await replyToMessage(messageId, { text });
       setReplyText({ ...replyText, [messageId]: '' });
-      fetchMessages(); // Refresh messages
+      fetchMessages();
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to reply');
     }
@@ -36,7 +37,8 @@ const ViewFeedback = () => {
   const handleLike = async (messageId) => {
     try {
       await likeMessage(messageId);
-      fetchMessages(); // Refresh messages
+      setLikedMessages((prev) => new Set(prev).add(messageId));
+      fetchMessages();
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to like');
     }
@@ -56,8 +58,8 @@ const ViewFeedback = () => {
               <br />
               <small>{new Date(msg.timestamp).toLocaleString()}</small>
               <div className="actions">
-                <button onClick={() => handleLike(msg.id)}>
-                  Like ({msg.likes})
+                <button onClick={() => handleLike(msg.id)} className="like-button">
+                  {likedMessages.has(msg.id) ? '💖' : '❤️'} ({msg.likes})
                 </button>
                 <textarea
                   value={replyText[msg.id] || ''}
@@ -66,13 +68,16 @@ const ViewFeedback = () => {
                   }
                   placeholder="Type your reply..."
                   rows="2"
+                  className="reply-textarea"
                 />
-                <button onClick={() => handleReply(msg.id)}>Reply</button>
+                <button onClick={() => handleReply(msg.id)} className="reply-button">
+                  💬 Reply
+                </button>
               </div>
               {msg.replies.length > 0 && (
                 <ul className="reply-list">
                   {msg.replies.map((reply) => (
-                    <li key={reply.id} className="reply-item">
+                    <li key={reply.id} className={`reply-item ${reply.sender}`}>
                       <strong>{reply.email} ({reply.sender}):</strong> {reply.text}
                       <br />
                       <small>{new Date(reply.timestamp).toLocaleString()}</small>

@@ -89,6 +89,42 @@
   background-color: #ffe6e6;
 }
 
+.actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.reply-textarea {
+  flex-grow: 1;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.reply-button {
+  background-color: #FFA500;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.reply-button:hover {
+  background-color: #e69500;
+}
+
 .reply-list {
   list-style-type: none;
   padding-left: 20px;
@@ -99,4 +135,12 @@
   padding: 5px;
   border-left: 2px solid #FFA500;
   margin-bottom: 5px;
+}
+
+.reply-item.user {
+  background-color: #e6f3ff;
+}
+
+.reply-item.admin {
+  background-color: #ffe6e6;
 }
