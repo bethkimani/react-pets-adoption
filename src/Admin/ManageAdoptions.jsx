@@ -179,11 +179,14 @@ const ManageAdoptions = () => {
             {showModal && (
                 <div className="modal-overlay">
                     <div className="modal">
-                        <h2>Confirm Deletion</h2>
-                        <p>Are you sure you want to delete this adoption application? This action cannot be undone.</p>
+                        <button onClick={closeDeleteModal} className="modal-close-btn">
+                            ✕
+                        </button>
+                        <h2>Delete Adoption</h2>
+                        <p>Are you sure you want to delete this adoption application?</p>
                         <div className="modal-buttons">
                             <button onClick={handleDelete} className="modal-confirm-btn">
-                                Confirm
+                                Yes, Delete
                             </button>
                             <button onClick={closeDeleteModal} className="modal-cancel-btn">
                                 Cancel
