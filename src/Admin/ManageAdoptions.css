@@ -70,3 +70,63 @@
     color: red;
     text-align: center;
 }
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+}
+
+.modal h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.modal p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modal-confirm-btn,
+.modal-cancel-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.modal-confirm-btn {
+    background-color: #f44336; /* Red for confirm deletion */
+    color: white;
+}
+
+.modal-cancel-btn {
+    background-color: #ccc;
+    color: #333;
+}

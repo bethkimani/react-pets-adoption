@@ -10,6 +10,8 @@ const ManageAdoptions = () => {
     const [schedules, setSchedules] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showModal, setShowModal] = useState(false); // State for modal visibility
+    const [adoptionToDelete, setAdoptionToDelete] = useState(null); // Track the adoption to delete
 
     useEffect(() => {
         const fetchData = async () => {
@@ -76,16 +78,28 @@ const ManageAdoptions = () => {
         }
     };
 
-    const handleDelete = async (adoptionId) => {
-        if (window.confirm('Are you sure you want to delete this adoption application?')) {
-            try {
-                await deleteAdoption(adoptionId);
-                setAdoptions(adoptions.filter(adoption => adoption.id !== adoptionId));
-                alert('Adoption application deleted successfully!');
-            } catch (err) {
-                console.error('Error deleting adoption:', err);
-                setError('Failed to delete adoption application.');
-            }
+    const openDeleteModal = (adoptionId) => {
+        setAdoptionToDelete(adoptionId);
+        setShowModal(true);
+    };
+
+    const closeDeleteModal = () => {
+        setAdoptionToDelete(null);
+        setShowModal(false);
+    };
+
+    const handleDelete = async () => {
+        if (!adoptionToDelete) return;
+
+        try {
+            await deleteAdoption(adoptionToDelete);
+            setAdoptions(adoptions.filter(adoption => adoption.id !== adoptionToDelete));
+            alert('Adoption application deleted successfully!');
+            closeDeleteModal();
+        } catch (err) {
+            console.error('Error deleting adoption:', err);
+            setError('Failed to delete adoption application.');
+            closeDeleteModal();
         }
     };
 
@@ -148,7 +162,7 @@ const ManageAdoptions = () => {
                                             Reject
                                         </button>
                                         <button
-                                            onClick={() => handleDelete(adoption.id)}
+                                            onClick={() => openDeleteModal(adoption.id)}
                                             className="delete-btn"
                                         >
                                             Delete
@@ -159,6 +173,24 @@ const ManageAdoptions = () => {
                         ))}
                     </tbody>
                 </table>
+            )}
+
+            {/* Delete Confirmation Modal */}
+            {showModal && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h2>Confirm Deletion</h2>
+                        <p>Are you sure you want to delete this adoption application? This action cannot be undone.</p>
+                        <div className="modal-buttons">
+                            <button onClick={handleDelete} className="modal-confirm-btn">
+                                Confirm
+                            </button>
+                            <button onClick={closeDeleteModal} className="modal-cancel-btn">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );
