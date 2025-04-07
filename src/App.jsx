@@ -13,8 +13,8 @@ import LiveChat from './components/LiveChat';
 import SearchAndDisplayPets from './components/Display';
 import Header from './components/Header';
 import WhyAdopt from './components/WhyAdopt';
-import AdminDashboard from './components/AdminDashboard';
-import UserDashboard from './components/UserDashboard';
+import AdminDashboard from './Admin/AdminDashboard';
+import UserDashboard from './Users/UserDashboard';
 import ResetPassword from './components/ResetPassword';
 import VerifyOtp from './components/VerifyOtp';
 
