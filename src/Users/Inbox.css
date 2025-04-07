@@ -28,19 +28,19 @@
   margin-bottom: 15px;
 }
 
-form {
+.inbox-container form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-label {
+.inbox-container label {
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-input,
-textarea {
+.inbox-container input,
+.inbox-container textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
@@ -48,12 +48,12 @@ textarea {
   font-size: 16px;
 }
 
-textarea {
+.inbox-container textarea {
   resize: vertical;
 }
 
-button {
-  background-color: #FFA500; /* Orange color as requested */
+.inbox-container button {
+  background-color: #FFA500;
   color: white;
   padding: 10px;
   border: none;
@@ -63,6 +63,40 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #e69500; /* Slightly darker orange on hover */
+.inbox-container button:hover {
+  background-color: #e69500;
+}
+
+.message-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.message-item {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.message-item.user {
+  background-color: #e6f3ff;
+}
+
+.message-item.admin {
+  background-color: #ffe6e6;
+}
+
+.reply-list {
+  list-style-type: none;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.reply-item {
+  padding: 5px;
+  border-left: 2px solid #FFA500;
+  margin-bottom: 5px;
 }

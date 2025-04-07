@@ -43,6 +43,9 @@ export const updatePet = (id, formData) =>
 export const deletePet = (id) => API.delete(`/pets/${id}`);
 export const sendMessage = (messageData) => API.post('/messages/send', messageData);
 export const getMessages = () => API.get('/messages/');
+export const replyToMessage = (messageId, replyData) => API.post(`/messages/reply/${messageId}`, replyData);
+export const likeMessage = (messageId) => API.post(`/messages/like/${messageId}`);
+export const getUserMessages = (email) => API.get(`/messages/user/${email}`);
 export const login = (data) => API.post('/auth/login', data);
 export const getUsers = () => API.get('/users');
 export const getRoles = () => API.get('/roles');
@@ -52,7 +55,7 @@ export const deleteUser = (id) => API.delete(`/users/${id}`);
 export const submitAdoptionForm = (formData) => API.post('/adoptions/', formData);
 export const getAdoptions = () => API.get('/adoptions/');
 export const updateAdoptionStatus = (id, data) => API.put(`/adoptions/${id}`, data);
-export const deleteAdoption = (id) => API.delete(`/adoptions/${id}`); // Added deleteAdoption
+export const deleteAdoption = (id) => API.delete(`/adoptions/${id}`);
 export const addPaymentMethod = (data) => API.post('/payments/', data);
 export const getPaymentsByUser = (userId) => API.get(`/payments/user/${userId}`);
 export const schedulePickup = (data) => API.post('/schedule-pickup/', data);

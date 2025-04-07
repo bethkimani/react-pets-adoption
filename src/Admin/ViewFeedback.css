@@ -1,30 +1,76 @@
-
+/* ViewFeedback.css */
 .view-feedback {
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.view-feedback h2 {
+  }
+  
+  .view-feedback h2 {
     margin-bottom: 20px;
     color: #333;
-}
-
-.feedback-list {
+  }
+  
+  .view-feedback .error {
+    color: red;
+    margin-bottom: 15px;
+  }
+  
+  .feedback-list {
     list-style-type: none;
     padding: 0;
-}
-
-.feedback-item {
+  }
+  
+  .feedback-item {
     padding: 10px;
     border: 1px solid #ccc;
     margin-bottom: 10px;
     border-radius: 5px;
     background-color: #fff;
     transition: background-color 0.3s;
-}
-
-.feedback-item:hover {
+  }
+  
+  .feedback-item:hover {
     background-color: #f0f0f0;
-}
+  }
+  
+  .actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .actions button {
+    background-color: #FFA500;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .actions button:hover {
+    background-color: #e69500;
+  }
+  
+  .actions textarea {
+    flex-grow: 1;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+  }
+  
+  .reply-list {
+    list-style-type: none;
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+  
+  .reply-item {
+    padding: 5px;
+    border-left: 2px solid #FFA500;
+    margin-bottom: 5px;
+  }
