@@ -1,168 +1,72 @@
-/* Scoped to .manage-adoptions to avoid affecting other parts of the website */
 .manage-adoptions {
     padding: 20px;
-    background-color: #2a2a2a; /* Dark background to match screenshot */
-    color: #fff; /* White text for the section */
 }
 
-/* Title styling */
 .manage-adoptions h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #fff; /* White title to match screenshot */
 }
 
-/* Table styling */
-.manage-adoptions .adoptions-table {
+.adoptions-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #333; /* Darker background for the table */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Slightly darker shadow */
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Table headers and cells */
-.manage-adoptions .adoptions-table th,
-.manage-adoptions .adoptions-table td {
+.adoptions-table th,
+.adoptions-table td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #444; /* Darker border to match theme */
-    color: #fff; /* White text for table content */
+    border-bottom: 1px solid #ddd;
 }
 
-/* Table headers */
-.manage-adoptions .adoptions-table th {
-    background-color: #444; /* Darker header background */
+.adoptions-table th {
+    background-color: #f5f5f5;
     font-weight: bold;
 }
 
-/* Table row hover effect */
-.manage-adoptions .adoptions-table tr:hover {
-    background-color: #3a3a3a; /* Slightly lighter dark on hover */
+.adoptions-table tr:hover {
+    background-color: #f9f9f9;
 }
 
-/* Button styles */
-.manage-adoptions .approve-btn,
-.manage-adoptions .reject-btn,
-.manage-adoptions .delete-btn {
+.approve-btn,
+.reject-btn,
+.delete-btn {
     padding: 5px 10px;
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    color: #fff; /* White text for buttons */
 }
 
-/* Approve button */
-.manage-adoptions .approve-btn {
-    background-color: #666; /* Grayed out for disabled state in screenshot */
+.approve-btn {
+    background-color: #4caf50;
+    color: white;
 }
 
-/* Reject button */
-.manage-adoptions .reject-btn {
-    background-color: #f44336; /* Red for reject */
+.reject-btn {
+    background-color: #f44336;
+    color: white;
 }
 
-/* Delete button */
-.manage-adoptions .delete-btn {
+.delete-btn {
     background-color: #ff9800; /* Orange color for delete */
+    color: white;
 }
 
-/* Disabled button styles */
-.manage-adoptions .approve-btn:disabled,
-.manage-adoptions .reject-btn:disabled {
-    background-color: #666; /* Gray for disabled buttons */
+.approve-btn:disabled,
+.reject-btn:disabled {
+    background-color: #ccc;
     cursor: not-allowed;
 }
 
-/* Action buttons container */
-.manage-adoptions .action-buttons {
+.action-buttons {
     display: flex;
     gap: 10px; /* Adds space between the buttons */
     align-items: center; /* Vertically centers the buttons */
 }
 
-/* Error message */
-.manage-adoptions .error-message {
-    color: #f44336; /* Red for error message */
+.error-message {
+    color: red;
     text-align: center;
-}
-
-/* Modal Styles */
-.manage-adoptions .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.manage-adoptions .modal {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    max-width: 90%;
-    position: relative; /* For positioning the close button */
-}
-
-.manage-adoptions .modal h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.manage-adoptions .modal p {
-    font-size: 16px;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-}
-
-.manage-adoptions .modal-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.manage-adoptions .modal-confirm-btn,
-.manage-adoptions .modal-cancel-btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.manage-adoptions .modal-confirm-btn {
-    background-color: #4caf50; /* Green for confirm deletion */
-    color: white;
-}
-
-.manage-adoptions .modal-cancel-btn {
-    background-color: #f44336; /* Red for cancel */
-    color: white;
-}
-
-/* Close button style */
-.manage-adoptions .modal-close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #ff9800; /* Yellow-orange close button */
-    border: none;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 16px;
-    color: #333;
 }
