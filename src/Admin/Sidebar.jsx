@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaPaw, FaUser, FaSignOutAlt, FaUsers } from 'react-icons/fa';
+import { FaHome, FaPaw, FaUser, FaSignOutAlt, FaUsers, FaFileAlt } from 'react-icons/fa';
 import './Sidebar.css';
 
 const Sidebar = ({ onLogout }) => {
@@ -29,6 +29,11 @@ const Sidebar = ({ onLogout }) => {
                     </Link>
                 </li>
                 <li>
+                    <Link to="/admin-dashboard/manage-adoptions" className="sidebar-link">
+                        <FaFileAlt /> Manage Adoptions
+                    </Link>
+                </li>
+                <li>
                     <Link to="/admin-dashboard/change-password" className="sidebar-link">
                         <FaPaw /> Change Password
                     </Link>
@@ -38,12 +43,11 @@ const Sidebar = ({ onLogout }) => {
                         <FaUser /> My Profile
                     </Link>
                 </li>
-
                 <li>
-    <Link to="/admin-dashboard/view-feedback" className="sidebar-link">
-        <FaUsers /> User Feedback
-    </Link>
-</li>
+                    <Link to="/admin-dashboard/view-feedback" className="sidebar-link">
+                        <FaUsers /> User Feedback
+                    </Link>
+                </li>
                 <li>
                     <button onClick={onLogout} className="sidebar-link">
                         <FaSignOutAlt /> Logout

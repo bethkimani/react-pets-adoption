@@ -15,7 +15,7 @@ import Header from './components/Header';
 import WhyAdopt from './components/WhyAdopt';
 import AdminDashboard from './Admin/AdminDashboard';
 import UserDashboard from './Users/UserDashboard';
-import Auth from './components/Auth'; // Updated to use Auth component
+import ResetPassword from './components/ResetPassword'; // Import the new component
 
 // Home component for the landing page
 const Home = () => {
@@ -36,7 +36,7 @@ const ProtectedRoute = ({ element, allowedRole }) => {
     const userRole = localStorage.getItem('role')?.toLowerCase();
 
     if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/" replace />;
     }
 
     if (allowedRole && userRole !== allowedRole.toLowerCase()) {
@@ -64,8 +64,7 @@ const AppLayout = () => {
                     <Route path="/search" element={<SearchPage />} />
                     <Route path="/search-and-display" element={<SearchAndDisplayPets />} />
                     <Route path="/about" element={<AboutUs />} />
-                    <Route path="/login" element={<Auth onClose={() => {}} initialMode="login" />} />
-                    <Route path="/signup" element={<Auth onClose={() => {}} initialMode="signup" />} />
+                    <Route path="/reset-password" element={<ResetPassword />} /> {/* Add reset password route */}
 
                     {/* Protected Routes */}
                     <Route

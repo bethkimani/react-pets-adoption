@@ -1,7 +1,5 @@
-// src/api.js
 import axios from 'axios';
 
-// Use the Render URL for the API base
 const API = axios.create({
     baseURL: import.meta.env.VITE_API_URL || 'https://pets-adoption-flask-sqlite.onrender.com/api',
     withCredentials: true,
@@ -24,7 +22,7 @@ API.interceptors.response.use(
             localStorage.removeItem('role');
             localStorage.removeItem('user_id');
             localStorage.removeItem('isAuthenticated');
-            window.location.href = '/login'; // Redirect to login instead of /auth
+            window.location.href = '/';
             return Promise.reject(error);
         }
         console.error('API Error:', error.response?.data || error.message);
@@ -43,10 +41,9 @@ export const updatePet = (id, formData) =>
         headers: { 'Content-Type': 'multipart/form-data' },
     });
 export const deletePet = (id) => API.delete(`/pets/${id}`);
-export const sendMessage = (messageData) =>
-    API.post('/messages/send', messageData);
+export const sendMessage = (messageData) => API.post('/messages/send', messageData);
 export const getMessages = () => API.get('/messages/');
-export const login = (data) => API.post('/auth/login', data); // Removed user_type
+export const login = (data) => API.post('/auth/login', data);
 export const getUsers = () => API.get('/users');
 export const getRoles = () => API.get('/roles');
 export const signup = (data) => API.post('/auth/signup', data);
@@ -54,9 +51,14 @@ export const updateUser = (id, data) => API.put(`/users/${id}`, data);
 export const deleteUser = (id) => API.delete(`/users/${id}`);
 export const submitAdoptionForm = (formData) => API.post('/adoptions/', formData);
 export const getAdoptions = () => API.get('/adoptions/');
+export const updateAdoptionStatus = (id, data) => API.put(`/adoptions/${id}`, data);
 export const addPaymentMethod = (data) => API.post('/payments/', data);
+export const getPaymentsByUser = (userId) => API.get(`/payments/user/${userId}`);
 export const schedulePickup = (data) => API.post('/schedule-pickup/', data);
+export const getSchedulePickupsByUser = (userId) => API.get(`/schedule-pickup/user/${userId}`);
 export const getChatMessages = () => API.get('/messages/');
 export const resetPassword = (data) => API.post('/auth/reset-password', data);
+export const resetPasswordConfirm = (data) =>
+    API.post(`/auth/reset-password/${data.token}`, { password: data.password });
 
 export default API;
