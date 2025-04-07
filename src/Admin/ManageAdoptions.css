@@ -31,7 +31,8 @@
 }
 
 .approve-btn,
-.reject-btn {
+.reject-btn,
+.delete-btn {
     padding: 5px 10px;
     border: none;
     border-radius: 3px;
@@ -45,6 +46,11 @@
 
 .reject-btn {
     background-color: #f44336;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #ff9800; /* Orange color for delete */
     color: white;
 }
 

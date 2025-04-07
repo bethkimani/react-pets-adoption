@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAdoptions, getPets, getUsers, updateAdoptionStatus, getPaymentsByUser, getSchedulePickupsByUser } from '../api';
+import { getAdoptions, getPets, getUsers, updateAdoptionStatus, getPaymentsByUser, getSchedulePickupsByUser, deleteAdoption } from '../api';
 import './ManageAdoptions.css';
 
 const ManageAdoptions = () => {
@@ -76,6 +76,19 @@ const ManageAdoptions = () => {
         }
     };
 
+    const handleDelete = async (adoptionId) => {
+        if (window.confirm('Are you sure you want to delete this adoption application?')) {
+            try {
+                await deleteAdoption(adoptionId);
+                setAdoptions(adoptions.filter(adoption => adoption.id !== adoptionId));
+                alert('Adoption application deleted successfully!');
+            } catch (err) {
+                console.error('Error deleting adoption:', err);
+                setError('Failed to delete adoption application.');
+            }
+        }
+    };
+
     if (loading) return <div>Loading...</div>;
     if (error) return <div className="error-message">{error}</div>;
 
@@ -133,6 +146,12 @@ const ManageAdoptions = () => {
                                             disabled={adoption.status === 'Rejected'}
                                         >
                                             Reject
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(adoption.id)}
+                                            className="delete-btn"
+                                        >
+                                            Delete
                                         </button>
                                     </div>
                                 </td>

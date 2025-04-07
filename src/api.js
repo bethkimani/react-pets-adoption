@@ -52,6 +52,7 @@ export const deleteUser = (id) => API.delete(`/users/${id}`);
 export const submitAdoptionForm = (formData) => API.post('/adoptions/', formData);
 export const getAdoptions = () => API.get('/adoptions/');
 export const updateAdoptionStatus = (id, data) => API.put(`/adoptions/${id}`, data);
+export const deleteAdoption = (id) => API.delete(`/adoptions/${id}`); // Added deleteAdoption
 export const addPaymentMethod = (data) => API.post('/payments/', data);
 export const getPaymentsByUser = (userId) => API.get(`/payments/user/${userId}`);
 export const schedulePickup = (data) => API.post('/schedule-pickup/', data);
