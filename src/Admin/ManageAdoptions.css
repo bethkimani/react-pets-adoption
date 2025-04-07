@@ -33,7 +33,6 @@
 .approve-btn,
 .reject-btn {
     padding: 5px 10px;
-    margin-right: 5px;
     border: none;
     border-radius: 3px;
     cursor: pointer;
@@ -53,6 +52,12 @@
 .reject-btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px; /* Adds space between the buttons */
+    align-items: center; /* Vertically centers the buttons */
 }
 
 .error-message {

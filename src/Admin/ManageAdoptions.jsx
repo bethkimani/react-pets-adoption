@@ -119,20 +119,22 @@ const ManageAdoptions = () => {
                                 </td>
                                 <td>{adoption.status || 'Pending'}</td>
                                 <td>
-                                    <button
-                                        onClick={() => handleStatusUpdate(adoption.id, 'Approved')}
-                                        className="approve-btn"
-                                        disabled={adoption.status === 'Approved'}
-                                    >
-                                        Approve
-                                    </button>
-                                    <button
-                                        onClick={() => handleStatusUpdate(adoption.id, 'Rejected')}
-                                        className="reject-btn"
-                                        disabled={adoption.status === 'Rejected'}
-                                    >
-                                        Reject
-                                    </button>
+                                    <div className="action-buttons">
+                                        <button
+                                            onClick={() => handleStatusUpdate(adoption.id, 'Approved')}
+                                            className="approve-btn"
+                                            disabled={adoption.status === 'Approved'}
+                                        >
+                                            Approve
+                                        </button>
+                                        <button
+                                            onClick={() => handleStatusUpdate(adoption.id, 'Rejected')}
+                                            className="reject-btn"
+                                            disabled={adoption.status === 'Rejected'}
+                                        >
+                                            Reject
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
