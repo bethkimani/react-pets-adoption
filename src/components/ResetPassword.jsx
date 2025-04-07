@@ -1,9 +1,8 @@
-
 // src/components/ResetPassword.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { resetPasswordConfirm } from '../api'; // We'll add this function to api.js
-import './Auth.css'; // Reuse the same styles as Auth.jsx
+import { resetPasswordConfirm } from '../api';
+import './Auth.css';
 
 const ResetPassword = () => {
     const [searchParams] = useSearchParams();
@@ -17,7 +16,7 @@ const ResetPassword = () => {
 
     useEffect(() => {
         if (!token) {
-            setError('Invalid or missing reset token. Please request a new reset link.');
+            setError('Invalid or missing reset token. Please request a new reset link or OTP.');
         }
     }, [token]);
 
@@ -40,7 +39,7 @@ const ResetPassword = () => {
             await resetPasswordConfirm({ token, password: newPassword });
             setMessage('Password reset successfully! You can now log in with your new password.');
             setTimeout(() => {
-                navigate('/'); // Redirect to homepage after 3 seconds
+                navigate('/');
             }, 3000);
         } catch (err) {
             const errorMessage = err.response?.data?.error || 'Failed to reset password. The link may be invalid or expired.';
