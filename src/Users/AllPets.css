@@ -1,90 +1,97 @@
 /* AllPets.css */
 .all-pets {
-    padding: 20px;
-  }
-  
-  .catalogue {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .catalogue h1 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .heart-icon {
-    color: #ff6b6b;
-    margin: 0 10px;
-  }
-  
-  .catalogue h2 {
-    text-align: center;
-    color: #666;
-    margin-bottom: 20px;
-  }
-  
-  /* CSS for the pets gallery */
-  .pets-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
-    gap: 20px;
-  }
-  
-  /* Pet card styling */
-  .pet-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease;
-  }
-  
-  .pet-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .pet-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .pet-info h2 {
-    margin: 0 0 10px;
-    color: #333;
-    font-size: 1.5rem;
-  }
-  
-  .pet-details {
-    margin-bottom: 15px;
-  }
-  
-  .pet-details p {
-    margin: 5px 0;
-    color: #555;
-    font-size: 0.9rem;
-  }
-  
-  .button-container {
-    text-align: center;
-  }
-  
-  .adopt-button {
-    background-color: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .adopt-button:hover:not(:disabled) {
-    background-color: #ff8787;
-  }
-  
-  .adopt-button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
+  padding: 20px;
+}
+
+.catalogue {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.catalogue h1 {
+  text-align: center;
+  color: #333;
+}
+
+.heart-icon {
+  color: #ff6b6b;
+  margin: 0 10px;
+}
+
+.catalogue h2 {
+  text-align: center;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* CSS for the pets gallery */
+.pets-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+  gap: 20px;
+}
+
+/* Pet card styling */
+.pet-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  padding: 15px; /* Added padding for better spacing */
+}
+
+.pet-card:hover {
+  transform: translateY(-5px);
+}
+
+.pet-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.pet-info h2 {
+  margin: 0 0 10px;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.pet-details {
+  margin-bottom: 15px;
+}
+
+.pet-details p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.adopt-button {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.adopt-button:hover:not(:disabled) {
+  background-color: #ff8787;
+}
+
+.adopt-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.adopt-button.adopted {
+  background-color: gray; /* Fixed: Removed invalid #gray */
+  cursor: not-allowed;
+  opacity: 0.7;
+}

@@ -1,8 +1,9 @@
+// AllPets.jsx
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { getPets } from '../api'; // Import the API function to fetch pets
+import { getPets, updatePet } from '../api';
 import './AllPets.css';
 
 const AllPets = () => {
@@ -21,9 +22,24 @@ const AllPets = () => {
         fetchPets();
     }, []);
 
-    const handleAdoptClick = (pet) => {
+    const handleAdoptClick = async (pet) => {
         if (pet.adoption_status === 'available') {
-            navigate('/user-dashboard/adoption-process');
+            try {
+                // Update pet status on server
+                const formData = new FormData();
+                formData.append('adoption_status', 'adopted');
+                await updatePet(pet.id, formData);
+
+                // Update local state
+                setPets(pets.map(p => 
+                    p.id === pet.id ? { ...p, adoption_status: 'adopted' } : p
+                ));
+                
+                navigate('/user-dashboard/adoption-process');
+            } catch (error) {
+                console.error('Error updating adoption status:', error);
+                alert('Failed to process adoption. Please try again.');
+            }
         } else {
             alert(`${pet.name} has already found their forever home. 🏡`);
         }
@@ -46,15 +62,13 @@ const AllPets = () => {
                             />
                             <h2>{pet.name}</h2>
                             <div className="button-container">
-                                {pet.adoption_status === 'available' ? (
-                                    <button className="adopt-button" onClick={() => handleAdoptClick(pet)}>
-                                        Adopt Me
-                                    </button>
-                                ) : (
-                                    <button className="adopt-button" disabled>
-                                        Adopted
-                                    </button>
-                                )}
+                                <button 
+                                    className={`adopt-button ${pet.adoption_status !== 'available' ? 'adopted' : ''}`}
+                                    onClick={() => handleAdoptClick(pet)}
+                                    disabled={pet.adoption_status !== 'available'}
+                                >
+                                    {pet.adoption_status === 'available' ? 'Adopt Me' : 'Adopted'}
+                                </button>
                             </div>
                             <div className="pet-details">
                                 <p>Species: {pet.species || 'N/A'}</p>

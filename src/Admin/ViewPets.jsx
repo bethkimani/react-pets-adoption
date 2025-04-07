@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FaEdit, FaTrash } from 'react-icons/fa'; // Import icons from react-icons
-import { getPets, updatePet, deletePet } from '../api';
+import { FaEdit, FaTrash } from 'react-icons/fa';
+import { getPets, updatePet, deletePet, getAdoptions, deleteAdoption } from '../api';
 import './ViewPets.css';
 
 const ViewPets = () => {
@@ -42,7 +42,6 @@ const ViewPets = () => {
     const submitEdit = async () => {
         try {
             const updatedPet = new FormData();
-            // Append all form fields
             updatedPet.append('name', formData.name || '');
             updatedPet.append('species', formData.species || '');
             updatedPet.append('breed', formData.breed || '');
@@ -54,9 +53,9 @@ const ViewPets = () => {
             }
 
             const response = await updatePet(selectedPet.id, updatedPet);
-            setPets(pets.map(p => (p.id === selectedPet.id ? response.data : p))); // Update with server response
+            setPets(pets.map(p => (p.id === selectedPet.id ? response.data : p)));
             setEditModalOpen(false);
-            setError(null); // Clear any previous errors
+            setError(null);
         } catch (error) {
             const errorMessage = error.response?.data?.error || error.message || 'Unknown error';
             setError(`Failed to update pet: ${errorMessage}`);
@@ -65,10 +64,22 @@ const ViewPets = () => {
 
     const confirmDelete = async () => {
         try {
+            // Fetch all adoptions and filter those related to the selected pet
+            const adoptionsResponse = await getAdoptions();
+            const relatedAdoptions = adoptionsResponse.data.filter(
+                adoption => adoption.pet_id === selectedPet.id
+            );
+
+            // Delete all related adoptions
+            await Promise.all(
+                relatedAdoptions.map(adoption => deleteAdoption(adoption.id))
+            );
+
+            // Now delete the pet
             await deletePet(selectedPet.id);
             setPets(pets.filter(p => p.id !== selectedPet.id));
             setDeleteModalOpen(false);
-            setError(null); // Clear any previous errors
+            setError(null);
         } catch (error) {
             const errorMessage = error.response?.data?.error || error.message || 'Unknown error';
             setError(`Failed to delete pet: ${errorMessage}`);
