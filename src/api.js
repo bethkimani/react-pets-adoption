@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'https://pets-adoption-flask-sqlite.onrender.com/api',
+    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api', // Ensure this matches your Render URL
     withCredentials: true,
 });
 
@@ -25,6 +25,9 @@ API.interceptors.response.use(
             localStorage.removeItem('isAuthenticated');
             window.location.href = '/';
             return Promise.reject(error);
+        }
+        if (error.message === 'Network Error') {
+            console.error('Network Error: Unable to reach the server. Check your network or server status.');
         }
         console.error('API Error:', error.response?.data || error.message);
         return Promise.reject(error);

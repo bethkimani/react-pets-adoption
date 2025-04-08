@@ -61,7 +61,7 @@ const Auth = ({ onClose, initialMode }) => {
             console.error('Auth error:', error.response || error.message);
             const errorMessage = error.response?.data?.error ||
                                 (showReset ? 'Failed to send reset email. Please try again.' : isLogin ? 'Login failed' : 'Signup failed') ||
-                                'An unexpected error occurred';
+                                'An unexpected error occurred. Please check your network connection.';
             setError(errorMessage);
         } finally {
             setIsLoading(false);
