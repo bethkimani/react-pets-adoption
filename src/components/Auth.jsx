@@ -11,16 +11,21 @@ const Auth = ({ onClose, initialMode }) => {
     const [name, setName] = useState('');
     const [phone_number, setPhoneNumber] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
     const handleAuth = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        setError('');
+        setMessage('');
+
         try {
             if (showReset) {
                 // Handle password reset request via email
-                await resetPassword({ email });
-                alert('A password reset link has been sent to your email. Please check your inbox (and spam/junk folder).');
+                const response = await resetPassword({ email });
+                setMessage(response.data.message || 'A password reset link has been sent to your email if it exists.');
                 setShowReset(false);
                 setEmail('');
             } else if (isLogin) {
@@ -45,8 +50,7 @@ const Auth = ({ onClose, initialMode }) => {
                     email,
                     password,
                 });
-                console.log('Signup response:', response.data);
-                alert('Signup successful! Please log in.');
+                setMessage('Signup successful! Please log in.');
                 setIsLogin(true);
                 setName('');
                 setPhoneNumber('');
@@ -57,8 +61,7 @@ const Auth = ({ onClose, initialMode }) => {
             const errorMessage = error.response?.data?.error ||
                                 (showReset ? 'Failed to send reset email. Please try again.' : isLogin ? 'Login failed' : 'Signup failed') ||
                                 'An unexpected error occurred';
-            console.error('Auth error:', errorMessage);
-            alert(errorMessage);
+            setError(errorMessage);
         } finally {
             setIsLoading(false);
         }
@@ -69,6 +72,8 @@ const Auth = ({ onClose, initialMode }) => {
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <button className="close-button" onClick={onClose}>X</button>
                 <h2>{showReset ? 'Reset Password' : isLogin ? 'Login' : 'Sign Up'}</h2>
+                {message && <p style={{ color: 'green' }}>{message}</p>}
+                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <form onSubmit={handleAuth}>
                     {!isLogin && !showReset && (
                         <>

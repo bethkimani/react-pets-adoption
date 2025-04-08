@@ -35,8 +35,8 @@ const ResetPassword = () => {
         setMessage('');
 
         try {
-            await resetPasswordConfirm({ token, password: newPassword });
-            setMessage('Password reset successfully! You can now log in with your new password.');
+            const response = await resetPasswordConfirm({ token, password: newPassword });
+            setMessage(response.data.message || 'Password reset successfully! You can now log in with your new password.');
             setTimeout(() => {
                 navigate('/');
             }, 3000);
