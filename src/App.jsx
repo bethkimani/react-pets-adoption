@@ -15,7 +15,8 @@ import Header from './components/Header';
 import WhyAdopt from './components/WhyAdopt';
 import AdminDashboard from './Admin/AdminDashboard';
 import UserDashboard from './Users/UserDashboard';
-import ResetPassword from './components/ResetPassword'; // Import the new component
+import ResetPassword from './components/ResetPassword';
+import VerifyOtp from './components/VerifyOtp';
 
 // Home component for the landing page
 const Home = () => {
@@ -64,7 +65,8 @@ const AppLayout = () => {
                     <Route path="/search" element={<SearchPage />} />
                     <Route path="/search-and-display" element={<SearchAndDisplayPets />} />
                     <Route path="/about" element={<AboutUs />} />
-                    <Route path="/reset-password" element={<ResetPassword />} /> {/* Add reset password route */}
+                    <Route path="/reset-password" element={<ResetPassword />} />
+                    <Route path="/verify-otp" element={<VerifyOtp />} />
 
                     {/* Protected Routes */}
                     <Route

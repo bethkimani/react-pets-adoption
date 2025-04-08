@@ -65,6 +65,7 @@ export const schedulePickup = (data) => API.post('/schedule-pickup/', data);
 export const getSchedulePickupsByUser = (userId) => API.get(`/schedule-pickup/user/${userId}`);
 export const getChatMessages = () => API.get('/messages/');
 export const resetPassword = (data) => API.post('/auth/reset-password', data);
+export const verifyOtp = (data) => API.post('/auth/verify-otp', data);
 export const resetPasswordConfirm = (data) =>
     API.post(`/auth/reset-password/${data.token}`, { password: data.password });
 
