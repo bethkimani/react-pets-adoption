@@ -1,4 +1,3 @@
-// src/components/ResetPassword.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { resetPasswordConfirm } from '../api';
@@ -16,7 +15,7 @@ const ResetPassword = () => {
 
     useEffect(() => {
         if (!token) {
-            setError('Invalid or missing reset token. Please request a new reset link or OTP.');
+            setError('Invalid or missing reset token. Please request a new reset link.');
         }
     }, [token]);
 
