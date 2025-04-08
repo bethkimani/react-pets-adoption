@@ -41,6 +41,7 @@ const ResetPassword = () => {
                 navigate('/');
             }, 3000);
         } catch (err) {
+            console.error('Reset password error:', err.response || err.message);
             const errorMessage = err.response?.data?.error || 'Failed to reset password. The link may be invalid or expired.';
             setError(errorMessage);
         } finally {

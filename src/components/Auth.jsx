@@ -58,6 +58,7 @@ const Auth = ({ onClose, initialMode }) => {
                 setPassword('');
             }
         } catch (error) {
+            console.error('Auth error:', error.response || error.message);
             const errorMessage = error.response?.data?.error ||
                                 (showReset ? 'Failed to send reset email. Please try again.' : isLogin ? 'Login failed' : 'Signup failed') ||
                                 'An unexpected error occurred';
