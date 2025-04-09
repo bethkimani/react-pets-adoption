@@ -6,10 +6,10 @@ import { getChatMessages } from '../api'; // Import the API function to fetch ch
 import './LiveChat.css'; // Import the CSS file for styling
 
 // Initialize Socket.IO client
-const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://127.0.0.1:5000', {
+const socket = io(import.meta.env.VITE_SOCKET_URL || 'https://pets-adoption-flask-sqlite.onrender.com', {
     withCredentials: true,
-    extraHeaders: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`, // Send JWT token
+    auth: {
+        token: localStorage.getItem('token'), // Send JWT token via auth
     },
 });
 
@@ -25,8 +25,14 @@ const LiveChat = () => {
             console.log('Connected to WebSocket');
         });
 
+        // Listen for connection errors
+        socket.on('connect_error', (error) => {
+            console.error('WebSocket connection error:', error);
+        });
+
         // Listen for new messages (including bot responses)
         socket.on('new_message', (message) => {
+            console.log('Received new message:', message);
             setMessages((prevMessages) => [...prevMessages, message]);
         });
 
@@ -38,6 +44,7 @@ const LiveChat = () => {
         // Clean up on component unmount
         return () => {
             socket.off('connect');
+            socket.off('connect_error');
             socket.off('new_message');
             socket.off('error');
         };
@@ -49,9 +56,10 @@ const LiveChat = () => {
             const fetchChatHistory = async () => {
                 try {
                     const response = await getChatMessages();
-                    // Filter out test messages (e.g., messages containing 'test')
+                    console.log('Fetched chat history:', response.data);
+                    // Filter out test messages
                     const filteredMessages = response.data.filter(
-                        (msg) => !msg.text.toLowerCase().includes('test') // Adjust this condition as needed
+                        (msg) => !msg.text.toLowerCase().includes('test')
                     );
                     setMessages(filteredMessages);
                 } catch (error) {
@@ -65,6 +73,7 @@ const LiveChat = () => {
 
     const sendMessage = () => {
         if (input.trim()) {
+            console.log('Sending message:', input);
             // Send message to the backend via WebSocket
             socket.emit('new_message', { text: input });
             setInput('');

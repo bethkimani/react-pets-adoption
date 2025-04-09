@@ -67,7 +67,7 @@ export const addPaymentMethod = (data) => API.post('/payments/', data);
 export const getPaymentsByUser = (userId) => API.get(`/payments/user/${userId}`);
 export const schedulePickup = (data) => API.post('/schedule-pickup/', data);
 export const getSchedulePickupsByUser = (userId) => API.get(`/schedule-pickup/user/${userId}`);
-export const getChatMessages = () => API.get('/chat/messages'); // Updated to fetch from /chat/messages
+export const getChatMessages = () => API.get('/chat/messages'); // Fetch from /chat/messages
 export const resetPassword = (data) => API.post('/auth/reset-password', data);
 export const resetPasswordConfirm = (data) =>
     API.post(`/auth/reset-password/${data.token}`, { password: data.password });
