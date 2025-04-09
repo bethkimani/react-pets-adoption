@@ -58,7 +58,7 @@ const Step1 = ({ nextStep, handleChange, values, handleFileChange }) => {
                     name="image"
                     onChange={handleFileChange}
                     className="form-control"
-                    required
+                    // Removed required attribute since we validate in handleFormSubmit
                 />
             </div>
             <div className="button-group">

@@ -49,9 +49,11 @@ const AddPets = () => {
     };
 
     const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        console.log("Selected file:", file); // Debug log to confirm file selection
         setValues((prevValues) => ({
             ...prevValues,
-            image: e.target.files[0],
+            image: file,
         }));
     };
 
@@ -71,8 +73,14 @@ const AddPets = () => {
         formData.append("age", values.age ? parseInt(values.age) : "");
         formData.append("adoption_status", values.adoptionStatus);
         formData.append("description", values.description || "");
+        
+        // Add debug log to check the image
+        console.log("Image before appending to FormData:", values.image);
         if (values.image) {
             formData.append("image", values.image);
+        } else {
+            setErrorMessage("No image file selected. Please upload an image.");
+            return;
         }
 
         try {
