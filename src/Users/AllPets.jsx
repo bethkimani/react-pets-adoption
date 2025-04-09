@@ -7,7 +7,7 @@ import './AllPets.css';
 
 const AllPets = () => {
     const [pets, setPets] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [processingPetId, setProcessingPetId] = useState(null); // Track the ID of the pet being processed
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const AllPets = () => {
             return;
         }
 
-        setLoading(true);
+        setProcessingPetId(pet.id); // Set the ID of the pet being processed
         setError(null);
 
         try {
@@ -52,7 +52,7 @@ const AllPets = () => {
             setError(errorMessage);
             alert(errorMessage);
         } finally {
-            setLoading(false);
+            setProcessingPetId(null); // Clear the processing state after the request completes
         }
     };
 
@@ -81,9 +81,9 @@ const AllPets = () => {
                                 <button 
                                     className={`adopt-button ${pet.adoption_status.toLowerCase() !== 'available' ? 'adopted' : ''}`}
                                     onClick={() => handleAdoptClick(pet)}
-                                    disabled={pet.adoption_status.toLowerCase() !== 'available' || loading}
+                                    disabled={pet.adoption_status.toLowerCase() !== 'available' || processingPetId === pet.id}
                                 >
-                                    {loading ? 'Processing...' : (pet.adoption_status.toLowerCase() === 'available' ? 'Adopt Me' : 'Adopted')}
+                                    {processingPetId === pet.id ? 'Processing...' : (pet.adoption_status.toLowerCase() === 'available' ? 'Adopt Me' : 'Adopted')}
                                 </button>
                             </div>
                             <div className="pet-details">
