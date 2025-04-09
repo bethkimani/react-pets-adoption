@@ -1,28 +1,60 @@
-import { useState, useEffect } from 'react';
+// src/components/LiveChat.jsx
+import { useState, useEffect, useRef } from 'react';
 import { FaCommentDots } from 'react-icons/fa';
 import io from 'socket.io-client';
 import { getChatMessages } from '../api'; // Import the API function to fetch chat history
-import './LiveChat.css'; // Import the CSS file for styling
+import './LiveChat.css';
 
-// Initialize Socket.IO client with the Render URL
 const socket = io('https://pets-adoption-flask-sqlite.onrender.com', {
     withCredentials: true,
-    auth: {
-        token: localStorage.getItem('token'), // Send JWT token via auth
-    },
 });
 
 const LiveChat = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [isOpen, setIsOpen] = useState(false);
+    const messagesEndRef = useRef(null);
 
-    // Set up WebSocket listeners
+    // Scroll to the bottom of the messages
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    // Fetch chat history when the chat widget is opened
+    const fetchChatHistory = async () => {
+        try {
+            const response = await getChatMessages();
+            console.log('Fetched chat history:', response.data);
+            const filteredMessages = response.data.filter(
+                (msg) => !msg.text.toLowerCase().includes('test')
+            );
+            setMessages(filteredMessages);
+
+            // If no messages exist, show the welcome message
+            if (filteredMessages.length === 0) {
+                const welcomeMessage = {
+                    text: "Hello! Welcome to Pets Adoption, your trusted platform for finding the perfect furry friend. We offer a wide range of pets ready for adoption. How can I assist you today? For more information, contact us at 401-234-5678.",
+                    sender: 'bot',
+                    timestamp: new Date().toISOString(),
+                };
+                setMessages([welcomeMessage]);
+            }
+        } catch (error) {
+            console.error('Error fetching chat history:', error);
+            // Show welcome message if there's an error fetching history
+            const welcomeMessage = {
+                text: "Hello! Welcome to Pets Adoption, your trusted platform for finding the perfect furry friend. We offer a wide range of pets ready for adoption. How can I assist you today? For more information, contact us at 401-234-5678.",
+                sender: 'bot',
+                timestamp: new Date().toISOString(),
+            };
+            setMessages([welcomeMessage]);
+        }
+    };
+
     useEffect(() => {
         // Connect to WebSocket
         socket.on('connect', () => {
             console.log('Connected to WebSocket');
-            // Fetch chat history immediately upon connection if chat is open
             if (isOpen) {
                 fetchChatHistory();
             }
@@ -33,11 +65,10 @@ const LiveChat = () => {
             console.error('WebSocket connection error:', error);
         });
 
-        // Listen for new messages (including bot responses)
+        // Listen for new messages
         socket.on('new_message', (message) => {
             console.log('Received new message:', message);
             setMessages((prevMessages) => {
-                // Avoid duplicate messages by checking if the message already exists
                 const messageExists = prevMessages.some(
                     (msg) => msg.text === message.text && msg.timestamp === message.timestamp
                 );
@@ -60,35 +91,7 @@ const LiveChat = () => {
             socket.off('new_message');
             socket.off('error');
         };
-    }, [isOpen]); // Add isOpen as a dependency to re-run when chat opens/closes
-
-    // Fetch chat history when the chat widget is opened
-    const fetchChatHistory = async () => {
-        try {
-            const response = await getChatMessages();
-            console.log('Fetched chat history:', response.data);
-            // Filter out test messages
-            const filteredMessages = response.data.filter(
-                (msg) => !msg.text.toLowerCase().includes('test')
-            );
-            setMessages(filteredMessages);
-
-            // If no messages exist, schedule the welcome message with a delay
-            if (filteredMessages.length === 0) {
-                setTimeout(() => {
-                    const welcomeMessage = {
-                        text: "Hello! Welcome to Pets Adoption, your trusted platform for finding the perfect furry friend. We offer a wide range of pets ready for adoption. How can I assist you today? For more information, contact us at 401-234-5678.",
-                        sender: 'bot',
-                        timestamp: new Date().toISOString(),
-                    };
-                    socket.emit('new_message', welcomeMessage);
-                    console.log('Emitted welcome message');
-                }, 3000); // 3-second delay
-            }
-        } catch (error) {
-            console.error('Error fetching chat history:', error);
-        }
-    };
+    }, [isOpen]);
 
     // Fetch chat history when the chat widget is opened
     useEffect(() => {
@@ -96,6 +99,11 @@ const LiveChat = () => {
             fetchChatHistory();
         }
     }, [isOpen]);
+
+    // Scroll to bottom whenever messages change
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     const sendMessage = () => {
         if (input.trim()) {
@@ -105,7 +113,6 @@ const LiveChat = () => {
                 sender: 'user',
                 timestamp: new Date().toISOString(),
             };
-            // Send message to the backend via WebSocket
             socket.emit('new_message', userMessage);
             setInput('');
         }
@@ -158,6 +165,7 @@ const LiveChat = () => {
                                 )}
                             </div>
                         ))}
+                        <div ref={messagesEndRef} />
                     </div>
                     <input
                         type="text"
