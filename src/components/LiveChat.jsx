@@ -1,3 +1,4 @@
+// src/components/LiveChat.js
 import { useState, useEffect } from 'react';
 import { FaCommentDots } from 'react-icons/fa';
 import io from 'socket.io-client';
@@ -24,7 +25,7 @@ const LiveChat = () => {
             console.log('Connected to WebSocket');
         });
 
-        // Listen for new messages (including the welcome message)
+        // Listen for new messages (including bot responses)
         socket.on('new_message', (message) => {
             setMessages((prevMessages) => [...prevMessages, message]);
         });
@@ -48,8 +49,11 @@ const LiveChat = () => {
             const fetchChatHistory = async () => {
                 try {
                     const response = await getChatMessages();
-                    // Combine fetched messages with any existing messages (e.g., welcome message)
-                    setMessages((prevMessages) => [...prevMessages, ...response.data]);
+                    // Filter out test messages (e.g., messages containing 'test')
+                    const filteredMessages = response.data.filter(
+                        (msg) => !msg.text.toLowerCase().includes('test') // Adjust this condition as needed
+                    );
+                    setMessages(filteredMessages);
                 } catch (error) {
                     console.error('Error fetching chat history:', error);
                 }
