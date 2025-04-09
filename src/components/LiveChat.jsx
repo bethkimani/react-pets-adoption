@@ -6,7 +6,7 @@ import { getChatMessages } from '../api'; // Import the API function to fetch ch
 import './LiveChat.css'; // Import the CSS file for styling
 
 // Initialize Socket.IO client
-const socket = io(import.meta.env.VITE_SOCKET_URL || 'https://pets-adoption-flask-sqlite.onrender.com', {
+const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://127.0.0.1:5000', {
     withCredentials: true,
     auth: {
         token: localStorage.getItem('token'), // Send JWT token via auth
