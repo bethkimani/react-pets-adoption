@@ -83,6 +83,11 @@ const AddPets = () => {
             return;
         }
 
+        // Debug log to inspect FormData contents
+        for (let [key, value] of formData.entries()) {
+            console.log(`FormData entry: ${key}=${value}`);
+        }
+
         try {
             const response = await addPet(formData);
             console.log("Pet added successfully:", response.data);

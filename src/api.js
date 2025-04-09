@@ -1,4 +1,3 @@
-// src/api.js
 import axios from 'axios';
 
 const API = axios.create({
@@ -11,7 +10,11 @@ API.interceptors.request.use((config) => {
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
-    config.headers['Content-Type'] = 'application/json';
+    // Only set Content-Type to application/json if it's not a multipart/form-data request
+    if (!config.headers['Content-Type'] || config.headers['Content-Type'] !== 'multipart/form-data') {
+        config.headers['Content-Type'] = 'application/json';
+    }
+    console.log("Request config:", config); // Debug log to inspect the request
     return config;
 });
 
