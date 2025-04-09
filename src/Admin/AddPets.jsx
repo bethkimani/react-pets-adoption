@@ -31,6 +31,7 @@ const AddPets = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         const role = localStorage.getItem('role');
+        console.log("User role from localStorage:", role); // Debug log to confirm role
         if (!token || role !== 'Admin') {
             alert('You must be logged in as an Admin to add a pet.');
             navigate('/auth');
