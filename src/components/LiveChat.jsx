@@ -82,6 +82,7 @@ const LiveChat = () => {
                         timestamp: new Date().toISOString(),
                     };
                     socket.emit('new_message', welcomeMessage);
+                    console.log('Emitted welcome message');
                 }, 3000); // 3-second delay
             }
         } catch (error) {
@@ -116,6 +117,21 @@ const LiveChat = () => {
         }
     };
 
+    // Function to format timestamp like "1 min ago"
+    const formatTimestamp = (timestamp) => {
+        const now = new Date();
+        const messageTime = new Date(timestamp);
+        const diffInSeconds = Math.floor((now - messageTime) / 1000);
+
+        if (diffInSeconds < 60) {
+            return `${diffInSeconds} sec ago`;
+        } else if (diffInSeconds < 3600) {
+            return `${Math.floor(diffInSeconds / 60)} min ago`;
+        } else {
+            return `${Math.floor(diffInSeconds / 3600)} hr ago`;
+        }
+    };
+
     return (
         <div className="live-chat-container">
             {/* Chat Icon */}
@@ -130,8 +146,16 @@ const LiveChat = () => {
                     <div className="messages">
                         {messages.map((msg, index) => (
                             <div key={index} className={msg.sender === 'user' ? 'user' : 'bot'}>
+                                {msg.sender === 'bot' && (
+                                    <div className="message-header">
+                                        <span className="sender-label">Customer Support</span>
+                                        <small>{formatTimestamp(msg.timestamp)}</small>
+                                    </div>
+                                )}
                                 <span>{msg.text}</span>
-                                <small>{new Date(msg.timestamp).toLocaleTimeString()}</small>
+                                {msg.sender === 'user' && (
+                                    <small>{formatTimestamp(msg.timestamp)}</small>
+                                )}
                             </div>
                         ))}
                     </div>
