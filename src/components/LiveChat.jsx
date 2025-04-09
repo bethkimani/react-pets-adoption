@@ -4,8 +4,8 @@ import io from 'socket.io-client';
 import { getChatMessages } from '../api'; // Import the API function to fetch chat history
 import './LiveChat.css'; // Import the CSS file for styling
 
-// Initialize Socket.IO client
-const socket = io(import.meta.env.VITE_SOCKET_URL || 'https://pets-adoption-flask-sqlite.onrender.com', {
+// Initialize Socket.IO client with the Render URL
+const socket = io('https://pets-adoption-flask-sqlite.onrender.com', {
     withCredentials: true,
     auth: {
         token: localStorage.getItem('token'), // Send JWT token via auth
@@ -67,20 +67,22 @@ const LiveChat = () => {
         try {
             const response = await getChatMessages();
             console.log('Fetched chat history:', response.data);
-            // Filter out test messages, but ensure welcome message isn't filtered
+            // Filter out test messages
             const filteredMessages = response.data.filter(
                 (msg) => !msg.text.toLowerCase().includes('test')
             );
             setMessages(filteredMessages);
 
-            // If no messages exist, emit a welcome message
+            // If no messages exist, schedule the welcome message with a delay
             if (filteredMessages.length === 0) {
-                const welcomeMessage = {
-                    text: "Hello! Welcome to Pets Adoption, your trusted platform for finding the perfect furry friend. We offer a wide range of pets ready for adoption. How can I assist you today? For more information, contact us at 401-234-5678.",
-                    sender: 'bot',
-                    timestamp: new Date().toISOString(),
-                };
-                socket.emit('new_message', welcomeMessage);
+                setTimeout(() => {
+                    const welcomeMessage = {
+                        text: "Hello! Welcome to Pets Adoption, your trusted platform for finding the perfect furry friend. We offer a wide range of pets ready for adoption. How can I assist you today? For more information, contact us at 401-234-5678.",
+                        sender: 'bot',
+                        timestamp: new Date().toISOString(),
+                    };
+                    socket.emit('new_message', welcomeMessage);
+                }, 3000); // 3-second delay
             }
         } catch (error) {
             console.error('Error fetching chat history:', error);
