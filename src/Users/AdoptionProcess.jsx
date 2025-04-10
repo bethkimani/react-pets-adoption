@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom'; // Add this import
+import { useParams } from 'react-router-dom'; // Add this import
 import Procedure from './Procedure';
 import AdoptionForm from './AdoptionForm';
 import PaymentSettings from './PaymentSettings';
@@ -7,8 +7,8 @@ import SchedulePickup from './SchedulePickup';
 import './AdoptionProcess.css';
 
 const AdoptionProcess = () => {
-  const location = useLocation(); // Get the navigation state
-  const petId = location.state?.petId; // Extract petId from state
+  const {id} = useParams() //Get the id from the parameter
+  const petId = parseInt(id); // Convert to number
 
   const [currentStep, setCurrentStep] = useState('Procedure');
   const [completedSteps, setCompletedSteps] = useState({

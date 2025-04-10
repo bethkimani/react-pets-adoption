@@ -31,15 +31,19 @@ const Auth = ({ onClose, initialMode }) => {
             } else if (isLogin) {
                 // Handle login
                 const response = await login({ email, password });
-                const { token, role, user_id } = response.data;
+                const data = response.data
+                console.log(data);
+                
+                const { token, role, user_id , username} = response.data;
                 localStorage.setItem('token', token);
                 localStorage.setItem('role', role);
                 localStorage.setItem('user_id', user_id);
+                localStorage.setItem('username', username )
                 localStorage.setItem('isAuthenticated', 'true');
                 if (role.toLowerCase() === 'admin') {
                     navigate('/admin-dashboard');
                 } else {
-                    navigate('/user-dashboard');
+                    navigate('/');
                 }
                 onClose();
             } else {

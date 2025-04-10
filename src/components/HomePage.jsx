@@ -1,87 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
+import { getPets } from '../api';
 
-// Import images directly
-import catImage from '../assets/images/cat.jpeg';
-import dogImage from '../assets/images/dog.webp';
-import germanShepherdImage from '../assets/images/germanshepherd.jpg';
-import rabbitImage from '../assets/images/rabbit.jpg';
-import turtleImage from '../assets/images/turtle.jpg';
-import parrotImage from '../assets/images/parrot.jpg';
-
-const pets = [
-  { 
-    name: 'Amuki', 
-    type: 'Dog', 
-    image: dogImage, 
-    available: false, 
-    specialty: 'Babysitting',
-    weight: '30 lbs',
-    greased: 'Yes',
-    highestMedal: 'Gold Medal'
-  },
-  { 
-    name: 'Muimui', 
-    type: 'Dog', 
-    image: catImage, 
-    available: true, 
-    specialty: 'Truffle Hunter',
-    weight: '25 lbs',
-    greased: 'No',
-    highestMedal: 'Silver Medal'
-  },
-  { 
-    name: 'Snow', 
-    type: 'Golden Retriever', 
-    image: germanShepherdImage, 
-    available: true, 
-    specialty: 'Helper Dog',
-    weight: '65 lbs',
-    greased: 'No',
-    highestMedal: 'Bronze Medal'
-  },
-  { 
-    name: 'Bunny', 
-    type: 'Rabbit', 
-    image: rabbitImage, 
-    available: true, 
-    specialty: 'Bunny Hop',
-    weight: '5 lbs',
-    greased: 'No',
-    highestMedal: 'None'
-  },
-  { 
-    name: 'Shelly', 
-    type: 'Turtle', 
-    image: turtleImage, 
-    available: true, 
-    specialty: 'Slow and Steady',
-    weight: '10 lbs',
-    greased: 'No',
-    highestMedal: 'Participation Medal'
-  },
-  { 
-    name: 'Polly', 
-    type: 'Parrot', 
-    image: parrotImage, 
-    available: true, 
-    specialty: 'Talkative',
-    weight: '2 lbs',
-    greased: 'No',
-    highestMedal: 'Champion Talker'
-  },
-];
 
 const HomePage = () => {
   const navigate = useNavigate(); // Use navigate to redirect
+  const [pets, setPets] = useState([])
+  const [error, setError]= useState(null)
+
+  useEffect(() => {
+          const fetchPets = async () => {
+              try {
+                  const response = await getPets();
+                  const data = response.data
+                  console.log(data);
+                  setPets(data)
+
+                  
+              } catch (error) {
+                  console.error('Error fetching pets:', error);
+                  setError('Failed to load pets. Please try again later.');
+                  setPets([])
+              }
+          };
+          fetchPets();
+      }, []);
 
   const handleAdoptClick = (pet) => {
-    if (pet.available) {
+    if (pet.adoption_status === "available") {
       // Redirect to the adoption process directly
-      navigate('/adoption-process');
+      navigate(`/adoption-process/${pet.id}`);
     } else {
       alert(`${pet.name} has already found their forever home. 🏡`);
     }
@@ -96,12 +47,12 @@ const HomePage = () => {
         </h1>
         <h2>Catalogue</h2>
         <div className="homepage-gallery">
-          {pets.map((pet, index) => (
-            <div key={index} className="homepage-pet-card">
-              <img src={pet.image} alt={pet.name} className="homepage-pet-image" />
+          {pets.map((pet) => (
+            <div key={pet.id} className="homepage-pet-card">
+              <img src={`https://pets-adoption-flask-sqlite.onrender.com${pet.image}`} alt={pet.name} className="homepage-pet-image" />
               <h2>{pet.name}</h2>
               <div className="button-container">
-                {pet.available ? (
+                {pet.adoption_status === "available" ? (
                   <button className="adopt-button" onClick={() => handleAdoptClick(pet)}>
                     Adopt Me
                   </button>
@@ -112,10 +63,11 @@ const HomePage = () => {
                 )}
               </div>
               <div className="pet-details">
-                <p>Specialty: {pet.specialty}</p>
-                <p>Weight: {pet.weight}</p>
-                <p>Greased: {pet.greased}</p>
-                <p>Highest Medal: {pet.highestMedal}</p>
+                <p>Breed: {pet.breed}</p>
+                <p>Description: {pet.description}</p>
+                <p>Hypoallergenic:{pet.hypoallergenic ? 'Yes' : "No"}</p>
+                <p>Age: {pet.age}</p>
+                <p>Weight {pet.weight}</p>
               </div>
             </div>
           ))}

@@ -11,10 +11,10 @@ import parrotImage from '../assets/images/parrot.jpg';
 import hamsterImage from '../assets/images/hamster.jpg';
 
 const pets = [
-  { name: 'Amuki', type: 'Dog', image: dogImage, available: true, details: 'Adopted' },
+  { name: 'Amuki', type: 'Dog', image: dogImage, available: false, details: 'Adopted' },
   { name: 'Muimui', type: 'Dog', image: catImage, available: true, details: 'Specialty: Finding truffles' },
   { name: 'Snow', type: 'Golden Retriever', image: germanShepherdImage, available: true, details: 'Adoption Status: Available\nColor: White\nBio: Friendly dog' },
-  { name: 'Bunny', type: 'Rabbit', image: rabbitImage, available: true, details: 'Color: Grey\nBio: Loves carrots' },
+  { name: 'Bunny', type: 'Rabbit', image: rabbitImage, available: false, details: 'Color: Grey\nBio: Loves carrots' },
   { name: 'Shelly', type: 'Turtle', image: turtleImage, available: true, details: 'Color: Green\nBio: Slow but steady' },
   { name: 'Polly', type: 'Parrot', image: parrotImage, available: true, details: 'Color: Rainbow\nBio: Talks a lot' },
   { name: 'Hammy', type: 'Hamster', image: hamsterImage, available: true, details: 'Color: Brown\nBio: Very active' },
@@ -62,7 +62,7 @@ const SearchAndDisplayPets = () => {
                 </button>
               )}
               <button className="search-details-button" onClick={() => handleSeeMore(pet)}>
-                See More
+                See Mr
               </button>
             </div>
           </div>

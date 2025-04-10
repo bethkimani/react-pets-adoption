@@ -16,6 +16,8 @@ import WhyAdopt from './components/WhyAdopt';
 import AdminDashboard from './Admin/AdminDashboard';
 import UserDashboard from './Users/UserDashboard';
 import ResetPassword from './components/ResetPassword';
+import AdoptionProcess from './Users/AdoptionProcess';
+import Auth from './components/Auth';
 
 
 // Home component for the landing page
@@ -66,7 +68,8 @@ const AppLayout = () => {
                     <Route path="/search-and-display" element={<SearchAndDisplayPets />} />
                     <Route path="/about" element={<AboutUs />} />
                     <Route path="/reset-password" element={<ResetPassword />} />
-                    
+                    <Route path='/adoption-process/:id' element={<AdoptionProcess/>}/>
+                    <Route path='/auth' element={<Auth/>}/>
 
                     {/* Protected Routes */}
                     <Route
