@@ -1,12 +1,45 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef,useState } from 'react';
 import { Chart, registerables } from 'chart.js';
 import './Dashboard.css';
+import { getTotalPets,getTotalAdoptedPets,getTotalUsers } from '../api';
 
 Chart.register(...registerables);
 
 const Dashboard = () => {
     const adoptionRateChartRef = useRef(null);
     const adoptionSummaryChartRef = useRef(null);
+
+    const [pets, setPets] = useState("");
+    const [AdoptedPets, setAdoptedPets] = useState("");
+    const [users, setUsers] = useState("");
+
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            // Start all requests simultaneously
+            const [petsResponse, adoptedResponse,usersResponse] = await Promise.all([
+              getTotalPets(),
+              getTotalAdoptedPets(),
+              getTotalUsers()
+
+            ]);
+            console.log(usersResponse.data.total_user);
+      
+            setPets(petsResponse.data.total_pets);
+            setAdoptedPets(adoptedResponse.data.total_adopted);
+            setUsers(usersResponse.data.total_user);
+      
+          } catch (error) {
+            console.error('Error fetching data:', error);
+            setError('Failed to load data');
+          }
+        };
+      
+        fetchData();
+      }, []);
+    
 
     useEffect(() => {
         const adoptionRateChart = new Chart(adoptionRateChartRef.current, {
@@ -56,9 +89,9 @@ const Dashboard = () => {
             </header>
 
             <section className="summary-cards">
-                <div className="summary-card">53 Users</div>
-                <div className="summary-card">57 Pets</div>
-                <div className="summary-card">3451 Adopted Pets</div>
+                <div className="summary-card">{users} Users</div>
+                <div className="summary-card">{pets} Total Pets</div>
+                <div className="summary-card">{AdoptedPets} Adopted Pets</div>
             </section>
 
             <section className="charts">

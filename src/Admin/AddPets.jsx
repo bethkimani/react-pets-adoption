@@ -19,17 +19,17 @@ const AddPets = () => {
         species: "",
         breed: "",
         age: "",
-        adoptionStatus: "",
+        adoption_status: "",
         description: "",
         image: null,
         gender: "",
         colour: "",
-        vaccinationStatus: "",
-        portal: "",
-        specialNeeds: "",
+        vaccination_status: "",
+        
+        special_needs: "",
         microchipped: "",
         personality: "",
-        backstory: "",
+        back_story: "",
     });
     const [successMessage, setSuccessMessage] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
@@ -65,7 +65,7 @@ const AddPets = () => {
     };
 
     const handleFormSubmit = async () => {
-        const requiredFields = ['name', 'species', 'adoptionStatus', 'gender', 'vaccinationStatus', 'microchipped'];
+        const requiredFields = ['name', 'species', 'adoption_status', 'gender', 'vaccination_status', 'microchipped'];
         for (const field of requiredFields) {
             if (!values[field]) {
                 setErrorMessage(`Please fill in the ${field} field.`);
@@ -78,16 +78,16 @@ const AddPets = () => {
         formData.append("species", values.species);
         formData.append("breed", values.breed || "");
         formData.append("age", values.age ? parseInt(values.age) : "");
-        formData.append("adoption_status", values.adoptionStatus);
+        formData.append("adoption_status", values.adoption_status);
         formData.append("description", values.description || "");
         formData.append("gender", values.gender);
         formData.append("colour", values.colour || "");
-        formData.append("vaccination_status", values.vaccinationStatus);
-        formData.append("portal", values.portal || "");
-        formData.append("special_needs", values.specialNeeds || "");
+        formData.append("vaccination_status", values.vaccination_status);
+        
+        formData.append("special_needs", values.special_needs || "none");
         formData.append("microchipped", values.microchipped);
         formData.append("personality", values.personality || "");
-        formData.append("backstory", values.backstory || "");
+        formData.append("back_story", values.back_story || "");
 
         if (values.image) {
             formData.append("image", values.image);
@@ -104,18 +104,18 @@ const AddPets = () => {
                 name: "",
                 species: "",
                 breed: "",
-                age: "",
-                adoptionStatus: "",
+                age: "",  
+                adoption_status: "",
                 description: "",
                 image: null,
                 gender: "",
                 colour: "",
-                vaccinationStatus: "",
-                portal: "",
-                specialNeeds: "",
+                vaccination_status: "",
+                
+                special_needs: "",
                 microchipped: "",
                 personality: "",
-                backstory: "",
+                back_story: "",
             });
             setStep(1);
         } catch (error) {
@@ -131,17 +131,17 @@ const AddPets = () => {
             species: "",
             breed: "",
             age: "",
-            adoptionStatus: "",
+            adoption_status: "",
             description: "",
             image: null,
             gender: "",
             colour: "",
-            vaccinationStatus: "",
-            portal: "",
-            specialNeeds: "",
+            vaccination_status: "",
+            
+            special_needs: "",
             microchipped: "",
             personality: "",
-            backstory: "",
+            back_story: "",
         });
         setStep(1);
         setSuccessMessage(null);

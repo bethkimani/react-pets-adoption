@@ -133,7 +133,7 @@ const ViewPets = () => {
                                 <td>
                                     {pet.image ? (
                                         <img
-                                            src={`https://pets-adoption-flask-sqlite.onrender.com${pet.image}`}
+                                            src={`http://127.0.0.1:10000${pet.image}`}
                                             alt={pet.name}
                                             style={{ width: '50px', height: '50px' }}
                                             onError={(e) => { e.target.src = 'https://via.placeholder.com/50'; }}

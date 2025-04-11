@@ -6,8 +6,8 @@ const Step2 = ({ nextStep, prevStep, handleChange, values }) => {
             <div className="form-group">
                 <label htmlFor="adoptionStatus">Adoption Status</label>
                 <select
-                    name="adoptionStatus"
-                    value={values.adoptionStatus}
+                    name="adoption_status"
+                    value={values.adoption_status}
                     onChange={handleChange}
                     className="form-control"
                     required
@@ -19,8 +19,8 @@ const Step2 = ({ nextStep, prevStep, handleChange, values }) => {
             <div className="form-group">
                 <label htmlFor="vaccinationStatus">Vaccination Status</label>
                 <select
-                    name="vaccinationStatus"
-                    value={values.vaccinationStatus}
+                    name="vaccination_status"
+                    value={values.vaccination_status}
                     onChange={handleChange}
                     className="form-control"
                     required
@@ -35,8 +35,8 @@ const Step2 = ({ nextStep, prevStep, handleChange, values }) => {
                 <label htmlFor="specialNeeds">Special Needs</label>
                 <input
                     type="text"
-                    name="specialNeeds"
-                    value={values.specialNeeds}
+                    name="special_needs"
+                    value={values.special_needs}
                     onChange={handleChange}
                     placeholder="e.g. None"
                     className="form-control"
@@ -70,8 +70,8 @@ const Step2 = ({ nextStep, prevStep, handleChange, values }) => {
             <div className="form-group">
                 <label htmlFor="backstory">Backstory</label>
                 <textarea
-                    name="backstory"
-                    value={values.backstory}
+                    name="back_story"
+                    value={values.back_story}
                     onChange={handleChange}
                     placeholder="Describe the pet's history..."
                     className="form-control"

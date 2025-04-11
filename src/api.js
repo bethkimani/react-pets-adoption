@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api', // Ensure this matches your Render URL
+    baseURL: 'http://127.0.0.1:10000/api', // Ensure this matches your Render URL
     withCredentials: true,
 });
 
@@ -40,6 +40,8 @@ API.interceptors.response.use(
 
 // API functions
 export const getPets = () => API.get('/pets/');
+export const getTotalPets = () => API.get('/pets/total');
+export const getTotalAdoptedPets = () => API.get('/pets/adopted/total');
 export const addPet = (formData) =>
     API.post('/pets/', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -58,6 +60,7 @@ export const userReplyToMessage = (messageId, replyData) => API.post(`/messages/
 export const getUserMessages = (email) => API.get(`/messages/user/${email}`);
 export const login = (data) => API.post('/auth/login', data);
 export const getUsers = () => API.get('/users');
+export const getTotalUsers =() => API.get(`/users/total`)
 export const getRoles = () => API.get('/roles');
 export const signup = (data) => API.post('/auth/signup', data);
 export const updateUser = (id, data) => API.put(`/users/${id}`, data);
