@@ -77,7 +77,6 @@ const Step2 = ({ nextStep, prevStep, handleChange, values }) => {
                     className="form-control"
                 />
             </div>
-           
             <div className="button-group">
                 <button type="button" className="nav-button" onClick={prevStep}>Back</button>
                 <button type="button" className="nav-button" onClick={nextStep}>Continue</button>

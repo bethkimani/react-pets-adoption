@@ -25,7 +25,6 @@ const AddPets = () => {
         gender: "",
         colour: "",
         vaccinationStatus: "",
-        portal: "",
         specialNeeds: "",
         microchipped: "",
         personality: "",
@@ -39,8 +38,8 @@ const AddPets = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         const role = localStorage.getItem('role');
-        if (!token || role !== 'Admin') {
-            alert('You must be logged in as an Admin to add a pet.');
+        if (!token || role !== 'User') { // Changed from 'Admin' to 'User'
+            alert('You must be logged in as a User to add a pet.');
             navigate('/auth');
         }
     }, [navigate]);
@@ -83,7 +82,6 @@ const AddPets = () => {
         formData.append("gender", values.gender);
         formData.append("colour", values.colour || "");
         formData.append("vaccination_status", values.vaccinationStatus);
-        formData.append("portal", values.portal || "");
         formData.append("special_needs", values.specialNeeds || "");
         formData.append("microchipped", values.microchipped);
         formData.append("personality", values.personality || "");
@@ -111,7 +109,6 @@ const AddPets = () => {
                 gender: "",
                 colour: "",
                 vaccinationStatus: "",
-                portal: "",
                 specialNeeds: "",
                 microchipped: "",
                 personality: "",
@@ -137,7 +134,6 @@ const AddPets = () => {
             gender: "",
             colour: "",
             vaccinationStatus: "",
-            portal: "",
             specialNeeds: "",
             microchipped: "",
             personality: "",

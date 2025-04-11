@@ -75,4 +75,7 @@ export const resetPassword = (data) => API.post('/auth/reset-password', data);
 export const resetPasswordConfirm = (data) =>
     API.post(`/auth/reset-password/${data.token}`, { password: data.password });
 
+// New function to fetch dashboard summary
+export const getDashboardSummary = () => API.get('/pets/dashboard/summary');
+
 export default API;

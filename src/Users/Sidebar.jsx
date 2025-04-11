@@ -1,4 +1,3 @@
-// Sidebar.jsx (updated to remove Adoption Form, Payment Settings, and Schedule Pick-Up)
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.css';
@@ -23,6 +22,11 @@ const Sidebar = ({ onLogout }) => {
                 <li className={location.pathname === '/user-dashboard/adoption-process' ? 'active' : ''}>
                     <Link to="/user-dashboard/adoption-process">
                         <i className="fas fa-paw"></i> Adoption Process
+                    </Link>
+                </li>
+                <li className={location.pathname === '/user-dashboard/add-pet' ? 'active' : ''}>
+                    <Link to="/user-dashboard/add-pet">
+                        <i className="fas fa-plus-circle"></i> Add Pet
                     </Link>
                 </li>
                 <li className={location.pathname === '/user-dashboard/inbox' ? 'active' : ''}>

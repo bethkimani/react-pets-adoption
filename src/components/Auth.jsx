@@ -43,7 +43,7 @@ const Auth = ({ onClose, initialMode }) => {
                 if (role.toLowerCase() === 'admin') {
                     navigate('/admin-dashboard');
                 } else {
-                    navigate('/');
+                    navigate('/user-dashboard');
                 }
                 onClose();
             } else {
