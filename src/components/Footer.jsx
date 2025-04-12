@@ -7,7 +7,7 @@ import './Footer.css';
 
 const Footer = () => {
     return (
-        <footer className="footer" id="faq-section">
+        <footer className="footer animate__animated animate__fadeInUp animate__delay-2s" id="faq-section">
             <div className="footer-container">
                 <div className="footer-section">
                     <h5>Contact Us</h5>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 import BookingModal from './BookingPet';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,15 +15,14 @@ const Hero = () => {
   };
 
   return (
-    <div className="hero">
+    <div className="hero ">
       <div className="hero-text">
         <h1 className="hero-title">
           Find Your Perfect Furry Friend Today!
         </h1>
         <div className="cta-buttons">
-          <a href="/catalogue" className="btn">Meet Your Match</a>
-          <a href="/catalogue#adoption-form-section" className="btn">Start the Adoption Process</a>
-          <a href="#faq-section" className="btn">Learn More</a>
+          <Link to={'/catalogue'} className="buton">Meet Your Match</Link>
+          <a href="#faq-section" className="buton">Learn More</a>
         </div>
       </div>
       {isModalOpen && <BookingModal onClose={closeModal} />}

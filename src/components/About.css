@@ -37,9 +37,9 @@
 .title {
     text-align: center; /* Center the subtitle */
     font-size: 1.5rem; /* Adjust font size as needed */
-    color: #333;
     margin-top: 40px; /* Increased space above the subtitle */
     margin-bottom: 40px; /* Space below the subtitle */
+    
 }
 
 @keyframes moveToCenter {
@@ -64,10 +64,12 @@
     color: #333;
 }
 
-.about-text h1 span {
-    color: #FF914D;
+.text-secondary{
+    color: #ff0066;
 }
-
+.red-text{
+    color: #ff6600;
+}
 .about-text p {
     font-size: 1.2rem;
     color: #555;
@@ -97,24 +99,20 @@
 
 /* Updated button styles */
 .btn-primary {
-    background-color: #FF8C42; /* Match your other orange buttons */
+    padding: 15px 30px;
+    font-size: 16px;
     color: white;
+    background: linear-gradient(90deg, #ff0066, #ff6600);
     border: none;
-    padding: 12px 25px; /* Slightly more horizontal padding */
-    font-size: 1rem;
-    font-weight: bold;
+    border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 5px;
-    text-decoration: none;
-    display: inline-block; /* Ensures proper sizing */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    box-shadow: 0 4px 15px rgba(255,0,102,0);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #FF6F22; /* Darker orange on hover */
-    transform: translateY(-2px); /* Slight lift effect */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+    box-shadow: 0 10px 20px rgba(255,0,102,0.5);
+    transform: translateY(-3px);
 }
 
 /* Image Section */

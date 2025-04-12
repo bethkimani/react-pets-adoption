@@ -5,10 +5,10 @@ import './About.css';
 
 const AboutUs = () => {
     return (
-        <div className="about-us-container">
+        <div className="about-us-container animate__animated animate__fadeInUp animate__delay-2s">
             {/* Left - Text Content */}
             <div className="about-text">
-                <h1 className="about-heading">Every Pet Deserves a <span className="text-secondary">Loving Home</span></h1>
+                <h1 className="about-heading">Every Pet Deserves a <span className="text-secondary">Loving</span><span className='red-text'> Home</span></h1>
                 <h2 className="title">About Us</h2>
                 <p className="description">
                     We connect rescue pets with caring families through a seamless adoption process.  

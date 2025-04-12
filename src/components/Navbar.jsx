@@ -21,22 +21,25 @@ const Navbar = () => {
     const toggleMenu = () => setIsMobile(!isMobile);
 
     return (
-        <nav className="navbar">
+        <nav className="navbar" style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 1000, // TO Ensure it stays above other content
+            width: '100%'}}>
             <div className="navbar-content">
-                <div className="brand-name">Adoptly</div>
+                <div className="brand-name">
+                <Link to="/" style={{ textDecoration: 'none', color: 'white' }}> 
+                <span >Adoptly</span>   
+                </Link>
+                </div>
                 <div className="menu-toggle" onClick={toggleMenu}>
                     <div className={`bar ${isMobile ? 'active' : ''}`}></div>
                     <div className={`bar ${isMobile ? 'active' : ''}`}></div>
                     <div className={`bar ${isMobile ? 'active' : ''}`}></div>
                 </div>
                 <div className={`nav-links ${isMobile ? 'active' : ''}`}>
-                    <div className="nav-item">
-                        <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
-                            <FaHome className="nav-icon" />
-                            <span className="nav-label">Home</span>
-                        </Link>
-                    </div>
-                    <div className="nav-item">
+                    
+                    <div className="nav-item" >
                         <Link to="/catalogue" style={{ textDecoration: 'none', color: 'white' }}>
                             <FaPaw className="nav-icon" />
                             <span className="nav-label">Catalogue</span>
@@ -44,7 +47,7 @@ const Navbar = () => {
                     </div>
                     <div className="nav-item">
                         <Link to="/search" style={{ textDecoration: 'none', color: 'white' }}>
-                            <FaSearch className="nav-icon" />
+                            <FaSearch className="nav-icon"  />
                             <span className="nav-label">Search</span>
                         </Link>
                     </div>

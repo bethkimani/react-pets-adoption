@@ -39,13 +39,13 @@ const HomePage = () => {
   };
 
   return (
-    <div className="homepage">
+    <div className="homepage animate__animated animate__fadeInUp animate__delay-2s">
       {/* Catalogue Section */}
       <div id="catalogue" className="catalogue">
         <h1>
           <FontAwesomeIcon icon={faHeart} className="heart-icon" /> Find Your Furry Soulmate <FontAwesomeIcon icon={faHeart} className="heart-icon" />
         </h1>
-        <h2>Catalogue</h2>
+        <h2>Pets</h2>
         <div className="homepage-gallery">
           {pets.map((pet) => (
             <div key={pet.id} className="homepage-pet-card">

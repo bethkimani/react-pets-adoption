@@ -105,18 +105,20 @@ footer {
 }
 
 .newsletter-form button {
-    background-color: #FF8C42;
+    padding: 15px 30px;
+    font-size: 16px;
     color: white;
-    padding: 6px; /* Adjusted padding */
+    background: linear-gradient(90deg, #ff0066, #ff6600);
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     cursor: pointer;
-    transition: background 0.3s;
-    font-size: 14px; /* Adjust font size if needed */
+    box-shadow: 0 4px 15px rgba(255,0,102,0);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .newsletter-form button:hover {
-    background-color: #e0773c;
+    box-shadow: 0 10px 20px rgba(255,0,102,0.5);
+    transform: translateY(-3px);
 }
 
 /* FAQs and Support Section */

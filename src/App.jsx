@@ -1,5 +1,5 @@
 // src/App.jsx
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -18,7 +18,7 @@ import UserDashboard from './Users/UserDashboard';
 import ResetPassword from './components/ResetPassword';
 import AdoptionProcess from './Users/AdoptionProcess';
 import Auth from './components/Auth';
-
+import 'animate.css'
 
 // Home component for the landing page
 const Home = () => {
@@ -54,12 +54,13 @@ const AppLayout = () => {
     const location = useLocation();
     const isAdminRoute = location.pathname.startsWith('/admin-dashboard');
     const isUserDashboard = location.pathname.startsWith('/user-dashboard');
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     return (
         <div className="App">
             <ErrorBoundary>
                 {!isUserDashboard && !isAdminRoute && <Header />}
-                {!isUserDashboard && !isAdminRoute && <Navbar />}
+                {!isUserDashboard && !isAdminRoute && <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
                 <Routes>
                     {/* Public Routes */}
                     <Route path="/" element={<Home />} />
@@ -70,6 +71,7 @@ const AppLayout = () => {
                     <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path='/adoption-process/:id' element={<AdoptionProcess/>}/>
                     <Route path='/auth' element={<Auth/>}/>
+                    <Route path='catalogue/adoption-process/:id' element={<AdoptionProcess/>}/>
 
                     {/* Protected Routes */}
                     <Route

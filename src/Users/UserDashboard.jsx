@@ -23,7 +23,7 @@ const UserDashboard = () => {
         localStorage.removeItem('isAuthenticated');
         localStorage.removeItem('role');
         setIsModalOpen(false);
-        navigate('/auth');
+        navigate('/');
     };
 
     return (

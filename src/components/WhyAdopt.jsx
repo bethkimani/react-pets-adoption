@@ -4,9 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDog, faHeart, faHome } from '@fortawesome/free-solid-svg-icons';
 import './WhyAdopt.css'; // Ensure you have this CSS file
 
+
 const WhyAdopt = () => {
     return (
-        <section className="why-adopt">
+        <section className="why-adopt animate__animated animate__fadeInUp animate__delay-2s">
             <h2>Why Adopt?</h2>
             <div className="why-adopt-container">
                 <div className="adopt-point">
