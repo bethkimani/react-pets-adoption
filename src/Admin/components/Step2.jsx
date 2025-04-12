@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 
 const Step2 = ({ nextStep, prevStep, handleChange, values }) => {

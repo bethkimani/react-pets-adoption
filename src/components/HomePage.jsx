@@ -32,7 +32,7 @@ const HomePage = () => {
   const handleAdoptClick = (pet) => {
     if (pet.adoption_status === "available") {
       // Redirect to the adoption process directly
-      navigate(`/adoption-process/${pet.id}`);
+      navigate(`adoption-process/${pet.id}`);
     } else {
       alert(`${pet.name} has already found their forever home. 🏡`);
     }

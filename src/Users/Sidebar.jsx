@@ -21,7 +21,7 @@ const Sidebar = ({ onLogout }) => {
                 </li>
                 <li className={location.pathname === '/user-dashboard/adoption-process' ? 'active' : ''}>
                     <Link to="/user-dashboard/adoption-process">
-                        <i className="fas fa-paw"></i> Adoption Process
+                        <i className="fas fa-paw"></i> Adopt a pet
                     </Link>
                 </li>
                 <li className={location.pathname === '/user-dashboard/add-pet' ? 'active' : ''}>

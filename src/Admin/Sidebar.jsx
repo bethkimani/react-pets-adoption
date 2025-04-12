@@ -15,7 +15,7 @@ const Sidebar = ({ onLogout }) => {
                 </li>
                 <li>
                     <Link to="/admin-dashboard/teams" className="sidebar-link">
-                        <FaUsers /> Teams
+                        <FaUsers /> Users
                     </Link>
                 </li>
                 <li>

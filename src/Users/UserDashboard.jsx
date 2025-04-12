@@ -48,6 +48,7 @@ const UserDashboard = () => {
                         <Route path="all-pets" element={<AllPets />} />
                         <Route path="schedule-pickup" element={<SchedulePickup />} />
                         <Route path="add-pet" element={<AddPets />} />
+                        <Route path='all-pets/adoption-process/:id' element={<AdoptionProcess/>}/>
                     </Routes>
                 </div>
             </div>

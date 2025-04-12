@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,6 @@ import './AllPets.css';
 
 const AllPets = () => {
     const [pets, setPets] = useState([]);
-    const [processingPetId, setProcessingPetId] = useState(null); // Track the ID of the pet being processed
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -30,30 +29,28 @@ const AllPets = () => {
             return;
         }
 
-        setProcessingPetId(pet.id); // Set the ID of the pet being processed
+        navigate(`adoption-process/${pet.id}`);
         setError(null);
 
-        try {
-            // Update pet status on server
-            const formData = new FormData();
-            formData.append('adoption_status', 'adopted');
-            const response = await updatePet(pet.id, formData);
+        // try {
+        //     // Update pet status on server
+        //     const formData = new FormData();
+        //     formData.append('adoption_status', 'adopted');
+        //     const response = await updatePet(pet.id, formData);
 
-            // Update local state with the response from the server
-            setPets(pets.map(p => 
-                p.id === pet.id ? { ...p, adoption_status: response.data.adoption_status } : p
-            ));
+        //     // Update local state with the response from the server
+        //     setPets(pets.map(p => 
+        //         p.id === pet.id ? { ...p, adoption_status: response.data.adoption_status } : p
+        //     ));
 
-            // Navigate to adoption process with the pet ID
-            navigate('/user-dashboard/adoption-process', { state: { petId: pet.id } });
-        } catch (error) {
-            console.error('Error updating adoption status:', error);
-            const errorMessage = error.response?.data?.error || 'Failed to process adoption. Please try again.';
-            setError(errorMessage);
-            alert(errorMessage);
-        } finally {
-            setProcessingPetId(null); // Clear the processing state after the request completes
-        }
+        //     // Navigate to adoption process with the pet ID
+        //     navigate('/user-dashboard/adoption-process', { state: { petId: pet.id } });
+        // } catch (error) {
+        //     console.error('Error updating adoption status:', error);
+        //     const errorMessage = error.response?.data?.error || 'Failed to process adoption. Please try again.';
+        //     setError(errorMessage);
+        //     alert(errorMessage);
+        // } 
     };
 
     if (error && pets.length === 0) {
@@ -81,9 +78,9 @@ const AllPets = () => {
                                 <button 
                                     className={`adopt-button ${pet.adoption_status.toLowerCase() !== 'available' ? 'adopted' : ''}`}
                                     onClick={() => handleAdoptClick(pet)}
-                                    disabled={pet.adoption_status.toLowerCase() !== 'available' || processingPetId === pet.id}
+                                    disabled={pet.adoption_status.toLowerCase() !== 'available' }
                                 >
-                                    {processingPetId === pet.id ? 'Processing...' : (pet.adoption_status.toLowerCase() === 'available' ? 'Adopt Me' : 'Adopted')}
+                                    {(pet.adoption_status.toLowerCase() === 'available' ? 'Adopt Me' : 'Adopted')}
                                 </button>
                             </div>
                             <div className="pet-details">

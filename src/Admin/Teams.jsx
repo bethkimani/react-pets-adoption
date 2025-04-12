@@ -216,7 +216,7 @@ const Team = () => {
             {error && <div className="error-message">{error}</div>}
             {success && <div className="success-message">{success}</div>}
             <div className="header">
-                <h2 className="title">Team</h2>
+                <h2 className="title">Users</h2>
                 {userRole === "Admin" && (
                     <button className="add-button" onClick={() => setShowAddModal(true)}>
                         Add +
