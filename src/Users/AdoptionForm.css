@@ -80,18 +80,21 @@ html, body {
   }
   
   .adoption-form button {
-    background-color: #4A90E2;
-    color: #FFFFFF;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 10px 25px;
     font-size: 16px;
-    margin-top: 10px;
+    color: white;
+    background: #0D0D3C;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255,0,102,0);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
   
   .adoption-form button:hover {
-    background-color: #3A80D2;
+    background: linear-gradient(90deg, #ff0066, #ff6600);
+    box-shadow: 0 10px 20px rgba(255,0,102,0.5);
+    transform: translateY(-3px);
   }
   
   .info-section {

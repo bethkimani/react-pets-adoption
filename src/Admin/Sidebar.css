@@ -1,66 +1,97 @@
 .sidebar {
-    width: 250px; /* Set a width for the sidebar */
-    background: #0D0D3C; /* Dark background color */
-    color: white; /* Text color */
-    height: 100vh; /* Full height */
-    padding: 20px; /* Padding for the content */
+    width: 250px;
+    background: #0D0D3C;
+    color: white;
+    height: 100vh;
+    padding: 20px;
     display: flex;
-    flex-direction: column; /* Vertical layout */
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
 .sidebar-title {
     font-size: 24px;
     margin-bottom: 20px;
-    text-align: center; /* Center the title */
+    text-align: center;
 }
 
 .sidebar-menu {
-    list-style: none; /* Remove default list styling */
-    padding: 0; /* Remove padding */
+    list-style: none;
+    padding: 0;
 }
 
 .sidebar-menu li {
-    margin: 15px 0; /* Space between menu items */
+    margin: 15px 0;
 }
 
 .sidebar-link {
-    color: white; /* Link color */
-    text-decoration: none; /* Remove underline */
-    display: flex; /* Use flexbox for icon and text */
-    align-items: center; /* Align items vertically */
-    padding: 10px; /* Add padding for clickable area */
-    border-radius: 5px; /* Rounded corners */
-    transition: background 0.3s; /* Smooth background transition */
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
 }
 
 .sidebar-link:hover {
-    background: rgba(255, 255, 255, 0.1); /* Light background on hover */
+    background: linear-gradient(90deg, #ff0066, #ff6600);
+    box-shadow: 0 10px 20px rgba(255, 0, 102, 0.5);
 }
 
 .sidebar-link svg {
-    margin-right: 10px; /* Space between icon and text */
-    font-size: 20px; /* Icon size */
-    transition: transform 0.3s; /* Add transition for scaling */
+    margin-right: 10px;
+    font-size: 20px;
+    transition: transform 0.3s;
 }
 
 .sidebar-link:hover svg {
-    transform: scale(1.1); /* Slightly enlarge icon on hover */
+    transform: scale(1.1);
 }
 
-/* Specific styles for the Logout button */
 .sidebar-menu li button {
-    background: none; /* Remove background for button */
-    border: none; /* Remove border */
-    color: white; /* Ensure text color is white */
-    cursor: pointer; /* Pointer cursor on hover */
-    width: 100%; /* Make button take the full width */
-    text-align: left; /* Align text to the left */
-    padding: 10px; /* Same padding as links */
-    border-radius: 5px; /* Maintain rounded corners */
-    transition: background 0.3s; /* Smooth background transition */
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
 }
 
 .sidebar-menu li button:hover {
-    background: rgba(255, 255, 255, 0.1); /* Light background on hover */
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/*  User info at bottom */
+.sidebar-user {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.sidebar-user:hover {
+    background: linear-gradient(90deg, #ff0066, #ff6600);
+    box-shadow: 0 10px 20px rgba(255, 0, 102, 0.5);
+    text-decoration: none;
+    color: white;
+}
+
+.user-icon {
+    font-size: 32px;
+    margin-right: 10px;
+}
+
+.user-name {
+    font-size: 16px;
 }

@@ -8,20 +8,22 @@
 /* Header styles */
 .header {
     display: flex;
+    flex-direction: column;
     justify-content: space-between; /* Space between title and button */
     align-items: center; /* Center items vertically */
     margin-bottom: 20px;
 }
 
 .title {
-    font-size: 2rem;
-    color: #f97316; /* Orange color */
+    font-size: xx-large;
+    color: #0D0D3C; /* Orange color */
+
+    
 }
 
 /* Add button styles */
 .add-button {
-    background-color: #003366; /* Dark blue */
-    color: white;
+    background: linear-gradient(90deg, #ff0066, #ff6600);
     padding: 4px 6px; /* Reduced padding for a smaller button */
     border: none;
     border-radius: 4px;
@@ -36,7 +38,9 @@
 }
 
 .add-button:hover {
-    background-color: #002244; /* Slightly lighter dark blue on hover */
+    box-shadow: 0 10px 20px rgba(255,0,102,0.5);
+    transform: translateY(-3px);
+    
 }
 
 /* Search input styles */

@@ -94,7 +94,7 @@ html {
 /* Ensure contact info links are underlined */
 .contact-info a {
   text-decoration: underline;
-  color:  #FF8C00; 
+  color:  #ff6600; 
 }
 
 .contact-item strong {
@@ -244,7 +244,7 @@ html {
 }
 
 .bar.active {
-  background-color: #FF8C00;
+  background-color: #ff6600;
 }
 
 /* Media Queries */
@@ -437,33 +437,87 @@ h1, h2, h3 {
   margin-top: 20px;
 }
 
-.homepage-pet-card {
-  background-color: white;
-  border-radius: 16px; /* Increased border radius for softer corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  margin: 17px; /* Space between cards */
-  padding: 15px;
-  width: calc(30% - 34px); /* Adjust width for three cards per row minus margins */
+.homepage-gallery {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Center align the items */
-  position: relative; /* Position relative for absolute positioning of the overlay */
-  transition: transform 0.3s, box-shadow 0.3s; /* Transition for the lift effect */
+  flex-wrap: wrap;
+  gap: 20px; /* spacing between cards */
+  justify-content: center; /* center the gallery */
 }
 
-/* Hover Effect */
-.homepage-pet-card:hover {
-  transform: scale(1.05); /* Slightly increase size */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow for depth */
+.homepage-pet-card {
+  width: 300px;
+  height: 400px;
+  perspective: 1000px;
 }
 
-.homepage-pet-image {
+.card-inner {
+  position: relative;
   width: 100%;
-  height: 200px; /* Fixed height for uniformity */
-  border-radius: 16px; /* Match the card's border radius */
-  object-fit: cover; /* Ensure images cover the space without distortion */
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
 }
+
+.homepage-pet-card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-front {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fill the entire card without distortion */
+  display: block;
+}
+
+.pet-name-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+}
+
+
+.card-back {
+  background-color: #fff;
+  color: #333;
+  transform: rotateY(180deg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pet-details {
+  text-align: left;
+  font-size: 14px;
+}
+
+.button-container {
+  margin-top: 10px;
+}
+
 
 /* Button Styles */
 .adopt-button {
@@ -521,7 +575,7 @@ input {
 
 /* Modal Button Styles */
 .modal-button {
-  background-color: #FFA500; /* Orange color */
+  background-color: #ff6600; /* Orange color */
   color: white; /* White text color */
   border: none;
   padding: 8px 16px; /* Adjust padding */
@@ -534,12 +588,12 @@ input {
 }
 
 .modal-button:hover {
-  background-color: #FF8C00; /* Darker orange on hover */
+  background-color: #ff6600; /* Darker orange on hover */
 }
 
 /* Form Toggle Link Styles */
 .toggle-link {
-  color: #FF8C00; /* Link color */
+  color: #ff6600; /* Link color */
   cursor: pointer;
   text-decoration: underline;
 }

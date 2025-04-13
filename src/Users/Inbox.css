@@ -37,6 +37,7 @@
 .inbox-container label {
   font-weight: bold;
   margin-bottom: 5px;
+  color: #ff6600;
 }
 
 .inbox-container input,
@@ -53,18 +54,21 @@
 }
 
 .inbox-container button {
-  background-color: #FFA500;
+  background-color: #0D0D3C;
   color: white;
   padding: 10px;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  box-shadow: 0 4px 15px rgba(255,0,102,0);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .inbox-container button:hover {
-  background-color: #e69500;
+  background: linear-gradient(90deg, #ff0066, #ff6600);
+  box-shadow: 0 10px 20px rgba(255,0,102,0.5);
+  transform: translateY(-3px);
 }
 
 .message-list {

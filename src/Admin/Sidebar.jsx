@@ -1,9 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaPaw, FaUser, FaSignOutAlt, FaUsers, FaFileAlt } from 'react-icons/fa';
+import { FaHome, FaPaw, FaSignOutAlt, FaUsers, FaFileAlt } from 'react-icons/fa';
 import './Sidebar.css';
+import { RiAccountCircleLine } from "react-icons/ri";
 
 const Sidebar = ({ onLogout }) => {
+    const adminName = localStorage.getItem('username')
     return (
         <div className="sidebar">
             <h2 className="sidebar-title">Pet Dashboard</h2>
@@ -39,11 +40,6 @@ const Sidebar = ({ onLogout }) => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/admin-dashboard/profile" className="sidebar-link">
-                        <FaUser /> My Profile
-                    </Link>
-                </li>
-                <li>
                     <Link to="/admin-dashboard/view-feedback" className="sidebar-link">
                         <FaUsers /> User Feedback
                     </Link>
@@ -54,6 +50,12 @@ const Sidebar = ({ onLogout }) => {
                     </button>
                 </li>
             </ul>
+
+            {/*  Make user info clickable */}
+            <Link to="/admin-dashboard/profile" className="sidebar-user">
+                <RiAccountCircleLine className="user-icon" />
+                <span className="user-name">{adminName}</span>
+            </Link>
         </div>
     );
 };

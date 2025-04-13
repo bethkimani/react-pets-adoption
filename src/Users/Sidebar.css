@@ -1,42 +1,77 @@
-/* Sidebar.css */
-
-.user-sidebar {
-    width: 250px; /* Fixed width for the sidebar */
-    background-color: #000000; /* Black background for the sidebar */
-    color: white; /* White text color for better contrast */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Slightly darker shadow */
+.sidebar {
+    width: 250px;
+    background-color: #0D0D3C;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     padding: 20px;
-    overflow-y: auto; /* Scroll if content overflows */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
-.user-sidebar h2 {
+.sidebar-title {
     font-size: 1.5em;
-    margin-bottom: 20px; /* Space below the heading */
+    margin-bottom: 20px;
 }
 
-.user-sidebar ul {
-    list-style-type: none; /* Remove default list styling */
-    padding: 0; /* Remove padding */
+.sidebar-menu {
+    list-style-type: none;
+    padding: 0;
 }
 
-.user-sidebar li {
-    margin: 10px 0; /* Space between items */
+.sidebar-menu li {
+    margin: 10px 0;
 }
 
-.user-sidebar li a {
-    text-decoration: none; /* Remove underline */
-    color: white; /* Change link color to white */
+.sidebar-link {
+    text-decoration: none;
+    color: white;
     padding: 10px 15px;
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Center items vertically */
-    border-radius: 4px; /* Rounded corners */
-    transition: background-color 0.3s; /* Smooth transition for hover */
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
-.user-sidebar li a:hover {
-    background-color: #444444; /* Dark gray on hover */
+.sidebar-link:hover {
+    background: linear-gradient(90deg, #ff0066, #ff6600);
+    box-shadow: 0 10px 20px rgba(255, 0, 102, 0.5);
+    color: white;
 }
 
-.user-sidebar li a i {
-    margin-right: 10px; /* Space between icon and text */
+.sidebar-link svg {
+    margin-right: 10px;
+}
+
+.sidebar-user {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.sidebar-user:hover {
+    background: linear-gradient(90deg, #ff0066, #ff6600);
+    box-shadow: 0 10px 20px rgba(255, 0, 102, 0.5);
+    color: white;
+    text-decoration: none;
+}
+
+.user-icon {
+    font-size: 32px;
+    margin-right: 10px;
+}
+
+.user-name {
+    font-size: 16px;
 }

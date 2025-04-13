@@ -14,7 +14,7 @@
 }
 
 .heart-icon {
-  color: #ff6b6b;
+  color: #ff0066;
   margin: 0 10px;
 }
 
@@ -72,7 +72,6 @@
 }
 
 .adopt-button {
-  background-color: #ff6b6b;
   color: white;
   border: none;
   padding: 10px 20px;

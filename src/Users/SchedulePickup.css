@@ -53,7 +53,7 @@
   }
   
   .schedule-pickup button {
-    background-color: #28a745;
+    background-color: #0D0D3C;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -65,5 +65,7 @@
   }
   
   .schedule-pickup button:hover {
-    background-color: #218838;
+    background: linear-gradient(90deg, #ff0066, #ff6600);
+    box-shadow: 0 10px 20px rgba(255,0,102,0.5);
+    transform: translateY(-3px);
   }

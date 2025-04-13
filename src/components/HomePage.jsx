@@ -49,25 +49,39 @@ const HomePage = () => {
         <div className="homepage-gallery">
           {pets.map((pet) => (
             <div key={pet.id} className="homepage-pet-card">
-              <img src={`https://pets-adoption-flask-sqlite.onrender.com${pet.image}`} alt={pet.name} className="homepage-pet-image" />
-              <h2>{pet.name}</h2>
-              <div className="button-container">
-                {pet.adoption_status === "available" ? (
-                  <button className="adopt-button" onClick={() => handleAdoptClick(pet)}>
-                    Adopt Me
-                  </button>
-                ) : (
-                  <button className="adopt-button" disabled>
-                    Adopted
-                  </button>
-                )}
-              </div>
-              <div className="pet-details">
-                <p>Breed: {pet.breed}</p>
-                <p>Description: {pet.description}</p>
-                <p>Hypoallergenic:{pet.hypoallergenic ? 'Yes' : "No"}</p>
-                <p>Age: {pet.age}</p>
-                <p>Weight {pet.weight}</p>
+              <div className="card-inner">
+                {/* Front face */}
+                <div className="card-front">
+                  <img
+                    src={`https://pets-adoption-flask-sqlite.onrender.com${pet.image}`}
+                    alt={pet.name}
+                    className="homepage-pet-image"
+                  />
+                  <div className="pet-name-overlay">{pet.name}</div>
+                </div>
+  
+                {/* Back face */}
+                <div className="card-back">
+                  <h2>{pet.name}</h2>
+                  <div className="pet-details">
+                    <p>Breed: {pet.breed}</p>
+                    <p>Description: {pet.description}</p>
+                    <p>Hypoallergenic: {pet.hypoallergenic ? 'Yes' : 'No'}</p>
+                    <p>Age: {pet.age}</p>
+                    <p>Weight: {pet.weight}</p>
+                  </div>
+                  <div className="button-container">
+                    {pet.adoption_status === 'available' ? (
+                      <button className="adopt-button" onClick={() => handleAdoptClick(pet)}>
+                        Adopt Me
+                      </button>
+                    ) : (
+                      <button className="adopt-button" disabled>
+                        Adopted
+                      </button>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
@@ -75,6 +89,7 @@ const HomePage = () => {
       </div>
     </div>
   );
+  
 };
 
 export default HomePage;
