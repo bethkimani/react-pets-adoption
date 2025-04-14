@@ -13,6 +13,7 @@ const Auth = ({ onClose, initialMode }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleAuth = async (e) => {
@@ -112,15 +113,33 @@ const Auth = ({ onClose, initialMode }) => {
                         required
                     />
                     {!showReset && (
-                        <input
-                            type="password"
-                            id="auth-password"
-                            name="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
+                        <div style={{ position: 'relative' }}>
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                id="auth-password"
+                                name="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <button
+                                type="button"
+                                style={{
+                                    position: 'absolute',
+                                    right: '10px',
+                                    top: '50%',
+                                    transform: 'translateY(-50%)',
+                                    background: 'none',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    fontSize: '16px'
+                                }}
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? '🙈' : '👁️'}
+                            </button>
+                        </div>
                     )}
                     <div className="form-actions">
                         <button type="submit" className="submit-button" disabled={isLoading}>
