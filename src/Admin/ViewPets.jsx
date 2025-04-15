@@ -47,7 +47,11 @@ const ViewPets = () => {
             updatedPet.append('breed', formData.breed || '');
             updatedPet.append('age', formData.age || '');
             updatedPet.append('adoption_status', formData.adoption_status || '');
-            updatedPet.append('description', formData.description || '');
+            updatedPet.append('gender', formData.gender || '');
+            updatedPet.append('vaccination_status', formData.vaccination_status || '');
+            updatedPet.append('special_needs', formData.special_needs || '');
+            updatedPet.append('personality', formData.personality || '');
+            updatedPet.append('back_story', formData.back_story || '');
             if (formData.imageFile) {
                 updatedPet.append('image', formData.imageFile);
             }
@@ -64,25 +68,46 @@ const ViewPets = () => {
 
     const confirmDelete = async () => {
         try {
-            // Fetch all adoptions and filter those related to the selected pet
-            const adoptionsResponse = await getAdoptions();
-            const relatedAdoptions = adoptionsResponse.data.filter(
-                adoption => adoption.pet_id === selectedPet.id
-            );
+            // Attempt to fetch and delete related adoptions, but don't fail the pet deletion if this step fails
+            let relatedAdoptions = [];
+            try {
+                const adoptionsResponse = await getAdoptions();
+                relatedAdoptions = adoptionsResponse.data.filter(
+                    adoption => adoption.pet_id === selectedPet.id
+                );
+            } catch (adoptionError) {
+                console.warn('Failed to fetch adoptions:', adoptionError.response?.data?.error || adoptionError.message);
+                // Continue with pet deletion even if fetching adoptions fails
+            }
 
-            // Delete all related adoptions
-            await Promise.all(
-                relatedAdoptions.map(adoption => deleteAdoption(adoption.id))
-            );
+            // Delete related adoptions, if any
+            if (relatedAdoptions.length > 0) {
+                await Promise.all(
+                    relatedAdoptions.map(async (adoption) => {
+                        try {
+                            await deleteAdoption(adoption.id);
+                        } catch (deleteAdoptionError) {
+                            console.warn(`Failed to delete adoption ${adoption.id}:`, deleteAdoptionError.response?.data?.error || deleteAdoptionError.message);
+                            // Continue even if deletion of an adoption fails
+                        }
+                    })
+                );
+            }
 
             // Now delete the pet
-            await deletePet(selectedPet.id);
-            setPets(pets.filter(p => p.id !== selectedPet.id));
-            setDeleteModalOpen(false);
-            setError(null);
+            try {
+                await deletePet(selectedPet.id);
+                setPets(pets.filter(p => p.id !== selectedPet.id));
+                setDeleteModalOpen(false);
+                setError(null);
+            } catch (petDeleteError) {
+                const errorMessage = petDeleteError.response?.data?.error || petDeleteError.message || 'Unknown error';
+                setError(`Failed to delete pet: ${errorMessage}`);
+            }
         } catch (error) {
+            // Catch any unexpected errors not caught in the inner try-catch blocks
             const errorMessage = error.response?.data?.error || error.message || 'Unknown error';
-            setError(`Failed to delete pet: ${errorMessage}`);
+            setError(`Unexpected error during deletion: ${errorMessage}`);
         }
     };
 
@@ -115,8 +140,12 @@ const ViewPets = () => {
                             <th>Species</th>
                             <th>Breed</th>
                             <th>Age</th>
+                            <th>Gender</th>
                             <th>Adoption Status</th>
-                            <th>Description</th>
+                            <th>Vaccination Status</th>
+                            <th>Special Needs</th>
+                            <th>Personality</th>
+                            <th>Back Story</th>
                             <th>Image</th>
                             <th>Actions</th>
                         </tr>
@@ -128,8 +157,12 @@ const ViewPets = () => {
                                 <td>{pet.species}</td>
                                 <td>{pet.breed || 'N/A'}</td>
                                 <td>{pet.age || 'N/A'}</td>
+                                <td>{pet.gender || 'N/A'}</td>
                                 <td>{pet.adoption_status}</td>
-                                <td>{pet.description || 'N/A'}</td>
+                                <td>{pet.vaccination_status || 'N/A'}</td>
+                                <td>{pet.special_needs || 'N/A'}</td>
+                                <td>{pet.personality || 'N/A'}</td>
+                                <td>{pet.back_story || 'N/A'}</td>
                                 <td>
                                     {pet.image ? (
                                         <img
@@ -191,14 +224,38 @@ const ViewPets = () => {
                         />
                         <input
                             type="text"
+                            value={formData.gender || ''}
+                            onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                            placeholder="Gender"
+                        />
+                        <input
+                            type="text"
                             value={formData.adoption_status || ''}
                             onChange={(e) => setFormData({ ...formData, adoption_status: e.target.value })}
                             placeholder="Adoption Status"
                         />
+                        <input
+                            type="text"
+                            value={formData.vaccination_status || ''}
+                            onChange={(e) => setFormData({ ...formData, vaccination_status: e.target.value })}
+                            placeholder="Vaccination Status"
+                        />
+                        <input
+                            type="text"
+                            value={formData.special_needs || ''}
+                            onChange={(e) => setFormData({ ...formData, special_needs: e.target.value })}
+                            placeholder="Special Needs"
+                        />
+                        <input
+                            type="text"
+                            value={formData.personality || ''}
+                            onChange={(e) => setFormData({ ...formData, personality: e.target.value })}
+                            placeholder="Personality"
+                        />
                         <textarea
-                            value={formData.description || ''}
-                            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                            placeholder="Description"
+                            value={formData.back_story || ''}
+                            onChange={(e) => setFormData({ ...formData, back_story: e.target.value })}
+                            placeholder="Back Story"
                         />
                         <input
                             type="file"

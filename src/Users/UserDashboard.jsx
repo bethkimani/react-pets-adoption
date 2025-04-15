@@ -8,7 +8,7 @@ import AdoptionForm from './AdoptionForm';
 import Inbox from './Inbox';
 import PaymentSettings from './PaymentSettings';
 import PendingReviews from './PendingReviews';
-import SpecialAdoptionForm from './SpecialAdoptionForm';
+import AdoptionHistory from './AdoptionHistory';
 import AllPets from './AllPets';
 import SchedulePickup from './SchedulePickup';
 import AddPets from './AddPets';
@@ -44,7 +44,7 @@ const UserDashboard = () => {
                         <Route path="inbox" element={<Inbox />} />
                         <Route path="payment-settings" element={<PaymentSettings />} />
                         <Route path="pending-reviews" element={<PendingReviews />} />
-                        <Route path="special-adoption-form" element={<SpecialAdoptionForm />} />
+                        <Route path="-adoption-History" element={<AdoptionHistory />} />
                         <Route path="all-pets" element={<AllPets />} />
                         <Route path="schedule-pickup" element={<SchedulePickup />} />
                         <Route path="add-pet" element={<AddPets />} />

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import './SpecialAdoptionForm.css'; // Use relative path
+import './AdoptionHistory.css'; // Use relative path
 
 const SpecialAdoptionForm = () => {
     return (
