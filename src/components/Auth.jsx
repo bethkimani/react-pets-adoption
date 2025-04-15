@@ -122,6 +122,7 @@ const Auth = ({ onClose, initialMode }) => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
+                                style={{ paddingRight: '40px' }}
                             />
                             <button
                                 type="button"
@@ -133,11 +134,16 @@ const Auth = ({ onClose, initialMode }) => {
                                     background: 'none',
                                     border: 'none',
                                     cursor: 'pointer',
-                                    fontSize: '16px'
+                                    fontSize: '16px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    height: '100%',
+                                    padding: '0',
                                 }}
                                 onClick={() => setShowPassword(!showPassword)}
                             >
-                                {showPassword ? '🙈' : '👁️'}
+                                👁️
                             </button>
                         </div>
                     )}
