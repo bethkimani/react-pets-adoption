@@ -2,11 +2,11 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 import { RiAccountCircleLine } from "react-icons/ri";
-import { FaHome, FaPaw, FaPlusCircle, FaEnvelope, FaUserCog, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaPaw, FaPlusCircle, FaEnvelope, FaUserCog, FaSignOutAlt, FaHistory } from 'react-icons/fa';
 
 const Sidebar = ({ onLogout }) => {
-    const location = useLocation()
-    const userName = localStorage.getItem('username')
+    const location = useLocation();
+    const userName = localStorage.getItem('username');
 
     return (
         <div className="sidebar">
@@ -35,6 +35,11 @@ const Sidebar = ({ onLogout }) => {
                 <li className={location.pathname === '/user-dashboard/inbox' ? 'active' : ''}>
                     <Link to="/user-dashboard/inbox" className="sidebar-link">
                         <FaEnvelope /> Inbox
+                    </Link>
+                </li>
+                <li className={location.pathname === '/user-dashboard/adoption-history' ? 'active' : ''}>
+                    <Link to="/user-dashboard/adoption-history" className="sidebar-link">
+                        <FaHistory /> Adoption History
                     </Link>
                 </li>
                 <li>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://pets-adoption-flask-sqlite.onrender.com/api', // Ensure this matches your Render URL
+    baseURL: 'https://pets-adoption-flask-sqlite-1-l2rp.onrender.com/api', // Ensure this matches your Render URL
     withCredentials: true,
 });
 
