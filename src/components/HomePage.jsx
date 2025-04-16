@@ -53,7 +53,7 @@ const HomePage = () => {
                 {/* Front face */}
                 <div className="card-front">
                   <img
-                    src={`https://pets-adoption-flask-sqlite.onrender.com${pet.image}`}
+                    src={`https://pets-adoption-flask-sqlite-1-l2rp.onrender.com${pet.image}`}
                     alt={pet.name}
                     className="homepage-pet-image"
                   />

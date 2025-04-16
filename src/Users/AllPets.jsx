@@ -32,25 +32,6 @@ const AllPets = () => {
         navigate(`adoption-process/${pet.id}`);
         setError(null);
 
-        // try {
-        //     // Update pet status on server
-        //     const formData = new FormData();
-        //     formData.append('adoption_status', 'adopted');
-        //     const response = await updatePet(pet.id, formData);
-
-        //     // Update local state with the response from the server
-        //     setPets(pets.map(p => 
-        //         p.id === pet.id ? { ...p, adoption_status: response.data.adoption_status } : p
-        //     ));
-
-        //     // Navigate to adoption process with the pet ID
-        //     navigate('/user-dashboard/adoption-process', { state: { petId: pet.id } });
-        // } catch (error) {
-        //     console.error('Error updating adoption status:', error);
-        //     const errorMessage = error.response?.data?.error || 'Failed to process adoption. Please try again.';
-        //     setError(errorMessage);
-        //     alert(errorMessage);
-        // } 
     };
 
     if (error && pets.length === 0) {
@@ -69,7 +50,7 @@ const AllPets = () => {
                     {pets.map((pet) => (
                         <div key={pet.id} className="pet-card">
                             <img
-                                src={pet.image ? `https://pets-adoption-flask-sqlite.onrender.com${pet.image}` : 'default-image.jpg'}
+                                src={pet.image ? `https://pets-adoption-flask-sqlite-1-l2rp.onrender.com${pet.image}` : 'default-image.jpg'}
                                 alt={pet.name}
                                 className="pet-image"
                             />

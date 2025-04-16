@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
 import { FaHome, FaPaw, FaSignOutAlt, FaUsers, FaFileAlt } from 'react-icons/fa';
 import './Sidebar.css';
@@ -37,6 +38,11 @@ const Sidebar = ({ onLogout }) => {
                 <li>
                     <Link to="/admin-dashboard/change-password" className="sidebar-link">
                         <FaPaw /> Change Password
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/admin-dashboard/chats" className="sidebar-link">
+                        <FaPaw /> Chats
                     </Link>
                 </li>
                 <li>

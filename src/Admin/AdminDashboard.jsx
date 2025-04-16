@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
@@ -11,6 +11,7 @@ import ViewFeedback from './ViewFeedback';
 import ManageAdoptions from './ManageAdoptions';
 import LogoutModal from './LogoutModal';
 import './AdminDashboard.css';
+import AdminChat from './AdminChat';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
@@ -39,6 +40,7 @@ const AdminDashboard = () => {
                     <Route path="teams" element={<Teams />} />
                     <Route path="view-feedback" element={<ViewFeedback />} />
                     <Route path="manage-adoptions" element={<ManageAdoptions />} />
+                    <Route path="chats" element={<AdminChat />} />
                 </Routes>
             </div>
             <LogoutModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} onConfirm={handleLogout} />

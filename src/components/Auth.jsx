@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import  { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, signup, resetPassword } from '../api';
 import './Auth.css';
@@ -128,8 +129,8 @@ const Auth = ({ onClose, initialMode }) => {
                                 type="button"
                                 style={{
                                     position: 'absolute',
-                                    right: '10px',
-                                    top: '50%',
+                                    right: '1px',
+                                    top: '30%',
                                     transform: 'translateY(-50%)',
                                     background: 'none',
                                     border: 'none',
@@ -143,7 +144,7 @@ const Auth = ({ onClose, initialMode }) => {
                                 }}
                                 onClick={() => setShowPassword(!showPassword)}
                             >
-                                👁️
+                                {showPassword ? '🙈' : '🙉'}
                             </button>
                         </div>
                     )}

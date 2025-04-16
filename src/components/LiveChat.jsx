@@ -1,184 +1,135 @@
-// src/components/LiveChat.jsx
 import { useState, useEffect, useRef } from 'react';
 import { FaCommentDots } from 'react-icons/fa';
 import io from 'socket.io-client';
-import { getChatMessages } from '../api'; // Import the API function to fetch chat history
 import './LiveChat.css';
 
-const socket = io('https://pets-adoption-flask-sqlite.onrender.com', {
-    withCredentials: true,
-});
+const socket = io('http://localhost:5174');
 
 const LiveChat = () => {
-    const [messages, setMessages] = useState([]);
-    const [input, setInput] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
-    const messagesEndRef = useRef(null);
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const messagesEndRef = useRef(null);
 
-    // Scroll to the bottom of the messages
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  useEffect(() => {
+    socket.on('connect', () => {
+      const socketId = socket.id;
+      console.log('✅ Connected with socket ID:', socketId);
+
+      socket.emit('register', { role: 'user', room: socketId });
+      socket.emit('join_room', socketId);
+
+      console.log(`🟢 User registered and joined room: ${socketId}`);
+    });
+
+    socket.on('message_received', (data) => {
+      if (data.from === 'user') return;
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          text: data.message,
+          sender: 'admin',
+          timestamp: data.timestamp || new Date().toISOString()
+        }
+      ]);
+    });
+
+    return () => {
+      socket.off('connect');
+      socket.off('message_received');
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      setMessages([
+        {
+          text: "Hi there! Welcome to Pets Adoption. Ask us anything 🐾",
+          sender: 'bot',
+          timestamp: new Date().toISOString()
+        }
+      ]);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  const sendMessage = () => {
+    if (!input.trim()) return;
+
+    if (!socket.id) {
+      console.warn('⚠️ Socket not ready yet.');
+      return;
+    }
+
+    const messageData = {
+      message: input,
+      room: socket.id,
+      from: 'user'
     };
 
-    // Fetch chat history when the chat widget is opened
-    const fetchChatHistory = async () => {
-        try {
-            const response = await getChatMessages();
-            console.log('Fetched chat history:', response.data);
-            const filteredMessages = response.data.filter(
-                (msg) => !msg.text.toLowerCase().includes('test')
-            );
-            setMessages(filteredMessages);
+    console.log('📤 Sending:', messageData);
 
-            // If no messages exist, show the welcome message
-            if (filteredMessages.length === 0) {
-                const welcomeMessage = {
-                    text: "Hello! Welcome to Pets Adoption, your trusted platform for finding the perfect furry friend. We offer a wide range of pets ready for adoption. How can I assist you today? For more information, contact us at 401-234-5678.",
-                    sender: 'bot',
-                    timestamp: new Date().toISOString(),
-                };
-                setMessages([welcomeMessage]);
-            }
-        } catch (error) {
-            console.error('Error fetching chat history:', error);
-            // Show welcome message if there's an error fetching history
-            const welcomeMessage = {
-                text: "Hello! Welcome to Pets Adoption, your trusted platform for finding the perfect furry friend. We offer a wide range of pets ready for adoption. How can I assist you today? For more information, contact us at 401-234-5678.",
-                sender: 'bot',
-                timestamp: new Date().toISOString(),
-            };
-            setMessages([welcomeMessage]);
-        }
-    };
+    socket.emit('send_message', messageData);
 
-    useEffect(() => {
-        // Connect to WebSocket
-        socket.on('connect', () => {
-            console.log('Connected to WebSocket');
-            if (isOpen) {
-                fetchChatHistory();
-            }
-        });
+    setMessages((prev) => [
+      ...prev,
+      { text: input, sender: 'user', timestamp: new Date().toISOString() }
+    ]);
+    setInput('');
+  };
 
-        // Listen for connection errors
-        socket.on('connect_error', (error) => {
-            console.error('WebSocket connection error:', error);
-        });
+  const formatTimestamp = (timestamp) => {
+    const time = new Date(timestamp);
+    return time.toLocaleTimeString();
+  };
 
-        // Listen for new messages
-        socket.on('new_message', (message) => {
-            console.log('Received new message:', message);
-            setMessages((prevMessages) => {
-                const messageExists = prevMessages.some(
-                    (msg) => msg.text === message.text && msg.timestamp === message.timestamp
-                );
-                if (!messageExists) {
-                    return [...prevMessages, message];
-                }
-                return prevMessages;
-            });
-        });
+  return (
+    <div className="live-chat-container">
+      <div className="chat-icon" onClick={() => setIsOpen(!isOpen)}>
+        <FaCommentDots size={24} />
+      </div>
 
-        // Handle errors
-        socket.on('error', (error) => {
-            console.error('WebSocket error:', error);
-        });
-
-        // Clean up on component unmount
-        return () => {
-            socket.off('connect');
-            socket.off('connect_error');
-            socket.off('new_message');
-            socket.off('error');
-        };
-    }, [isOpen]);
-
-    // Fetch chat history when the chat widget is opened
-    useEffect(() => {
-        if (isOpen) {
-            fetchChatHistory();
-        }
-    }, [isOpen]);
-
-    // Scroll to bottom whenever messages change
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages]);
-
-    const sendMessage = () => {
-        if (input.trim()) {
-            console.log('Sending message:', input);
-            const userMessage = {
-                text: input,
-                sender: 'user',
-                timestamp: new Date().toISOString(),
-            };
-            socket.emit('new_message', userMessage);
-            setInput('');
-        }
-    };
-
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            sendMessage();
-        }
-    };
-
-    // Function to format timestamp like "1 min ago"
-    const formatTimestamp = (timestamp) => {
-        const now = new Date();
-        const messageTime = new Date(timestamp);
-        const diffInSeconds = Math.floor((now - messageTime) / 1000);
-
-        if (diffInSeconds < 60) {
-            return `${diffInSeconds} sec ago`;
-        } else if (diffInSeconds < 3600) {
-            return `${Math.floor(diffInSeconds / 60)} min ago`;
-        } else {
-            return `${Math.floor(diffInSeconds / 3600)} hr ago`;
-        }
-    };
-
-    return (
-        <div className="live-chat-container">
-            {/* Chat Icon */}
-            <div className="chat-icon" onClick={() => setIsOpen(!isOpen)}>
-                <FaCommentDots size={24} />
-            </div>
-
-            {/* Chat Widget (Conditionally Rendered) */}
-            {isOpen && (
-                <div className="live-chat-widget">
-                    <h2>Live Chat</h2>
-                    <div className="messages">
-                        {messages.map((msg, index) => (
-                            <div key={index} className={msg.sender === 'user' ? 'user' : 'bot'}>
-                                {msg.sender === 'bot' && (
-                                    <div className="message-header">
-                                        <span className="sender-label">Customer Support</span>
-                                        <small>{formatTimestamp(msg.timestamp)}</small>
-                                    </div>
-                                )}
-                                <span>{msg.text}</span>
-                                {msg.sender === 'user' && (
-                                    <small>{formatTimestamp(msg.timestamp)}</small>
-                                )}
-                            </div>
-                        ))}
-                        <div ref={messagesEndRef} />
-                    </div>
-                    <input
-                        type="text"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                        placeholder="Type a message..."
-                    />
-                    <button onClick={sendMessage}>Send</button>
-                </div>
-            )}
+      {isOpen && (
+        <div className="live-chat-widget">
+          <h2>Live Chat</h2>
+          <div className="messages">
+            {messages.map((msg, i) => (
+              <div key={i} className={msg.sender === 'user' ? 'user' : 'bot'}>
+                {msg.sender !== 'user' && (
+                  <div className="message-header">
+                    <span className="sender-label">
+                      {msg.sender === 'bot' ? 'Support Bot' : 'Admin'}
+                    </span>
+                    <small>{formatTimestamp(msg.timestamp)}</small>
+                  </div>
+                )}
+                <span>{msg.text}</span>
+                {msg.sender === 'user' && (
+                  <small>{formatTimestamp(msg.timestamp)}</small>
+                )}
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+            placeholder="Type a message..."
+            disabled={!socket.id}
+          />
+          <button onClick={sendMessage} disabled={!socket.id || !input.trim()}>
+            Send
+          </button>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default LiveChat;
