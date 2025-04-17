@@ -64,11 +64,15 @@ const HomePage = () => {
                 <div className="card-back">
                   <h2>{pet.name}</h2>
                   <div className="pet-details">
-                    <p>Breed: {pet.breed}</p>
-                    <p>Description: {pet.description}</p>
-                    <p>Hypoallergenic: {pet.hypoallergenic ? 'Yes' : 'No'}</p>
+                  <p>Breed: {pet.breed}</p>
                     <p>Age: {pet.age}</p>
                     <p>Weight: {pet.weight}</p>
+                    <p>Gender: {pet.gender}</p>
+                    <p>Microchipped: {pet.microchipped}</p>
+                    <p>Personality: {pet.personality}</p>
+                    <p>Hypoallergenic: {pet.hypoallergenic ? 'Yes' : 'No'}</p>
+                    <p>Special Needs: {pet.special_needs}</p>
+                    <p>Back Story: {pet.back_story}</p>
                   </div>
                   <div className="button-container">
                     {pet.adoption_status === 'available' ? (

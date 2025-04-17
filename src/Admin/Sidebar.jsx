@@ -36,11 +36,7 @@ const Sidebar = ({ onLogout }) => {
                         <FaFileAlt /> Manage Adoptions
                     </Link>
                 </li>
-                <li>
-                    <Link to="/admin-dashboard/change-password" className="sidebar-link">
-                        <FaPaw /> Change Password
-                    </Link>
-                </li>
+                
                 <li>
                     <Link to="/admin-dashboard/chats" className="sidebar-link">
                         <BsChatText /> Chats

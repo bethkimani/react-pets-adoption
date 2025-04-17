@@ -67,9 +67,9 @@ export const userLikeMessage = (messageId) => API.post(`/messages/user/like/${me
 export const userReplyToMessage = (messageId, replyData) => API.post(`/messages/user/reply/${messageId}`, replyData);
 export const getUserMessages = (email) => API.get(`/messages/user/${email}`);
 export const login = (data) => API.post('/auth/login', data);
-export const getUsers = () => API.get('/users');
+export const getUsers = () => API.get('/users/');
 export const getTotalUsers = () => API.get(`/users/total`);
-export const getRoles = () => API.get('/roles');
+export const getRoles = () => API.get('/roles/');
 export const signup = (data) => API.post('/auth/signup', data);
 export const updateUser = (id, data) => API.put(`/users/${id}`, data);
 export const deleteUser = (id) => API.delete(`/users/${id}`);
