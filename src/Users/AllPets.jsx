@@ -50,7 +50,7 @@ const AllPets = () => {
                     {pets.map((pet) => (
                         <div key={pet.id} className="pet-card">
                             <img
-                                src={pet.image ? `https://pets-adoption-flask-sqlite-1-l2rp.onrender.com${pet.image}` : 'default-image.jpg'}
+                                src={pet.image ? `https://pets-adoption-flask-sqlite-enz1.onrender.com${pet.image}` : 'default-image.jpg'}
                                 alt={pet.name}
                                 className="pet-image"
                             />
