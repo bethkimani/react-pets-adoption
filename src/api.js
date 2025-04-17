@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-// Determine the base URL based on the environment
-const BASE_URL = process.env.NODE_ENV === 'development'
-    ? 'http://127.0.0.1:10000/api'
-    : 'https://pets-adoption-flask-sqlite-enz1.onrender.com/api';
+// Use the production backend URL
+const BASE_URL = 'https://pets-adoption-flask-sqlite-enz1.onrender.com/api';
 
 const API = axios.create({
     baseURL: BASE_URL,
