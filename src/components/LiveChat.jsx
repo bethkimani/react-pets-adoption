@@ -3,7 +3,7 @@ import { FaCommentDots } from 'react-icons/fa';
 import io from 'socket.io-client';
 import './LiveChat.css';
 
-const socket = io('http://localhost:5174');
+const socket = io('https://livechat-server-kz67.onrender.com');
 
 const LiveChat = () => {
   const [messages, setMessages] = useState([]);
@@ -12,18 +12,13 @@ const LiveChat = () => {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    socket.on('connect', () => {
-      const socketId = socket.id;
-      console.log('✅ Connected with socket ID:', socketId);
+    const handleConnect = () => {
+      console.log('✅ Connected with socket ID:', socket.id);
+      socket.emit('register', { role: 'user' });
+    };
 
-      socket.emit('register', { role: 'user', room: socketId });
-      socket.emit('join_room', socketId);
-
-      console.log(`🟢 User registered and joined room: ${socketId}`);
-    });
-
-    socket.on('message_received', (data) => {
-      if (data.from === 'user') return;
+    const handleMessage = (data) => {
+      if (data.from === 'user') return; // Don't show user's own messages twice
 
       setMessages((prev) => [
         ...prev,
@@ -33,11 +28,14 @@ const LiveChat = () => {
           timestamp: data.timestamp || new Date().toISOString()
         }
       ]);
-    });
+    };
+
+    socket.on('connect', handleConnect);
+    socket.on('message_received', handleMessage);
 
     return () => {
-      socket.off('connect');
-      socket.off('message_received');
+      socket.off('connect', handleConnect);
+      socket.off('message_received', handleMessage);
     };
   }, []);
 
@@ -67,11 +65,8 @@ const LiveChat = () => {
 
     const messageData = {
       message: input,
-      room: socket.id,
       from: 'user'
     };
-
-    console.log('📤 Sending:', messageData);
 
     socket.emit('send_message', messageData);
 

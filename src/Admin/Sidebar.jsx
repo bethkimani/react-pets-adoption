@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
 import { FaHome, FaPaw, FaSignOutAlt, FaUsers, FaFileAlt } from 'react-icons/fa';
+import { BsChatText } from "react-icons/bs";
 import './Sidebar.css';
 import { RiAccountCircleLine } from "react-icons/ri";
 
@@ -42,7 +43,7 @@ const Sidebar = ({ onLogout }) => {
                 </li>
                 <li>
                     <Link to="/admin-dashboard/chats" className="sidebar-link">
-                        <FaPaw /> Chats
+                        <BsChatText /> Chats
                     </Link>
                 </li>
                 <li>
