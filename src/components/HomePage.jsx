@@ -4,12 +4,24 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import { getPets } from '../api';
+import Auth from './Auth';
 
 
 const HomePage = () => {
   const navigate = useNavigate(); // Use navigate to redirect
   const [pets, setPets] = useState([])
   const [error, setError]= useState(null)
+
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState('login'); // Default to login mode
+  const openAuthModal = (mode) => {
+          setAuthMode(mode);
+          setIsAuthModalOpen(true);
+      };
+  
+      const closeAuthModal = () => {
+          setIsAuthModalOpen(false);
+      }
 
   useEffect(() => {
           const fetchPets = async () => {
@@ -75,8 +87,8 @@ const HomePage = () => {
                     <p>Back Story: {pet.back_story}</p>
                   </div>
                   <div className="button-container">
-                    {pet.adoption_status === 'available' ? (
-                      <button className="adopt-button" onClick={() => handleAdoptClick(pet)}>
+                    {pet.adoption_status.toLowerCase() === 'available' ? (
+                      <button className="adopt-button"  onClick={() => openAuthModal('login')}>
                         Adopt Me
                       </button>
                     ) : (
@@ -91,6 +103,13 @@ const HomePage = () => {
           ))}
         </div>
       </div>
+
+      {isAuthModalOpen && (
+                <Auth
+                    onClose={closeAuthModal}
+                    initialMode={authMode}
+                />
+            )}
     </div>
   );
   

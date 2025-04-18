@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAdoptions, getPets, getUsers, updateAdoptionStatus, getPaymentsByUser, getSchedulePickupsByUser, deleteAdoption } from '../api';
+import { getAdoptions, getPets, getUsers,updatePet, updateAdoptionStatus, getPaymentsByUser, getSchedulePickupsByUser, deleteAdoption } from '../api';
 import './ManageAdoptions.css';
 
 const ManageAdoptions = () => {
@@ -65,16 +65,33 @@ const ManageAdoptions = () => {
 
     const handleStatusUpdate = async (adoptionId, newStatus) => {
         try {
+            console.log('Updating adoption status:', adoptionId, newStatus);
+            // Update adoption status
             await updateAdoptionStatus(adoptionId, { status: newStatus });
+    
+            // Update pet status based on adoption status
+            const adoption = adoptions.find(adoption => adoption.id === adoptionId);
+            const petFormData = new FormData();
+            if (newStatus === 'Approved') {
+                petFormData.append('adoption_status', 'Adopted');
+                await updatePet(adoption.pet_id, petFormData); // Use pet_id instead of adoptionId
+            } else if (newStatus === 'Rejected') {
+                petFormData.append('adoption_status', 'Available');
+                await updatePet(adoption.pet_id, petFormData); // Use pet_id instead of adoptionId
+            }
+    
+            // Update frontend state for adoptions
             setAdoptions(adoptions.map(adoption =>
                 adoption.id === adoptionId ? { ...adoption, status: newStatus } : adoption
             ));
+    
             alert(`Adoption ${newStatus} successfully!`);
         } catch (err) {
             console.error('Error updating status:', err);
-            setError('Failed to update adoption status.');
+            setError('Feet to update adoption status.');
         }
     };
+
 
     const handleDelete = async (adoptionId) => {
         if (window.confirm('Are you sure you want to delete this adoption application?')) {
