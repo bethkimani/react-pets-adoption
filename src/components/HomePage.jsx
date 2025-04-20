@@ -6,44 +6,40 @@ import '../App.css';
 import { getPets } from '../api';
 import Auth from './Auth';
 
-
 const HomePage = () => {
-  const navigate = useNavigate(); // Use navigate to redirect
-  const [pets, setPets] = useState([])
-  const [error, setError]= useState(null)
-
+  const navigate = useNavigate();
+  const [pets, setPets] = useState([]);
+  const [error, setError] = useState(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authMode, setAuthMode] = useState('login'); // Default to login mode
+  const [authMode, setAuthMode] = useState('login');
+
   const openAuthModal = (mode) => {
-          setAuthMode(mode);
-          setIsAuthModalOpen(true);
-      };
-  
-      const closeAuthModal = () => {
-          setIsAuthModalOpen(false);
-      }
+    setAuthMode(mode);
+    setIsAuthModalOpen(true);
+  };
+
+  const closeAuthModal = () => {
+    setIsAuthModalOpen(false);
+  };
 
   useEffect(() => {
-          const fetchPets = async () => {
-              try {
-                  const response = await getPets();
-                  const data = response.data
-                  console.log(data);
-                  setPets(data)
-
-                  
-              } catch (error) {
-                  console.error('Error fetching pets:', error);
-                  setError('Failed to load pets. Please try again later.');
-                  setPets([])
-              }
-          };
-          fetchPets();
-      }, []);
+    const fetchPets = async () => {
+      try {
+        const response = await getPets();
+        const data = response.data;
+        console.log(data);
+        setPets(data);
+      } catch (error) {
+        console.error('Error fetching pets:', error);
+        setError('Failed to load pets. Please try again later.');
+        setPets([]);
+      }
+    };
+    fetchPets();
+  }, []);
 
   const handleAdoptClick = (pet) => {
     if (pet.adoption_status === "available") {
-      // Redirect to the adoption process directly
       navigate(`adoption-process/${pet.id}`);
     } else {
       alert(`${pet.name} has already found their forever home. 🏡`);
@@ -69,14 +65,23 @@ const HomePage = () => {
                     alt={pet.name}
                     className="homepage-pet-image"
                   />
-                  <div className="pet-name-overlay">{pet.name}</div>
+                  <div className="pet-name-overlay">
+                    <div className="pet-name">{pet.name}</div>
+                    {pet.owner && (
+                      <div className="owner-details">
+                        <p>Owner: {pet.owner.name}</p>
+                        <p>Phone: {pet.owner.phone_number}</p>
+                        
+                      </div>
+                    )}
+                  </div>
                 </div>
-  
+
                 {/* Back face */}
                 <div className="card-back">
                   <h2>{pet.name}</h2>
                   <div className="pet-details">
-                  <p>Breed: {pet.breed}</p>
+                    <p>Breed: {pet.breed}</p>
                     <p>Age: {pet.age}</p>
                     <p>Weight: {pet.weight}</p>
                     <p>Gender: {pet.gender}</p>
@@ -88,7 +93,7 @@ const HomePage = () => {
                   </div>
                   <div className="button-container">
                     {pet.adoption_status.toLowerCase() === 'available' ? (
-                      <button className="adopt-button"  onClick={() => openAuthModal('login')}>
+                      <button className="adopt-button" onClick={() => openAuthModal('login')}>
                         Adopt Me
                       </button>
                     ) : (
@@ -105,14 +110,13 @@ const HomePage = () => {
       </div>
 
       {isAuthModalOpen && (
-                <Auth
-                    onClose={closeAuthModal}
-                    initialMode={authMode}
-                />
-            )}
+        <Auth
+          onClose={closeAuthModal}
+          initialMode={authMode}
+        />
+      )}
     </div>
   );
-  
 };
 
 export default HomePage;

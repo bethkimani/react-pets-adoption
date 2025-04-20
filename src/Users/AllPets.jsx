@@ -31,7 +31,6 @@ const AllPets = () => {
 
         navigate(`adoption-process/${pet.id}`);
         setError(null);
-
     };
 
     if (error && pets.length === 0) {
@@ -49,27 +48,50 @@ const AllPets = () => {
                 <div className="pets-gallery">
                     {pets.map((pet) => (
                         <div key={pet.id} className="pet-card">
-                            <img
-                                src={pet.image ? `https://pets-adoption-flask-sqlite-enz1.onrender.com${pet.image}` : 'default-image.jpg'}
-                                alt={pet.name}
-                                className="pet-image"
-                            />
-                            <h2>{pet.name}</h2>
-                            <div className="button-container">
-                                <button 
-                                    className={`adopt-button ${pet.adoption_status.toLowerCase() !== 'available' ? 'adopted' : ''}`}
-                                    onClick={() => handleAdoptClick(pet)}
-                                    disabled={pet.adoption_status.toLowerCase() !== 'available' }
-                                >
-                                    {(pet.adoption_status.toLowerCase() === 'available' ? 'Adopt Me' : 'Adopted')}
-                                </button>
-                            </div>
-                            <div className="pet-details">
-                                <p>Species: {pet.species || 'N/A'}</p>
-                                <p>Breed: {pet.breed || 'N/A'}</p>
-                                <p>Age: {pet.age || 'N/A'}</p>
-                                <p>Adoption Status: {pet.adoption_status || 'N/A'}</p>
-                                <p>Description: {pet.description || 'N/A'}</p>
+                            <div className="card-inner">
+                                {/* Front face */}
+                                <div className="card-front">
+                                    <img
+                                        src={pet.image ? `https://pets-adoption-flask-sqlite-enz1.onrender.com${pet.image}` : 'default-image.jpg'}
+                                        alt={pet.name}
+                                        className="pet-image"
+                                    />
+                                    <div className="pet-name-overlay">
+                                        <div className="pet-name">{pet.name}</div>
+                                        {pet.owner && (
+                                            <div className="owner-details">
+                                                <p>Owner: {pet.owner.name}</p>
+                                                <p>Phone: {pet.owner.phone_number}</p>
+                                                
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Back face */}
+                                <div className="card-back">
+                                    <h2>{pet.name}</h2>
+                                    <div className="pet-details">
+                                        <p>Breed: {pet.breed}</p>
+                                        <p>Age: {pet.age}</p>
+                                        <p>Weight: {pet.weight}</p>
+                                        <p>Gender: {pet.gender}</p>
+                                        <p>Microchipped: {pet.microchipped}</p>
+                                        <p>Personality: {pet.personality}</p>
+                                        <p>Hypoallergenic: {pet.hypoallergenic ? 'Yes' : 'No'}</p>
+                                        <p>Special Needs: {pet.special_needs}</p>
+                                        <p>Back Story: {pet.back_story}</p>
+                                    </div>
+                                    <div className="button-container">
+                                        <button
+                                            className={`adopt-button ${pet.adoption_status.toLowerCase() !== 'available' ? 'adopted' : ''}`}
+                                            onClick={() => handleAdoptClick(pet)}
+                                            disabled={pet.adoption_status.toLowerCase() !== 'available'}
+                                        >
+                                            {pet.adoption_status.toLowerCase() === 'available' ? 'Adopt Me' : 'Adopted'}
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))}

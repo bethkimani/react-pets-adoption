@@ -489,15 +489,29 @@ h1, h2, h3 {
 
 .pet-name-overlay {
   position: absolute;
-  bottom: 0;
+  top: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background for better readability */
   color: #fff;
   padding: 10px;
-  font-size: 18px;
-  text-align: center;
+  text-align: left;
+  font-size: 16px;
 }
 
+.pet-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.owner-details {
+  font-size: 14px;
+}
+
+.owner-details p {
+  margin: 2px 0;
+  color: #fff; /* Ensure text is white for contrast */
+}
 
 .card-back {
   background-color: #fff;
@@ -517,7 +531,6 @@ h1, h2, h3 {
 .button-container {
   margin-top: 10px;
 }
-
 
 /* Button Styles */
 .adopt-button {
@@ -626,10 +639,19 @@ input {
   .modal-button {
     padding: 8px 16px; /* Adjust modal button size */
   }
+
+  .pet-name-overlay {
+    font-size: 14px; /* Smaller font for mobile */
+  }
+
+  .pet-name {
+    font-size: 16px; /* Adjust pet name size */
+  }
+
+  .owner-details {
+    font-size: 12px; /* Smaller font for owner details */
+  }
 }
-
-
-
 
 
 

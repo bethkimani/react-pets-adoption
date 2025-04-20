@@ -137,6 +137,7 @@ const ViewPets = () => {
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Owner</th>
                             <th>Species</th>
                             <th>Breed</th>
                             <th>Age</th>
@@ -154,6 +155,7 @@ const ViewPets = () => {
                         {filteredPets.map(pet => (
                             <tr key={pet.id}>
                                 <td>{pet.name}</td>
+                                <td>{pet.owner ? pet.owner.name : 'N/A'}</td>
                                 <td>{pet.species}</td>
                                 <td>{pet.breed || 'N/A'}</td>
                                 <td>{pet.age || 'N/A'}</td>

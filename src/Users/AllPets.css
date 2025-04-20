@@ -1,6 +1,6 @@
-/* AllPets.css */
 .all-pets {
   padding: 20px;
+  background-color: #FFF8DC; /* Cream, matching HomePage */
 }
 
 .catalogue {
@@ -10,7 +10,9 @@
 
 .catalogue h1 {
   text-align: center;
-  color: #333;
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: black; /* Warm Brown, matching HomePage */
 }
 
 .heart-icon {
@@ -24,65 +26,135 @@
   margin-bottom: 20px;
 }
 
-/* CSS for the pets gallery */
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Pets gallery styling */
 .pets-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 items per row */
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Spacing between cards */
+  justify-content: center; /* Center the gallery */
 }
 
 /* Pet card styling */
 .pet-card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  padding: 15px; /* Added padding for better spacing */
+  width: 300px;
+  height: 400px;
+  perspective: 1000px; /* Enable 3D perspective for flip effect */
 }
 
-.pet-card:hover {
-  transform: translateY(-5px);
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.pet-card:hover .card-inner {
+  transform: rotateY(180deg); /* Flip on hover */
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-front {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
 }
 
 .pet-image {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 100%;
+  object-fit: cover; /* Fill the entire card without distortion */
+  display: block;
 }
 
-.pet-info h2 {
-  margin: 0 0 10px;
+.pet-name-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background for readability */
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+  font-size: 16px;
+}
+
+.pet-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.owner-details {
+  font-size: 14px;
+}
+
+.owner-details p {
+  margin: 2px 0;
+  color: #fff; /* Ensure text is white for contrast */
+}
+
+.card-back {
+  background-color: #fff;
   color: #333;
-  font-size: 1.5rem;
+  transform: rotateY(180deg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
 .pet-details {
-  margin-bottom: 15px;
+  text-align: left;
+  font-size: 14px;
+  flex-grow: 1; /* Allow pet-details to take available space */
+  overflow-y: auto; /* Scroll if pet details are too long */
 }
 
 .pet-details p {
   margin: 5px 0;
   color: #555;
-  font-size: 0.9rem;
 }
 
 .button-container {
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px; /* Add margin to ensure button is fully visible */
+  flex-shrink: 0; /* Prevent button container from shrinking */
 }
 
 .adopt-button {
-  background-color: #0D0D3C;
+  padding: 15px 30px;
+  font-size: 16px;
   color: white;
+  background: linear-gradient(90deg, #ff0066, #ff6600); /* Matching HomePage button gradient */
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 0, 102, 0);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .adopt-button:hover:not(:disabled) {
-  background-color: #ff8787;
+  box-shadow: 0 10px 20px rgba(255, 0, 102, 0.5);
+  transform: translateY(-3px);
 }
 
 .adopt-button:disabled {
@@ -91,7 +163,41 @@
 }
 
 .adopt-button.adopted {
-  background-color: gray; /* Fixed: Removed invalid #gray */
+  background-color: gray;
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .pet-card {
+    width: calc(45% - 34px); /* Two cards per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .pet-card {
+    width: calc(100% - 34px); /* One card per row */
+  }
+
+  .pet-image {
+    height: 150px; /* Adjust height for smaller screens */
+  }
+
+  .adopt-button {
+    padding: 8px 16px; /* Reduce button size */
+    font-size: 12px; /* Adjust font size */
+  }
+
+  .pet-name-overlay {
+    font-size: 14px; /* Smaller font for mobile */
+  }
+
+  .pet-name {
+    font-size: 16px; /* Adjust pet name size */
+  }
+
+  .owner-details {
+    font-size: 12px; /* Smaller font for owner details */
+  }
 }
