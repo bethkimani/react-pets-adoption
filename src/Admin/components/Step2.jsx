@@ -13,8 +13,9 @@ const Step2 = ({ nextStep, prevStep, handleChange, values }) => {
                     className="form-control"
                     required
                 >
-                    <option value="">Select...</option>
-                    <option value="available">Adopt me</option>
+                    <option value="Available">Available</option>
+                    <option value="Adopted">Adopted</option>
+                    <option value="Pending">Pending</option>
                 </select>
             </div>
             <div className="form-group">

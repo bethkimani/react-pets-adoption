@@ -19,7 +19,7 @@ const AddPets = () => {
         species: "",
         breed: "",
         age: "",
-        adoption_status: "",
+        adoption_status: "Available", // Default to "Available"
         description: "",
         image: null,
         gender: "",
@@ -38,7 +38,7 @@ const AddPets = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         const role = localStorage.getItem('role');
-        if (!token || role !== 'User') { // Changed from 'Admin' to 'User'
+        if (!token || role !== 'User') {
             alert('You must be logged in as a User to add a pet.');
             navigate('/auth');
         }
@@ -72,6 +72,12 @@ const AddPets = () => {
             }
         }
 
+        const validAdoptionStatuses = ['Available', 'Adopted', 'Pending'];
+        if (!validAdoptionStatuses.includes(values.adoption_status)) {
+            setErrorMessage(`Invalid adoption status. Must be one of: ${validAdoptionStatuses.join(', ')}`);
+            return;
+        }
+
         const formData = new FormData();
         formData.append("name", values.name);
         formData.append("species", values.species);
@@ -94,6 +100,11 @@ const AddPets = () => {
             return;
         }
 
+        // Log the form data for debugging
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+
         try {
             const response = await addPet(formData);
             setSuccessMessage("Pet added successfully! Add another pet below.");
@@ -103,13 +114,13 @@ const AddPets = () => {
                 species: "",
                 breed: "",
                 age: "",
-                adoption_status: "",
+                adoption_status: "Available",
                 description: "",
                 image: null,
                 gender: "",
                 colour: "",
                 vaccination_status: "",
-                specialNeeds: "",
+                special_needs: "",
                 microchipped: "",
                 personality: "",
                 back_story: "",
@@ -128,13 +139,13 @@ const AddPets = () => {
             species: "",
             breed: "",
             age: "",
-            adoption_status: "",
+            adoption_status: "Available",
             description: "",
             image: null,
             gender: "",
             colour: "",
             vaccination_status: "",
-            specialNeeds: "",
+            special_needs: "",
             microchipped: "",
             personality: "",
             back_story: "",
