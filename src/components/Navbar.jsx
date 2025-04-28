@@ -1,7 +1,6 @@
-// src/components/Navbar.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaSearch, FaUser, FaPaw, FaInfoCircle } from 'react-icons/fa';
+import { FaHome, FaUser, FaPaw, FaInfoCircle } from 'react-icons/fa';
 import Auth from './Auth'; // Import the combined Auth modal
 
 const Navbar = () => {
@@ -21,16 +20,20 @@ const Navbar = () => {
     const toggleMenu = () => setIsMobile(!isMobile);
 
     return (
-        <nav className="navbar" style={{
-            position: 'sticky',
-            top: 0,
-            zIndex: 1000, // TO Ensure it stays above other content
-            width: '100%'}}>
+        <nav
+            className="navbar"
+            style={{
+                position: 'sticky',
+                top: 0,
+                zIndex: 1000, // To ensure it stays above other content
+                width: '100%',
+            }}
+        >
             <div className="navbar-content">
                 <div className="brand-name">
-                <Link to="/" style={{ textDecoration: 'none', color: 'white' }}> 
-                <span >Adoptly</span>   
-                </Link>
+                    <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+                        <span>Adoptly</span>
+                    </Link>
                 </div>
                 <div className="menu-toggle" onClick={toggleMenu}>
                     <div className={`bar ${isMobile ? 'active' : ''}`}></div>
@@ -38,17 +41,10 @@ const Navbar = () => {
                     <div className={`bar ${isMobile ? 'active' : ''}`}></div>
                 </div>
                 <div className={`nav-links ${isMobile ? 'active' : ''}`}>
-                    
-                    <div className="nav-item" >
+                    <div className="nav-item">
                         <Link to="/catalogue" style={{ textDecoration: 'none', color: 'white' }}>
                             <FaPaw className="nav-icon" />
                             <span className="nav-label">Catalogue</span>
-                        </Link>
-                    </div>
-                    <div className="nav-item">
-                        <Link to="/search" style={{ textDecoration: 'none', color: 'white' }}>
-                            <FaSearch className="nav-icon"  />
-                            <span className="nav-label">Search</span>
                         </Link>
                     </div>
                     <div className="nav-item">
@@ -70,10 +66,7 @@ const Navbar = () => {
                 </div>
             </div>
             {isAuthModalOpen && (
-                <Auth
-                    onClose={closeAuthModal}
-                    initialMode={authMode}
-                />
+                <Auth onClose={closeAuthModal} initialMode={authMode} />
             )}
         </nav>
     );
