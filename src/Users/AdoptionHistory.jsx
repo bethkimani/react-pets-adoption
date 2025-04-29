@@ -45,6 +45,11 @@ const AdoptionHistory = () => {
       const userAdoptions = Array.isArray(adoptionsRes.data) ? adoptionsRes.data : [];
       const petList = Array.isArray(petsRes.data) ? petsRes.data : [];
 
+      // Log the created_at field for each adoption
+      userAdoptions.forEach((adoption, index) => {
+        console.log(`Adoption ${index + 1} created_at:`, adoption.created_at);
+      });
+
       if (!userAdoptions.length) {
         setError('No adoption applications found for your account.');
       } else if (!petList.length) {
@@ -103,8 +108,9 @@ const AdoptionHistory = () => {
             bValue = getPetName(b.pet_id).toLowerCase();
             break;
           case 'date':
-            aValue = new Date(a.created_at || 0).getTime();
-            bValue = new Date(b.created_at || 0).getTime();
+            // Use a fallback date for invalid or missing created_at
+            aValue = a.created_at ? new Date(a.created_at).getTime() : 0;
+            bValue = b.created_at ? new Date(b.created_at).getTime() : 0;
             break;
           case 'status':
             aValue = (a.status || 'Pending').toLowerCase();
@@ -129,6 +135,25 @@ const AdoptionHistory = () => {
       adoption.postal_code || '',
     ].filter(Boolean);
     return parts.length ? parts.join(', ') : 'N/A';
+  };
+
+  // Render date safely
+  const renderDate = (createdAt) => {
+    if (!createdAt) {
+      console.warn('Missing created_at for adoption:', createdAt); // Debug log
+      return 'N/A';
+    }
+    try {
+      const date = new Date(createdAt);
+      if (isNaN(date.getTime())) {
+        console.warn('Invalid created_at date:', createdAt); // Debug log
+        return 'N/A';
+      }
+      return date.toLocaleDateString();
+    } catch (err) {
+      console.warn('Error parsing created_at:', createdAt, err.message); // Debug log
+      return 'N/A';
+    }
   };
 
   // Conditional rendering
@@ -183,11 +208,7 @@ const AdoptionHistory = () => {
             {adoptions.map((adoption) => (
               <tr key={adoption.id}>
                 <td>{getPetName(adoption.pet_id)}</td>
-                <td>
-                  {adoption.created_at
-                    ? new Date(adoption.created_at).toLocaleDateString()
-                    : 'N/A'}
-                </td>
+                <td>{renderDate(adoption.created_at)}</td>
                 <td
                   className={`status-${
                     (adoption.status || 'Pending').toLowerCase().replace(/\s/g, '-')

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import  { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, signup, resetPassword } from '../api';
 import './Auth.css';
@@ -15,13 +15,51 @@ const Auth = ({ onClose, initialMode }) => {
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [passwordErrors, setPasswordErrors] = useState([]);
     const navigate = useNavigate();
+
+    const validatePassword = (pwd) => {
+        const errors = [];
+        if (pwd.length < 10) {
+            errors.push("Password must be at least 10 characters long");
+        }
+        if (!/[A-Z]/.test(pwd)) {
+            errors.push("Password must contain at least one uppercase letter");
+        }
+        if (!/[a-z]/.test(pwd)) {
+            errors.push("Password must contain at least one lowercase letter");
+        }
+        if (!/[0-9]/.test(pwd)) {
+            errors.push("Password must contain at least one number");
+        }
+        if (!/[!@#$%^&*(),.?":{}|<>]/.test(pwd)) {
+            errors.push("Password must contain at least one special character (e.g., !@#$%^&*())");
+        }
+        return errors;
+    };
+
+    const handlePasswordChange = (e) => {
+        const newPassword = e.target.value;
+        setPassword(newPassword);
+        const errors = validatePassword(newPassword);
+        setPasswordErrors(errors);
+    };
 
     const handleAuth = async (e) => {
         e.preventDefault();
         setIsLoading(true);
         setError('');
         setMessage('');
+
+        // Validate password before submitting for signup or reset
+        if (!showReset && !isLogin) {
+            const errors = validatePassword(password);
+            if (errors.length > 0) {
+                setError("Please fix the following password errors: " + errors.join(", "));
+                setIsLoading(false);
+                return;
+            }
+        }
 
         try {
             if (showReset) {
@@ -33,14 +71,14 @@ const Auth = ({ onClose, initialMode }) => {
             } else if (isLogin) {
                 // Handle login
                 const response = await login({ email, password });
-                const data = response.data
+                const data = response.data;
                 console.log(data);
                 
-                const { token, role, user_id , username} = response.data;
+                const { token, role, user_id, username } = response.data;
                 localStorage.setItem('token', token);
                 localStorage.setItem('role', role);
                 localStorage.setItem('user_id', user_id);
-                localStorage.setItem('username', username )
+                localStorage.setItem('username', username);
                 localStorage.setItem('isAuthenticated', 'true');
                 if (role.toLowerCase() === 'admin') {
                     navigate('/admin-dashboard');
@@ -62,6 +100,7 @@ const Auth = ({ onClose, initialMode }) => {
                 setPhoneNumber('');
                 setEmail('');
                 setPassword('');
+                setPasswordErrors([]);
             }
         } catch (error) {
             console.error('Auth error:', error.response || error.message);
@@ -121,7 +160,7 @@ const Auth = ({ onClose, initialMode }) => {
                                 name="password"
                                 placeholder="Password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={handlePasswordChange}
                                 required
                                 style={{ paddingRight: '40px' }}
                             />
@@ -146,6 +185,15 @@ const Auth = ({ onClose, initialMode }) => {
                             >
                                 {showPassword ? '🙈' : '🙉'}
                             </button>
+                            {!isLogin && passwordErrors.length > 0 && (
+                                <div style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>
+                                    <ul>
+                                        {passwordErrors.map((err, index) => (
+                                            <li key={index}>{err}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </div>
                     )}
                     <div className="form-actions">
