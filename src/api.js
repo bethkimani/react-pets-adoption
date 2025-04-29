@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Use the production backend URL
-const BASE_URL = 'https://react-pets-adoption.onrender.com/api'; // Adjust to 5000 if backend runs on port 5000
+const BASE_URL = ' https://pets-adoption-flask-sqlite-enz1.onrender.com/api';
 
 const API = axios.create({
     baseURL: BASE_URL,

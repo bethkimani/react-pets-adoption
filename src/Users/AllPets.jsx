@@ -52,7 +52,7 @@ const AllPets = () => {
                                 {/* Front face */}
                                 <div className="card-front">
                                     <img
-                                        src={pet.image ? `  https://react-pets-adoption.onrender.com${pet.image}` : 'default-image.jpg'}
+                                        src={pet.image ? `https://pets-adoption-flask-sqlite-enz1.onrender.com${pet.image}` : 'default-image.jpg'}
                                         alt={pet.name}
                                         className="pet-image"
                                     />
