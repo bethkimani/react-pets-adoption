@@ -5,7 +5,7 @@ import './AdoptionForm.css';
 const AdoptionForm = ({ petId, onSubmit }) => {
   const [formData, setFormData] = useState({
     user_id: localStorage.getItem('user_id') || '',
-    pet_id: petId || '', // Preselect the petId if provided
+    pet_id: petId || '',
     first_name: '',
     last_name: '',
     phone_number: '',
@@ -45,13 +45,11 @@ const AdoptionForm = ({ petId, onSubmit }) => {
     const fetchPets = async () => {
       try {
         const response = await getPets();
-        // Filter out pets that are already adopted
         const availablePets = response.data.filter(
           (pet) => pet.adoption_status.toLowerCase() === 'available'
         );
         setPets(availablePets);
 
-        // If petId is provided, set the interested_pet field
         if (petId) {
           const selectedPet = response.data.find((pet) => pet.id === parseInt(petId));
           if (selectedPet) {
@@ -80,14 +78,52 @@ const AdoptionForm = ({ petId, onSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+     
+    // Validate user_id
     if (!formData.user_id) {
-      alert('Please log in to submit the form.');
+      setError('Please log in to submit the form.');
       window.location.href = '/auth';
       return;
     }
 
+    // Validate pet_id
+    if (!formData.pet_id) {
+      setError('Please select a pet to adopt.');
+      return;
+    }
+
+    // Validate required fields
+    const requiredFields = [
+      'first_name', 'last_name', 'phone_number', 'email', 'age_category',
+      'address', 'city', 'province', 'postal_code', 'interested_pet',
+      'living_environment', 'duration_at_address', 'residents',
+      'home_description', 'allergies', 'alone_time', 'spayed_neutered',
+      'current_pets_vaccinated', 'dog_stay', 'enrichment', 'had_dogs_before',
+      'training_methods', 'has_veterinarian', 'vet_frequency',
+      'willing_to_work_on', 'reference', 'consent'
+    ];
+    for (const field of requiredFields) {
+      if (field !== 'consent' && (!formData[field] || formData[field].trim() === '')) {
+        setError(`Please fill in the ${field.replace('_', ' ')} field.`);
+        return;
+      }
+    }
+    if (!formData.consent) {
+      setError('You must consent to the terms to submit the form.');
+      return;
+    }
+
+    // Normalize consent to a string
+    const normalizedFormData = {
+      ...formData,
+      consent: formData.consent.toString(),
+    };
+
+    // Log the form data
+    console.log('Form Data Sent:', normalizedFormData);
+
     try {
-      const response = await submitAdoptionForm(formData);
+      const response = await submitAdoptionForm(normalizedFormData);
       console.log('Response:', response.data);
       alert('Your application has been submitted successfully!');
       setFormData({
@@ -127,11 +163,16 @@ const AdoptionForm = ({ petId, onSubmit }) => {
       });
       setError(null);
       if (onSubmit) {
-        onSubmit(); // Call the onSubmit prop to move to the next step
+        onSubmit();
       }
     } catch (err) {
-      console.error('Error submitting form:', err.response?.data || err.message);
-      setError('There was an error submitting your application. Please try again.');
+      const errorMessage = err.response?.data?.error || err.message;
+      console.error('Error submitting form:', {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      });
+      setError(`There was an error submitting your application: ${errorMessage}. Please try again.`);
     }
   };
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Use the production backend URL
-const BASE_URL = ' https://pets-adoption-flask-sqlite-enz1.onrender.com/api';
+const BASE_URL = 'https://react-pets-adoption.onrender.com/api'; // Adjust to 5000 if backend runs on port 5000
 
 const API = axios.create({
     baseURL: BASE_URL,
@@ -17,13 +17,17 @@ API.interceptors.request.use((config) => {
     if (!config.headers['Content-Type'] || config.headers['Content-Type'] !== 'multipart/form-data') {
         config.headers['Content-Type'] = 'application/json';
     }
-    console.log("Request config:", config); // Debug log to inspect the request
+    console.log('Request:', config.method.toUpperCase(), config.url, 'Token:', token ? 'Present' : 'Missing'); // Debug log
     return config;
 });
 
 API.interceptors.response.use(
-    (response) => response,
+    (response) => {
+        console.log('Response:', response.config.url, response.status); // Debug log
+        return response;
+    },
     (error) => {
+        console.error('API Error:', error.response?.data || error.message, 'URL:', error.config?.url);
         if (error.response?.status === 401) {
             console.warn('Unauthorized: Token may be invalid or expired');
             localStorage.removeItem('token');
@@ -36,7 +40,6 @@ API.interceptors.response.use(
         if (error.message === 'Network Error') {
             console.error('Network Error: Unable to reach the server. Check your network or server status.');
         }
-        console.error('API Error:', error.response?.data || error.message);
         return Promise.reject(error);
     }
 );
@@ -66,7 +69,7 @@ export const likeMessage = (messageId) => API.post(`/messages/like/${messageId}`
 export const userLikeMessage = (messageId) => API.post(`/messages/user/like/${messageId}`);
 export const userReplyToMessage = (messageId, replyData) => API.post(`/messages/user/reply/${messageId}`, replyData);
 export const getUserMessages = (email) => API.get(`/messages/user/${email}`);
-export const login = (data) => API.post('/auth/login', data);
+export const login = (data) => API.post('/auth/login', data); // Fixed: Correct endpoint
 export const getUsers = () => API.get('/users/');
 export const getTotalUsers = () => API.get(`/users/total`);
 export const getRoles = () => API.get('/roles/');
@@ -80,6 +83,14 @@ export const getAdoptions = () =>
             return (status >= 200 && status < 300) || status === 404; // Accept 404 as a non-error case
         },
     });
+export const getUserAdoptions = () => {
+    console.log('Calling getUserAdoptions: /api/adoptions/me/'); // Debug log
+    return API.get('/adoptions/me/', {
+        validateStatus: (status) => {
+            return (status >= 200 && status < 300) || status === 404; // Accept 404 as a non-error case
+        },
+    });
+};
 export const updateAdoptionStatus = (id, data) => API.put(`/adoptions/${id}`, data);
 export const deleteAdoption = (id) =>
     API.delete(`/adoptions/${id}`, {
@@ -91,12 +102,10 @@ export const addPaymentMethod = (data) => API.post('/payments/', data);
 export const getPaymentsByUser = (userId) => API.get(`/payments/user/${userId}`);
 export const schedulePickup = (data) => API.post('/schedule-pickup/', data);
 export const getSchedulePickupsByUser = (userId) => API.get(`/schedule-pickup/user/${userId}`);
-export const getChatMessages = () => API.get('/chat/messages'); // Updated to fetch from /chat/messages
+export const getChatMessages = () => API.get('/chat/messages');
 export const resetPassword = (data) => API.post('/auth/reset-password', data);
 export const resetPasswordConfirm = (data) =>
     API.post(`/auth/reset-password/${data.token}`, { password: data.password });
-
-// New function to fetch dashboard summary
 export const getDashboardSummary = () => API.get('/pets/dashboard/summary');
 
 export default API;

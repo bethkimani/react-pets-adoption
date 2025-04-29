@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { getAdoptions, getPets } from '../api';
+import { getUserAdoptions, getPets } from '../api';
 import './AdoptionHistory.css';
 
 const AdoptionHistory = () => {
@@ -16,20 +16,23 @@ const AdoptionHistory = () => {
 
     try {
       const userId = localStorage.getItem('user_id');
-      console.log('User ID from localStorage:', userId); // Debug log
-      if (!userId) {
+      const token = localStorage.getItem('token');
+      console.log('Fetching adoption history. User ID:', userId, 'Token:', token ? 'Present' : 'Missing'); // Debug log
+
+      if (!userId || !token) {
         setError('Please log in to view your adoption history.');
         setLoading(false);
         return;
       }
 
+      console.log('Calling getUserAdoptions for /api/adoptions/me/'); // Debug log
       const [adoptionsRes, petsRes] = await Promise.all([
-        getAdoptions().catch((err) => {
-          console.warn('Failed to fetch adoptions:', err);
+        getUserAdoptions().catch((err) => {
+          console.warn('Failed to fetch user adoptions:', err.response?.data || err.message);
           return { data: [] };
         }),
         getPets().catch((err) => {
-          console.warn('Failed to fetch pets:', err);
+          console.warn('Failed to fetch pets:', err.response?.data || err.message);
           return { data: [] };
         }),
       ]);
@@ -39,21 +42,10 @@ const AdoptionHistory = () => {
       console.log('Pets API Response:', petsRes.data);
 
       // Validate response data
-      const userIdNum = parseInt(userId); // Ensure userId is a number
-      const userAdoptions = Array.isArray(adoptionsRes.data)
-        ? adoptionsRes.data.filter((adoption) => {
-            // Handle potential string user_id in backend response
-            const adoptionUserId = typeof adoption.user_id === 'string' ? parseInt(adoption.user_id) : adoption.user_id;
-            const matchesUserId = adoptionUserId === userIdNum;
-            console.log(
-              `Adoption ID ${adoption.id}: user_id=${adoption.user_id}, parsed=${adoptionUserId}, matches=${matchesUserId}`
-            );
-            return matchesUserId;
-          })
-        : [];
+      const userAdoptions = Array.isArray(adoptionsRes.data) ? adoptionsRes.data : [];
       const petList = Array.isArray(petsRes.data) ? petsRes.data : [];
 
-      if (!userAdoptions.length && adoptionsRes.data.length) {
+      if (!userAdoptions.length) {
         setError('No adoption applications found for your account.');
       } else if (!petList.length) {
         setError('Unable to load pet details at this time.');
@@ -63,9 +55,13 @@ const AdoptionHistory = () => {
       setPets(petList);
       setLoading(false);
     } catch (err) {
-      console.error('Error fetching adoption history:', err);
+      console.error('Error fetching adoption history:', err.response?.data || err.message);
       if (err.response?.status === 401) {
         setError('Your session has expired. Please log in again.');
+      } else if (err.response?.status === 403) {
+        setError('You are not authorized to view this page. Please log in with the correct account.');
+      } else if (err.response?.status === 404) {
+        setError('No adoption applications found for your account.');
       } else {
         setError('Failed to load adoption history. Please try again later.');
       }
