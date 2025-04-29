@@ -72,29 +72,43 @@ const AddPets = () => {
             }
         }
 
+        // Case-insensitive validation for adoption_status
         const validAdoptionStatuses = ['Available', 'Adopted', 'Pending'];
-        if (!validAdoptionStatuses.includes(values.adoption_status)) {
+        const normalizedAdoptionStatus = values.adoption_status.toLowerCase();
+        const isValidStatus = validAdoptionStatuses.some(
+            (status) => status.toLowerCase() === normalizedAdoptionStatus
+        );
+
+        if (!isValidStatus) {
             setErrorMessage(`Invalid adoption status. Must be one of: ${validAdoptionStatuses.join(', ')}`);
             return;
         }
 
-        const formData = new FormData();
-        formData.append("name", values.name);
-        formData.append("species", values.species);
-        formData.append("breed", values.breed || "");
-        formData.append("age", values.age ? parseInt(values.age) : "");
-        formData.append("adoption_status", values.adoption_status);
-        formData.append("description", values.description || "");
-        formData.append("gender", values.gender);
-        formData.append("colour", values.colour || "");
-        formData.append("vaccination_status", values.vaccination_status);
-        formData.append("special_needs", values.special_needs || 'none');
-        formData.append("microchipped", values.microchipped);
-        formData.append("personality", values.personality || "");
-        formData.append("back_story", values.back_story || "");
+        // Normalize adoption_status to match the expected case (e.g., "Available")
+        const normalizedValues = {
+            ...values,
+            adoption_status: validAdoptionStatuses.find(
+                (status) => status.toLowerCase() === normalizedAdoptionStatus
+            ),
+        };
 
-        if (values.image) {
-            formData.append("image", values.image);
+        const formData = new FormData();
+        formData.append("name", normalizedValues.name);
+        formData.append("species", normalizedValues.species);
+        formData.append("breed", normalizedValues.breed || "");
+        formData.append("age", normalizedValues.age ? parseInt(normalizedValues.age) : "");
+        formData.append("adoption_status", normalizedValues.adoption_status);
+        formData.append("description", normalizedValues.description || "");
+        formData.append("gender", normalizedValues.gender);
+        formData.append("colour", normalizedValues.colour || "");
+        formData.append("vaccination_status", normalizedValues.vaccination_status);
+        formData.append("special_needs", normalizedValues.special_needs || 'none');
+        formData.append("microchipped", normalizedValues.microchipped);
+        formData.append("personality", normalizedValues.personality || "");
+        formData.append("back_story", normalizedValues.back_story || "");
+
+        if (normalizedValues.image) {
+            formData.append("image", normalizedValues.image);
         } else {
             setErrorMessage("No image file selected. Please upload an image.");
             return;
